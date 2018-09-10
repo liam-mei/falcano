@@ -1,5 +1,7 @@
+import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-
+import SignUp from "./SignUp";
+import SignIn from "./SignIn"
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -11,18 +13,17 @@ class LandingPage extends Component {
   render() { 
     return ( 
       <div>
-      <Link to={Signup} />
-      <Link to={SIgnIn} />
+      <Link to={"/SignUp"}>Sign Up</Link>
+      < br />
+      <Link to={"/SignIn"}>Sign In</Link>
         <h1>Flight Plan</h1>
+        <img src="https://t3.ftcdn.net/jpg/01/95/58/96/500_F_195589622_jSP9kxu6jUHndWRpPf62pVs24smSNZxx.jpg"></img>
 
-        <form>
-          <input placeholder="username">
-          
-          </input>
-          <input placeholder="password">
-          </input>
-        </form>
         <p>
+          Some interesting things
+        </p>
+        <p>
+          Mission statement
 
         </p>
       </div>
