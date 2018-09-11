@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import SignUp from "./SignUp";
-import SignIn from "./SignIn"
+import SignIn from "./SignIn";
+import axios from 'axios';
+
 class LandingPage extends Component {
   constructor(props) {
     super(props);
@@ -10,6 +12,23 @@ class LandingPage extends Component {
       password: "",
       }
   }
+  // componentDidMount(){
+  //   let postData = {
+  //     name: 'trying something crazy',
+  //     content: 'trying content'
+  //   }
+  //   let axiosconfig = {
+  //     headers: {'Authorization': 'Token aba81343b1ea1a4f47acca8159244cb30d080d74'}
+  //   }
+  //   axios.post('http://127.0.0.1:8000/api/flight_info/', postData, axiosconfig)
+    
+  // .then((response)=>{
+  //   console.log('response successful', response)
+  // }) 
+  // .catch((error)=>{
+  //   console.log('you messed up', error)
+  // })
+  // }
   render() { 
     return ( 
       <div>
