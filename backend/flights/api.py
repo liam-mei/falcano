@@ -29,7 +29,7 @@ class FlightsViewSet(viewsets.ModelViewSet):
 class AircraftSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Aircraft
-        fields = ('name', 'content')
+        fields = ('man_type', 'tail_number', 'aircraft_sel')
 
     def create(self, validated_data):
         user = self.context['request'].user
