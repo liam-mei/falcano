@@ -1,1 +1,1 @@
-web: gunicorn backend/flight_logs.wsgi
+web: gunicorn backend.wsgi
