@@ -4,14 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-django = "*"
 djangorestframework = "*"
-python-decouple = "*"
-white-noise = "*"
-dj-database-url = "*"
-django-cors-headers = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3"
+python_version = "3.7"

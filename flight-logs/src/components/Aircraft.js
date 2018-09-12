@@ -4,8 +4,12 @@ import React, { Component } from 'react';
 class Aircraft extends Component {
   constructor(props) {
     super(props);
-    this.state = {  }
+    this.state = {  
+      name: "",
+      content: ""
+    }
   }
+  
   render() { 
     return ( 
       <div>
