@@ -1,42 +1,50 @@
 from rest_framework import serializers, viewsets
-from .models import FlightsInfo, AircraftInfo
+from .models import Flights, Aircraft
 
-class FlightsInfoSerializer(serializers.HyperlinkedModelSerializer):
+
+class FlightsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = FlightsInfo
+        model = Flights
         fields = ('name', 'content')
+
     def create(self, validated_data):
         user = self.context['request'].user
-        flight_info = FlightsInfo.objects.create(user=user, **validated_data)
-        return flight_info
+        flight = Flights.objects.create(user=user, **validated_data)
+        return flight
 
-class FlightsInfoViewSet(viewsets.ModelViewSet):
-    serializer_class = FlightsInfoSerializer
-    queryset = FlightsInfo.objects.none()
+
+class FlightsViewSet(viewsets.ModelViewSet):
+    serializer_class = FlightsSerializer
+    queryset = Flights.objects.none()
+
     def get_queryset(self):
         user = self.request.user
 
         if user.is_anonymous:
-            return FlightsInfo.objects.none()
+            return Flights.objects.none()
         else:
-            return FlightsInfo.objects.filter(user=user)
+            return Flights.objects.filter(user=user)
 
-class AircraftInfoSerializer(serializers.HyperlinkedModelSerializer):
+
+class AircraftSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = AircraftInfo
+        model = Aircraft
         fields = ('name', 'content')
+
     def create(self, validated_data):
         user = self.context['request'].user
-        aircraft_info = AircraftInfo.objects.create(user=user, **validated_data)
-        return aircraft_info
+        aircraft = Aircraft.objects.create(user=user, **validated_data)
+        return aircraft
 
-class AircraftInfoViewSet(viewsets.ModelViewSet):
-    serializer_class = AircraftInfoSerializer
-    queryset = AircraftInfo.objects.none()
+
+class AircraftViewSet(viewsets.ModelViewSet):
+    serializer_class = AircraftSerializer
+    queryset = Aircraft.objects.none()
+
     def get_queryset(self):
         user = self.request.user
 
         if user.is_anonymous:
-            return AircraftInfo.objects.none()
+            return Aircraft.objects.none()
         else:
-            return AircraftInfo.objects.filter(user=user)
+            return Aircraft.objects.filter(user=user)
