@@ -9,7 +9,22 @@ class FlightsInfo(models.Model):
   created_at = models.DateTimeField(auto_now_add=True)
   user = models.ForeignKey(User, on_delete=models.CASCADE)
 
+  def __str__(self):
+        return self.name
+
+class AircraftInfo(models.Model):
+  id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
+  man_type = models.CharField(max_length=200)
+  tail_number = models.CharField(max_length=200)
+  created_at = models.DateTimeField(auto_now_add=True)
+  aircraft_sel = models.CharField(max_length=200)
+  user = models.ForeignKey(User, on_delete=models.CASCADE)
 
   def __str__(self):
         return self.name
-# Create your models here.
+
+# Aircraft SEL
+  # Single-engine land
+  # Single-engine sea
+  # Multi-engine land
+  # Multi-engine sea
