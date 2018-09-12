@@ -16,11 +16,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include 
 from rest_framework import routers
-from flights.api import FlightsInfoViewSet
 from django.urls import path, include, re_path
 from rest_framework.authtoken import views
+from flights.api import FlightsInfoViewSet, AircraftInfoViewSet
 router = routers.DefaultRouter()
 router.register(r'flight_info', FlightsInfoViewSet)
+router.register(r'aircraft_info', AircraftInfoViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
