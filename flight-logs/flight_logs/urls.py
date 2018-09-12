@@ -14,14 +14,14 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import path, include 
+from django.urls import path, include
 from rest_framework import routers
 from django.urls import path, include, re_path
 from rest_framework.authtoken import views
-from flights.api import FlightsInfoViewSet, AircraftInfoViewSet
+from flights.api import FlightsViewSet, AircraftViewSet
 router = routers.DefaultRouter()
-router.register(r'flight_info', FlightsInfoViewSet)
-router.register(r'aircraft_info', AircraftInfoViewSet)
+router.register(r'flights', FlightsViewSet)
+router.register(r'aircraft', AircraftViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
