@@ -47,3 +47,16 @@ monthly billing
 premium features - TO-DO
 
 settings - TODO
+
+no instrument application (bool)
+No ldg = number of landings (bool)
+cross country (bool)
+Grnd Trainer = (hours)
+PIC (hours)
+Dual rec (hours)
+actual instruction (hours)
+sim inst (hours)
+day/night (bool)
+
+instuctors = profile page(stretch/don't worry about it)
+
