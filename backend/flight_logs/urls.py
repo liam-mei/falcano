@@ -19,6 +19,8 @@ from rest_framework import routers
 from django.urls import path, include, re_path
 from rest_framework.authtoken import views
 from flights.api import FlightsViewSet, AircraftViewSet
+from rest_framework_jwt.views import obtain_jwt_token
+
 router = routers.DefaultRouter()
 router.register(r'flights', FlightsViewSet)
 router.register(r'aircraft', AircraftViewSet)
@@ -26,5 +28,7 @@ router.register(r'aircraft', AircraftViewSet)
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    re_path(r'^api-token-auth/', views.obtain_auth_token)
+    re_path(r'^api-token-auth/', views.obtain_auth_token),
+    path('token-auth/', obtain_jwt_token),
+    path('flights/', include('flights.urls'))
 ]
