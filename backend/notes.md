@@ -21,10 +21,17 @@ tables we have made ***all tables need created_at
     id
     name
     created_at
+    airports visited
     foreign key userID
-    pic
-    day
-    night
+    no instrument application (bool)
+    No ldg = number of landings (number)
+    cross country (bool)
+    Grnd Trainer = (hours)
+    PIC (hours)
+    Dual rec (hours)
+    actual instruction (hours)
+    sim inst (hours)
+    day/night (bool)
 
 
 missing tables
@@ -47,3 +54,7 @@ monthly billing
 premium features - TO-DO
 
 settings - TODO
+
+
+instuctors = profile page(stretch/don't worry about it)
+

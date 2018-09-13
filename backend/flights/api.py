@@ -5,7 +5,10 @@ from .models import Flights, Aircraft
 class FlightsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Flights
-        fields = ('name', 'content')
+        fields = ('name', 'remarks', 'created_at', 'no_instument_app', 
+                'no_ldg', 'cross_country', 'pic', 'dual_rec', 'actual_instr',
+                'sim_instr', 'day', 'night', 'airports_visited', 'fly_date',
+                'snippet', 'tail_number', 'license_type', 'man_type',)
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -29,7 +32,7 @@ class FlightsViewSet(viewsets.ModelViewSet):
 class AircraftSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Aircraft
-        fields = ('man_type', 'tail_number', 'aircraft_sel')
+        fields = ('man_type', 'tail_number', 'license_type')
 
     def create(self, validated_data):
         user = self.context['request'].user
