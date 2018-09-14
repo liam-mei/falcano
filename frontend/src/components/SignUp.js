@@ -35,10 +35,10 @@ class SignUp extends Component {
 					password: this.state.password,
 				};
 				axios
-					.post('https://flightloggercs10.herokuapp.com/flights/users', user)
+					.post('https://flightloggercs10.herokuapp.com/flights/users/', user)
 					.then((response) => {
 						// set the token to local storage
-						localStorage.setItem('token', response.token);
+						localStorage.setItem('token', response.data.token);
 
 						// reset the fields
 						this.setState({
