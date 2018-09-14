@@ -1,17 +1,42 @@
-import React, { Component } from 'react';
+// import React, { Component } from 'react';
 
-class Billing extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {  }
-  }
-  render() { 
-    return ( 
-      <div>
+// class Billing extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { 
+//       cardNumber: '',
+
+//      }
+//   }
+//   render() { 
+//     return ( 
+//       <div>
         
-      </div>
-     );
-  }
-}
+//       </div>
+//      );
+//   }
+// }
  
-export default Billing;
+// export default Billing;
+
+// import React, { Component } from 'react';
+
+// class Billing extends Component {
+//   constructor(props) {
+//     super(props);
+//     this.state = { 
+//       cardNumber: '',
+//       month: '',
+//       day: '',
+//       year: '',
+//       cvv: ''
+//      };
+//   }
+//   render() {
+//     return (
+      
+//     )
+//   }
+// }
+
+// export default Billing;
