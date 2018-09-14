@@ -37,12 +37,23 @@ class SignUp extends Component {
           username: this.state.username,
           password: this.state.password
         }
-        axios.post("https://flightloggercs10.herokuapp.com/signup/", user).then(response =>{
-          console.log(response.data);
-        }).catch(err => {
-          console.log(err);
-        })
-      }
+        axios.post("https://flightloggercs10.herokuapp.com/flights/users/", user)
+          .then(response =>{
+            console.log(response.data);
+            this.setState({
+              username: "",
+              password: "",
+              confirmpassword: "" 
+              })
+          })
+          //ToDo: add to local storage
+          // .then(response => {
+          //   localStorage.setItem('token', response.token);
+          // })
+          .catch(err => {
+            console.log(err);
+          })
+        }
     } else
     {
       this.setState({ errorMessage: "Please enter a username" });
