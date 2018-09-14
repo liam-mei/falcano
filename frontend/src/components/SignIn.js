@@ -37,7 +37,7 @@ class SignIn extends Component {
         username: this.state.username,
         password: this.state.password
       }
-      axios.post("https://flightloggercs10.herokuapp.com/api-token-auth/", user).then(response =>{
+      axios.post("https://flightloggercs10.herokuapp.com/token-auth/", user).then(response =>{
         console.log(response.data);
         //ToDo: add to local storage
       }).catch(err => {
