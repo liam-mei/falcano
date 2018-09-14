@@ -1,0 +1,48 @@
+.Content {
+  display: flex;
+  Justify-content: center;
+  align-items: center;
+}
+
+.LeftContainer {
+  Border: 4px solid black;
+}
+
+.RightContainer {
+  Border: 4px solid black;
+}
+
+.FlightLogo {
+  color: #333;
+  font-size: 5rem;
+}
+
+.SignupSignin {
+  display: flex;
+  justify-content: center;
+  padding-top: 1rem;
+}
+
+.SignupSignin a {
+  color: #011638;
+  background-color: none;
+  border: solid 4px #011638;
+  border-radius: 7px;
+  border-width: 3px;
+  width: 50px;
+}
+
+/*
+.SignupSignin {
+  color: #011638;
+  background-color: none;
+  border: solid 4px #011638;
+  border-radius: 7px;
+  border-width: 3px;
+  padding: 3px 20px 3px 20px;
+  margin: px;
+  width: 50px;
+  display: flex;
+  flex-direction: row;
+}
+*/
