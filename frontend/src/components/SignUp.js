@@ -57,6 +57,7 @@ class SignUp extends Component {
       this.setState({ errorMessage: 'Please enter a username' });
     }
   };
+  
 
   render() {
     return (
