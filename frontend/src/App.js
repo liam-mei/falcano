@@ -13,6 +13,8 @@ import Settings from './components/Settings';
 import TotalsModal from './components/TotalsModal';
 import SignIn from './components/SignIn';
 import Instructors from './components/Instructors';
+import Breadcrumb from './components/Breadcrumb';
+
 
 // Stripe Stuff
 import { Elements, StripeProvider } from 'react-stripe-elements';
@@ -20,8 +22,7 @@ import BillingForm from './billing/BillingForm';
 
 class App extends Component {
   render() {
-    return (
-      <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
+    return <StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
         <div className="App">
           <Route exact path="/" component={LandingPage} />
 
@@ -32,9 +33,10 @@ class App extends Component {
           <Route path="/flights" component={Flights} />
           <Route path="/settings" component={Settings} />
           <Route path="/instructors" component={Instructors} />
+          <Route path="/Breadcrumb" component={Breadcrumb} />
+          
         </div>
-      </StripeProvider>
-    );
+      </StripeProvider>;
   }
 }
 
