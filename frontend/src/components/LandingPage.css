@@ -1,4 +1,56 @@
-.Content {
+* {
+  box-sizing: border-box;
+}
+
+.Wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url("../utils/Images/MntnCldLandingPage.png");
+  background-repeat: no-repeat;
+  background-position: center; 
+}
+
+.Card {
+  display: center;
+  background: #E8E8E8;
+  width: 700px;
+  border-radius: 7px;
+  opacity: .75;
+  padding-bottom: 2rem;
+}
+
+.MissionStatement {
+  color: rgb(81, 81, 81);
+  padding: 1em;
+}
+
+.LogInLink, .SignUpLink {
+  border: 3px solid #0009D0;
+  padding: .6rem 3rem;
+  border-radius: 3px; 
+}
+
+a {
+  text-decoration: none;
+}
+
+.SignUpLink {
+  margin-left: .5rem;
+}
+
+.LogInLink {
+  margin-right: .5rem;
+}
+
+.Logo {
+  font-size: 7rem;
+  font-weight: 700;
+  letter-spacing: -1.25rem;
+}
+
+/* .Content {
   display: flex;
   Justify-content: center;
   align-items: center;
@@ -30,7 +82,7 @@
   border-radius: 7px;
   border-width: 3px;
   width: 50px;
-}
+} */
 
 /*
 .SignupSignin {
