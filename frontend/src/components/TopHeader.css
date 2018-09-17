@@ -1,0 +1,18 @@
+.TopNav {
+    
+    display: flex;
+    justify-content: space-between;
+}
+
+
+
+Link {
+    text-decoration: none;
+    color: #333333;
+    list-style: none;
+}
+
+Link:hover {
+    text-decoration: underline;
+    list-style: none;
+}
