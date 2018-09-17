@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import './components/LandingPage.css';
+
 import LandingPage from './components/LandingPage';
 import { Route } from 'react-router-dom';
 import SignUp from './components/SignUp';
