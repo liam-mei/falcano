@@ -1,0 +1,23 @@
+.nav-div {
+  height: 800px;
+  width: 120px;
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Stay on top */
+  top: 0; /* Stay at the top */
+  left: 1;
+  overflow-x: hidden; /* Disable horizontal scroll */
+  background-color: white; /* Black*/
+  padding-top: 60px; /* Place content 60px from the top */
+  box-shadow: 1px 1px 2px #888888;
+}
+
+.link {
+  text-decoration: none;
+  color: darkgray;
+} 
+
+.link:hover {
+  text-decoration: none;
+  color: black;
+}
+

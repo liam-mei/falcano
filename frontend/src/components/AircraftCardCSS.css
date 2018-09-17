@@ -1,0 +1,94 @@
+.air-card {
+  width: 250px;
+  margin: 10px 10px 10px 15%;
+}
+
+.card-typography {
+  display: flex;
+}
+
+.card-typography-p {
+  display: inline-block;
+  padding: 5px 20px 0px 10px;
+}
+
+.modal-content {
+  width: 400px !important;
+  border-radius: 0px !important;
+}
+
+.modal-title {
+  display: inline-flex;
+  flex-direction: row;
+}
+
+.modal-header-p {
+  flex-wrap: nowrap;
+  padding: 0px 20px 0px 10px;
+}
+
+.edit-button {
+  display: inline-block;
+  height: 30px;
+  background: white;
+  color: black;
+  margin-left: 58%;
+  font-size: 15px;
+  border: 1px solid black;
+}
+
+.modal-body {
+  display: flex;
+  justify-content: center;
+  padding: 0px !important;
+}
+
+.modal-body-img {
+  height: 250px;
+  width: 396px;
+}
+.modal-footer {
+  display: flex;
+  padding: 0px !important;
+}
+
+.ul-1 {
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 0px 20px 0% !important;
+  padding: 0px 30px 0px 0px;
+  list-style-type: none;
+}
+
+.ul-2 {  
+  font-size: 14px;
+  display: flex;
+  flex-direction: column;
+  margin: 20px 40px 20px 0px;
+  padding: 0px 10px 0px 20px;
+  list-style-type: none;
+}
+
+.nested-modal-body {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  height: 350px;
+  width: 400px;
+}
+
+.edit-input-tn {
+  margin-right: 50px;
+  
+  width: 120px;
+  font-size: 14px;
+  height: 20px;
+}
+
+.edit-input-lt {
+  width: 120px;
+  font-size: 14px;
+  height: 20px;
+}
