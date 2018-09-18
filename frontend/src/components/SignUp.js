@@ -62,7 +62,8 @@ class SignUp extends Component {
 							passwordComfirm: '',
 							errorMessage: '',
 						});
-						this.props.history.push('/');
+						{/*changed.push('/') to .push('/flights')*/}
+						this.props.history.push('/flights');
 						window.location.reload();
 					})
 					.catch((err) => {
@@ -77,7 +78,8 @@ class SignUp extends Component {
 	render() {
 		return (
 			<div className="Container">
-				<TopHeader />
+				{/*most likely don't need top nav in SignUp*/}
+				{/*<TopHeader />*/}
 				<div className="Card">
 					<form onSubmit={this.handleSubmit}>
 						<input
