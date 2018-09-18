@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import NavBar from './NavBar';
-import TopHeader from './TopHeader';
+import NavBar from '../NavBar';
+import TopHeader from '../TopHeader';
 class Instructors extends Component {
   constructor(props) {
     super(props);

@@ -1,18 +1,19 @@
 import axios from "axios";
 import React, { Component } from "react";
 import AircraftCard from "./AircraftCard";
-import NavBar from "./NavBar";
+import NavBar from "../NavBar";
 
-import TopHeader from './TopHeader';
+import TopHeader from '../TopHeader';
 
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
 let dev = true;
 let URL = (dev
   ? "http://127.0.0.1:8000/api"
-  : "https://flightloggercs10.herokuapp.com/api");
+  : "https://flightloggercs10.herokuapp.com/api" );
+URL = "http://127.0.0.1:8000/api"
 
-class Aircraft extends Component {
+class Aircrafts extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -47,7 +48,7 @@ class Aircraft extends Component {
 
   render() {
     return (
-      <div>
+      <div className="Aircrafts">
       <TopHeader breadcrumb={[ 'aircraft' ]} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
         <NavBar />
         {this.state.data.map(plane => {
@@ -67,4 +68,4 @@ class Aircraft extends Component {
   }
 }
 
-export default Aircraft;
+export default Aircrafts;

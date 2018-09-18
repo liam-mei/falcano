@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Flights from './Flights.js';
+import Flights from './Flights/Flights';
 import './TopHeader.css';
 import LandingPage from './LandingPage';
 import { Link } from 'react-router-dom';
@@ -20,9 +20,9 @@ class TopHeader extends Component {
 	}
 	render() {
 		return (
-			<div className="TopNav">
+			<div className="Topheader-TopNav">
 				<div className="BreadCrumb">
-					<Link className="link" to={'/'}>
+					<Link className="Topheader-link" to={'/'}>
 						Home
 					</Link>
 					<span> </span>
@@ -30,7 +30,7 @@ class TopHeader extends Component {
 						const linkTag = link.toLowerCase();
 						const linkLabel = link.charAt(0).toUpperCase() + link.slice(1).toLowerCase();
 						return (
-							<Link key={index} className="link" to={`/${linkTag}`}>
+							<Link key={index} className="Current-link" to={`/${linkTag}`}>
 								> {linkLabel}
 							</Link>
 						);
@@ -40,7 +40,7 @@ class TopHeader extends Component {
 				<div className="ViewTotal">
 					{this.state.rightLinks.map((link, index) => {
 						return (
-							<Link key={index} className="link" to={`/${link.name}`}>
+							<Link key={index} className="ViewTotal-link" to={`/${link.name}`}>
 								{link.value}
 							</Link>
 						);
