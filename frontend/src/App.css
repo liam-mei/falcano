@@ -1,7 +1,10 @@
 .App{
-  
   display:flex;
   flex-direction: column;
+  
+  
+  width:1024px;
+    max-width:1024px;
 }
 
 .Signout{
