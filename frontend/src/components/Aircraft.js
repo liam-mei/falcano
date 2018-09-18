@@ -3,6 +3,8 @@ import React, { Component } from "react";
 import AircraftCard from "./AircraftCard";
 import NavBar from "./NavBar";
 
+import TopHeader from './TopHeader';
+
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
 let dev = true;
@@ -46,6 +48,7 @@ class Aircraft extends Component {
   render() {
     return (
       <div>
+      <TopHeader breadcrumb={[ 'aircraft' ]} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
         <NavBar />
         {this.state.data.map(plane => {
           let id = plane.id;
