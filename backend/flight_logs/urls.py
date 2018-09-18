@@ -32,4 +32,5 @@ urlpatterns = [
     path('token-auth/', obtain_jwt_token),
     re_path(r'^api-token-verify/', verify_jwt_token),
     path('flights/', include('flights.urls'))
+    
 ]
