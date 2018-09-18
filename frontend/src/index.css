@@ -1,8 +1,15 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
+}
+
+body {
   font-family: sans-serif;
-  display:flex;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url("./utils/Images/MntnCldLandingPage.png");
+  background-repeat: no-repeat;
+  background-position: center;
 }
