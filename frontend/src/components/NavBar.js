@@ -16,8 +16,8 @@ class NavBar extends Component {
         <br/>
         <Link className="link" to={'/settings'}>Settings</Link>
       </div>
-     );
+    );
   }
 }
- 
+
 export default NavBar;

@@ -10,8 +10,8 @@ class EditFlightModal extends Component {
       <div>
         
       </div>
-     );
+    );
   }
 }
- 
+
 export default EditFlightModal;
