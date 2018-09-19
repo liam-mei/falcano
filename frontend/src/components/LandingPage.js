@@ -11,7 +11,8 @@ class LandingPage extends Component {
 		return (
 			<div className="Wrapper">
 				{this.props.authenticated ? (
-          <Route path="/home" component={HomePage} />
+          <HomePage />
+        
 				) : (
 					<div className="Card">
 						<h1 className="Logo">FALCANO</h1>

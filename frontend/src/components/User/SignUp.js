@@ -64,7 +64,7 @@ class SignUp extends Component {
 							errorMessage: '',
 						});
 						{/*changed.push('/') to .push('/flights')*/}
-						this.props.history.push('/flights');
+						this.props.history.push('/home');
 						window.location.reload();
 					})
 					.catch((err) => {

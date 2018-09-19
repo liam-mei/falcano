@@ -18,6 +18,8 @@ import './App.css';
 class App extends Component {
 	signOut = () => {
 		localStorage.removeItem('token');
+		// Todo: make redirect to landingpage
+		// this.props.history.push('/');
 		window.location.reload();
 	};
 	render() {
