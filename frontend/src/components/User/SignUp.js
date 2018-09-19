@@ -22,7 +22,8 @@ class SignUp extends Component {
 
 	componentDidMount() {
 		if (isLoggedIn()) {
-			this.props.history.push('/');
+			{/*changed endpoint from '/' to '/home'*/}
+			this.props.history.push('/home');
 			window.location.reload();
 		}
 	}

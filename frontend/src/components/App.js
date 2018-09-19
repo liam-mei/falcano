@@ -5,6 +5,7 @@ import { Elements, StripeProvider } from 'react-stripe-elements';
 
 import Auth from './Auhenication/Auth';
 import LandingPage from './LandingPage';
+import HomePage from './HomePage';
 import Aircrafts from './Aircraft/Aircrafts';
 import Flights from './Flights/Flights';
 import Settings from './User/Settings';
@@ -32,6 +33,7 @@ class App extends Component {
 						''
 					)}
 					<Route exact path="/" render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />} />
+					<Route path="/home" component={HomePage} />
 					<Route path="/signUp" component={SignUp} />
 					<Route path="/signIn" component={SignIn} />
 					<Route path="/aircrafts" component={Aircrafts} />
