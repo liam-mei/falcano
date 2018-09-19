@@ -19,9 +19,11 @@ def current_user(request):
     """
     Determine the current user by their token, and return their data
     """
-    
-    serializer = UserSerializer(request.user)
-    return Response(serializer.data)
+
+    def get(self, request, format=Json):
+        serializer = UserSerializerWithToken(data=request.data)
+        if serializer.is_valid():
+            return Response(serializer.data)
 
 
 class UserList(APIView):

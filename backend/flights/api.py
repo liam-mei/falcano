@@ -1,11 +1,11 @@
 from rest_framework import serializers, viewsets
 from .models import Flights, Aircraft
 
-from django.db.models import Sum, Count
+from django.db.models import Sum, Count, F
 
 
 class FlightsSerializer(serializers.HyperlinkedModelSerializer):
-    pic_count = serializers.IntegerField()
+    # pic_count = serializers.IntegerField()
 
     class Meta:
         model = Flights
@@ -85,25 +85,44 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
         # print(Flights.objects.filter(tail_number='tailnumber1'))
         # return Flights.objects.filter(tail_number='tailnumber1').aggregate(Sum('pic'))
         # return Flights.objects.filter(tail_number='tailnumber1').annotate(name_count=Count('pic')).aggregate(Sum('pic'))
-        # return Flights.objects.all().aggregate(Sum('pic'))
+        # sum = []
+        #for i in Flights.objects.filter(tail_number="tail1"):
+        # fl = Flights.objects.filter(tail_number='tail1').values('pic')
+        # print("fl", fl)
+        # sum_fl = fl.annotate(pic_count=Sum('pic'))
+        # print("sum", sum_fl)
+        # return sum_fl
+        user = self.request.user
+        if user.is_anonymous:
+            pass
+        else:
+            return Flights.objects.filter(tail_number='tail1', user=user)
+        #     c = Flights.objects.filter(tail_number="tail1")
+        #     sum.append(c[i])
+        # print('SUM', sum)
+        # Flights.objects.annotate(pic_count=sum)
+            # print("ccccccccc", c)
+            # return c 
 
-
+            #  sum += i.pic
         # c = Flights.objects.filter(tail_number='tailnumber1')
-        # print('BEFORE ASDFKAS;DLFKJAS;LDF')
-        # print('AFTER AS;DLFKJAS;LDKFJAL;SJ')
-        c = Flights.objects.filter(tail_number='tailnumber1')
+        # c = Flights.objects.filter(tail_number='tail1')
         # print(c)
 
         # a = []
 
-        sum = 0
+        # sum = 0
 
-        for i in c:
-            print("i asdlfkjasd: ", i.pic)
-            sum = sum + i.pic
-
-        # print(sum)
+        # for i in c:
+        #     print("i asdlfkjasd: ", i.pic)
+        #     d = c.annotate(pic_count=Sum('pic'))
+        #     Flights.pic_count.save(d)
+        # return self.pic_count
+        # print('BEFORE ASDFKAS;DLFKJAS;LDF')
+        # print('pic', sum)
+        # print('AFTER AS;DLFKJAS;LDKFJAL;SJ')
+        # print("dddddddddd", d[0].pic_count)
         # print(dir(c))
 
-        # return c.annotate(pic_total=sum)
-        # return [{sum}]
+        # return sum
+        # return c

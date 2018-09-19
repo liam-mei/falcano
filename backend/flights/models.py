@@ -24,6 +24,7 @@ class Flights(models.Model):
     tail_number = models.CharField(max_length=25, default="Tail Number")
     license_type = models.CharField(max_length=40, default="Aircraft")
     man_type = models.CharField(max_length=200, default="Manufacturer")
+    pic_count = models.FloatField(default=0.0)
     # uncomment if instructor fields end up being needed
     # intsr_name = models.CharField(max_length=50)
     # intsr_num = models.PositiveSmallIntegerField()
