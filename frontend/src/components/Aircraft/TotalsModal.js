@@ -9,7 +9,7 @@ class TotalsModal extends Component {
   }
   render() { 
     return ( 
-      <div>
+      <div className="TotalsModal">
 
       </div>
      );

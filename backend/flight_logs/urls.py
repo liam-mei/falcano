@@ -28,17 +28,18 @@ router = routers.DefaultRouter()
 router.register(r'flights', FlightsViewSet)
 router.register(r'aircraft', AircraftViewSet)
 router.register(r'filteraircraft', FilterAircraftViewSet)
-router.register(r'filterflights', FilterFlightsViewSet)
+# router.register(r'filterflights', FilterFlightsViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    re_path(r'^api-token-auth/', views.obtain_auth_token),
+    # re_path(r'^api-token-auth/', views.obtain_auth_token),
     path('token-auth/', obtain_jwt_token),
     re_path(r'^api-token-verify/', verify_jwt_token),
-    path('flights/', include('flights.urls')),
+    # path('user_admin/', include('flights.urls')),
     # url endpoint to filter data dynamically
-    url('^filter3/(?P<tail_number>.+)/$', Filter3ViewSet.as_view()),
-]
+    url('^api/filteredflights/(?P<tail_number>.+)/$', Filter3ViewSet.as_view()),
+
+]   
 
 urlpatterns += router.urls

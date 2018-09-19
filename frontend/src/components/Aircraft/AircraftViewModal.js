@@ -10,7 +10,7 @@ class AircraftViewModal extends Component {
   }
   render() { 
     return ( 
-      <div>
+      <div className="AircraftViewModal">
         {/* title */}
         {/* IMG of aircraft*/}
         {/* data */}

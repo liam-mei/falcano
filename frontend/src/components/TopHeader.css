@@ -1,18 +1,22 @@
-.TopNav {
+.Topheader-TopNav {
     padding:1rem;
     display: flex;
     justify-content: space-between;
 }
 
-
-
-Link {
-    text-decoration: none;
-    color: #333333;
-    list-style: none;
+ 
+.Topheader-link{
+border: 1px solid red;
 }
 
-Link:hover {
-    text-decoration: underline;
-    list-style: none;
+.Current-link {
+   border: 1px solid green;
+}
+
+.ViewTotal-link{
+    border: 1px solid blue;
+    text-decoration: none;
+}
+.ViewTotal{
+   text-decoration: none;
 }

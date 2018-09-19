@@ -3,9 +3,9 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import TopHeader from './TopHeader';
+import TopHeader from '../TopHeader';
 
-import { isLoggedIn } from '../utils/helper/helperFuncions';
+import { isLoggedIn } from '../../utils/helper/helperFuncions';
 
 import './SigninSignupCss.css';
 
