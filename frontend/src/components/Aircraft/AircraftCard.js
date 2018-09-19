@@ -2,7 +2,7 @@ import React from "react";
 import Card from "@material-ui/core/Card";
 import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
-import "./AircraftCardCSS.css";
+import "./AircraftCard.css";
 import axios from "axios";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 
@@ -47,39 +47,31 @@ class AircraftCardModal extends React.Component {
   componentDidMount() {
     let axiosconfig = {};
     axios
-      .get(`${URL}/aircraft/`, axiosconfig)
+      .get(`${URL}/aircraft/`)
       .then(response => {
         this.setState({ data: response.data });
         console.log("res", response);
       })
       .catch();
+    
   }
 
   render() {
     console.log("modal", this.props);
-    return (
-      <div>
-        <Card onClick={this.toggle} className="air-card">
+    return <div className="AircraftCard">
+        <Card onClick={this.toggle} className="AircraftCard-Card">
           <Typography className="card-typography" onClick={this.toggle}>
-            <p className="card-typography-p">{this.props.data.tail_number}</p>
+            <p className="card-typography-p">
+              {this.props.data.tail_number}
+            </p>
             <p className="card-typography-p">{this.props.data.man_type}</p>
           </Typography>
-          <CardMedia
-            onClick={this.toggle}
-            component="img"
-            height="140"
-            image="https://qph.fs.quoracdn.net/main-qimg-721f8fad881515f2e901f6a68151cd55-c"
-            title="Airplane"
-          />
+          <CardMedia onClick={this.toggle} component="img" height="140" image="https://qph.fs.quoracdn.net/main-qimg-721f8fad881515f2e901f6a68151cd55-c" title="Airplane" />
         </Card>
         {/* CARD END */}
 
         {/* MODAL START */}
-        <Modal
-          className="modal-content"
-          isOpen={this.state.modal}
-          toggle={this.toggle}
-        >
+        <Modal className="modal-content" isOpen={this.state.modal} toggle={this.toggle}>
           <ModalHeader className="modal-title">
             <p className="modal-header-p">{this.props.data.tail_number}</p>
             <p className="modal-header-p">{this.props.data.man_type}</p>
@@ -90,25 +82,12 @@ class AircraftCardModal extends React.Component {
           </ModalHeader>
           <ModalBody className="modal-body">
             <br />
-            <img
-              className="modal-body-img"
-              src="https://qph.fs.quoracdn.net/main-qimg-721f8fad881515f2e901f6a68151cd55-c"
-            />
+            <img className="modal-body-img" src="https://qph.fs.quoracdn.net/main-qimg-721f8fad881515f2e901f6a68151cd55-c" />
             {/* NESTED MODAL */}
-            <Modal
-              isOpen={this.state.nestedModal}
-              toggle={this.toggleNested}
-              onClosed={this.state.closeAll ? this.toggle : undefined}
-            >
+            <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
               <ModalHeader>
-                <input
-                  className="edit-input-tn"
-                  placeholder={this.props.data.tail_number}
-                />
-                <input
-                  className="edit-input-lt"
-                  placeholder={this.props.data.license_type}
-                />
+                <input className="edit-input-tn" placeholder={this.props.data.tail_number} />
+                <input className="edit-input-lt" placeholder={this.props.data.license_type} />
               </ModalHeader>
               <ModalBody className="nested-modal-body">
                 Drag and Drop Image
@@ -142,8 +121,7 @@ class AircraftCardModal extends React.Component {
             </ul>
           </ModalFooter>
         </Modal>
-      </div>
-    );
+      </div>;
   }
 }
 

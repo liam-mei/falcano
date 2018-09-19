@@ -7,8 +7,8 @@ class EditAircraftModal extends Component {
   }
   render() { 
     return ( 
-      <div>
-        
+      <div className="EditAircraftModal" >
+        to do
       </div>
      );
   }

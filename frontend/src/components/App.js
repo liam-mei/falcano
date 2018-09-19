@@ -3,19 +3,15 @@ import { Route } from 'react-router-dom';
 // Stripe Stuff
 import { Elements, StripeProvider } from 'react-stripe-elements';
 
-import Auth from './components/Auhenication/Auth';
-import LandingPage from './components/LandingPage';
-import Aircraft from './components/Aircraft';
-// import EditAircraftModal from "./components/EditAircraftModal";
-// import EditFlightModal from "./components/EditFlightModal";
-// import Billing from "./components/Billing";
-import Flights from './components/Flights';
-import Settings from './components/Settings';
-//import TotalsModal from "./components/TotalsModal";
-import SignIn from './components/SignIn';
-import SignUp from './components/SignUp';
-import Instructors from './components/Instructors';
-import BillingForm from './billing/BillingForm';
+import Auth from './Auhenication/Auth';
+import LandingPage from './LandingPage';
+import Aircrafts from './Aircraft/Aircrafts';
+import Flights from './Flights/Flights';
+import Settings from './User/Settings';
+import SignIn from './User/SignIn';
+import SignUp from './User/SignUp';
+import Instructors from './User/Instructors';
+import BillingForm from './Billing/BillingForm';
 
 import './App.css';
 class App extends Component {
@@ -38,7 +34,7 @@ class App extends Component {
 					<Route exact path="/" render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />} />
 					<Route path="/signUp" component={SignUp} />
 					<Route path="/signIn" component={SignIn} />
-					<Route path="/aircraft" component={Aircraft} />
+					<Route path="/aircrafts" component={Aircrafts} />
 					<Route path="/billing" component={BillingForm} />
 					<Route path="/flights" component={Flights} />
 					<Route path="/settings" component={Settings} />
