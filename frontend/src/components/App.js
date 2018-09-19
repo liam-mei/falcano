@@ -5,6 +5,7 @@ import { Elements, StripeProvider } from 'react-stripe-elements';
 
 import Auth from './Auhenication/Auth';
 import LandingPage from './LandingPage';
+import HomePage from './HomePage';
 import Aircrafts from './Aircraft/Aircrafts';
 import Flights from './Flights/Flights';
 import Settings from './User/Settings';
@@ -17,6 +18,8 @@ import './App.css';
 class App extends Component {
 	signOut = () => {
 		localStorage.removeItem('token');
+		// Todo: make redirect to landingpage
+		// this.props.history.push('/');
 		window.location.reload();
 	};
 	render() {
@@ -32,6 +35,7 @@ class App extends Component {
 						''
 					)}
 					<Route exact path="/" render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />} />
+					<Route path="/home" component={HomePage} />
 					<Route path="/signUp" component={SignUp} />
 					<Route path="/signIn" component={SignIn} />
 					<Route path="/aircrafts" component={Aircrafts} />
