@@ -22,7 +22,8 @@ class TopHeader extends Component {
 		return (
 			<div className="Topheader-TopNav">
 				<div className="BreadCrumb">
-					<Link className="Topheader-link" to={'/'}>
+					{/*Changed link from '/' to '/home'*/}
+					<Link className="Topheader-link" to={'/home'}>
 						Home
 					</Link>
 					<span> </span>

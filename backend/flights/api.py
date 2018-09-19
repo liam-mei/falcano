@@ -52,8 +52,6 @@ class AircraftViewSet(viewsets.ModelViewSet):
     
     def get_queryset(self):
         user = self.request.user
-        print("USER:", self.request.user)
-        # return Aircraft.objects.all()
 
         if user.is_anonymous:
             return Aircraft.objects.all()
@@ -101,6 +99,7 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
             pass
         else:
             return Flights.objects.filter(user=user, tail_number=tail_number)
+
         #     c = Flights.objects.filter(tail_number="tail1")
         #     sum.append(c[i])
         # print('SUM', sum)

@@ -27,7 +27,7 @@ from flights.views import Filter3ViewSet
 router = routers.DefaultRouter()
 router.register(r'flights', FlightsViewSet)
 router.register(r'aircraft', AircraftViewSet)
-router.register(r'filteraircraft', FilterAircraftViewSet)
+# router.register(r'filteraircraft', FilterAircraftViewSet)
 # router.register(r'filterflights', FilterFlightsViewSet)
 
 urlpatterns = [
@@ -42,4 +42,4 @@ urlpatterns = [
     re_path(r'^api-token-refresh/', refresh_jwt_token),
 ]   
 
-urlpatterns += router.urls
+# urlpatterns += router.urls
