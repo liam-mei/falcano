@@ -74,6 +74,7 @@ class Aircrafts extends Component {
 		window.location.reload();
 	};
 
+	
 	componentDidMount() {
 		const headers = {
 			Authorization: 'JWT ' + localStorage.getItem('token'),
