@@ -1,0 +1,54 @@
+.SignUp {
+  grid-column: 1/ -1;
+  grid-row: 1/ -1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.SignUp .SignUp-card {
+  border: 1px solid #E8E8E8;
+  width: 400px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 7px;
+  padding: 1rem;
+  margin-bottom: 2rem;
+}
+
+.SignUp .SignUp-card form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+
+}
+
+.SignUp .SignUp-card form input {
+  margin: .5rem 0;
+  padding: .4rem 0.2rem;
+  font-size: 1.2rem;
+  opacity: 0.6;
+}
+
+.SignUp .SignUp-card form button {
+  margin: .5rem 0;
+  padding: .4rem 0;
+  font-size: 1.2rem;
+  border-radius: 5px;
+}
+
+.SignUp .SignUp-card form button:hover {
+  cursor: pointer;
+  background-color: #0009D0;
+  color: white;
+}
+
+.SignUp .SignUp-right {
+  align-self: flex-end;
+}
+
+.SignUp .SignUp-right:hover {
+  text-decoration: underline;
+}

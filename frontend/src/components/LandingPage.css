@@ -1,109 +1,64 @@
-.Wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+.LandingPage {
+  grid-column: 1/ -1;
+  grid-row: 1/ -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 1fr;
+
 }
 
-.Card {
+.LandingPage .LandingPage-loggedIn {
+  grid-column: 1/ -1;
+  grid-row: 1/ -1;
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: 4rem 1fr;
+}
+
+.LandingPage .LandingPage-card {
+  grid-column: 4/ -1;
+  grid-row: 2/ -1;
+  background: #E8E8E8;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: #E8E8E8;
   width: 700px;
+  height: 30rem;
   border-radius: 7px;
   opacity: .8;
 }
 
-.MissionStatement {
+
+.LandingPage .card-mission-statement {
   color: rgb(81, 81, 81);
   padding: 2em;
 }
 
-.SigninSignup {
-  display: flex;
-  margin-bottom: 2rem;
-}
-
-.LogInLink,
-.SignUpLink {
+.LandingPage .registration-signin,
+.LandingPage .registration-signup {
   border: 3px solid #0009D0;
   padding: .6rem 3rem;
   border-radius: 3px;
 }
 
-a {
-  text-decoration: none;
-}
-
-a:hover.LogInLink,
-a:hover.SignUpLink {
+.LandingPage a:hover.registration-signin,
+.LandingPage a:hover.registration-signup {
   color: #fff;
   text-decoration: none;
   background-color: #0009D0;
 }
 
-
-.SignUpLink {
+.LandingPage .registration-signup {
   margin-left: .5rem;
 }
 
-.LogInLink {
+.LandingPage .registration-signin {
   margin-right: .5rem;
 }
 
-.Logo {
+.LandingPage .card-logo {
   font-size: 7rem;
   font-weight: 700;
   letter-spacing: -1.25rem;
 }
-
-/* .Content {
-  display: flex;
-  Justify-content: center;
-  align-items: center;
-}
-
-.LeftContainer {
-  Border: 4px solid black;
-}
-
-.RightContainer {
-  Border: 4px solid black;
-}
-
-.FlightLogo {
-  color: #333;
-  font-size: 5rem;
-}
-
-.SignupSignin {
-  display: flex;
-  justify-content: center;
-  padding-top: 1rem;
-}
-
-.SignupSignin a {
-  color: #011638;
-  background-color: none;
-  border: solid 4px #011638;
-  border-radius: 7px;
-  border-width: 3px;
-  width: 50px;
-} */
-
-/*
-.SignupSignin {
-  color: #011638;
-  background-color: none;
-  border: solid 4px #011638;
-  border-radius: 7px;
-  border-width: 3px;
-  padding: 3px 20px 3px 20px;
-  margin: px;
-  width: 50px;
-  display: flex;
-  flex-direction: row;
-}
-*/

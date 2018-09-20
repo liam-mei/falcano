@@ -20,10 +20,9 @@ class TopHeader extends Component {
 	}
 	render() {
 		return (
-			<div className="Topheader-TopNav">
+			<div className="Topheader">
 				<div className="BreadCrumb">
-					{/*Changed link from '/' to '/home'*/}
-					<Link className="Topheader-link" to={'/home'}>
+					<Link className="BreadCrumb-link" to={'/home'}>
 						Home
 					</Link>
 					<span> </span>
@@ -31,17 +30,16 @@ class TopHeader extends Component {
 						const linkTag = link.toLowerCase();
 						const linkLabel = link.charAt(0).toUpperCase() + link.slice(1).toLowerCase();
 						return (
-							<Link key={index} className="Current-link" to={`/${linkTag}`}>
+							<Link key={index} className="BreadCrumb-link" to={`/${linkTag}`}>
 								> {linkLabel}
 							</Link>
 						);
 					})}
 				</div>
-
-				<div className="ViewTotal">
+				<div className="Right">
 					{this.state.rightLinks.map((link, index) => {
 						return (
-							<Link key={index} className="ViewTotal-link" to={`/${link.name}`}>
+							<Link key={index} className="Right-link" to={`/${link.name}`}>
 								{link.value}
 							</Link>
 						);
