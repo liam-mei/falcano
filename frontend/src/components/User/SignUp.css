@@ -1,5 +1,6 @@
 .SignUp {
-  grid-area: cd;
+  grid-column: 1/ -1;
+  grid-row: 1/ -1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,4 +47,8 @@
 
 .SignUp .SignUp-right {
   align-self: flex-end;
+}
+
+.SignUp .SignUp-right:hover {
+  text-decoration: underline;
 }

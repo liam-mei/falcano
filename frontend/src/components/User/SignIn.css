@@ -1,5 +1,6 @@
 .SignIn {
-  grid-area: cd;
+  grid-column: 1/ -1;
+  grid-row: 1/ -1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -46,4 +47,8 @@
 
 .SignIn .SignIn-right {
   align-self: flex-end;
+}
+
+.SignIn .SignIn-right:hover {
+  text-decoration: underline;
 }
