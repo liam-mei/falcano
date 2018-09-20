@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import NavBar from '../NavBar';
-import axios from 'axios';
-// import { Breadcrumb } from 'reactstrap';
 import TopHeader from '../TopHeader';
+
+import './Flights.css';
 class Flights extends Component {
 	constructor(props) {
 		super(props);
@@ -10,9 +10,13 @@ class Flights extends Component {
 	}
 	render() {
 		return (
-			<div>
+			<div className="Flights">
 				<TopHeader breadcrumb={[ 'flights' ]} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
 				<NavBar />
+				<div className="FlightList">
+					this will have the flight list this will have the flight list this will have the flight list this will have
+					the flight list
+				</div>
 			</div>
 		);
 	}

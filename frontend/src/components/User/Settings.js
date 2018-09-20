@@ -10,12 +10,12 @@ class Settings extends Component {
   }
   render() { 
     return ( 
-      <div className="Settings-Wrapper">
+      <div className="Settings">
         {/*remove total hours from line 13*/}
         <TopHeader breadcrumb={[ 'settings' ]} />
         <NavBar />
         
-          <div className="Settings">
+          <div className="Settings-Form">
             <form>
               <div className="NameText">
                 <label className="NameBox"> Name</label>
@@ -39,7 +39,7 @@ class Settings extends Component {
               </div>
             </form>
           </div>
-         </div>
+        </div>
       
     );
   }

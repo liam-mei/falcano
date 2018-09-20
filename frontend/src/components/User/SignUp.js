@@ -3,11 +3,9 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import TopHeader from '../TopHeader';
-
 import { isLoggedIn } from '../../utils/helper/helperFuncions';
 
-import './SigninSignupCss.css';
+import './SignUp.css';
 
 class SignUp extends Component {
 	constructor(props) {
@@ -22,7 +20,10 @@ class SignUp extends Component {
 
 	componentDidMount() {
 		if (isLoggedIn()) {
-			this.props.history.push('/');
+			{
+				/*changed endpoint from '/' to '/home'*/
+			}
+			this.props.history.push('/home');
 			window.location.reload();
 		}
 	}
@@ -62,8 +63,10 @@ class SignUp extends Component {
 							passwordComfirm: '',
 							errorMessage: '',
 						});
-						{/*changed.push('/') to .push('/flights')*/}
-						this.props.history.push('/flights');
+						{
+							/*changed.push('/') to .push('/flights')*/
+						}
+						this.props.history.push('/home');
 						window.location.reload();
 					})
 					.catch((err) => {
@@ -77,10 +80,10 @@ class SignUp extends Component {
 
 	render() {
 		return (
-			<div className="Container">
+			<div className="SignUp">
 				{/*most likely don't need top nav in SignUp*/}
 				{/*<TopHeader />*/}
-				<div className="Card">
+				<div className="SignUp-card">
 					<form onSubmit={this.handleSubmit}>
 						<input
 							onChange={this.handleChange}
@@ -110,9 +113,9 @@ class SignUp extends Component {
 						/>
 
 						<button>Sign Up</button>
-						<div style={{ color: 'red' }}>{this.state.errorMessage ? this.state.errorMessage : ''}</div>
+						<div className="danger">{this.state.errorMessage ? this.state.errorMessage : ''}</div>
 					</form>
-					<Link style={{ alignSelf: 'flex-end' }} to={'/SignIn'}>
+					<Link className="SignUp-right" to={'/SignIn'}>
 						LogIn
 					</Link>
 				</div>

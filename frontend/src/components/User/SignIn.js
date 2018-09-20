@@ -3,11 +3,9 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import TopHeader from '../TopHeader';
-
 import { isLoggedIn } from '../../utils/helper/helperFuncions';
 
-import './SigninSignupCss.css';
+import './SignIn.css';
 class SignIn extends Component {
 	constructor(props) {
 		super(props);
@@ -20,7 +18,10 @@ class SignIn extends Component {
 
 	componentDidMount() {
 		if (isLoggedIn()) {
-			this.props.history.push('/');
+			{
+				/*changed endpoint from '/' to '/home'*/
+			}
+			this.props.history.push('/home');
 			window.location.reload();
 		}
 	}
@@ -57,8 +58,10 @@ class SignIn extends Component {
 					password: '',
 					errorMessage: '',
 				});
-				{/*changed.push('/') to .push('/flights')*/}
-				this.props.history.push('/flights');
+				{
+					/*changed.push('/') to .push('/flights')*/
+				}
+				this.props.history.push('/home');
 				window.location.reload();
 			})
 			.catch((err) => {
@@ -67,39 +70,23 @@ class SignIn extends Component {
 	};
 
 	render() {
-		return (
-			<div className="Container">
-			{/*most likely don't need top nav in Signin*/}
-			{/*<TopHeader />*/} 
-				<div className="Card">
-					<form onSubmit={this.handleSubmit}>
-						<input
-							onChange={this.handleChange}
-							value={this.state.username}
-							name="username"
-							type="text"
-							className="form-control"
-							placeholder="Username"
-						/>
+		return <div className="SignIn">
+        <div className="SignIn-card">
+          <form onSubmit={this.handleSubmit}>
+            <input onChange={this.handleChange} value={this.state.username} name="username" type="text" className="form-control" placeholder="Username" />
 
-						<input
-							onChange={this.handleChange}
-							value={this.state.password}
-							name="password"
-							type="password"
-							className="form-control"
-							placeholder="password"
-						/>
+            <input onChange={this.handleChange} value={this.state.username} name="username" type="text" className="form-control" placeholder="Username" />
 
-						<button>Sign In</button>
-						<div style={{ color: 'red' }}>{this.state.errorMessage ? this.state.errorMessage : ''}</div>
-					</form>
-					<Link style={{ alignSelf: 'flex-end' }} to={'/SignUp'}>
-						SignUp
-					</Link>
-				</div>
-			</div>
-		);
+            <button>Sign In</button>
+            <div className="danger">
+              {this.state.errorMessage ? this.state.errorMessage : ""}
+            </div>
+          </form>
+          <Link className="SignIn-right" to={"/SignUp"}>
+            SignUp
+          </Link>
+        </div>
+      </div>;
 	}
 }
 

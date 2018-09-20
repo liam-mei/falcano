@@ -37,27 +37,26 @@ class FlightsViewSet(viewsets.ModelViewSet):
 class AircraftSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Aircraft
-        fields = ('man_type', 'tail_number', 'license_type')
+        fields = ('man_type', 'tail_number', 'license_type','id')
 
     def create(self, validated_data):
         user = self.context['request'].user
         aircraft = Aircraft.objects.create(user=user, **validated_data)
         return aircraft
 
+    
 
 class AircraftViewSet(viewsets.ModelViewSet):
     serializer_class = AircraftSerializer
     queryset = Aircraft.objects.none()
-
+    
     def get_queryset(self):
-        # user = self.request.user
+        user = self.request.user
 
-        return Aircraft.objects.all()
-
-        # if user.is_anonymous:
-        #     return Aircraft.objects.all()
-        # else:
-        #     return Aircraft.objects.filter(user=user)
+        if user.is_anonymous:
+            return Aircraft.objects.all()
+        else:
+            return Aircraft.objects.filter(user=user)
 
 # hard coded way of filtering aircraft
 # need to reimplement the user filter
@@ -67,11 +66,12 @@ class FilterAircraftViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return Aircraft.objects.filter(license_type='sel')
+        # return Aircraft.objects.filter(license_type='sel')
 
-        # if user.is_anonymous:
-        # else:
-        #     return Aircraft.objects.filter(user=user)
+        if user.is_anonymous:
+            return Flights.objects.none()
+        else:
+            return Aircraft.objects.filter(user=user)
 
 
 # tried to aggregate filtered data.  Multiple attempts.  Not yet working also needs to reimplement user filter
@@ -80,6 +80,7 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
     queryset = Flights.objects.none()
 
     def get_queryset(self):
+        print("FLIGHTS USER: ", self.request.user)
         # import pdb; pdb.set_trace()
         # user = self.request.user
         # print(Flights.objects.filter(tail_number='tailnumber1'))
@@ -93,10 +94,12 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
         # print("sum", sum_fl)
         # return sum_fl
         user = self.request.user
+        tail_number = self.request.tail_number
         if user.is_anonymous:
             pass
         else:
-            return Flights.objects.filter(tail_number='tail1', user=user)
+            return Flights.objects.filter(user=user, tail_number=tail_number)
+
         #     c = Flights.objects.filter(tail_number="tail1")
         #     sum.append(c[i])
         # print('SUM', sum)
