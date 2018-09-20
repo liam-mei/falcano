@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-// Stripe Stuff
-//import { Elements, StripeProvider } from 'react-stripe-elements';
 
 import Auth from './Auhenication/Auth';
 import LandingPage from './LandingPage';
@@ -25,6 +23,7 @@ class App extends Component {
 	render() {
 		console.log(this.props);
 		return (
+
 			//{/*<StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">*/}
 			<div className="App">
 				{this.props.loggedIn ? (
@@ -32,10 +31,12 @@ class App extends Component {
 						<span className="SignOut" onClick={this.signOut}>
 							Signout
 						</span>
+
 					</div>
 				) : (
 					''
 				)}
+
 				<div className="Content">
 					<Route exact path="/" render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />} />
 					<Route
@@ -52,7 +53,6 @@ class App extends Component {
 					<Route path="/instructors" component={Instructors} />
 				</div>
 			</div>
-			//{/* </StripeProvider > */}
 		);
 	}
 }
