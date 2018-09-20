@@ -1,19 +1,27 @@
-.FlightCard-Wrapper {
+.FlightCard {
     display: flex;
     flex-direction: column;
     background: #E9E8E8;
-    padding: 2rem;
+    padding: 1rem;
+    margin: 0;
 }
 
-p {
-    margin-bottom: 0rem;
+.FlightCard h3 {
+    margin: 0 0 1rem 0;
+    padding: 0;
 }
 
-.FlightCard-Image {
-    margin: 1rem;
+.FlightCard p {
+    margin: 0 0 .5rem 0;
+    padding: 0;
 }
 
-.FLightCard-Hours-Date {
+.FlightCard .FlightCard-Image {
+    margin: 0 0 .5rem 0;
+    padding: 0;
+}
+
+.FlightCard .FLightCard-Hours-Date {
     display: flex;
     justify-content: space-between;
 }

@@ -8,7 +8,7 @@ class FlightCard extends Component {
 	}
 	render() {
 		return (
-        <div className="FlightCard-Wrapper">
+        <div className="FlightCard">
             <h3>Crosscountry Solo</h3>
             <p>KGAI-KLNS-KGAI</p>
             <p>N911AT</p>
