@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
-// Stripe Stuff
-import { Elements, StripeProvider } from 'react-stripe-elements';
 
 import Auth from './Auhenication/Auth';
 import LandingPage from './LandingPage';
@@ -25,26 +23,26 @@ class App extends Component {
 	render() {
 		console.log(this.props);
 		return (
-			<StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">
-				<div className="App">
-					{this.props.loggedIn ? (
-						<div className="Signout" onClick={this.signOut}>
-							Sign Out
-						</div>
-					) : (
-						''
-					)}
-					<Route exact path="/" render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />} />
-					<Route path="/home" component={HomePage} />
-					<Route path="/signUp" component={SignUp} />
-					<Route path="/signIn" component={SignIn} />
-					<Route path="/aircrafts" component={Aircrafts} />
-					<Route path="/billing" component={BillingForm} />
-					<Route path="/flights" component={Flights} />
-					<Route path="/settings" component={Settings} />
-					<Route path="/instructors" component={Instructors} />
-				</div>
-			</StripeProvider>
+
+			<div className="App">
+				{this.props.loggedIn ? (
+					<div className="Signout" onClick={this.signOut}>
+						Sign Out
+					</div>
+				) : (
+					''
+				)}
+				<Route exact path="/" render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />} />
+				<Route path="/home" component={HomePage} />
+				<Route path="/signUp" component={SignUp} />
+				<Route path="/signIn" component={SignIn} />
+				<Route path="/aircrafts" component={Aircrafts} />
+				<Route path="/billing" component={BillingForm} />
+				<Route path="/flights" component={Flights} />
+				<Route path="/settings" component={Settings} />
+				<Route path="/instructors" component={Instructors} />
+			</div>
+
 		);
 	}
 }
