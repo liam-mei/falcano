@@ -1,0 +1,42 @@
+.Settings-Wrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 20rem;
+}
+
+.Settings{
+    display: flex;
+    width: 24rem;
+}
+
+.NameText,
+.OldPassWord,
+.NewPassWord {
+    display: flex;
+    justify-content: space-between;
+    width: 24rem;
+    margin-bottom: 1rem;
+}
+
+.NameType,
+.OldPasswordType,
+.NewPasswordType {
+    right: 8rem;
+}
+
+.OldPasswordType {
+    width: 5rem;
+}
+
+.NewPasswordType {
+    width: 5rem;
+}
+
+.Save {
+    display: flex;
+    justify-content: center;
+}
+
+.SaveDiv {
+    box-shadow: 1.5px 1.5px grey;
+}

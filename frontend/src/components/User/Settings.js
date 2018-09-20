@@ -10,11 +10,37 @@ class Settings extends Component {
   }
   render() { 
     return ( 
-      <div>
+      <div className="Settings-Wrapper">
         {/*remove total hours from line 13*/}
         <TopHeader breadcrumb={[ 'settings' ]} />
         <NavBar />
-      </div>
+        
+          <div className="Settings">
+            <form>
+              <div className="NameText">
+                <label className="NameBox"> Name</label>
+                <input className="NameType" type="text" />
+              </div>
+
+              <div className="OldPassWord">
+                <label className="PasswordBox">Old Password</label>
+                <input className="OldPasswordType" type="text" />
+              </div>
+
+              <div className="NewPassWord">
+                <label className="NewPasswordBox">New Password</label>
+                <input className="NewPasswordType" type="text" />
+              </div>
+
+              <div className="Save">
+                <div className="SaveDiv">
+                  <button>save</button>
+                </div>
+              </div>
+            </form>
+          </div>
+         </div>
+      
     );
   }
 }
