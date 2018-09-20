@@ -5,6 +5,7 @@ import Typography from "@material-ui/core/Typography";
 import "./AircraftCard.css";
 import axios from "axios";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import Dropzone from 'react-dropzone';
 
 // variables for mapping the filtered flights data.
 
@@ -21,6 +22,7 @@ class AircraftCardModal extends React.Component {
 
     this.state = {
       data: [],
+      files: [],
       id: '',
       tail_number: '',
       tail_number_edit: '',
@@ -28,6 +30,7 @@ class AircraftCardModal extends React.Component {
       man_type_edit: '',
       license_type: '',
       license_type_edit: '',
+      photo: '',
       modal: false,
       nestedModal: false,
       closeAll: false
@@ -42,15 +45,14 @@ class AircraftCardModal extends React.Component {
     }
     axios({
       method: 'GET',
-      url: `${URL}/filteredflights/${this.state.tail_number}`,
+      url: `${URL}/filteredflights/${this.state.id}`,
       headers: headers,
     }).then((response) => {
-      console.log("MODAL RES", response.data)
+      console.log("MODAL RES", response.data.aircraft)
       this.setState({ data: response.data });
     }).catch((error) => {
       console.log("error :", error)
     });
-    
   };
   
   toggleNested = () => {
@@ -105,6 +107,30 @@ class AircraftCardModal extends React.Component {
     });
   };
   
+  // DRAG AND DROP UPLOAD HANDLER
+  handleOnDrop = (acceptedfiles, rejectedFiles) => {
+    console.log(acceptedfiles)
+    const headers = {
+      'Authorization': 'JWT ' + localStorage.getItem('token')
+    }
+    axios({
+      method: 'PUT',
+      url: `${URL}/aircraft/${this.state.id}/`,
+      data: {
+        man_type: this.state.man_type_edit,
+        tail_number: this.state.tail_number_edit,
+        license_type: this.state.license_type_edit,
+        id: this.state.id,
+        photo: acceptedfiles
+      },
+      headers: headers,
+    }).then(res => {
+      console.log("Dropzone res: ", res)
+    }).catch(err => {
+      console.log("Dropzone err: ", err)
+    })
+  }
+
   componentDidMount() {
     this.setState({ 
       tail_number: this.props.data.tail_number, 
@@ -112,11 +138,12 @@ class AircraftCardModal extends React.Component {
       tail_number_edit: this.props.data.tail_number,
       license_type_edit: this.props.data.license_type,
       man_type_edit: this.props.data.man_type, 
+      photo: this.props.data.photo
     }) 
   }
   
   render() {
-    console.log("dataflights", this.state.data)
+    console.log("filestate", this.props.data)
     let [ pic_sum, no_ldg, day, night, cross_country, actual_instr,
           sim_instr, dual_rec] = [0,0,0,0,0,0,0];
     for(let i=0; i<this.state.data.length; i++) {
@@ -139,7 +166,7 @@ class AircraftCardModal extends React.Component {
             </p>
             <p className="card-typography-p">{this.props.data.man_type}</p>
           </Typography>
-          <CardMedia onClick={this.toggle} component="img" height="140" image="https://qph.fs.quoracdn.net/main-qimg-721f8fad881515f2e901f6a68151cd55-c" title="Airplane" />
+          <CardMedia onClick={this.toggle} component="img" height="140" image={this.state.photo} title="Airplane" />
         </Card>
         {/* CARD END */}
 
@@ -155,7 +182,7 @@ class AircraftCardModal extends React.Component {
           </ModalHeader>
           <ModalBody className="modal-body">
             <br />
-            <img className="modal-body-img" src="https://qph.fs.quoracdn.net/main-qimg-721f8fad881515f2e901f6a68151cd55-c" />
+            <img className="modal-body-img" src={this.state.photo} />
             {/* NESTED MODAL */}
             <Modal isOpen={this.state.nestedModal} toggle={this.toggleNested} onClosed={this.state.closeAll ? this.toggle : undefined}>
               <ModalHeader>
@@ -164,7 +191,9 @@ class AircraftCardModal extends React.Component {
                 <input className="edit-input-mt" name="man_type_edit" onChange={this.handleChange} placeholder={this.props.data.man_type} />
               </ModalHeader>
               <ModalBody className="nested-modal-body">
-                Drag and Drop Image
+                <Dropzone onDrop={this.handleOnDrop} multiple={false} accept='image/*'>
+                  <div>Try dropping some files here, or click to select files to upload.</div>
+                </Dropzone>
               </ModalBody>
               <ModalFooter>
                 {/* CLOSE NESTED */}
