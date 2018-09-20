@@ -36,6 +36,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [
 # Application definition
 
 INSTALLED_APPS = [
+    # Stripe Payments
+    'stripe_payments',
+
     'flights',
     'rest_framework',
     'corsheaders',
@@ -158,3 +161,9 @@ STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 CORS_ORIGIN_ALLOW_ALL = True
+
+# Stripe things 
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+
+STRIPE_SECRET_KEY=config("STRIPE_SECRET_KEY")

@@ -14,6 +14,7 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+
 # we probably don't need generics...
 from rest_framework import routers, generics
 from django.urls import path, include, re_path
@@ -24,6 +25,10 @@ from django.conf import settings
 from django.views.static import serve
 from django.conf.urls import url
 from flights.views import Filter3ViewSet
+
+# from stripe stuff
+from django.conf import settings
+from django.conf.urls.static import static
 
 router = routers.DefaultRouter()
 router.register(r'flights', FlightsViewSet)
@@ -41,6 +46,7 @@ urlpatterns = [
     # url endpoint to filter data dynamically
     url('^api/filteredflights/(?P<aircraft>.+)/$', Filter3ViewSet.as_view()),
     re_path(r'^api-token-refresh/', refresh_jwt_token),
+    url(r'^api/', include('stripe_payments.urls')),
     url(r'^media/(?P<path>.*)$', serve, { 'document_root': settings.MEDIA_ROOT, })
 ]   
 

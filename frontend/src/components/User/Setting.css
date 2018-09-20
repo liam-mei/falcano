@@ -1,0 +1,47 @@
+.Settings {
+    grid-column: 1/ -1;
+    grid-row: 1/ -1;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: 4rem 1fr;
+}
+
+.Settings .Settings-Form {
+    grid-column: 3/ -1;
+    grid-row: 2/ -1;
+    padding: 2rem 3rem;
+    padding: 2rem 3rem;
+}
+
+
+.Settings .NameText,
+.Settings .OldPassWord,
+.Settings .NewPassWord {
+    display: flex;
+    justify-content: space-between;
+    width: 24rem;
+    margin-bottom: 1rem;
+}
+
+.Settings .NameType,
+.Settings .OldPasswordType,
+.Settings .NewPasswordType {
+    right: 8rem;
+}
+
+.Settings .OldPasswordType {
+    width: 5rem;
+}
+
+.Settings .NewPasswordType {
+    width: 5rem;
+}
+
+.Settings .Save {
+    display: flex;
+    justify-content: center;
+}
+
+.Settings .SaveDiv {
+    box-shadow: 1.5px 1.5px grey;
+}
