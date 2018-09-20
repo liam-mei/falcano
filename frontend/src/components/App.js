@@ -24,25 +24,35 @@ class App extends Component {
 		console.log(this.props);
 		return (
 
+			//{/*<StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">*/}
 			<div className="App">
 				{this.props.loggedIn ? (
-					<div className="Signout" onClick={this.signOut}>
-						Sign Out
+					<div className="TopBar">
+						<span className="SignOut" onClick={this.signOut}>
+							Signout
+						</span>
+
 					</div>
 				) : (
 					''
 				)}
-				<Route exact path="/" render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />} />
-				<Route path="/home" component={HomePage} />
-				<Route path="/signUp" component={SignUp} />
-				<Route path="/signIn" component={SignIn} />
-				<Route path="/aircrafts" component={Aircrafts} />
-				<Route path="/billing" component={BillingForm} />
-				<Route path="/flights" component={Flights} />
-				<Route path="/settings" component={Settings} />
-				<Route path="/instructors" component={Instructors} />
-			</div>
 
+				<div className="Content">
+					<Route exact path="/" render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />} />
+					<Route
+						exact
+						path="/home"
+						render={(props) => <LandingPage {...props} authenticated={this.props.loggedIn} />}
+					/>
+					<Route path="/signUp" component={SignUp} />
+					<Route path="/signIn" component={SignIn} />
+					<Route path="/aircrafts" component={Aircrafts} />
+					<Route path="/billing" component={BillingForm} />
+					<Route path="/flights" component={Flights} />
+					<Route path="/settings" component={Settings} />
+					<Route path="/instructors" component={Instructors} />
+				</div>
+			</div>
 		);
 	}
 }
