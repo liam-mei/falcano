@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import NavBar from './NavBar';
+import HomePage from './HomePage';
+import { Route } from 'react-router-dom';
 
 import './LandingPage.css';
 
@@ -9,7 +11,8 @@ class LandingPage extends Component {
 		return (
 			<div className="Wrapper">
 				{this.props.authenticated ? (
-					'welcome to Falcano'
+          <HomePage />
+        
 				) : (
 					<div className="Card">
 						<h1 className="Logo">FALCANO</h1>

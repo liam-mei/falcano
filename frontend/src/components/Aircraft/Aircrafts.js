@@ -8,15 +8,16 @@ import TopHeader from '../TopHeader';
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
 let dev = true;
-let URL = (dev
-  ? "http://127.0.0.1:8000/api"
-  : "https://flightloggercs10.herokuapp.com/api" );
-URL = "http://127.0.0.1:8000/api"
+// let URL = (dev
+//   ? "http://127.0.0.1:8000/api"
+//   : "https://flightloggercs10.herokuapp.com/api" );
+let URL = "http://127.0.0.1:8000/api"
 
 class Aircrafts extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      token: "",
       name: "",
       content: "",
       openModal: false,
@@ -31,20 +32,25 @@ class Aircrafts extends Component {
     };
   }
   componentDidMount() {
-    let axiosconfig = {
-      headers: {
-        Authorization: "Token 155aa0ef77bafed25f791161ff5345b02ee1da3b"
-      }
-    };
-    axios
-      .get(`${URL}/aircraft/`)
-      .then(response => {
-        this.setState({ data: response.data });
-      })
-      .catch(err => {
-        console.log(err);
+    const headers = {
+      'Authorization': 'JWT ' + localStorage.getItem('token')
+    }
+    axios({
+      method: 'GET',
+      url: `${URL}/aircraft/`,
+      headers: headers,
+    }).then((response) => {
+      console.log("aircraft res", response.data)
+      this.setState({
+        data: response.data
       });
+    }).catch((error) => {
+      console.log("error :", error)
+    });      
   }
+
+    
+
 
   render() {
     return (

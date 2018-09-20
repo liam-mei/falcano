@@ -19,7 +19,7 @@ from rest_framework import routers, generics
 from django.urls import path, include, re_path
 from rest_framework.authtoken import views
 from flights.api import FlightsViewSet, AircraftViewSet, FilterAircraftViewSet, FilterFlightsViewSet
-from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token
+from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
 
 from django.conf.urls import url
 from flights.views import Filter3ViewSet
@@ -27,7 +27,7 @@ from flights.views import Filter3ViewSet
 router = routers.DefaultRouter()
 router.register(r'flights', FlightsViewSet)
 router.register(r'aircraft', AircraftViewSet)
-router.register(r'filteraircraft', FilterAircraftViewSet)
+# router.register(r'filteraircraft', FilterAircraftViewSet)
 # router.register(r'filterflights', FilterFlightsViewSet)
 
 urlpatterns = [
@@ -39,7 +39,7 @@ urlpatterns = [
     # path('user_admin/', include('flights.urls')),
     # url endpoint to filter data dynamically
     url('^api/filteredflights/(?P<tail_number>.+)/$', Filter3ViewSet.as_view()),
-
+    re_path(r'^api-token-refresh/', refresh_jwt_token),
 ]   
 
-urlpatterns += router.urls
+# urlpatterns += router.urls
