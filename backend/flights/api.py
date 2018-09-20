@@ -12,7 +12,7 @@ class FlightsSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('name', 'remarks', 'created_at', 'no_instument_app',
                   'no_ldg', 'cross_country', 'pic', 'dual_rec', 'actual_instr',
                   'sim_instr', 'day', 'night', 'airports_visited', 'fly_date',
-                  'snippet', 'tail_number', 'license_type', 'man_type', 'pic_count')
+                  'snippet', 'aircraft')
                   # added pic_count 
 
     def create(self, validated_data):
@@ -37,7 +37,7 @@ class FlightsViewSet(viewsets.ModelViewSet):
 class AircraftSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Aircraft
-        fields = ('man_type', 'tail_number', 'license_type','id')
+        fields = ('man_type', 'tail_number', 'license_type', 'id', 'photo')
 
     def create(self, validated_data):
         user = self.context['request'].user
@@ -94,11 +94,11 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
         # print("sum", sum_fl)
         # return sum_fl
         user = self.request.user
-        tail_number = self.request.tail_number
+        aircraft = self.request.aircraft.id
         if user.is_anonymous:
             pass
         else:
-            return Flights.objects.filter(user=user, tail_number=tail_number)
+            return Flights.objects.filter(user=user, aircraft=aircraft)
 
         #     c = Flights.objects.filter(tail_number="tail1")
         #     sum.append(c[i])

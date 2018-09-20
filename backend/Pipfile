@@ -13,6 +13,7 @@ gunicorn = "*"
 "psycopg2-binary" = "*"
 whitenoise = "*"
 djangorestframework-jwt = "*"
+pillow = "*"
 
 certifi = "==2018.1.18"
 chardet = "==3.0.4"

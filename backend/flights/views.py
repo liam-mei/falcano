@@ -51,9 +51,9 @@ class Filter3ViewSet(generics.ListAPIView):
     def get_queryset(self):
         # user = self.request.user
         print("USER:", self.request.user)
-        tail_number = self.kwargs['tail_number']
+        aircraft = self.kwargs['aircraft']
         # model = Flights
-        return Flights.objects.filter(tail_number=tail_number)
+        return Flights.objects.filter(aircraft=aircraft)
         # return Flights.objects.filter(tail_number=tail_number).aggregate(Sum('pic'))
         #return Flights.objects.all().aggregate(Sum('pic'))
 

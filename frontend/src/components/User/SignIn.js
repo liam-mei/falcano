@@ -49,7 +49,7 @@ class SignIn extends Component {
 			password: this.state.password,
 		};
 		axios
-			.post('https://flightloggercs10.herokuapp.com/token-auth/', user)
+			.post('https:/flightloggercs10.herokuapp.com/token-auth/', user)
 			.then((response) => {
 				// set the token to local storage
 				localStorage.setItem('token', response.data.token);
@@ -70,37 +70,23 @@ class SignIn extends Component {
 	};
 
 	render() {
-		return (
-			<div className="SignIn">
-				<div className="SignIn-card">
-					<form onSubmit={this.handleSubmit}>
-						<input
-							onChange={this.handleChange}
-							value={this.state.username}
-							name="username"
-							type="text"
-							className="form-control"
-							placeholder="Username"
-						/>
+		return <div className="SignIn">
+        <div className="SignIn-card">
+          <form onSubmit={this.handleSubmit}>
+            <input onChange={this.handleChange} value={this.state.username} name="username" type="text" className="form-control" placeholder="Username" />
 
-						<input
-							onChange={this.handleChange}
-							value={this.state.password}
-							name="password"
-							type="password"
-							className="form-control"
-							placeholder="password"
-						/>
+            <input onChange={this.handleChange} value={this.state.password} name="password" type="password" className="form-control" placeholder="Password" />
 
-						<button>Sign In</button>
-						<div className="danger">{this.state.errorMessage ? this.state.errorMessage : ''}</div>
-					</form>
-					<Link className="SignIn-right" to={'/SignUp'}>
-						SignUp
-					</Link>
-				</div>
-			</div>
-		);
+            <button>Sign In</button>
+            <div className="danger">
+              {this.state.errorMessage ? this.state.errorMessage : ""}
+            </div>
+          </form>
+          <Link className="SignIn-right" to={"/SignUp"}>
+            SignUp
+          </Link>
+        </div>
+      </div>;
 	}
 }
 

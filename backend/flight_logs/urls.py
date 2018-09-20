@@ -21,7 +21,8 @@ from django.urls import path, include, re_path
 from rest_framework.authtoken import views
 from flights.api import FlightsViewSet, AircraftViewSet, FilterAircraftViewSet, FilterFlightsViewSet
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
-
+from django.conf import settings
+from django.views.static import serve
 from django.conf.urls import url
 from flights.views import Filter3ViewSet
 
@@ -43,9 +44,10 @@ urlpatterns = [
     re_path(r'^api-token-verify/', verify_jwt_token),
     # path('user_admin/', include('flights.urls')),
     # url endpoint to filter data dynamically
-    url('^api/filteredflights/(?P<tail_number>.+)/$', Filter3ViewSet.as_view()),
+    url('^api/filteredflights/(?P<aircraft>.+)/$', Filter3ViewSet.as_view()),
     re_path(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^api/', include('stripe_payments.urls')),
+    url(r'^media/(?P<path>.*)$', serve, { 'document_root': settings.MEDIA_ROOT, })
 ]   
 
 # urlpatterns += router.urls
