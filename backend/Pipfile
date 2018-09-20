@@ -14,6 +14,15 @@ gunicorn = "*"
 whitenoise = "*"
 djangorestframework-jwt = "*"
 
+certifi = "==2018.1.18"
+chardet = "==3.0.4"
+idna = "==2.6"
+pytz = "==2018.3"
+requests = "==2.18.4"
+sqlparse = "==0.2.4"
+stripe = "==1.79.1"
+"urllib3" = "==1.22"
+
 [dev-packages]
 
 [requires]
