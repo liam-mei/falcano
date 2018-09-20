@@ -1,0 +1,19 @@
+.FlightCard-Wrapper {
+    display: flex;
+    flex-direction: column;
+    background: #E9E8E8;
+    padding: 2rem;
+}
+
+p {
+    margin-bottom: 0rem;
+}
+
+.FlightCard-Image {
+    margin: 1rem;
+}
+
+.FLightCard-Hours-Date {
+    display: flex;
+    justify-content: space-between;
+}
