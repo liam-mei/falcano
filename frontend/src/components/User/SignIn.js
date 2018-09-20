@@ -49,7 +49,7 @@ class SignIn extends Component {
 			password: this.state.password,
 		};
 		axios
-			.post('https://flightloggercs10.herokuapp.com/token-auth/', user)
+			.post('https:/flightloggercs10.herokuapp.com/token-auth/', user)
 			.then((response) => {
 				// set the token to local storage
 				localStorage.setItem('token', response.data.token);

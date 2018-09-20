@@ -13,6 +13,7 @@ gunicorn = "*"
 "psycopg2-binary" = "*"
 whitenoise = "*"
 djangorestframework-jwt = "*"
+pillow = "*"
 
 [dev-packages]
 
