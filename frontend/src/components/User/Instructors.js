@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from '../NavBar';
 import TopHeader from '../TopHeader';
+
 import Auth from "./../Authenication/Auth";
 
 import './Instructors.css';
@@ -18,7 +19,7 @@ class Instructors extends Component {
 				<section class="card-container">
 					<article class="card">
 						<header class="card__title">
-							<h1>Charles Martinez</h1>
+							<h4>Charles Martinez</h4>
 							<p>Chief Pilot</p>
 						</header>
 						<figure class="card__thumbnail">
@@ -30,14 +31,14 @@ class Instructors extends Component {
 								Instuctors Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									AIRCRAFT, Commercerical Aircraft Instructor,Instrument,
 									CFI,CFII
               </p>
-								<h1>Air Experience:</h1>
+								<h4>Air Experience:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>charlesM@yahoo.com</p>
 							</main>
 						</div>
@@ -45,8 +46,8 @@ class Instructors extends Component {
 
 					<article class="card">
 						<header class="card__title">
-							<h3>Mike Warner</h3>
-							<h3>Chief Pilot</h3>
+							<h4>Mike Warner</h4>
+							<p>Chief Pilot</p>
 						</header>
 						<figure class="card__thumbnail">
 							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSNLoxG-UHDR9ByptEA0RMr_nvT-gk2iQoe04EjsPx-DRRm56ykzQ" />
@@ -57,22 +58,22 @@ class Instructors extends Component {
 								Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									AIRCRAFT, Commercerical Aircraft Instructor,Instrument,
-									  CFI,CFII
+									CFI,CFII
               </p>
-								<h1>Air Experienc:</h1>
+								<h4>Air Experience:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>MikeW@yahoo.com</p>
 							</main>
-						</div>
+							</div>
 					</article>
 					<article class="card">
 						<header class="card__title">
-							<h3>Mary Finn</h3>
-							<h3>Chief Pilot</h3>
+							<h4>Mary Finn</h4>
+							<p>Chief Pilot</p>
 						</header>
 						<figure class="card__thumbnail">
 							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbTteGkDxbUM_3CuLDlWVrBAMlKxIqt0FGg86BR6fMLP4zoaW2pQ" />
@@ -83,14 +84,14 @@ class Instructors extends Component {
 								Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									AIRCRAFT, Commercerical Aircraft Instructor,Instrument,
 									CFI,CFII
               </p>
-								<h1>Air Experienc:</h1>
+								<h4>Air Experience:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>MaryF@yahoo.com</p>
 							</main>
 						</div>
@@ -98,10 +99,9 @@ class Instructors extends Component {
 
 					<article class="card">
 						<header class="card__title">
-							<h3>Christopher Pine</h3>
-							<h3>Chief Pilot</h3>
-							<h1>Contact Info:</h1>
-							<p>charlesM@yahoo.com</p>
+							<h4>Christopher Pine</h4>
+							<p>Chief Pilot</p>
+							
 						</header>
 						<figure class="card__thumbnail">
 							<img src="https://qph.fs.quoracdn.net/main-qimg-b83054ef214471c6d8d998881a5a8953-c" />
@@ -112,22 +112,22 @@ class Instructors extends Component {
 								Instuctors Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									AIRCRAFT, Commercerical Aircraft Instructor,Instrument,
 									CFI,CFII
               </p>
-								<h1>Air Experienc:</h1>
+								<h4>Air Experience:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>ChrisP@yahoo.com</p>
 							</main>
 						</div>
 					</article>
 					<article class="card">
 						<header class="card__title">
-							<h3>Thomas Sanders</h3>
-							<h3>Chief Pilot</h3>
+							<h4>Thomas Sanders</h4>
+							<p>Chief Pilot</p>
 						</header>
 						<figure class="card__thumbnail">
 							<img src="http://www.eatsleepfly.com/v2/wp-content/uploads/2015/09/become-a-pilot.jpg" />
@@ -138,22 +138,22 @@ class Instructors extends Component {
 								Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									AIRCRAFT, Commercerical Aircraft Instructor,Instrument,
 									CFI,CFII
               </p>
-								<h1>Air Experienc:</h1>
+								<h4>Air Experienc:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>TomS@yahoo.com</p>
 							</main>
 						</div>
 					</article>
 					<article class="card">
 						<header class="card__title">
-							<h3>Sandra Klien </h3>
-							<h3>Chief Pilot</h3>
+							<h4>Sandra Klien </h4>
+							<p>Chief Pilot</p>
 						</header>
 						<figure class="card__thumbnail">
 							<img src="https://www.thehindu.com/migration_catalog/article10092976.ece/alternates/FREE_660/18nov_tyramns01+19TH_WOMAN_LOCO_PIL.jpg" />
@@ -164,22 +164,22 @@ class Instructors extends Component {
 								Instuctors Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									AIRCRAFT, Commercerical Aircraft Instructor,Instrument,
 									  CFI,CFII
               </p>
-								<h1>Air Experienc:</h1>
+								<h4>Air Experienc:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>SandraK@yahoo.com</p>
 							</main>
 						</div>
 					</article>
 					<article class="card">
 						<header class="card__title">
-							<h3>Samather Meyer</h3>
-							<h3>Chief Pilot</h3>
+							<h4>Samather Meyer</h4>
+							<p>Chief Pilot</p>
 						</header>
 						<figure class="card__thumbnail">
 							<img src="https://i1.wp.com/www.siasat.com/wp-content/uploads/2018/08/Iram-Habib-800x500.jpg?fit=800%2C500&ssl=1" />
@@ -190,22 +190,22 @@ class Instructors extends Component {
 								Instuctors Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									HELICOPTER, Commercerical Helicopter Instructor,Instrumnet,
 									CFI,CFII
               </p>
-								<h1>Air Experienc:</h1>
+								<h4>Air Experienc:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>SamM@yahoo.com</p>
 							</main>
 						</div>
 					</article>
 					<article class="card">
 						<header class="card__title">
-							<h3>Kevin Collins</h3>
-							<h3>Chief Pilot</h3>
+							<h4>Kevin Collins</h4>
+							<h4>Chief Pilot</h4>
 						</header>
 						<figure class="card__thumbnail">
 							<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTaunK1MwAh7DbpA6A3hZnMyYSofJUceEXe_HBvmMJSWw6qKHbf-w" />
@@ -216,14 +216,14 @@ class Instructors extends Component {
 								Instuctors Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									AIRCRAFT, Commercerical Aircraft Instructor,Instrument,
 									CFI,CFII
               </p>
-								<h1>Air Experienc:</h1>
+								<h4>Air Experienc:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>KevinC@yahoo.com</p>
 							</main>
 						</div>
@@ -231,8 +231,8 @@ class Instructors extends Component {
 
 					<article class="card">
 						<header class="card__title">
-							<h3>Baker MayFeild</h3>
-							<h3>Chief Pilot</h3>
+							<h4>Baker MayFeild</h4>
+							<p>Chief Pilot</p>
 						</header>
 						<figure class="card__thumbnail">
 							<img src="https://cdn-image.travelandleisure.com/sites/default/files/styles/1600x1000/public/1536783975/pilot-sleeping-on-flight-PILOTSLEEP0918.jpg?itok=SHvJeHM7" />
@@ -243,14 +243,14 @@ class Instructors extends Component {
 								Instuctors Staff. He holds the following.
             </p>
 							<main class="card__description">
-								<h1>Ratings:</h1>
+								<h4>Ratings:</h4>
 								<p>
 									AIRCRAFT, Commercerical Aircraft Instructor,Instrument,
 									CFI,CFII
               </p>
-								<h1>Air Experienc:</h1>
+								<h4>Air Experienc:</h4>
 								<p>S300 AS50BA A109</p>
-								<h1>Contact Info:</h1>
+								<h4>Contact Info:</h4>
 								<p>BakerM@yahoo.com</p>
 							</main>
 						</div>
@@ -261,4 +261,4 @@ class Instructors extends Component {
 	}
 }
 
-export default Auth(Instructors);
+export default (Instructors) ;
