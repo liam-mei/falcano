@@ -7,7 +7,7 @@
 }
 
 .Flights .FlightList {
-  grid-column: 3/ -1;
+  grid-column: 3/ 9;
   grid-row: 2/ -1;
   padding: 2rem 3rem;
   padding: 2rem 3rem;

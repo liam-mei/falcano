@@ -4,6 +4,8 @@
     background: #E9E8E8;
     padding: 1rem;
     margin: 0;
+    height: 370px;
+    border: 1px solid black;
 }
 
 .FlightCard h3 {
@@ -19,6 +21,7 @@
 .FlightCard .FlightCard-Image {
     margin: 0 0 .5rem 0;
     padding: 0;
+    height: 200px;
 }
 
 .FlightCard .FLightCard-Hours-Date {
