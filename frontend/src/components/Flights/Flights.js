@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NavBar from '../NavBar';
 import TopHeader from '../TopHeader';
 import axios from 'axios';
+import Auth from './../Auhenication/Auth';
 import './Flights.css';
 import FlightCard from './FlightCard';
 import Card from "@material-ui/core/Card";
@@ -192,4 +193,4 @@ class Flights extends Component {
 	}
 }
 
-export default Flights;
+export default Auth(Flights);

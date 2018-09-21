@@ -7,7 +7,7 @@
 }
 
 
-.Billing .Billing-details-page {
+.Billing .Billing-card {
   grid-column: 3/ -1;
   grid-row: 2/ -1;
   padding: 2rem 3rem;
