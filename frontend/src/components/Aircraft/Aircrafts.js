@@ -12,7 +12,7 @@ import Dropzone from 'react-dropzone';
 
 import TopHeader from '../TopHeader';
 
-import Auth from './../Auhenication/Auth';
+import Auth from './../Authenication/Auth';
 
 import './Aircrafts.css';
 

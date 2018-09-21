@@ -3,7 +3,7 @@ import axios from 'axios';
 import NavBar from '../NavBar';
 import TopHeader from '../TopHeader';
 
-import Auth from './../Auhenication/Auth';
+import Auth from './../Authenication/Auth';
 
 import './Settings.css';
 class Settings extends Component {
