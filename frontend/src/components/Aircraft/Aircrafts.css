@@ -8,8 +8,10 @@
 
 
 .Aircrafts .AircraftList {
-  grid-column: 3/ 7;
+  grid-column: 3/ -1;
   grid-row: 2/ -1;
-  padding: 2rem 3rem;
-  padding: 2rem 3rem;
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
 }

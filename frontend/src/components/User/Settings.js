@@ -3,7 +3,7 @@ import axios from 'axios';
 import NavBar from '../NavBar';
 import TopHeader from '../TopHeader';
 
-import Auth from './../Auhenication/Auth';
+import Auth from './../Authenication/Auth';
 
 import './Settings.css';
 class Settings extends Component {
@@ -20,13 +20,8 @@ class Settings extends Component {
 
 				<div className="Settings-Form">
 					<form>
-						<div className="NameText">
-							<label className="NameBox"> Name</label>
-							<input className="NameType" type="text" />
-						</div>
-
 						<div className="OldPassWord">
-							<label className="PasswordBox">Old Password</label>
+							<label className="PasswordBox">Current Password</label>
 							<input className="OldPasswordType" type="text" />
 						</div>
 
@@ -34,7 +29,10 @@ class Settings extends Component {
 							<label className="NewPasswordBox">New Password</label>
 							<input className="NewPasswordType" type="text" />
 						</div>
-
+						<div className="NewPassWord">
+							<label className="NewPasswordBox">Confirm New Password</label>
+							<input className="NewPasswordType" type="text" />
+						</div>
 						<div className="Save">
 							<div className="SaveDiv">
 								<button>save</button>

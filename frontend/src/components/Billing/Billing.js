@@ -4,7 +4,7 @@ import BillingForm from './BillingForm';
 import NavBar from '../NavBar';
 import TopHeader from '../TopHeader';
 
-import Auth from './../Auhenication/Auth';
+import Auth from './../Authenication/Auth';
 
 import './Billing.css';
 class Billing extends Component {

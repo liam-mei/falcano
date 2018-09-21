@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import NavBar from '../NavBar';
 import TopHeader from '../TopHeader';
-import Auth from './../Auhenication/Auth';
+
+import Auth from "./../Authenication/Auth";
 
 import './Instructors.css';
 class Instructors extends Component {
