@@ -104,7 +104,6 @@ class Aircrafts extends Component {
 				<TopHeader breadcrumb={[ 'aircraft' ]} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
 				<NavBar />
 				<div className="AircraftList">
-					A list of aircrafts
 					{this.state.data.map((plane) => {
 						let id = plane.id;
 						return <AircraftCard key={id} data={plane} props={this.props} />;
