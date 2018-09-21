@@ -11,32 +11,23 @@ class LandingPage extends Component {
 	render() {
 		return (
 			<div className="LandingPage">
-				{this.props.authenticated ? (
-					<div className="LandingPage-loggedIn">
-						<TopHeader />
-						<NavBar />
-						<HomePage />
+				<div className="LandingPage-card">
+					<h1 className="card-logo">FALCANO</h1>
+					<h3 className="card-slogan">Time flies</h3>
+					<p className="card-mission-statement">
+						Mission statement Demand to be let outside at once, and expect owner to wait for me as i think about it
+						human is washing you why halp oh the horror flee scratch hiss bite cry louder at reflection so swat at dog,
+						but i can haz, so meow meow toilet paper attack claws fluff everywhere meow miao french ciao litterbox.
+					</p>
+					<div className="card-registration">
+						<Link className="registration-signin" to={'/SignIn'}>
+							LogIn
+						</Link>
+						<Link className="registration-signup" to={'/SignUp'}>
+							SignUp
+						</Link>
 					</div>
-				) : (
-					<div className="LandingPage-card">
-						<h1 className="card-logo">FALCANO</h1>
-						<h3 className="card-slogan">Time flies</h3>
-						<p className="card-mission-statement">
-							Mission statement Demand to be let outside at once, and expect owner to wait for me as i think about it
-							human is washing you why halp oh the horror flee scratch hiss bite cry louder at reflection so swat at
-							dog, but i can haz, so meow meow toilet paper attack claws fluff everywhere meow miao french ciao
-							litterbox.
-						</p>
-						<div className="card-registration">
-							<Link className="registration-signin" to={'/SignIn'}>
-								LogIn
-							</Link>
-							<Link className="registration-signup" to={'/SignUp'}>
-								SignUp
-							</Link>
-						</div>
-					</div>
-				)}
+				</div>
 			</div>
 		);
 	}

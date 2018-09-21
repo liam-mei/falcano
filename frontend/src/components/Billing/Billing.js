@@ -1,67 +1,28 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import Billing from './Billing';
-import NavBar from './NavBar';
-import TopHeader from './TopHeader';
+import BillingForm from './BillingForm';
+import NavBar from '../NavBar';
+import TopHeader from '../TopHeader';
+
+import Auth from './../Auhenication/Auth';
 
 import './Billing.css';
-class Flights extends Component {
+class Billing extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
 	}
 	render() {
 		return (
-			<div className="Billings">
-				{/*remove total hours from line 13*/}
+			<div className="Billing">
 				<TopHeader breadcrumb={[ 'billing' ]} />
 				<NavBar />
+				<div className="Billing-card">
+					<BillingForm />
+				</div>
 			</div>
 		);
 	}
 }
 
-export default Billing;
-
-// import React, { Component } from 'react';
-
-// class Billing extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       cardNumber: '',
-
-//      }
-//   }
-//   render() {
-//     return (
-//       <div>
-
-//       </div>
-//      );
-//   }
-// }
-
-// export default Billing;
-
-// import React, { Component } from 'react';
-
-// class Billing extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.state = {
-//       cardNumber: '',
-//       month: '',
-//       day: '',
-//       year: '',
-//       cvv: ''
-//      };
-//   }
-//   render() {
-//     return (
-
-//     )
-//   }
-// }
-
-// export default Billing;
+export default Auth(Billing);

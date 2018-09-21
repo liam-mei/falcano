@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import NavBar from '../NavBar';
 import TopHeader from '../TopHeader';
+import Auth from './../Auhenication/Auth';
 
 import './Flights.css';
 class Flights extends Component {
@@ -22,4 +23,4 @@ class Flights extends Component {
 	}
 }
 
-export default Flights;
+export default Auth(Flights);

@@ -7,14 +7,6 @@
 
 }
 
-.LandingPage .LandingPage-loggedIn {
-  grid-column: 1/ -1;
-  grid-row: 1/ -1;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 4rem 1fr;
-}
-
 .LandingPage .LandingPage-card {
   grid-column: 4/ -1;
   grid-row: 2/ -1;
