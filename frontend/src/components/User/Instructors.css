@@ -41,6 +41,11 @@
 }
 
 .Instructors p,
-.Instructors h1 {
+.Instructors h3 {
   margin: 10px;
+}
+
+.Instructors h4 {
+  
+  font-size: 1.1rem;
 }
