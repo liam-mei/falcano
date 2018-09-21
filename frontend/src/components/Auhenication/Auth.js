@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { isLoggedIn } from '../../utils/helper/helperFuncions';
 
-const Auth = (App) =>
+const Auth = (Comp) =>
 	class extends Component {
 		state = {
 			loggedIn: false,
@@ -12,12 +12,12 @@ const Auth = (App) =>
 			if (isLoggedIn()) {
 				this.setState({ loggedIn: true });
 			} else {
-				this.setState({ loggedIn: false });
+				this.props.history.push('/');
+				window.location.reload();
 			}
 		}
 		render() {
-			if (this.state.loggedIn) return <App loggedIn={true} />;
-			return <App loggedIn={false} />;
+			return <Comp loggedIn={this.state.loggedIn} />;
 		}
 	};
 

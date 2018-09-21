@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import NavBar from './NavBar';
+import TopHeader from './TopHeader';
+
 import './HomePage.css';
 
 class HomePage extends Component {
@@ -10,12 +13,16 @@ class HomePage extends Component {
 	render() {
 		return (
 			<div className="HomePage">
-				<h1>Welcom to Falcano!</h1>
-				<h2>Take us on your next flight</h2>
-				<h3>
-					Whether your off to the Bahamas or off to a simulated flight; you'll never struggle to keep track of your
-					flights again.{' '}
-				</h3>
+				<NavBar />
+				<TopHeader />
+				<div className="HomePage-info">
+					<h1>Welcom to Falcano!</h1>
+					<h2>Take us on your next flight</h2>
+					<h3>
+						Whether your off to the Bahamas or off to a simulated flight; you'll never struggle to keep track of your
+						flights again.{' '}
+					</h3>
+				</div>
 			</div>
 		);
 	}
