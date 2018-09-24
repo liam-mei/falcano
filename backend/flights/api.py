@@ -12,7 +12,7 @@ class FlightsSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('name', 'remarks', 'created_at', 'no_instument_app',
                   'no_ldg', 'cross_country', 'pic', 'dual_rec', 'actual_instr',
                   'sim_instr', 'day', 'night', 'airports_visited', 'fly_date',
-                  'snippet', 'aircraft')
+                  'snippet', 'aircraft', 'license_type')
                   # added pic_count 
 
     def create(self, validated_data):
@@ -54,9 +54,22 @@ class AircraftViewSet(viewsets.ModelViewSet):
         user = self.request.user
 
         if user.is_anonymous:
-            return Aircraft.objects.all()
+            return Aircraft.objects.none()
         else:
             return Aircraft.objects.filter(user=user)
+
+
+class LicenseViewSet(viewsets.ModelViewSet):
+    serializer_class = AircraftSerializer
+    queryset = Aircraft.objects.none()
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_anonymous:
+            return Aircraft.objects.none()
+        else:
+            return Aircraft.objects.filter(license_type='sel')
 
 # hard coded way of filtering aircraft
 # need to reimplement the user filter
@@ -96,7 +109,7 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
         user = self.request.user
         aircraft = self.request.aircraft.id
         if user.is_anonymous:
-            pass
+            return Flights.objects.none()
         else:
             return Flights.objects.filter(user=user, aircraft=aircraft)
 

@@ -6,13 +6,24 @@ from datetime import date
 
 
 class Aircraft(models.Model):
+    SEL = 'Airplane SEL'
+    SES = 'Airplane SES'
+    MEL = 'Airplane MEL'
+    MES = 'Airplane MES'
+    license_choices = (
+    (SEL, 'SEL'),
+    (SES, 'SES'),
+    (MEL, 'MEL'),
+    (MES, 'MES'),
+    )
+
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     man_type = models.CharField(max_length=200)
     tail_number = models.CharField(max_length=200)
     created_at = models.DateTimeField(auto_now_add=True)
-    license_type = models.CharField(max_length=40, default="Aircraft")
+    license_type = models.CharField(max_length=40, choices=license_choices, default="Airplane SEL")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    photo = models.ImageField(default="/plane.jpg", upload_to="aircrafts/%Y/%m/%D/")
+    photo = models.ImageField(default="/plane.jpg", upload_to="aircrafts/%Y/%m/%D/", blank=True)
     class Meta:
         verbose_name_plural = "Aircraft"
 
@@ -42,8 +53,8 @@ class Flights(models.Model):
     airports_visited = models.CharField(max_length=100, default="Airports", blank=True)
     fly_date = models.DateField(default=date.today, blank=True, null=True)
     snippet = models.TextField(blank=True, default="snippet", null=True)
-    # tail_number = models.CharField(max_length=25, default="Tail Number")
-    # license_type = models.CharField(max_length=40, default="Aircraft")
+    # license_ty = models.ForeignKey(Aircraft, to_field="license_type", on_delete=models.CASCADE)
+    license_type = models.CharField(max_length=40, default="Airplane SEL", null=False)
     # man_type = models.CharField(max_length=200, default="Manufacturer")
     aircraft = models.ForeignKey(Aircraft, on_delete=models.CASCADE, default=uuid4, null=True )
     # pic_count = models.FloatField(default=0.0)
