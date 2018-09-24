@@ -24,7 +24,7 @@ from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh
 from django.conf import settings
 from django.views.static import serve
 from django.conf.urls import url
-from flights.views import Filter3ViewSet
+from flights.views import Filter3ViewSet, UserList
 
 # from stripe stuff
 from django.conf import settings
@@ -42,7 +42,7 @@ urlpatterns = [
     # re_path(r'^api-token-auth/', views.obtain_auth_token),
     path('token-auth/', obtain_jwt_token),
     re_path(r'^api-token-verify/', verify_jwt_token),
-    # path('user_admin/', include('flights.urls')),
+    path('user_admin/', include('flights.urls')),
     # url endpoint to filter data dynamically
     url('^api/filteredflights/(?P<aircraft>.+)/$', Filter3ViewSet.as_view()),
     re_path(r'^api-token-refresh/', refresh_jwt_token),

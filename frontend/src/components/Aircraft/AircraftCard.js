@@ -7,146 +7,144 @@ import axios from "axios";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Dropzone from 'react-dropzone';
 
-// variables for mapping the filtered flights data.
-
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
 const dev = true;
-let URL = (dev
-  ? "http://127.0.0.1:8000/api"
-  : "https://flightloggercs10.herokuapp.com/api");
-
-class AircraftCardModal extends React.Component {
-  constructor() {
-    super();
-
-    this.state = {
-      data: [],
-      files: [],
-      id: '',
-      tail_number: '',
-      tail_number_edit: '',
-      man_type: '',
-      man_type_edit: '',
-      license_type: '',
-      license_type_edit: '',
-      photo: '',
-      modal: false,
-      nestedModal: false,
-      closeAll: false
-    };
-  }
-
-  // toggles the modal and populates the data the specific aircraft.
-  toggle = () => {
-    this.setState({ modal: !this.state.modal });
-    const headers = {
-      'Authorization': 'JWT ' + localStorage.getItem('token')
-    }
-    axios({
-      method: 'GET',
-      url: `${URL}/filteredflights/${this.state.id}`,
-      headers: headers,
-    }).then((response) => {
-      console.log("MODAL RES", response.data.aircraft)
-      this.setState({ data: response.data });
-    }).catch((error) => {
-      console.log("error :", error)
-    });
-  };
-  
-  toggleNested = () => {
-    this.setState({
-      nestedModal: !this.state.nestedModal,
-      closeAll: false
-    });
-  };
-
-  // Handles the change in input
-  handleChange = (e) => {
-    this.setState({ [e.target.name]: e.target.value })
-    console.log("statechange", this.state.license_type_edit)
-  } 
-
-  // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
-  toggleNestedAndPut = (e) => {
-    this.setState({
-      nestedModal: !this.state.nestedModal,
-      closeAll: false,
+let URL
+(dev ? URL = "http://127.0.0.1:8000/api"
+  : URL = "https://flightloggercs10.herokuapp.com/api");
+  class AircraftCardModal extends React.Component {
+    constructor() {
+      super();
       
-    });
-    const headers = {
-      'Authorization': 'JWT ' + localStorage.getItem('token')
+      this.state = {
+        data: [],
+        files: [],
+        id: '',
+        tail_number: '',
+        tail_number_edit: '',
+        man_type: '',
+        man_type_edit: '',
+        license_type: '',
+        license_type_edit: '',
+        photo: '',
+        modal: false,
+        nestedModal: false,
+        closeAll: false
+      };
     }
-    axios({
-      method: 'PUT',
-      url: `${URL}/aircraft/${this.state.id}/`,
-      data: {
-        man_type: this.state.man_type_edit,
+    
+    // toggles the modal and populates the data the specific aircraft.
+    toggle = () => {
+      this.setState({ modal: !this.state.modal });
+      const headers = {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+      axios({
+        method: 'GET',
+        url: `${URL}/filteredflights/${this.state.id}`,
+        headers: headers,
+      }).then((response) => {
+        console.log("MODAL RES", response.data.aircraft)
+        this.setState({ data: response.data });
+      }).catch((error) => {
+        console.log("error :", error)
+      });
+    };
+    
+    toggleNested = () => {
+      this.setState({
+        nestedModal: !this.state.nestedModal,
+        closeAll: false
+      });
+    };
+    
+    // Handles the change in input
+    handleChange = (e) => {
+      this.setState({ [e.target.name]: e.target.value })
+      console.log("statechange", this.state.license_type_edit)
+    } 
+    
+    // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
+    toggleNestedAndPut = (e) => {
+      this.setState({
+        nestedModal: !this.state.nestedModal,
+        closeAll: false,
+        
+      });
+      const headers = {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+      axios({
+        method: 'PUT',
+        url: `${URL}/aircraft/${this.state.id}/`,
+        data: {
+          man_type: this.state.man_type_edit,
+          tail_number: this.state.tail_number_edit,
+          license_type: this.state.license_type_edit,
+          id: this.state.id
+        },
+        headers: headers,
+      }).then((response) => {
+        console.log('put response', response)
+      }).catch((error) => {
+        console.log("put error", error)
+      })
+      this.setState({ 
         tail_number: this.state.tail_number_edit,
-        license_type: this.state.license_type_edit,
-        id: this.state.id
-      },
-      headers: headers,
-    }).then((response) => {
-      console.log('put response', response)
-    }).catch((error) => {
-      console.log("put error", error)
-    })
-    this.setState({ 
-      tail_number: this.state.tail_number_edit,
-      man_type: this.state.man_type_edit,
-      license_type: this.state.license_type_edit
-    });
-  }
-  
-  toggleAll = () => {
-    this.setState({
-      nestedModal: !this.state.nestedModal,
-      closeAll: true
-    });
-  };
-  
-  // DRAG AND DROP UPLOAD HANDLER
-  handleOnDrop = (acceptedfiles, rejectedFiles) => {
-    console.log(acceptedfiles)
-    const headers = {
-      'Authorization': 'JWT ' + localStorage.getItem('token')
+        man_type: this.state.man_type_edit,
+        license_type: this.state.license_type_edit
+      });
     }
-    axios({
-      method: 'PUT',
-      url: `${URL}/aircraft/${this.state.id}/`,
-      data: {
-        man_type: this.state.man_type_edit,
-        tail_number: this.state.tail_number_edit,
-        license_type: this.state.license_type_edit,
-        id: this.state.id,
-        photo: acceptedfiles
-      },
-      headers: headers,
-    }).then(res => {
-      console.log("Dropzone res: ", res)
-    }).catch(err => {
-      console.log("Dropzone err: ", err)
-    })
-  }
-
-  componentDidMount() {
-    this.setState({ 
-      tail_number: this.props.data.tail_number, 
-      id: this.props.data.id,
-      tail_number_edit: this.props.data.tail_number,
-      license_type_edit: this.props.data.license_type,
-      man_type_edit: this.props.data.man_type, 
-      photo: this.props.data.photo
-    }) 
-  }
-  
-  render() {
-    console.log("filestate", this.props.data)
-    let [ pic_sum, no_ldg, day, night, cross_country, actual_instr,
-          sim_instr, dual_rec] = [0,0,0,0,0,0,0];
-    for(let i=0; i<this.state.data.length; i++) {
+    
+    toggleAll = () => {
+      this.setState({
+        nestedModal: !this.state.nestedModal,
+        closeAll: true
+      });
+    };
+    
+    // DRAG AND DROP UPLOAD HANDLER
+    handleOnDrop = (acceptedfiles, rejectedFiles) => {
+      console.log(acceptedfiles)
+      const headers = {
+        'Authorization': 'JWT ' + localStorage.getItem('token')
+      }
+      axios({
+        method: 'PUT',
+        url: `${URL}/aircraft/${this.state.id}/`,
+        data: {
+          man_type: this.state.man_type_edit,
+          tail_number: this.state.tail_number_edit,
+          license_type: this.state.license_type_edit,
+          id: this.state.id,
+          photo: acceptedfiles
+        },
+        headers: headers,
+      }).then(res => {
+        console.log("Dropzone res: ", res)
+      }).catch(err => {
+        console.log("Dropzone err: ", err)
+      })
+    }
+    
+    componentDidMount() {
+      console.log("URL", URL)
+      this.setState({ 
+        tail_number: this.props.data.tail_number, 
+        id: this.props.data.id,
+        tail_number_edit: this.props.data.tail_number,
+        license_type_edit: this.props.data.license_type,
+        man_type_edit: this.props.data.man_type, 
+        photo: this.props.data.photo
+      }) 
+    }
+    
+    render() {
+      console.log("filestate", this.props.data)
+      let [ pic_sum, no_ldg, day, night, cross_country, actual_instr,
+        sim_instr, dual_rec] = [0,0,0,0,0,0,0];
+        for(let i=0; i<this.state.data.length; i++) {
       pic_sum += this.state.data[i].pic
       no_ldg += this.state.data[i].no_ldg
       day += this.state.data[i].day
@@ -157,7 +155,6 @@ class AircraftCardModal extends React.Component {
       dual_rec += this.state.data[i].dual_rec
   }  
     console.log("picSUM", pic_sum);
-    console.log("modal", this.props);
     return <div className="AircraftCard">
         <Card onClick={this.toggle} className="AircraftCard-Card">
           <Typography className="card-typography" onClick={this.toggle}>

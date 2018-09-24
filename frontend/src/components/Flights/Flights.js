@@ -10,8 +10,12 @@ import CardContent from "@material-ui/core/CardContent"
 import Typography from "@material-ui/core/Typography";
 import { Modal, ModalHeader, ModalBody, ModalFooter,
 	ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from "reactstrap";
+	const dev = true;
+	let URL
+	(dev ? URL = "http://127.0.0.1:8000/api"
+		: URL = "https://flightloggercs10.herokuapp.com/api");
 
-const URL = 'http://127.0.0.1:8000/api/'
+		
 const headers = {
 	'Authorization': 'JWT ' + localStorage.getItem('token')
 }
@@ -40,6 +44,7 @@ class Flights extends Component {
 			snippet: "",
 			aircraft: null,
 			id: null,
+			license_type: "",
 		};
 	}
 
@@ -48,7 +53,7 @@ class Flights extends Component {
 		this.setState({ openModal: !this.state.openModal })
 		axios({
 			method: 'GET',
-			url: `${URL}aircraft/`,
+			url: `${URL}/aircraft/`,
 			headers: headers
 		}).then(response => {
 			this.setState({ aircraftChoice: response.data })
@@ -83,17 +88,20 @@ class Flights extends Component {
 	// ADD NEW FLIGHT
 		toggleAndPost = (e) => {
 			console.log("dropdowntitlestate", this.dropdownButtonTitle)
-			let aircraftURL = "http://127.0.0.1:8000/api/aircraft/"
+			let aircraftURL = `${URL}/aircraft/`
+			let licensetype;
 			for(let i=0; i<this.state.aircraftChoice.length; i++) {
 				if (this.state.aircraftChoice[i].tail_number === this.state.dropdownButtonTitle) {
 					aircraftURL += this.state.aircraftChoice[i].id + "/"
-					console.log("id Loop", this.state.aircraftChoice[i].id )
+					licensetype = this.state.aircraftChoice[i].license_type
+					console.log('flightlic', this.state.aircraftChoice[i].license_type)
 				}
+				this.setState({ license_type: licensetype})
+				console.log('flightlicstate', this.state.license_type)
 			}
-			console.log('aircraftURL', aircraftURL)
 			axios({
 				method: 'POST',
-				url: `${URL}flights/`,
+				url: `${URL}/flights/`,
 				data: {
 					name: this.state.name,
 					remarks: this.state.remarks,
@@ -109,7 +117,8 @@ class Flights extends Component {
 					airports_visited: this.state.airports,
 					fly_date: this.state.fly_date,
 					snippet: this.state.snippet,
-					aircraft: aircraftURL
+					aircraft: aircraftURL,
+					license_type: this.state.flightLicense,
 				},
 				headers: headers,
 			}).then((response) => {
@@ -129,7 +138,7 @@ class Flights extends Component {
     }
     axios({
       method: 'get',
-      url: `${URL}flights/`,
+      url: `${URL}/flights/`,
       headers: headers,
     }).then((response) => {
       console.log('flights get response', response.data)
@@ -142,7 +151,7 @@ class Flights extends Component {
 		console.log("pic state", this.state.id)
 		return (
 			<div className="Flights">
-				<TopHeader breadcrumb={[ 'flights' ]} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
+				<TopHeader breadcrumb={[ 'flights' ]} test="asda" data={this.state.flightData} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
 				<NavBar />
 				<div className="FlightList">
 				{this.state.flightData.map((flight) => {

@@ -50,6 +50,7 @@ class App extends Component {
 					<Route path="/signUp" component={SignUp} />
 					<Route path="/signIn" component={SignIn} />
 					<Route path="/aircrafts" component={Aircrafts} />
+					{/* <Route path="/aircrafts" render = {(props) => <Aircraft {...props} flights={fightdata} /> }  /> */}
 					<Route path="/billing" component={Billing} />
 					<Route path="/flights" component={Flights} />
 					<Route path="/settings" component={Settings} />

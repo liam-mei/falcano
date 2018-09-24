@@ -1,8 +1,7 @@
 {
     "_meta": {
         "hash": {
-
-            "sha256": "c3803ceda61ef0ad7696b0e6609cbc7e07a71148fb696235385a31735fbb3edd"
+            "sha256": "b7fe25c9972df53291b5436712f33c3eb48a59ae8b1dce135631c3c84705477b"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -19,18 +18,18 @@
     "default": {
         "certifi": {
             "hashes": [
-                "sha256:376690d6f16d32f9d1fe8932551d80b23e9d393a8578c5633a2ed39a64861638",
-                "sha256:456048c7e371c089d0a77a5212fb37a2c2dce1e24146e3b7e0261736aaeaa22a"
+                "sha256:14131608ad2fd56836d33a71ee60fa1c82bc9d2c8d98b7bdbc631fe1b3cd1296",
+                "sha256:edbc3f203427eef571f79a7692bb160a2b0f7ccaa31953e99bd17e307cf63f7d"
             ],
-            "version": "==2018.8.24"
-
+            "index": "pypi",
+            "version": "==2018.1.18"
         },
         "chardet": {
             "hashes": [
                 "sha256:84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae",
                 "sha256:fc323ffcaeaed0e0a02bf4d117757b98aed530d9ed4531e3e15460124c106691"
             ],
-
+            "index": "pypi",
             "version": "==3.0.4"
         },
         "dj-database-url": {
@@ -83,11 +82,11 @@
         },
         "idna": {
             "hashes": [
-
-                "sha256:156a6814fb5ac1fc6850fb002e0852d56c0c8d2531923a51032d1b70760e186e",
-                "sha256:684a38a6f903c1d71d6d5fac066b58d7768af4de2b832e426ec79c30daa94a16"
+                "sha256:2c6a5de3089009e3da7c5dde64a141dbc8551d5b7f6cf4ed7c2568d0cc520a8f",
+                "sha256:8c7309c718f94b3a625cb648ace320157ad16ff131ae0af362c9f21b80ef6ec4"
             ],
-            "version": "==2.7"
+            "index": "pypi",
+            "version": "==2.6"
         },
         "pillow": {
             "hashes": [
@@ -124,7 +123,6 @@
             ],
             "index": "pypi",
             "version": "==5.2.0"
-
         },
         "psycopg2-binary": {
             "hashes": [
@@ -202,30 +200,6 @@
         },
         "stripe": {
             "hashes": [
-                "sha256:2ec19bf8ad588ec04b36c35f359196fa1991f9ad911b1686ac2a12651a154947",
-                "sha256:d895204135102ff63ad26cdbb315180fdec3f01c44fe964533f022f2719c35b2"
-            ],
-            "index": "pypi",
-            "version": "==1.79.1"
-        },
-        "urllib3": {
-            "hashes": [
-                "sha256:06330f386d6e4b195fbfc736b297f58c5a892e4440e54d294d7004e3a9bbea1b",
-                "sha256:cc44da8e1145637334317feebd728bd869a35285b93cbb4cca2577da7e62db4f"
-            ],
-            "index": "pypi",
-            "version": "==1.22"
-        },
-        "requests": {
-            "hashes": [
-                "sha256:63b52e3c866428a224f97cab011de738c36aec0185aa91cfacd418b5d58911d1",
-                "sha256:ec22d826a36ed72a7358ff3fe56cbd4ba69dd7a6718ffd450ff0e9df7a47ce6a"
-            ],
-            "markers": "python_version >= '3.0'",
-            "version": "==2.19.1"
-        },
-        "stripe": {
-            "hashes": [
                 "sha256:8f556bb9af0b0714753567b1ec8e31649bc9af96980333bffc903155db276c7f",
                 "sha256:984b45d3c56242f23a1f3ad5a43cdaf07353b924193dd97bf8bc30203d4f541b"
             ],
@@ -234,11 +208,11 @@
         },
         "urllib3": {
             "hashes": [
-                "sha256:a68ac5e15e76e7e5dd2b8f94007233e01effe3e50e8daddf69acfd81cb686baf",
-                "sha256:b5725a0bd4ba422ab0e66e89e030c806576753ea3ee08554382c14e685d117b5"
+                "sha256:06330f386d6e4b195fbfc736b297f58c5a892e4440e54d294d7004e3a9bbea1b",
+                "sha256:cc44da8e1145637334317feebd728bd869a35285b93cbb4cca2577da7e62db4f"
             ],
-            "markers": "python_version != '3.2.*' and python_version < '4' and python_version != '3.1.*' and python_version != '3.0.*' and python_version != '3.3.*' and python_version >= '2.6'",
-            "version": "==1.23"
+            "index": "pypi",
+            "version": "==1.22"
         },
         "whitenoise": {
             "hashes": [

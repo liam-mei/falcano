@@ -7,6 +7,11 @@ import { isLoggedIn } from '../../utils/helper/helperFuncions';
 
 import './SignUp.css';
 
+const dev = true;
+	let URL
+	(dev ? URL = "http://127.0.0.1:8000/api"
+		: URL = "https://flightloggercs10.herokuapp.com/api");
+
 class SignUp extends Component {
 	constructor(props) {
 		super(props);
@@ -51,7 +56,7 @@ class SignUp extends Component {
 					password: this.state.password,
 				};
 				axios
-					.post('https://flightloggercs10.herokuapp.com/flights/users/', user)
+					.post(`${URL}/flights/users/`, user)
 					.then((response) => {
 						// set the token to local storage
 						localStorage.setItem('token', response.data.token);

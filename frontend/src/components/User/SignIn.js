@@ -2,10 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-
 import { isLoggedIn } from '../../utils/helper/helperFuncions';
-
 import './SignIn.css';
+
+const dev = true;
+	let URL
+	(dev ? URL = "http://127.0.0.1:8000"
+		: URL = "https://flightloggercs10.herokuapp.com");
 class SignIn extends Component {
 	constructor(props) {
 		super(props);
@@ -49,7 +52,7 @@ class SignIn extends Component {
 			password: this.state.password,
 		};
 		axios
-			.post('https:/flightloggercs10.herokuapp.com/token-auth/', user)
+			.post(`${URL}/token-auth/`, user)
 			.then((response) => {
 				// set the token to local storage
 				localStorage.setItem('token', response.data.token);

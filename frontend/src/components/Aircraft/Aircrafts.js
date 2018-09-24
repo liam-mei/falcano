@@ -19,10 +19,11 @@ import './Aircrafts.css';
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
 let dev = true;
-// let URL = (dev
-//   ? "http://127.0.0.1:8000/api"
-//   : "https://flightloggercs10.herokuapp.com/api" );
-let URL = 'http://127.0.0.1:8000/api';
+
+let URL
+(dev ? URL = "http://127.0.0.1:8000/api"
+  : URL = "https://flightloggercs10.herokuapp.com/api");
+
 
 class Aircrafts extends Component {
 	constructor(props) {
@@ -79,6 +80,7 @@ class Aircrafts extends Component {
 	};
 
 	componentDidMount() {
+		console.log("URL", URL)
 		const headers = {
 			Authorization: 'JWT ' + localStorage.getItem('token'),
 		};
