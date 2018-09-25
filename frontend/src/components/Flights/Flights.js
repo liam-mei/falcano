@@ -45,6 +45,7 @@ class Flights extends Component {
 			aircraft: null,
 			id: null,
 			license_type: "",
+			total_hours: null,
 		};
 	}
 
@@ -120,6 +121,7 @@ class Flights extends Component {
 					snippet: this.state.snippet,
 					aircraft: aircraftURL,
 					license_type: this.state.flightLicense,
+					total_hours: this.state.total_hours
 				},
 				headers: headers,
 			}).then((response) => {
