@@ -1,29 +1,3 @@
-// import React, {Component} from 'react';
-// import {CardElement, injectStripe} from 'react-stripe-elements';
-
-// class CheckoutForm extends Component {
-//   constructor(props) {
-//     super(props);
-//     this.submit = this.submit.bind(this);
-//   }
-
-//   async submit(ev) {
-//     // User clicked submit
-//   }
-
-//   render() {
-//     return (
-//       <div className="checkout">
-//         <h1>Billing</h1>
-//         <CardElement />
-//         <button onClick={this.submit}>Buy Now</button>
-//       </div>
-//     );
-//   }
-// }
-
-// export default injectStripe(CheckoutForm);
-
 import React from 'react';
 
 import { injectStripe, CardElement } from 'react-stripe-elements';
@@ -36,7 +10,9 @@ import { injectStripe, CardElement } from 'react-stripe-elements';
 class CheckoutForm extends React.Component {
   state = {
     resp_message: '',
-    card_errors: ''
+    card_errors: '',
+    amount: '',
+    message: 'test'
   };
   handleCardErrors = (card_dets) => {
     console.log('Card Section dets', card_dets);
@@ -47,8 +23,18 @@ class CheckoutForm extends React.Component {
     }
   };
 
+  handleChange = (event) => {
+    this.setState({
+      amount: event.target.value
+    });
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
+    if (this.state.amount === '') {
+      alert('Please make selection');
+      return;
+    }
     this.setState({ card_errors: '', resp_message: '' });
     /*
     Within the context of Elements, this call to createToken knows which
@@ -68,10 +54,9 @@ class CheckoutForm extends React.Component {
               result.token
             );
             let formData = new FormData();
-            formData.append('description', 'My form description');
+            formData.append('description', this.state.description);
             formData.append('currency', 'usd');
-            // We need to adjust amount based on month or year purchase
-            formData.append('amount', 199);
+            formData.append('amount', this.state.amount);
             formData.append('source', result.token.id);
             // need to create endpoint on django
             return fetch(`http://127.0.0.1:8000/api/create-charge/`, {
@@ -89,9 +74,19 @@ class CheckoutForm extends React.Component {
   };
 
   render() {
+    console.log('state message: ', this.state.message);
     return (
       <div>
-        {this.state.resp_message && <h1>{this.state.resp_message}</h1>}
+        {this.state.resp_message && (
+          <h1>
+            {this.state.resp_message} <br /> Thank you for purchasing our{' '}
+            {this.state.amount === '99' ? (
+              <div>Monthly Subscription</div>
+            ) : (
+              <div>Annual Subscription</div>
+            )}
+          </h1>
+        )}
         <form onSubmit={this.handleSubmit}>
           <label>
             <h2>Card Details</h2>
@@ -100,6 +95,30 @@ class CheckoutForm extends React.Component {
               <h2>{this.state.card_errors}</h2>
             </div>
           </label>
+
+          <div className="radio" onClick={this.handleMonthly}>
+            <label>
+              <input
+                type="radio"
+                value="99"
+                checked={this.state.amount === '99'}
+                onChange={this.handleChange}
+              />
+              1-Month: $.99
+            </label>
+          </div>
+          <div className="radio">
+            <label>
+              <input
+                type="radio"
+                value="1999"
+                checked={this.state.amount === '1999'}
+                onChange={this.handleChange}
+              />
+              1-Year: $19.99
+            </label>
+          </div>
+
           <button className="form-btn">Confirm order</button>
         </form>
       </div>
