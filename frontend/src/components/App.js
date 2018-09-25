@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { Route } from 'react-router-dom';
-
+import { Route, Redirect } from 'react-router-dom';
+import axios from 'axios';
 import LandingPage from './LandingPage';
 import HomePage from './HomePage';
 import Aircrafts from './Aircraft/Aircrafts';
@@ -10,27 +10,44 @@ import SignIn from './User/SignIn';
 import SignUp from './User/SignUp';
 import Instructors from './User/Instructors';
 import Billing from './Billing/Billing';
-
 import { isLoggedIn } from '../utils/helper/helperFuncions';
-
 import './App.css';
+
+const dev = true;
+	let URL
+	(dev ? URL = "http://127.0.0.1:8000/api-token-verify/"
+		: URL = "https://flightloggercs10.herokuapp.com/api-token-verify/");
+
+
+
 class App extends Component {
 	state = {
 		authenticated: false,
 	};
 
 	componentDidMount() {
-		if (isLoggedIn()) {
-			this.setState({ authenticated: true });
-		} else {
-			this.setState({ authenticated: false });
-		}
+		let token = localStorage.getItem('token')
+
+			axios({
+				method: 'POST',
+				url: URL,
+				data: {
+					"token": token
+				}
+				}).then((response) => {
+				console.log("auth response ", response)
+					this.setState({ authenticated: true })
+				}).catch(err => {
+					console.log(err)
+					// window.location.replace('http://localhost:3000/');
+				})
 	}
 	signOut = () => {
 		localStorage.removeItem('token');
-		window.location.reload();
+		window.location.replace('http://localhost:3000/');
 	};
 	render() {
+		console.log('AUTHENTICATED :', this.props)
 		return (
 			//{/*<StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">*/}
 			<div className="App">

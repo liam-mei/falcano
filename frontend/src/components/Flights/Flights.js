@@ -59,6 +59,7 @@ class Flights extends Component {
 			this.setState({ aircraftChoice: response.data })
 			console.log("ac state", this.state.aircraftChoice)
 		}).catch(err => {
+			this.props.history.push('/')
 			console.log(err)
 		})
 	}

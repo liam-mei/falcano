@@ -97,6 +97,7 @@ class Aircrafts extends Component {
 			})
 			.catch((error) => {
 				console.log('error :', error);
+				this.props.history.push('/')
 			});
 	}
 
