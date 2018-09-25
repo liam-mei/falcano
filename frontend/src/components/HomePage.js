@@ -4,6 +4,7 @@ import NavBar from './NavBar';
 import TopHeader from './TopHeader';
 
 import './HomePage.css';
+import '../utils/Images/homePageIllustration.svg'
 
 class HomePage extends Component {
 	constructor(props) {
@@ -16,12 +17,8 @@ class HomePage extends Component {
 				<NavBar />
 				<TopHeader />
 				<div className="HomePage-info">
-					<h1>Welcom to Falcano!</h1>
-					<h2>Take us on your next flight</h2>
-					<h3>
-						Whether your off to the Bahamas or off to a simulated flight; you'll never struggle to keep track of your
-						flights again.{' '}
-					</h3>
+					<h1>Falcano Logo</h1>
+					<h2>Fly with ease, take us on your next flight.</h2>
 				</div>
 			</div>
 		);

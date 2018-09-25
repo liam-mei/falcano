@@ -4,7 +4,6 @@
      display: flex;
      justify-content: space-between;
      padding: .5rem;
-     padding-right: 7rem;
-     border-bottom: 1px solid #aaa;
-     margin-bottom: 1rem;
+     border-bottom: var(--solidBorder) var(--darkGrey); 
+     margin-bottom: var(--oneRem);
  }

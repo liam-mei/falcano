@@ -9,5 +9,18 @@
 .HomePage-info {
   grid-column: 3/ -1;
   grid-row: 2/ -1;
-  padding: 2rem 3rem;
+  background-image: url('../utils/Images/homePageIllustration.svg');
+  background-repeat: no-repeat;
 }
+
+.HomePage .HomePage-info h2 {
+  margin: 20rem 0 0 3rem;
+}
+
+h2::first-letter { 
+  font-size: 200%;
+  color: var(--sky);
+}
+
+
+
