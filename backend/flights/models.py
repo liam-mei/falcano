@@ -41,7 +41,7 @@ class Flights(models.Model):
     remarks = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
-    no_instument_app = models.BooleanField(default=False)
+    no_instument_app = models.FloatField(default=0.0, blank=True, null=True)
     no_ldg = models.FloatField(default=0.0, blank=True, null=True)
     cross_country = models.FloatField(default=0.0, blank=True, null=True)
     pic = models.FloatField(default=0.0, blank=True, null=True)

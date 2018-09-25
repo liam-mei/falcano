@@ -33,7 +33,7 @@ class TopHeader extends Component {
 		flightList: [],
 		openModal: false,
 		sel: 0,
-		mel: null,
+		mel: 0,
 		ses: null,
 		mes: null,
 		SELTotals: 0,
@@ -49,42 +49,24 @@ class TopHeader extends Component {
 		total: 0,
 	};
 	toggleModal = () => {
-		// let SELdayNight = 0;
-		// let MELdayNight = 0;
-		// let SESdayNight = 0;
-		// let MESdayNight = 0;
-		// let dayTotal = 0;
-		// let nightTotal = 0;
-		// let actualTotal = 0;
-		// let simTotal = 0;
-		// let picTotal = 0;
-		let [ SELdayNight, MELdayNight, SESdayNight, MESdayNight, dayTotal, nightTotal, actualTotal,
+		let [ SELtotal, MELtotal, SEStotal, MEStotal, dayTotal, nightTotal, actualTotal,
 					simTotal, picTotal, totalhrs, recTotal ] = [0,0,0,0,0,0,0,0,0,0,0,0]
 		let agg = true;
 		while(agg === true) {
 			for(let i = 0; i < this.state.flightList.length; i++) {
 				console.log("ASDASDADDASADADASDAD")
 				if(this.state.flightList[i].license_type === "Airplane SEL") {
-					console.log("SELDA")
-					let SELday = this.state.flightList[i].day;
-					let SELnight = this.state.flightList[i].night;
-					SELdayNight += (SELday + SELnight)
-					this.setState({ sel: SELdayNight })
+					SELtotal += this.state.flightList[i].total_hours
+					this.setState({ sel: SELtotal })
 				} else if(this.state.flightList[i].license_type === "Airplane MEL") {
-					let MELday = this.state.flightList[i].day;
-					let MELnight = this.state.flightList[i].night;
-					MELdayNight += (MELday + MELnight)
-					this.setState({ mel: MELdayNight });
+					MELtotal += this.state.flightList[i].total_hours
+					this.setState({ mel: MELtotal });
 				}	else if(this.state.flightList[i].license_type === "Airplane SES") {
-					let SESday = this.state.flightList[i].day;
-					let SESnight = this.state.flightList[i].night;
-					SESdayNight += (SESday + SESnight)
-					this.setState({ SES: SESdayNight });
+					SEStotal += this.state.flightList[i].total_hours
+					this.setState({ SES: SEStotal });
 				} else if(this.state.flightList[i].license_type === "Airplane MES") {
-					let MESday = this.state.flightList[i].day;
-					let MESnight = this.state.flightList[i].night;
-					MESdayNight += (MESday + MESnight)
-					this.setState({ SES: MESdayNight });
+					MEStotal += this.state.flightList[i].total_hours
+					this.setState({ SES: MEStotal });
 				}
 				dayTotal += this.state.flightList[i].day
 				nightTotal += this.state.flightList[i].night
@@ -92,11 +74,16 @@ class TopHeader extends Component {
 				simTotal += this.state.flightList[i].sim_instr
 				picTotal += this.state.flightList[i].pic
 				recTotal += this.state.flightList[i].dual_rec
+				totalhrs += this.state.flightList[i].total_hours
 			}
-			totalhrs = (dayTotal+nightTotal)
-			this.setState({ day: dayTotal, night: nightTotal, actual_instr: actualTotal, 
-											sim_instr: simTotal, pic: picTotal, dual_rec: recTotal, total: totalhrs })
-			console.log('DAY TOTAL :', this.state.dayTot)
+			this.setState({ day: Math.round(dayTotal * 10) / 10, 
+											night: Math.round(nightTotal * 10) / 10, 
+											actual_instr: Math.round(actualTotal * 10) / 10, 
+											sim_instr: Math.round(simTotal * 10) / 10, 
+											pic: Math.round(picTotal * 10) / 10, 
+											dual_rec: Math.round(recTotal * 10) / 10, 
+											total: Math.round(totalhrs * 10) / 10
+										})
 			agg = false
 		}
 		if(agg === false){
@@ -158,6 +145,7 @@ class TopHeader extends Component {
 						Airplane SEL Hours:{this.state.sel}
 						<br/>
 						Airplane MEL Hours :{this.state.mel}
+						<br/>
 						day{this.state.day}
 						<br/>
 						night{this.state.night}

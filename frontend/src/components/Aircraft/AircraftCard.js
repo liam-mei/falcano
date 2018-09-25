@@ -141,9 +141,9 @@ let URL
     }
     
     render() {
-      console.log("filestate", this.props.data)
+      console.log("filesdata", this.state.data)
       let [ pic_sum, no_ldg, day, night, cross_country, actual_instr,
-        sim_instr, dual_rec] = [0,0,0,0,0,0,0];
+        sim_instr, dualrec] = [0,0,0,0,0,0,0];
         for(let i=0; i<this.state.data.length; i++) {
       pic_sum += this.state.data[i].pic
       no_ldg += this.state.data[i].no_ldg
@@ -152,9 +152,9 @@ let URL
       cross_country += this.state.data[i].cross_country
       actual_instr += this.state.data[i].actual_instr
       sim_instr += this.state.data[i].sim_instr
-      dual_rec += this.state.data[i].dual_rec
+      dualrec += this.state.data[i].dual_rec
   }  
-    console.log("picSUM", pic_sum);
+    console.log("data", this.state.data);
     return <div className="AircraftCard">
         <Card onClick={this.toggle} className="AircraftCard-Card">
           <Typography className="card-typography" onClick={this.toggle}>
@@ -216,7 +216,7 @@ let URL
             <ul className="ul-2">
               <li>Grnd Trainer</li>
               <li>PIC: {pic_sum}</li>
-              <li>Dual Rec.{dual_rec}</li>
+              <li>Dual Rec: {dualrec}</li>
               <li>Total</li>
             </ul>
           </ModalFooter>
