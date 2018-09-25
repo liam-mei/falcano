@@ -9,7 +9,7 @@ import Typography from "@material-ui/core/Typography";
 import { Modal, ModalHeader, ModalBody, ModalFooter,
 	ButtonDropdown, DropdownToggle, DropdownMenu, DropdownItem  } from "reactstrap";
 import axios from 'axios';
-
+//
 
 const headers = {
 	'Authorization': 'JWT ' + localStorage.getItem('token')
@@ -40,33 +40,28 @@ class TopHeader extends Component {
 		MELTotals: 0,
 		SESTotals: 0,
 		MESTotals: 0,
-		totals: {
-			day: 0,
-			night: 0,
-			actual_instr: 0,
-			sim_instr: 0,
-			pic: 0,
-			dual_rec: 0,
-			total: 0,
-		}
+		day: 0,
+		night: 0,
+		actual_instr: 0,
+		sim_instr: 0,
+		pic: 0,
+		dual_rec: 0,
+		total: 0,
 	};
 	toggleModal = () => {
-		let SELdayNight = 0;
-		let MELdayNight = 0;
-		let SESdayNight = 0;
-		let MESdayNight = 0;
+		// let SELdayNight = 0;
+		// let MELdayNight = 0;
+		// let SESdayNight = 0;
+		// let MESdayNight = 0;
+		// let dayTotal = 0;
+		// let nightTotal = 0;
+		// let actualTotal = 0;
+		// let simTotal = 0;
+		// let picTotal = 0;
+		let [ SELdayNight, MELdayNight, SESdayNight, MESdayNight, dayTotal, nightTotal, actualTotal,
+					simTotal, picTotal, totalhrs, recTotal ] = [0,0,0,0,0,0,0,0,0,0,0,0]
 		let agg = true;
 		while(agg === true) {
-			axios({
-				method: 'GET',
-				url: `${URL}/flights/`,
-				headers: headers
-			}).then(response => {
-				this.setState({ flightList: response.data })
-				console.log("ac state", this.state.flightList)
-			}).catch(err => {
-				console.log(err)
-			})
 			for(let i = 0; i < this.state.flightList.length; i++) {
 				console.log("ASDASDADDASADADASDAD")
 				if(this.state.flightList[i].license_type === "Airplane SEL") {
@@ -91,7 +86,17 @@ class TopHeader extends Component {
 					MESdayNight += (MESday + MESnight)
 					this.setState({ SES: MESdayNight });
 				}
+				dayTotal += this.state.flightList[i].day
+				nightTotal += this.state.flightList[i].night
+				actualTotal += this.state.flightList[i].actual_instr
+				simTotal += this.state.flightList[i].sim_instr
+				picTotal += this.state.flightList[i].pic
+				recTotal += this.state.flightList[i].dual_rec
 			}
+			totalhrs = (dayTotal+nightTotal)
+			this.setState({ day: dayTotal, night: nightTotal, actual_instr: actualTotal, 
+											sim_instr: simTotal, pic: picTotal, dual_rec: recTotal, total: totalhrs })
+			console.log('DAY TOTAL :', this.state.dayTot)
 			agg = false
 		}
 		if(agg === false){
@@ -100,6 +105,16 @@ class TopHeader extends Component {
 	}
 		
 	componentDidMount() {
+		axios({
+			method: 'GET',
+			url: `${URL}/flights/`,
+			headers: headers
+		}).then(response => {
+			this.setState({ flightList: response.data })
+			console.log("topheader", this.state.flightList)
+		}).catch(err => {
+			console.log(err)
+		})
 		if (Array.isArray(this.props.breadcrumb)) {
 			this.setState({ breadcrumb: this.props.breadcrumb });
 		}
@@ -109,7 +124,7 @@ class TopHeader extends Component {
 		// }
 	}
 	render() {
-
+		console.log("top header props", this.props)
 		return (
 			<div className="Topheader">
 				<div className="BreadCrumb">
@@ -140,7 +155,22 @@ class TopHeader extends Component {
 						TOTAL
 					</button>
 					<Modal toggle={this.toggleModal} isOpen={this.state.openModal}>
-						{this.state.sel}
+						Airplane SEL Hours:{this.state.sel}
+						<br/>
+						Airplane MEL Hours :{this.state.mel}
+						day{this.state.day}
+						<br/>
+						night{this.state.night}
+						<br/>
+						actual: {this.state.actual_instr}
+						<br/>
+						sim: {this.state.sim_instr}
+						<br/>
+						pic: {this.state.pic}
+						<br/>
+						dual rec: {this.state.dual_rec}
+						<br/>
+						Total Hours: {this.state.total}
 					</Modal>
 				</div>
 			</div>

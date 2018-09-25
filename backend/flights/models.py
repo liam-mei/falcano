@@ -57,6 +57,7 @@ class Flights(models.Model):
     license_type = models.CharField(max_length=40, default="Airplane SEL", null=False)
     # man_type = models.CharField(max_length=200, default="Manufacturer")
     aircraft = models.ForeignKey(Aircraft, on_delete=models.CASCADE, default=uuid4, null=True )
+    total_hours = models.FloatField(default=0.0, blank=False)
     # pic_count = models.FloatField(default=0.0)
     # uncomment if instructor fields end up being needed
     # intsr_name = models.CharField(max_length=50)
@@ -67,3 +68,9 @@ class Flights(models.Model):
 
     def __str__(self):
         return self.name
+
+
+class Billing(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    stripe_payment_token = models.CharField(max_length=200)
+    payment_date = models.DateTimeField(auto_now_add=True)
