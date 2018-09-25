@@ -148,10 +148,10 @@ class Flights extends Component {
 		})
 	};
 	render() {
-		console.log("pic state", this.state.id)
+		console.log("flight data", this.state.flightData)
 		return (
 			<div className="Flights">
-				<TopHeader breadcrumb={[ 'flights' ]} test="asda" data={this.state.flightData} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
+				<TopHeader breadcrumb={[ 'flights' ]} data={this.state.flightData} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
 				<NavBar />
 				<div className="FlightList">
 				{this.state.flightData.map((flight) => {

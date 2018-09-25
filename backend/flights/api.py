@@ -12,7 +12,7 @@ class FlightsSerializer(serializers.HyperlinkedModelSerializer):
         fields = ('name', 'remarks', 'created_at', 'no_instument_app',
                   'no_ldg', 'cross_country', 'pic', 'dual_rec', 'actual_instr',
                   'sim_instr', 'day', 'night', 'airports_visited', 'fly_date',
-                  'snippet', 'aircraft', 'license_type')
+                  'snippet', 'aircraft', 'license_type', 'total_hours')
                   # added pic_count 
 
     def create(self, validated_data):

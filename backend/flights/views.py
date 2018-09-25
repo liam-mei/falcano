@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from rest_framework import permissions, status
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 from .serializers import UserSerializer, UserSerializerWithToken, ChangePasswordSerializer
-
 from .api import FlightsSerializer, AircraftSerializer
 from .models import Flights, Aircraft
 from rest_framework import generics
@@ -40,6 +41,11 @@ class UserList(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    @receiver(post_save, sender=User)
+    def create_user_profile(sender, instance, created, **kwargs):
+        if created:
+            instance.groups.add(Group.objects.get(name='default'))
 
 
 # dynamically filter database off of url
