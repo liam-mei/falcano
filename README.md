@@ -59,6 +59,13 @@ python manage.py runserver
    - create a new group `default`
    - add create and delete permission for that group
 
+4. Where to get SkyVector HTML snippits
+   - go `skyvector.com`
+   - upper left click `Flight Plan`
+        - enter Departure and Destination airport codes
+            - upper right click `Link`
+            - select lower link `Image Link with Chart Snippet`
+
 
 ## Deployed on
 * Heroku for backend - https://flightloggercs10.herokuapp.com
