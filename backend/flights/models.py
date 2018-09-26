@@ -58,6 +58,8 @@ class Flights(models.Model):
     # man_type = models.CharField(max_length=200, default="Manufacturer")
     aircraft = models.ForeignKey(Aircraft, on_delete=models.CASCADE, default=uuid4, null=True )
     total_hours = models.FloatField(default=0.0, blank=False)
+    sv_html = models.CharField(max_length=300, blank=True)
+    sv_script = models.CharField(max_length=300, blank=True)
     # pic_count = models.FloatField(default=0.0)
     # uncomment if instructor fields end up being needed
     # intsr_name = models.CharField(max_length=50)
