@@ -38,7 +38,7 @@ class Flights extends Component {
       openModal: false,
       name: '',
       remarks: '',
-      no_instument_app: false,
+      no_instument_app: null,
       no_ldg: null,
       cross_country: null,
       pic: null,
@@ -61,19 +61,6 @@ class Flights extends Component {
 
   toggleModal = () => {
     this.setState({ openModal: !this.state.openModal });
-    axios({
-      method: 'GET',
-      url: `${URL}/aircraft/`,
-      headers: headers
-    })
-      .then((response) => {
-        this.setState({ aircraftChoice: response.data });
-        console.log('ac state', this.state.aircraftChoice);
-      })
-      .catch((err) => {
-        this.props.history.push('/');
-        console.log(err);
-      });
   };
 
   //TOGGLES DROPDOWN BUTTON FOR SELECTING AIRCRAFT WHEN ADDING NEW FLIGHT
@@ -106,7 +93,7 @@ class Flights extends Component {
 
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
-    console.log('dropdowntitlestate', this.dropdownButtonTitle);
+    // console.log('dropdowntitlestate', this.dropdownButtonTitle);
     let aircraftURL = `${URL}/aircraft/`;
     let licensetype;
     for (let i = 0; i < this.state.aircraftChoice.length; i++) {
@@ -116,10 +103,10 @@ class Flights extends Component {
       ) {
         aircraftURL += this.state.aircraftChoice[i].id + '/';
         licensetype = this.state.aircraftChoice[i].license_type;
-        console.log('flightlic', this.state.aircraftChoice[i].license_type);
+        // console.log('flightlic', this.state.aircraftChoice[i].license_type);
       }
       this.setState({ license_type: licensetype });
-      console.log('flightlicstate', this.state.license_type);
+    //   console.log('flightlicstate', this.state.license_type);
     }
     axios({
       method: 'POST',
@@ -136,7 +123,7 @@ class Flights extends Component {
         sim_instr: this.state.sim_instr,
         day: this.state.day,
         night: this.state.night,
-        airports_visited: this.state.airports,
+        airports_visited: this.state.airports_visited,
         fly_date: this.state.fly_date,
         snippet: this.state.snippet,
         aircraft: aircraftURL,
@@ -162,7 +149,20 @@ class Flights extends Component {
   componentDidMount() {
     const headers = {
       Authorization: 'JWT ' + localStorage.getItem('token')
-    };
+	};
+	axios({
+		method: 'GET',
+		url: `${URL}/aircraft/`,
+		headers: headers
+	  })
+		.then((response) => {
+		  this.setState({ aircraftChoice: response.data });
+		  console.log('ac state', this.state.aircraftChoice);
+		})
+		.catch((err) => {
+		  this.props.history.push('/');
+		  console.log(err);
+		});
     axios({
       method: 'get',
       url: `${URL}/flights/`,
@@ -189,7 +189,7 @@ class Flights extends Component {
         <NavBar />
         <div className="FlightList">
           {this.state.flightData.map((flight) => {
-            return <FlightCard flight={flight} key={flight.created_at} />;
+            return <FlightCard aircraftChoice={this.state.aircraftChoice} flight={flight} key={flight.created_at} />;
           })}
           <Card onClick={this.toggle} className="NewFlightsCard-Card">
             <Typography className="card-typography" onClick={this.toggle} />
