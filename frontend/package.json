@@ -20,6 +20,15 @@
         "start": "react-scripts start",
         "build": "react-scripts build",
         "test": "react-scripts test --env=jsdom",
-        "eject": "react-scripts eject"
+        "eject": "react-scripts eject",
+        "make-test-css": "lessc src/test.less src/test.css",
+        "make-index-css": "lessc src/index.less src/index.css",
+        "make-app-css": "lessc src/components/App.less src/components/App.css",
+        "make-topHeader-css": "lessc src/components/TopHeader.less src/components/TopHeader.css",
+        "make-navBar-css": "lessc src/components/NavBar.less src/components/NavBar.css",
+        "make-home-css": "lessc src/components/HomePage.less src/components/HomePage.css",
+        "make-landing-css": "lessc src/components/LandingPage.less src/components/LandingPage.css",
+        "make-signup-css": "lessc src/components/User/SignUp.less src/components/User/SignUp.css",
+        "make-signin-css": "lessc src/components/User/SignIn.less src/components/User/SignIn.css"
     }
 }

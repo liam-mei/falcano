@@ -4,7 +4,7 @@ import NavBar from './NavBar';
 import TopHeader from './TopHeader';
 
 import './HomePage.css';
-import '../utils/Images/homePageIllustration.svg'
+import '../utils/Images/homePageIllustration.svg';
 
 class HomePage extends Component {
 	constructor(props) {

@@ -7,6 +7,8 @@ import { isLoggedIn } from '../../utils/helper/helperFuncions';
 
 import './SignUp.css';
 
+import '../../utils/Images/signUpPage.svg';
+
 const dev = true;
 	let URL
 	(dev ? URL = "http://127.0.0.1:8000"
@@ -88,7 +90,15 @@ class SignUp extends Component {
 			<div className="SignUp">
 				{/*most likely don't need top nav in SignUp*/}
 				{/*<TopHeader />*/}
+				<div className="SignUp-Text">
+				<p>Be ready.</p>
+				<p>Be organized.</p>
+				<p>Be Falcano.</p>
+				</div>
 				<div className="SignUp-card">
+					<div className="SignUp-CardText">
+						Welcome to the tribe!
+					</div>
 					<form onSubmit={this.handleSubmit}>
 						<input
 							onChange={this.handleChange}
