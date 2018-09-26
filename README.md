@@ -1,14 +1,30 @@
 # Flight Logger
 
-Flight logger aims to be an easy to use flight log for pilots, and those in training
-to become one. Track your hours on specific planes, for certain licenses and your 
-total hours flown, all in one convientent place.
+Flight logger aims to be an easy to use flight log for pilots and those in training
+to become one. Upload planes and then document your flights on each plane with the specific flight information such as hours flown in daylight and nighttime.  Total hours flown are also aggregated and separated into their specific fields and also by license type.
 
-## Built With
+## Main Tech Stack
 
 * [Django](https://www.djangoproject.com/) - Backend database management
 * [React](https://reactjs.org/) - The web framework used
 * [JWT](https://jwt.io/) - Used to securely transfer user tokens for authorization.
+* [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client
+* [Stripe](https://stripe.com/) - Online payments company
+
+## Other Tech Stack
+
+* [react-dropzone](https://react-dropzone.netlify.com/) - drag-and-drop for files
+* [Parser](https://www.npmjs.com/package/html-react-parser) - HTML to React parser
+* [Helmet](https://www.npmjs.com/package/react-helmet) - manages changes to document head
+* [react-modal](https://github.com/reactjs/react-modal)
+* [react-dom](https://reactjs.org/)
+
+## CSS
+
+* [@material-ui/core](http://material-ui.com/)
+* [bootstrap](https://getbootstrap.com/)
+* [CSS Grid]()
+* [LESS](http://lesscss.org/)
 
 ### Prerequisites
 
@@ -21,18 +37,32 @@ and [pip/pipenv](https://pypi.org/project/pip/)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-For the react side of the project, cd into the /frontend folder and type
+
+
+1. For the frontend/react side of the project
+   - open a terminal 
+   - cd into the /frontend folder and type
 ```
+yarn install
 yarn start
 ``` 
-for the Django side, cd into /backend fold, and type
+2. for the backend/Django side
+   - open a new terminal
+   - cd into /backend fold, and type
 ```
 pipenv shell
 pipenv install
 python manage.py runserver
 ```
+3. Further setup:
+   - go to `http://localhost:8000/admin`
+   - create a new group `default`
+   - add create and delete permission for that group
 
 
+## Deployed on
+* Heroku for backend - https://flightloggercs10.herokuapp.com
+* Netlify for frontend - https://stoic-meitner-50ac30.netlify.com/
 
 ## Deployment
 
