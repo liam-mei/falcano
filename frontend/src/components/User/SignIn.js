@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import { isLoggedIn } from '../../utils/helper/helperFuncions';
 import './SignIn.css';
 
+import '../../utils/Images/logIn.svg';
+
 const dev = true;
 	let URL
 	(dev ? URL = "http://127.0.0.1:8000"
@@ -75,11 +77,12 @@ class SignIn extends Component {
 	render() {
 		return <div className="SignIn">
 		<div className="SignIn-Text">
-			<p>Be ready.</p>
-			<p>Be organized.</p>
-			<p>Be Falcano.</p>
+			<p>Let's get ready to fly.</p>
 			</div>
-        <div className="SignIn-card">
+		<div className="SignIn-card">
+			<div className="SignIn-CardText">
+				Welcome back!
+			</div>
           <form onSubmit={this.handleSubmit}>
             <input onChange={this.handleChange} value={this.state.username} name="username" type="text" className="form-control" placeholder="Username" />
 

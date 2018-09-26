@@ -5,14 +5,19 @@
   grid-template-columns: 3fr 4fr;
   grid-template-rows: 1fr;
   height: 100vh;
-  background-image: url('../../utils/Images/signUpPage.svg');
+  background-image: url('../../utils/Images/logIn.svg');
   background-repeat: no-repeat;
+}
+.SignIn .SignIn-CardText {
+  font-size: 1.75rem;
+  color: #20BF55;
 }
 .SignIn .SignIn-Text {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  font-size: 1.75rem;
 }
 .SignIn .SignIn-card {
   display: flex;
@@ -21,7 +26,7 @@
   align-items: center;
   border: 1px solid #E8E8E8;
   width: 400px;
-  margin-top: 10rem;
+  margin-top: 13rem;
   margin-bottom: 10rem;
   border-radius: 7px;
   padding: 1rem;

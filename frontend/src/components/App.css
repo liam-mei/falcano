@@ -1,32 +1,5 @@
 .App {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: 50px 1fr;
-  grid-template-areas: "t t t t t t t t t t t t" "b b b b b b b b b b b b";
-}
-.App .TopBar {
-  grid-area: t;
-  display: flex;
-  justify-content: flex-end;
-  padding-right: 2rem;
-}
-.App .TopBar .SignOut {
-  border: 2px solid gray;
-  border-radius: 3px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: .6rem 0;
-  padding: 0 1rem;
-}
-.App .TopBar .SignOut:hover {
-  background: gray;
-  color: white;
-  cursor: pointer;
-}
-.App .Content {
-  grid-area: b;
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 1fr;
 }

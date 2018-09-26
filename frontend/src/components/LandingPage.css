@@ -4,6 +4,9 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 1fr;
+  height: 100vh;
+  background-image: url('../utils/Images/landingPage.svg');
+  background-repeat: no-repeat;
 }
 .LandingPage .LandingPage-card {
   grid-column: 4 / -1;

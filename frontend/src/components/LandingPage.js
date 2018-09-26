@@ -6,12 +6,14 @@ import TopHeader from './TopHeader';
 import HomePage from './HomePage';
 
 import './LandingPage.css';
-
+import '../utils/Images/landingPage.svg';
+import '../utils/Images/Logo.svg';
 class LandingPage extends Component {
 	render() {
 		return (
 			<div className="LandingPage">
 				<div className="LandingPage-card">
+					<img src={'../utils/Images/Logo.svg'}/>
 					<h1 className="card-logo">FALCANO</h1>
 					<h3 className="card-slogan">Time flies</h3>
 					<p className="card-mission-statement">
