@@ -32,7 +32,6 @@ class App extends Component {
 	};
 	render() {
 		return (
-			//{/*<StripeProvider apiKey="pk_test_TYooMQauvdEDq54NiTphI7jx">*/}
 			<div className="App">
 				{this.state.authenticated ? (
 					<div className="TopBar">
@@ -44,18 +43,15 @@ class App extends Component {
 					''
 				)}
 
-				<div className="Content">
 					<Route exact path="/" component={LandingPage} />
 					<Route exact path="/home" component={HomePage} />
 					<Route path="/signUp" component={SignUp} />
 					<Route path="/signIn" component={SignIn} />
 					<Route path="/aircrafts" component={Aircrafts} />
-					{/* <Route path="/aircrafts" render = {(props) => <Aircraft {...props} flights={fightdata} /> }  /> */}
 					<Route path="/billing" component={Billing} />
 					<Route path="/flights" component={Flights} />
 					<Route path="/settings" component={Settings} />
 					<Route path="/instructors" component={Instructors} />
-				</div>
 			</div>
 		);
 	}

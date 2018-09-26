@@ -1,26 +1,20 @@
 .HomePage {
-  grid-column: 1/ -1;
-  grid-row: 1/ -1;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 4rem 1fr;
 }
-
-.HomePage-info {
-  grid-column: 3/ -1;
-  grid-row: 2/ -1;
+.HomePage .HomePage-info {
+  grid-column: 3 / -1;
+  grid-row: 2 / -1;
   background-image: url('../utils/Images/homePageIllustration.svg');
   background-repeat: no-repeat;
 }
-
 .HomePage .HomePage-info h2 {
   margin: 20rem 0 0 3rem;
 }
-
-h2::first-letter { 
+.HomePage .HomePage-info h2::first-letter {
   font-size: 200%;
   color: var(--sky);
 }
-
-
-

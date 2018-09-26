@@ -1,54 +1,57 @@
 .SignIn {
-  grid-column: 1/ -1;
-  grid-row: 1/ -1;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-columns: 3fr 4fr;
+  grid-template-rows: 1fr;
+  height: 100vh;
+  background-image: url('../../utils/Images/signUpPage.svg');
+  background-repeat: no-repeat;
+}
+.SignIn .SignIn-Text {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
 }
-
 .SignIn .SignIn-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   border: 1px solid #E8E8E8;
   width: 400px;
-  display: flex;
-  flex-direction: column;
+  margin-top: 10rem;
+  margin-bottom: 10rem;
   border-radius: 7px;
   padding: 1rem;
-  margin-bottom: 2rem;
+  background-color: var(--slate);
 }
-
 .SignIn .SignIn-card form {
-  display: flex;
-  flex-direction: column;
   width: 100%;
   display: flex;
   flex-direction: column;
-
 }
-
 .SignIn .SignIn-card form input {
   margin: .5rem 0;
   padding: .4rem 0.2rem;
   font-size: 1.2rem;
   opacity: 0.6;
 }
-
 .SignIn .SignIn-card form button {
   margin: .5rem 0;
   padding: .4rem 0;
   font-size: 1.2rem;
   border-radius: 5px;
 }
-
 .SignIn .SignIn-card form button:hover {
   cursor: pointer;
   background-color: #0009D0;
   color: white;
 }
-
-.SignIn .SignIn-right {
+.SignIn .SignIn-card .SignIn-right {
   align-self: flex-end;
 }
-
-.SignIn .SignIn-right:hover {
+.SignIn .SignIn-card .SignIn-right:hover {
   text-decoration: underline;
 }

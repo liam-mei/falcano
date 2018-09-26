@@ -74,6 +74,11 @@ class SignIn extends Component {
 
 	render() {
 		return <div className="SignIn">
+		<div className="SignIn-Text">
+			<p>Be ready.</p>
+			<p>Be organized.</p>
+			<p>Be Falcano.</p>
+			</div>
         <div className="SignIn-card">
           <form onSubmit={this.handleSubmit}>
             <input onChange={this.handleChange} value={this.state.username} name="username" type="text" className="form-control" placeholder="Username" />

@@ -1,9 +1,9 @@
- .Topheader {
-     grid-column: 1/ -1;
-     grid-row: 1/ 2;
-     display: flex;
-     justify-content: space-between;
-     padding: .5rem;
-     border-bottom: var(--solidBorder) var(--darkGrey); 
-     margin-bottom: var(--oneRem);
- }
+.Topheader {
+  grid-column: 1 / -1;
+  grid-row: 1 / 2;
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem;
+  border-bottom: var(--solidBorder) var(--darkGrey);
+  margin-bottom: var(--oneRem);
+}

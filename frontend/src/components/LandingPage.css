@@ -1,15 +1,13 @@
 .LandingPage {
-  grid-column: 1/ -1;
-  grid-row: 1/ -1;
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 1fr;
-
 }
-
 .LandingPage .LandingPage-card {
-  grid-column: 4/ -1;
-  grid-row: 2/ -1;
+  grid-column: 4 / -1;
+  grid-row: 2 / -1;
   background: #E8E8E8;
   display: flex;
   flex-direction: column;
@@ -20,37 +18,35 @@
   border-radius: 7px;
   opacity: .8;
 }
-
-
-.LandingPage .card-mission-statement {
-  color: rgb(81, 81, 81);
+.LandingPage .LandingPage-card .card-logo {
+  font-size: 7em;
+  font-weight: 700;
+  letter-spacing: -1.25rem;
+}
+@media only screen and (max-width: 900px) {
+  .LandingPage .LandingPage-card .card-logo {
+    color: blue;
+  }
+}
+.LandingPage .LandingPage-card .card-mission-statement {
+  color: #515151;
   padding: 2em;
 }
-
-.LandingPage .registration-signin,
-.LandingPage .registration-signup {
+.LandingPage .LandingPage-card .registration-signin,
+.LandingPage .LandingPage-card .registration-signup {
   border: 3px solid #0009D0;
   padding: .6rem 3rem;
   border-radius: 3px;
 }
-
-.LandingPage a:hover.registration-signin,
-.LandingPage a:hover.registration-signup {
+.LandingPage .LandingPage-card .registration-signin:hover,
+.LandingPage .LandingPage-card .registration-signup:hover {
   color: #fff;
   text-decoration: none;
   background-color: #0009D0;
 }
-
-.LandingPage .registration-signup {
+.LandingPage .LandingPage-card .registration-signin {
   margin-left: .5rem;
 }
-
-.LandingPage .registration-signin {
+.LandingPage .LandingPage-card .registration-signin {
   margin-right: .5rem;
-}
-
-.LandingPage .card-logo {
-  font-size: 7rem;
-  font-weight: 700;
-  letter-spacing: -1.25rem;
 }

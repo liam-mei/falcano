@@ -1,6 +1,6 @@
 .NavBar {
-  grid-column: 1/ 3;
-  grid-row: 2/ -1;
+  grid-column: 1 / 3;
+  grid-row: 2 / -1;
   background: var(--sky);
   display: flex;
   flex-direction: column;
@@ -8,18 +8,8 @@
   text-align: center;
   padding-top: 1rem;
 }
-
-.NavBar-link {
+.NavBar .NavBar-link {
   padding: 0.5rem;
   text-transform: uppercase;
   color: white;
-}
-
-.NavBar-link:visted {
-  color: #666;
-}
-
-.NavBar-link:hover {
-  background: white;
-  color: black;
 }
