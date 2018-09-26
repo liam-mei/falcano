@@ -54,6 +54,26 @@ def checkout(request):
             metadata={'order_id': 12345}
         )
 
+#         def checkout(request):
+#     try:
+#         subscription = stripe.Subscription.create(
+#             # amount=request.POST.get('amount', ''),
+#             # currency=request.POST.get('currency', ''),
+#             # description=request.POST.get('description', ''),
+#             # statement_descriptor="22 Characters max",
+#             # metadata={'order_id': 12345}
+#             customer='cus_DfOZc9F3hXSluK',
+#             items=[
+#                 {
+#                   "plan": "plan_DfjTFsAFNlvWqJ",
+#                 },
+#                   ],
+#             stripe_account=
+# card_1DEOTmBgQ5jgM6j7eR3mmGOY ,
+#             # source=request.POST.get('source', ''),
+#             # console.log("source: ", source)
+#         )
+
         # Only confirm an order after you have status: succeeded
         print("______STATUS_____", charge['status'])  # should be succeeded
         if charge['status'] == 'succeeded':
