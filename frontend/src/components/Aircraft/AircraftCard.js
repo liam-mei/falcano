@@ -36,7 +36,7 @@ class AircraftCardModal extends React.Component {
       modal: false,
       nestedModal: false,
       closeAll: false, 
-      uploadurl: '',
+      uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg',
     };
   }
 
