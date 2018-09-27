@@ -61,6 +61,8 @@ class FlightCard extends Component {
       total_hours: null,
       sv_html: '',
       sv_script: '',
+      xxxsv_html2: '',
+      xxxsv_script2: '',
 
       aircraftChoice: [],
       dropdownOpen: false,
@@ -68,12 +70,17 @@ class FlightCard extends Component {
     };
   }
   modalToggle = () => {
-    // axios({
-    //     method: 'GET',
-    //     url: URL,
-    //     headers: headers
-    // }).then
-    this.setState({ openModal: !this.state.openModal });
+    let randomNumber = Math.floor(Math.random() * 1000) + 10;
+    let xxxsv_html2 = this.state.sv_html.split('sv_').join('sv_' + randomNumber);
+    let xxxsv_script2 = this.state.sv_script.split('sv_').join('sv_' + randomNumber);
+    // console.log("html2 =======: ", xxxsv_html2);
+    // console.log("script2 =======: ", xxxsv_script2);
+
+    this.setState({
+      openModal: !this.state.openModal,
+      xxxsv_html2: xxxsv_html2,
+      xxxsv_script2: xxxsv_script2
+    });
   };
 
   nestedModalToggle = () => {
@@ -110,15 +117,15 @@ class FlightCard extends Component {
     })
       .then((response) => {
         // console.log('flights ac response', response);
-        this.setState({ aircraft_whatever: response.data, 
-            dropdownButtonTitle: response.data.tail_number
+        this.setState({
+          aircraft_whatever: response.data,
+          dropdownButtonTitle: response.data.tail_number
         });
       })
       .catch((error) => {
         console.log('flights ac error', error);
       });
     this.setState({
-
       aircraftChoice: this.props.aircraftChoice,
       name: this.props.flight.name,
       remarks: this.props.flight.remarks,
@@ -140,13 +147,22 @@ class FlightCard extends Component {
       total_hours: this.props.flight.total_hours,
       sv_html: this.props.flight.sv_html,
       sv_script: this.props.flight.sv_script,
-
+      xxxsv_html2: this.props.flight.sv_html,
+      xxxsv_script2: this.props.flight.sv_script,
     });
   }
 
-  handleToggle = () => {
-    this.setState({ openModal: !this.state.openModal });
-  };
+  // handleToggle = () => {
+  //   let randomNumber = Math.floor(Math.random() * 1000) + 10;
+  //   let xxxsv_html2 = this.state.sv_html.split('sv_').join('sv_' + randomNumber);
+  //   let xxxsv_script2 = this.state.sv_html.split('sv_').join('sv_' + randomNumber);
+
+  //   this.setState({
+  //     openModal: !this.state.openModal,
+  //     xxxsv_html2: xxxsv_html2,
+  //     xxxsv_script2: xxxsv_script2
+  //   });
+  // };
 
   handleSnippet = (e) => {
     let html = e.target.value;
@@ -215,11 +231,10 @@ class FlightCard extends Component {
   };
 
   render() {
-    console.log(
-      '====== aircraft BIG ============D:',
-      this.props
-    );
+    // console.log('====== aircraft BIG ============D:', this.props);
+    // console.log('====== sv2: ', this.state.xxxsv_script2, this.state.xxxsv_html2)
     return (
+      // flight card list
       <div className="FlightCard" onClick={this.modalToggle}>
         <h3>{this.props.flight.name}</h3>
         <p>{this.props.flight.airports_visited}</p>
@@ -231,19 +246,29 @@ class FlightCard extends Component {
           <span>{this.props.flight.total_hours}</span>
         </div>
         <Modal
-          onClick={this.nestedModalToggle}
           props={this.props.flight}
           isOpen={this.state.openModal}
           toggle={this.modalToggle}
         >
+          {/* This is where the Flight Card Modal Starts */}
           <ModalHeader>
             <h4>
               {this.props.flight.name}
               {this.props.flight.fly_date}
             </h4>
-            <h4>{this.props.flight.airports_visited}</h4>
+            <h4>
+              {this.props.flight.airports_visited}{' '}
+              <button onClick={this.nestedModalToggle}>Edit</button>
+            </h4>
           </ModalHeader>
-          <ModalBody />
+          <ModalBody>
+            <div>
+
+              {Parser(this.state.xxxsv_html2)}
+              <Helmet>{Parser(this.state.xxxsv_script2)}</Helmet>
+
+            </div>
+          </ModalBody>
         </Modal>
         <Modal
           isOpen={this.state.nestedModal}
@@ -304,7 +329,7 @@ class FlightCard extends Component {
               })}
             </DropdownMenu>
           </ButtonDropdown>
-          {/* END DROP DOWN FOR SELECTING AIRCRAFT */}
+          {/* ====== END DROP DOWN FOR SELECTING AIRCRAFT =========*/}
           <ModalBody>
             <textarea
               placeholder="Remarks, Procedures, Maneuvers"
@@ -317,7 +342,6 @@ class FlightCard extends Component {
           </ModalBody>
           <ModalFooter>
             <div>
-              
               <div>
                 Cross Country
                 <input
