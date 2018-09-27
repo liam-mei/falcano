@@ -93,7 +93,7 @@ class SignUp extends Component {
 				<div className="SignUp-Text">
 				<p>Be ready.</p>
 				<p>Be organized.</p>
-				<p>Be Falcano.</p>
+				<p>Be <strong>Falcano</strong>.</p>
 				</div>
 				<div className="SignUp-card">
 					<div className="SignUp-CardText">

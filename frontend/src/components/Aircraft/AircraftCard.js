@@ -221,7 +221,7 @@ let URL
             </ul>
           </ModalFooter>
         </Modal>
-      </div>;
+        </div>
   }
 }
 

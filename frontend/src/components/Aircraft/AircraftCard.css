@@ -13,8 +13,11 @@
 }
 
 .modal-content {
-  width: 400px !important;
-  border-radius: 0px !important;
+  width: 650px !important;
+  border-radius: 0px!important;
+  border: 3px solid red;
+  display: flex;
+  flex-direction: column;
 }
 
 .modal-title {
@@ -81,7 +84,6 @@
 
 .edit-input-tn {
   margin-right: 50px;
-  
   width: 120px;
   font-size: 14px;
   height: 20px;
@@ -92,3 +94,21 @@
   font-size: 14px;
   height: 20px;
 }
+
+/* me testing */
+.AircraftCard-Card {
+  border: 1px solid green;
+}
+
+.modal-title{
+  border: 1px solid red;
+}
+
+.nested-modal-body {
+  border: 1px solid purple;
+}
+
+
+
+
+

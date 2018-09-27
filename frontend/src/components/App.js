@@ -14,64 +14,66 @@ import { isLoggedIn } from '../utils/helper/helperFuncions';
 import './App.css';
 
 const dev = true;
-	let URL
-	(dev ? URL = "http://127.0.0.1:8000/api-token-verify/"
-		: URL = "https://flightloggercs10.herokuapp.com/api-token-verify/");
+    let URL
+    (dev ? URL = "http://127.0.0.1:8000/api-token-verify/"
+        : URL = "https://flightloggercs10.herokuapp.com/api-token-verify/");
 
 
 
 class App extends Component {
-	state = {
-		authenticated: false,
-	};
+    state = {
+        authenticated: false,
+    };
 
-	componentDidMount() {
-		let token = localStorage.getItem('token')
+    componentDidMount() {
+        let token = localStorage.getItem('token')
 
-			axios({
-				method: 'POST',
-				url: URL,
-				data: {
-					"token": token
-				}
-				}).then((response) => {
-				console.log("auth response ", response)
-					this.setState({ authenticated: true })
-				}).catch(err => {
-					console.log(err)
-					// window.location.replace('http://localhost:3000/');
-				})
-	}
-	signOut = () => {
-		localStorage.removeItem('token');
-		window.location.replace('http://localhost:3000/');
-	};
-	render() {
-		console.log('AUTHENTICATED :', this.props)
-		return (
-			<div className="App">
-				{this.state.authenticated ? (
-					<div className="TopBar">
-						<span className="SignOut" onClick={this.signOut}>
-							Signout
-						</span>
-					</div>
-				) : (
-					''
-				)}
-
-					<Route exact path="/" component={LandingPage} />
-					<Route exact path="/home" component={HomePage} />
-					<Route path="/signUp" component={SignUp} />
-					<Route path="/signIn" component={SignIn} />
-					<Route path="/aircrafts" component={Aircrafts} />
-					<Route path="/billing" component={Billing} />
-					<Route path="/flights" component={Flights} />
-					<Route path="/settings" component={Settings} />
-					<Route path="/instructors" component={Instructors} />
-			</div>
-		);
-	}
+            axios({
+                method: 'POST',
+                url: URL,
+                data: {
+                    "token": token
+                }
+                }).then((response) => {
+                console.log("auth response ", response)
+                    this.setState({ authenticated: true })
+                }).catch(err => {
+                    console.log(err)
+                    // window.location.replace('http://localhost:3000/');
+                })
+    }
+    signOut = () => {
+        localStorage.removeItem('token');
+        window.location.replace('http://localhost:3000/');
+    };
+    render() {
+        console.log('AUTHENTICATED :', this.props)
+        return (
+            <div className="App">
+                {this.state.authenticated ? (
+                    <div className="TopBar">
+                        <span className="SignOut" onClick={this.signOut}>
+                            Signout
+                        </span>
+                    </div>
+                ) : (
+                    ''
+                )}
+				<div>
+					signOut
+				</div>
+                    <Route exact path="/" component={LandingPage} />
+                    <Route exact path="/home" component={HomePage} />
+                    <Route path="/signUp" component={SignUp} />
+                    <Route path="/signIn" component={SignIn} />
+                    <Route path="/aircrafts" component={Aircrafts} />
+                    <Route path="/billing" component={Billing} />
+                    <Route path="/flights" component={Flights} />
+                    <Route path="/settings" component={Settings} />
+                    <Route path="/instructors" component={Instructors} />
+            </div>
+        );
+    }
 }
 
 export default App;
