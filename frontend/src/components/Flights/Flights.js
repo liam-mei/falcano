@@ -169,7 +169,7 @@ class Flights extends Component {
       headers: headers
     })
       .then((response) => {
-        console.log('flights get response', response.data);
+        console.log('====D flights get response', response.data);
         this.setState({ flightData: response.data });
       })
       .catch((error) => {
