@@ -4,12 +4,25 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 4rem 1fr;
+  background-image: url('../../utils/Images/billing.svg');
+  background-repeat: no-repeat;
 }
 
 
 .Billing .Billing-card {
-  grid-column: 3/ -1;
+  grid-column: 4/ 6;
+  /* grid-column: 3/ -1; */
   grid-row: 2/ -1;
   padding: 2rem 3rem;
   padding: 2rem 3rem;
+  margin-bottom: 25rem;
+  border: solid red 1px;
+  border-radius: 7px;
+  background: rgb(235, 239, 243);
+  padding: 2rem 7rem;
+  width: 25rem;
+}
+
+.Elements {
+  border: 1px solid purple;
 }

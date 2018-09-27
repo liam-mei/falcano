@@ -13,6 +13,7 @@
 }
 .HomePage .HomePage-info h2 {
   margin: 20rem 0 0 3rem;
+  align: left;
 }
 .HomePage .HomePage-info h2::first-letter {
   font-size: 200%;

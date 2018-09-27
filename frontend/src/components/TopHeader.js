@@ -37,6 +37,7 @@ dev
 
 class TopHeader extends Component {
   state = {
+    "authenticated":false,
     breadcrumb: [],
     rightLinks: [],
     flightList: [],
@@ -150,9 +151,15 @@ class TopHeader extends Component {
     // 	this.setState({ rightLinks: this.props.rightLinks });
     // }
   }
+
+  signOut = () => {
+    localStorage.removeItem('token');
+    window.location.replace('http://localhost:3000/');
+};
   render() {
     return (
       <div className="Topheader">
+        
         <div className="BreadCrumb">
           <Link className="BreadCrumb-link" to={"/home"}>
             Home
@@ -179,6 +186,9 @@ class TopHeader extends Component {
 					})} */}
 
           <button onClick={this.toggleModal}>TOTAL</button>
+          <span className="SignOut" onClick={this.signOut}>
+                    Signout
+            </span>
           <Modal toggle={this.toggleModal} isOpen={this.state.openModal}>
             Airplane SEL Hours:
             {this.state.sel}
@@ -209,7 +219,12 @@ class TopHeader extends Component {
             <br />
             Total Hours: {this.state.total}
           </Modal>
+          
+          
+            
+        ) 
         </div>
+        
       </div>
     );
   }
