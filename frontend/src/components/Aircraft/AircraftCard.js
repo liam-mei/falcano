@@ -7,6 +7,9 @@ import axios from "axios";
 import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import Dropzone from "react-dropzone";
 import {Helmet} from 'react-helmet';
+const headers = {
+  Authorization: "JWT " + localStorage.getItem("token")
+};
 
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
@@ -77,9 +80,7 @@ class AircraftCardModal extends React.Component {
       nestedModal: !this.state.nestedModal,
       closeAll: false
     });
-    const headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
-    };
+    
     axios({
       method: "PUT",
       url: `${URL}/aircraft/${this.state.id}/`,
@@ -87,7 +88,8 @@ class AircraftCardModal extends React.Component {
         man_type: this.state.man_type_edit,
         tail_number: this.state.tail_number_edit,
         license_type: this.state.license_type_edit,
-        id: this.state.id
+        id: this.state.id,
+        photo: this.state.uploadurl
       },
       headers: headers
     })
@@ -100,7 +102,8 @@ class AircraftCardModal extends React.Component {
     this.setState({
       tail_number: this.state.tail_number_edit,
       man_type: this.state.man_type_edit,
-      license_type: this.state.license_type_edit
+      license_type: this.state.license_type_edit,
+      photo: this.state.uploadurl
     });
   };
 
@@ -117,29 +120,25 @@ class AircraftCardModal extends React.Component {
     const headers = {
       Authorization: "JWT " + localStorage.getItem("token")
     };
-    axios({
-      method: "PUT",
-      url: `${URL}/aircraft/${this.state.id}/`,
-      data: {
-        man_type: this.state.man_type_edit,
-        tail_number: this.state.tail_number_edit,
-        license_type: this.state.license_type_edit,
-        id: this.state.id,
-        photo: acceptedfiles
-      },
-      headers: headers
-    })
-      .then(res => {
-        console.log("Dropzone res: ", res);
-      })
-      .catch(err => {
-        console.log("Dropzone err: ", err);
-      });
+    
   };
 
+  cloud = (error, result) => {
+
+  }
+
   upload = () => {
-    window.cloudinary.openUploadWidget({ cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo'}, 
-    function(error, result) { console.log(error, result) }), false}
+    window.cloudinary.openUploadWidget(
+      { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
+
+      (error, result) => {
+        console.log(error, result);
+        this.setState({ uploadurl: result[0].url });
+        console.log('===== stateurl: ', this.state.uploadurl);
+      }
+    ),
+      false;
+  };
 
   componentDidMount() {
     console.log("URL", URL);
