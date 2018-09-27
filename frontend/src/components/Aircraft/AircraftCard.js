@@ -143,7 +143,7 @@ let URL
     render() {
       console.log("filesdata", this.state.data)
       let [ pic_sum, no_ldg, day, night, cross_country, actual_instr,
-        sim_instr, dualrec] = [0,0,0,0,0,0,0,0];
+        sim_instr, dualrec, no_instument_app, total_hours] = [0,0,0,0,0,0,0,0,0,0];
         for(let i=0; i<this.state.data.length; i++) {
       pic_sum += this.state.data[i].pic
       no_ldg += this.state.data[i].no_ldg
@@ -153,6 +153,8 @@ let URL
       actual_instr += this.state.data[i].actual_instr
       sim_instr += this.state.data[i].sim_instr
       dualrec += this.state.data[i].dual_rec
+      no_instument_app += this.state.data[i].no_instument_app
+      total_hours += this.state.data[i].total_hours
   }  
     console.log("data", this.state.data);
     return <div className="AircraftCard">
@@ -204,7 +206,7 @@ let URL
             <ul className="ul-1">
               <li>Airplane SEL</li>
               <li>Cross Country {cross_country}</li>
-              <li>No. Instr. App.</li>
+              <li>No. Instr. App.{no_instument_app}</li>
               <li>No. Ldg: {no_ldg}</li>
             </ul>
             <ul className="ul-2">
@@ -217,7 +219,7 @@ let URL
               <li>Grnd Trainer</li>
               <li>PIC: {pic_sum}</li>
               <li>Dual Rec: {dualrec}</li>
-              <li>Total</li>
+              <li>Total Hourse: {total_hours}</li>
             </ul>
           </ModalFooter>
         </Modal>

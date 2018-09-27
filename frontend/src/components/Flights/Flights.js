@@ -77,7 +77,7 @@ class Flights extends Component {
     let sv_html = arr[0] + '</div>';
     let sv_script = arr[1];
 
-    console.log('SV HTML ', sv_html);
+    // console.log('SV HTML ', sv_html);
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
 
@@ -88,12 +88,16 @@ class Flights extends Component {
 
   handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log('namechange', this.state.name);
+    // console.log('namechange', this.state.name);
   };
 
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
+    if (this.state.dropdownButtonTitle === 'Aircraft Choice') {
+      alert('Please Select The Aircraft You Flew With');
+      return;
+    }
     let aircraftURL = `${URL}/aircraft/`;
     let licensetype;
     for (let i = 0; i < this.state.aircraftChoice.length; i++) {
@@ -106,7 +110,7 @@ class Flights extends Component {
         // console.log('flightlic', this.state.aircraftChoice[i].license_type);
       }
       this.setState({ license_type: licensetype });
-    //   console.log('flightlicstate', this.state.license_type);
+      //   console.log('flightlicstate', this.state.license_type);
     }
     axios({
       method: 'POST',
@@ -135,7 +139,7 @@ class Flights extends Component {
       headers: headers
     })
       .then((response) => {
-        console.log('??????????', response);
+        // console.log('??????????', response);
       })
       .catch((error) => {
         console.log('put error', error);
@@ -149,27 +153,27 @@ class Flights extends Component {
   componentDidMount() {
     const headers = {
       Authorization: 'JWT ' + localStorage.getItem('token')
-	};
-	axios({
-		method: 'GET',
-		url: `${URL}/aircraft/`,
-		headers: headers
-	  })
-		.then((response) => {
-		  this.setState({ aircraftChoice: response.data });
-		  console.log('ac state', this.state.aircraftChoice);
-		})
-		.catch((err) => {
-		  this.props.history.push('/');
-		  console.log(err);
-		});
+    };
+    axios({
+      method: 'GET',
+      url: `${URL}/aircraft/`,
+      headers: headers
+    })
+      .then((response) => {
+        this.setState({ aircraftChoice: response.data });
+        // console.log('ac state', this.state.aircraftChoice);
+      })
+      .catch((err) => {
+        this.props.history.push('/');
+        console.log(err);
+      });
     axios({
       method: 'get',
       url: `${URL}/flights/`,
       headers: headers
     })
       .then((response) => {
-        console.log('flights get response', response.data);
+        // console.log('====D flights get response', response.data);
         this.setState({ flightData: response.data });
       })
       .catch((error) => {
@@ -177,8 +181,8 @@ class Flights extends Component {
       });
   }
   render() {
-    console.log('FLIGHTS PROPS', this.props);
-    console.log('E TARGET VALUE ', this.state.sv_html);
+    // console.log('FLIGHTS PROPS', this.props);
+    // console.log('E TARGET VALUE ', this.state.sv_html);
     return (
       <div className="Flights">
         <TopHeader
@@ -189,7 +193,13 @@ class Flights extends Component {
         <NavBar />
         <div className="FlightList">
           {this.state.flightData.map((flight) => {
-            return <FlightCard aircraftChoice={this.state.aircraftChoice} flight={flight} key={flight.created_at} />;
+            return (
+              <FlightCard
+                aircraftChoice={this.state.aircraftChoice}
+                flight={flight}
+                key={flight.created_at}
+              />
+            );
           })}
           <Card onClick={this.toggle} className="NewFlightsCard-Card">
             <Typography className="card-typography" onClick={this.toggle} />
@@ -223,8 +233,8 @@ class Flights extends Component {
                     cols="50"
                     name="html-snippet"
                     form="usrform"
-					onChange={this.handleSnippet}
-					placeholder="Paste your HTML Snippet Here"
+                    onChange={this.handleSnippet}
+                    placeholder="Paste your HTML Snippet Here"
                   />
                 </ModalBody>
                 {/* DROP DOWN FOR SELECTING AIRCRAFT */}
@@ -241,6 +251,7 @@ class Flights extends Component {
                         <DropdownItem
                           onClick={this.handleDropDownButton}
                           name={aircraft.tail_number}
+                          key={aircraft.tail_number+Math.random()}
                         >
                           {aircraft.tail_number}
                         </DropdownItem>
@@ -253,8 +264,8 @@ class Flights extends Component {
                   <textarea
                     placeholder="Remarks, Procedures, Maneuvers"
                     name="remarks"
-					onChange={this.handleInputChange}
-					rows="4"
+                    onChange={this.handleInputChange}
+                    rows="4"
                     cols="50"
                   />
                 </ModalBody>

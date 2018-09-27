@@ -175,7 +175,7 @@ class FlightCard extends Component {
     let sv_html = arr[0] + '</div>';
     let sv_script = arr[1];
 
-    console.log('SV HTML ', sv_html);
+    // console.log('SV HTML ', sv_html);
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
 
@@ -202,9 +202,9 @@ class FlightCard extends Component {
       data: {
         name: this.state.name,
         remarks: this.state.remarks,
-        no_instument_app: this.state.no_inst,
+        no_instument_app: this.state.no_instument_app,
         no_ldg: this.state.no_ldg,
-        cross_country: this.state.cc,
+        cross_country: this.state.cross_country,
         pic: this.state.pic,
         dual_rec: this.state.dual_rec,
         actual_instr: this.state.actual_instr,
@@ -223,7 +223,7 @@ class FlightCard extends Component {
       headers: headers
     })
       .then((response) => {
-        console.log('??????????', response);
+        // console.log('??????????', response);
       })
       .catch((error) => {
         console.log('put error', error);
@@ -237,7 +237,7 @@ class FlightCard extends Component {
   render() {
     // console.log('====== aircraft BIG ============D:', this.props);
     // console.log('====== sv2: ', this.state.xxxsv_script2, this.state.xxxsv_html2)
-    console.log('======= man type: skinny: ', this.state.aircraft_whatever);
+    // console.log('======= Skinny Props: ', this.props);
     return (
       // flight card list
       <div className="FlightCard" onClick={this.modalToggle}>
@@ -301,8 +301,8 @@ class FlightCard extends Component {
             </ul>
             <ul className="ul-2">
               <li>Grnd Trainer</li>
-              <li>PIC: {this.props.flight.pic_sum}</li>
-              <li>Dual Rec: {this.props.flight.dualrec}</li>
+              <li>PIC: {this.props.flight.pic}</li>
+              <li>Dual Rec: {this.props.flight.dual_rec}</li>
               <li>Total {this.props.flight.total_hours}</li>
             </ul>
           </ModalFooter>
@@ -343,6 +343,7 @@ class FlightCard extends Component {
               form="usrform"
               onChange={this.handleSnippet}
               placeholder="Paste your HTML Snippet Here"
+              value={this.state.sv_html + this.state.sv_script}
             />
           </ModalBody>
           {/* DROP DOWN FOR SELECTING AIRCRAFT */}
@@ -359,6 +360,7 @@ class FlightCard extends Component {
                   <DropdownItem
                     onClick={this.handleDropDownButton}
                     name={aircraft.tail_number}
+                    key={aircraft.tail_number+Math.random()}
                   >
                     {aircraft.tail_number}
                   </DropdownItem>
