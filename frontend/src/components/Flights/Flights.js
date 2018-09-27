@@ -94,6 +94,10 @@ class Flights extends Component {
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
+    if (this.state.dropdownButtonTitle === 'Aircraft Choice') {
+      alert('Please Select The Aircraft You Flew With');
+      return;
+    }
     let aircraftURL = `${URL}/aircraft/`;
     let licensetype;
     for (let i = 0; i < this.state.aircraftChoice.length; i++) {
@@ -106,7 +110,7 @@ class Flights extends Component {
         // console.log('flightlic', this.state.aircraftChoice[i].license_type);
       }
       this.setState({ license_type: licensetype });
-    //   console.log('flightlicstate', this.state.license_type);
+      //   console.log('flightlicstate', this.state.license_type);
     }
     axios({
       method: 'POST',
@@ -149,20 +153,20 @@ class Flights extends Component {
   componentDidMount() {
     const headers = {
       Authorization: 'JWT ' + localStorage.getItem('token')
-	};
-	axios({
-		method: 'GET',
-		url: `${URL}/aircraft/`,
-		headers: headers
-	  })
-		.then((response) => {
-		  this.setState({ aircraftChoice: response.data });
-		  console.log('ac state', this.state.aircraftChoice);
-		})
-		.catch((err) => {
-		  this.props.history.push('/');
-		  console.log(err);
-		});
+    };
+    axios({
+      method: 'GET',
+      url: `${URL}/aircraft/`,
+      headers: headers
+    })
+      .then((response) => {
+        this.setState({ aircraftChoice: response.data });
+        console.log('ac state', this.state.aircraftChoice);
+      })
+      .catch((err) => {
+        this.props.history.push('/');
+        console.log(err);
+      });
     axios({
       method: 'get',
       url: `${URL}/flights/`,
@@ -189,7 +193,13 @@ class Flights extends Component {
         <NavBar />
         <div className="FlightList">
           {this.state.flightData.map((flight) => {
-            return <FlightCard aircraftChoice={this.state.aircraftChoice} flight={flight} key={flight.created_at} />;
+            return (
+              <FlightCard
+                aircraftChoice={this.state.aircraftChoice}
+                flight={flight}
+                key={flight.created_at}
+              />
+            );
           })}
           <Card onClick={this.toggle} className="NewFlightsCard-Card">
             <Typography className="card-typography" onClick={this.toggle} />
@@ -223,8 +233,8 @@ class Flights extends Component {
                     cols="50"
                     name="html-snippet"
                     form="usrform"
-					onChange={this.handleSnippet}
-					placeholder="Paste your HTML Snippet Here"
+                    onChange={this.handleSnippet}
+                    placeholder="Paste your HTML Snippet Here"
                   />
                 </ModalBody>
                 {/* DROP DOWN FOR SELECTING AIRCRAFT */}
@@ -253,8 +263,8 @@ class Flights extends Component {
                   <textarea
                     placeholder="Remarks, Procedures, Maneuvers"
                     name="remarks"
-					onChange={this.handleInputChange}
-					rows="4"
+                    onChange={this.handleInputChange}
+                    rows="4"
                     cols="50"
                   />
                 </ModalBody>
