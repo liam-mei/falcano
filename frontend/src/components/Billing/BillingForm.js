@@ -7,7 +7,7 @@ import { Elements, StripeProvider } from 'react-stripe-elements';
 const BillingForm = () => {
   return (
     <StripeProvider apiKey="pk_test_tYvByOjo3u4ZLzcoJYTe4NHT">
-      <div>
+      <div className="Billing-Card">
         <Elements>
           <CheckoutForm />
         </Elements>

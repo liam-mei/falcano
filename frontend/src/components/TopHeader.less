@@ -6,18 +6,26 @@
     padding: .5rem;
     //border-bottom: var(--solidBorder) var(--darkGrey); 
     //margin-bottom: var(--oneRem);
-
-    .SignOut {
-        border: 2px solid gray;
-        border-radius: 3px;
+    .BreadCrumb {
+        flex: 3;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        padding: 1rem;
-        &:hover {
-            background: gray;
-            color: white;
-            cursor: pointer;
-        } // Signout:hover
-    } // Signout
-}
+    }
+
+    .Right{
+        display:  flex;
+        justify-content: space-around;
+        .SignOut {
+            border: 2px solid gray;
+            border-radius: 3px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            &:hover {
+                background: gray;
+                color: white;
+                cursor: pointer;
+            } // Signout:hover
+        } // Signout
+    }// Right
+}// TopHeader

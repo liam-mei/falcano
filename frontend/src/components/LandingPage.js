@@ -22,10 +22,10 @@ class LandingPage extends Component {
 						but i can haz, so meow meow toilet paper attack claws fluff everywhere meow miao french ciao litterbox.
 					</p>
 					<div className="card-registration">
-						<Link className="registration-signin" to={'/SignIn'}>
+						<Link className="registration-signin" to={'/signin'}>
 							LogIn
 						</Link>
-						<Link className="registration-signup" to={'/SignUp'}>
+						<Link className="registration-signup" to={'/signup'}>
 							SignUp
 						</Link>
 					</div>
