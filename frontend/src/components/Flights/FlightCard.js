@@ -71,8 +71,12 @@ class FlightCard extends Component {
   }
   modalToggle = () => {
     let randomNumber = Math.floor(Math.random() * 1000) + 10;
-    let xxxsv_html2 = this.state.sv_html.split('sv_').join('sv_' + randomNumber);
-    let xxxsv_script2 = this.state.sv_script.split('sv_').join('sv_' + randomNumber);
+    let xxxsv_html2 = this.state.sv_html
+      .split('sv_')
+      .join('sv_' + randomNumber);
+    let xxxsv_script2 = this.state.sv_script
+      .split('sv_')
+      .join('sv_' + randomNumber);
     // console.log("html2 =======: ", xxxsv_html2);
     // console.log("script2 =======: ", xxxsv_script2);
 
@@ -148,7 +152,7 @@ class FlightCard extends Component {
       sv_html: this.props.flight.sv_html,
       sv_script: this.props.flight.sv_script,
       xxxsv_html2: this.props.flight.sv_html,
-      xxxsv_script2: this.props.flight.sv_script,
+      xxxsv_script2: this.props.flight.sv_script
     });
   }
 
@@ -233,7 +237,7 @@ class FlightCard extends Component {
   render() {
     // console.log('====== aircraft BIG ============D:', this.props);
     // console.log('====== sv2: ', this.state.xxxsv_script2, this.state.xxxsv_html2)
-    console.log("======= man type: skinny: ", this.state.aircraft_whatever)
+    console.log('======= man type: skinny: ', this.state.aircraft_whatever);
     return (
       // flight card list
       <div className="FlightCard" onClick={this.modalToggle}>
@@ -263,18 +267,19 @@ class FlightCard extends Component {
             </h4>
           </ModalHeader>
           <ModalBody>
-
-              {Parser(this.state.xxxsv_html2)}
-              <Helmet>{Parser(this.state.xxxsv_script2)}</Helmet>
-
+            {Parser(this.state.xxxsv_html2)}
+            <Helmet>{Parser(this.state.xxxsv_script2)}</Helmet>
           </ModalBody>
 
           <ModalBody>
             <p>{this.state.aircraft_whatever.tail_number}</p>
             <p>{this.state.aircraft_whatever.man_type}</p>
-
           </ModalBody>
-          <ModalBody>{this.props.flight.remarks}</ModalBody>
+          <ModalBody>
+            <textarea rows="4" cols="50" readOnly>
+              {this.props.flight.remarks}
+            </textarea>
+          </ModalBody>
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
               <li>Airplane SEL</li>
@@ -285,8 +290,14 @@ class FlightCard extends Component {
             <ul className="ul-2">
               <li>Day: {this.props.flight.day}</li>
               <li>Night {this.props.flight.night}</li>
-              <li>Actual Instr.{this.props.flight.actual_instr}</li>
-              <li>Sim. Instr.{this.props.flight.sim_instr}</li>
+              <li>
+                Actual Instr.
+                {this.props.flight.actual_instr}
+              </li>
+              <li>
+                Sim. Instr.
+                {this.props.flight.sim_instr}
+              </li>
             </ul>
             <ul className="ul-2">
               <li>Grnd Trainer</li>
