@@ -11,8 +11,6 @@ import { Modal, ModalHeader, ModalBody, ModalFooter,
 import axios from 'axios';
 //
 
-import { signout} from "../utils/helper/helperFuncions";
-
 const headers = {
 	'Authorization': 'JWT ' + localStorage.getItem('token')
 }
@@ -50,13 +48,6 @@ class TopHeader extends Component {
 		dual_rec: 0,
 		total: 0,
 	};
-
-	logout = () => {
-		signout();
-		console.log("HEHEHEHE", this.props)
-		//this.props.history.push('/');
-		//window.location.reload();
-	}
 	toggleModal = () => {
 		let [ SELtotal, MELtotal, SEStotal, MEStotal, dayTotal, nightTotal, actualTotal,
 					simTotal, picTotal, totalhrs, recTotal ] = [0,0,0,0,0,0,0,0,0,0,0,0]
@@ -169,10 +160,7 @@ class TopHeader extends Component {
 						<br/>
 						Total Hours: {this.state.total}
 					</Modal>
-
 				</div>
-				<div onClick={this.logout} className="SignOut">Signout</div>
-				
 			</div>
 		);
 	}

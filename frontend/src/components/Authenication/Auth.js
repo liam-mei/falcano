@@ -30,7 +30,7 @@ const Auth = (Comp) =>
 				})
 			}
 			render() {
-						return <Comp loggedIn={this.state.loggedIn} />;
+						return <Comp loggedIn={this.state.loggedIn} {...this.props} />;
 					}
 				};
 
