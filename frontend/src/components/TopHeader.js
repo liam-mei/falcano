@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import Flights from './Flights/Flights';
-import './TopHeader.css';
-import LandingPage from './LandingPage';
-import { Link } from 'react-router-dom';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
+import React, { Component } from "react";
+import Flights from "./Flights/Flights";
+import "./TopHeader.css";
+import LandingPage from "./LandingPage";
+import { Link } from "react-router-dom";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import Typography from "@material-ui/core/Typography";
 import {
   Modal,
   ModalHeader,
@@ -15,19 +15,19 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from 'reactstrap';
-import axios from 'axios';
+} from "reactstrap";
+import axios from "axios";
 //
 
 const headers = {
-  Authorization: 'JWT ' + localStorage.getItem('token')
+  Authorization: "JWT " + localStorage.getItem("token")
 };
 
 const dev = true;
 let URL;
 dev
-  ? (URL = 'http://127.0.0.1:8000/api')
-  : (URL = 'https://flightloggercs10.herokuapp.com/api');
+  ? (URL = "http://127.0.0.1:8000/api")
+  : (URL = "https://flightloggercs10.herokuapp.com/api");
 
 // logic for totals modal
 // get ALL flights for user
@@ -79,20 +79,27 @@ class TopHeader extends Component {
     ] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let agg = true;
     while (agg === true) {
+      // console.log("====== pp======: ", this.state.flightList)
       for (let i = 0; i < this.state.flightList.length; i++) {
-        if (this.state.flightList[i].license_type === 'Airplane SEL') {
+        console.log(
+          "====== ith license type======: ",
+          this.state.flightList[i].license_type
+        );
+        if (this.state.flightList[i].license_type === "Airplane SEL") {
           SELtotal += this.state.flightList[i].total_hours;
           this.setState({ sel: SELtotal });
-        } else if (this.state.flightList[i].license_type === 'Airplane MEL') {
+        } else if (this.state.flightList[i].license_type === "Airplane MEL") {
           MELtotal += this.state.flightList[i].total_hours;
           this.setState({ mel: MELtotal });
-        } else if (this.state.flightList[i].license_type === 'Airplane SES') {
+        } else if (this.state.flightList[i].license_type === "Airplane SES") {
           SEStotal += this.state.flightList[i].total_hours;
-          this.setState({ SES: SEStotal });
-        } else if (this.state.flightList[i].license_type === 'Airplane MES') {
+          this.setState({ ses: SEStotal });
+        } else if (this.state.flightList[i].license_type === "Airplane MES") {
           MEStotal += this.state.flightList[i].total_hours;
-          this.setState({ SES: MEStotal });
+          this.setState({ mes: MEStotal });
         }
+        // console.log("************ STATE SES***************", this.state.ses)
+        // console.log("======SESESES====", SEStotal)
         cross_country_total += this.state.flightList[i].cross_country;
         no_instrument_app_total += this.state.flightList[i].no_instument_app;
         no_ldg_total += this.state.flightList[i].no_ldg;
@@ -125,14 +132,14 @@ class TopHeader extends Component {
 
   componentDidMount() {
     axios({
-      method: 'GET',
+      method: "GET",
       url: `${URL}/flights/`,
       headers: headers
     })
-      .then((response) => {
+      .then(response => {
         this.setState({ flightList: response.data });
       })
-      .catch((err) => {
+      .catch(err => {
         console.log(err);
       });
     if (Array.isArray(this.props.breadcrumb)) {
@@ -147,7 +154,7 @@ class TopHeader extends Component {
     return (
       <div className="Topheader">
         <div className="BreadCrumb">
-          <Link className="BreadCrumb-link" to={'/home'}>
+          <Link className="BreadCrumb-link" to={"/home"}>
             Home
           </Link>
           <span> </span>

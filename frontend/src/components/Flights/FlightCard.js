@@ -191,7 +191,7 @@ class FlightCard extends Component {
       ) {
         aircraftURL += this.state.aircraftChoice[i].id + '/';
         licensetype = this.state.aircraftChoice[i].license_type;
-        // console.log('flightlic', this.state.aircraftChoice[i].license_type);
+        console.log('flightlic', this.state.aircraftChoice[i].license_type);
       }
       this.setState({ license_type: licensetype });
       //   console.log('flightlicstate', this.state.license_type);
@@ -215,7 +215,7 @@ class FlightCard extends Component {
         fly_date: this.state.fly_date,
         snippet: this.state.snippet,
         aircraft: aircraftURL,
-        license_type: this.state.flightLicense,
+        license_type: this.state.license_type,
         total_hours: this.state.total_hours,
         sv_html: this.state.sv_html,
         sv_script: this.state.sv_script
@@ -237,7 +237,7 @@ class FlightCard extends Component {
   render() {
     // console.log('====== aircraft BIG ============D:', this.props);
     // console.log('====== sv2: ', this.state.xxxsv_script2, this.state.xxxsv_html2)
-    // console.log('======= Skinny Props: ', this.props);
+    // console.log('======= Skinny Props: ', this.state.license_type);
     return (
       // flight card list
       <div className="FlightCard" onClick={this.modalToggle}>
@@ -282,7 +282,7 @@ class FlightCard extends Component {
           </ModalBody>
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
-              <li>Airplane SEL</li>
+              <li>{this.props.flight.license_type}</li>
               <li>Cross Country {this.props.flight.cross_country}</li>
               <li>No. Instr. App. {this.props.flight.no_instument_app}</li>
               <li>No. Ldg: {this.props.flight.no_ldg}</li>
@@ -360,7 +360,7 @@ class FlightCard extends Component {
                   <DropdownItem
                     onClick={this.handleDropDownButton}
                     name={aircraft.tail_number}
-                    key={aircraft.tail_number+Math.random()}
+                    key={aircraft.id}
                   >
                     {aircraft.tail_number}
                   </DropdownItem>
