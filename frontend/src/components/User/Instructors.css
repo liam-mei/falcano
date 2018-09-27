@@ -8,46 +8,111 @@
   background-repeat: no-repeat;
 }
 
-
-
-.Instructors .card-container {
+.Instructors .Instructors-container {
   grid-column: 3/ -1;
   grid-row: 2/ -1;
-  display: grid;
-  padding: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  grid-gap: 1rem;
+   display: grid;
+   grid-gap: 1rem;
+   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+
 }
 
-.Instructors .card {
+.Instructors .NewInstructor {
+  display: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 100%;
+  overflow: auto;
+  justify-content: center;
+  align-items: center;
+  background: rgba(150, 150, 150, 0.5);
+}
+
+.Instructors .NewInstructor .FormContainer {
+  border: 2px solid gray;
+  display: flex;
+  background: white;
+  border-radius: 10px;
+  width: 400px;
+  height: 400px;
+  box-shadow: 0 1px 1px 3px rgba(150, 250, 150, 0.1),
+    1px 1px 1px 4px rgba(100, 100, 250, 0.25);
+}
+
+.Instructors .Instructor-card {
   display: grid;
   box-shadow: 0px 1px 5px #555;
   background-color: white;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
 }
 
-/* Simple Card styles for prettying */
-
-.Instructors .card__title {
-  padding: 0.5rem;
-  font-style: sans serif;
+.Instructors .Instructor-card .card-name {
+  font-size: 1.2rem;
 }
 
-.Instructors .card__description {
-  padding: 1.5rem;
-
-  margin-bottom: 10px;
+.Instructors .Instructor-card .card-number {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
 }
 
-.Instructors img {
+.Instructors .Instructor-card .card-img {
+  display: flex;
+}
+
+.Instructors .Instructor-card .card-img img {
   width: 100%;
+  height: 100%;
 }
 
-.Instructors p,
-.Instructors h3 {
-  margin: 10px;
+.Instructors .Instructor-card .card-description,
+.Instructors .Instructor-card .card-rating,
+.Instructors .Instructor-card .card-contact {
+  margin-top: 0.5rem;
 }
 
-.Instructors h4 {
-  
-  font-size: 1.1rem;
+.Instructors .Instructor-card .card-description .description-title,
+.Instructors .Instructor-card .card-rating .description-title,
+.Instructors .Instructor-card .card-contact .description-title,
+.Instructors .Instructor-card .card-description .rating-title,
+.Instructors .Instructor-card .card-rating .rating-title,
+.Instructors .Instructor-card .card-contact .rating-title,
+.Instructors .Instructor-card .card-description .contact-title,
+.Instructors .Instructor-card .card-rating .contact-title,
+.Instructors .Instructor-card .card-contact .contact-title {
+  font-size: 1.2rem;
+  padding-bottom: 0;
+}
+
+.Instructors .Instructor-card .card-description .description-content,
+.Instructors .Instructor-card .card-rating .description-content,
+.Instructors .Instructor-card .card-contact .description-content,
+.Instructors .Instructor-card .card-description .rating-details,
+.Instructors .Instructor-card .card-rating .rating-details,
+.Instructors .Instructor-card .card-contact .rating-details,
+.Instructors .Instructor-card .card-description .contact-info,
+.Instructors .Instructor-card .card-rating .contact-info,
+.Instructors .Instructor-card .card-contact .contact-info {
+  border: 1px solid gray;
+  padding: 0.2rem;
+}
+
+.Instructors .Instructor-card .Button {
+  background: #01baef;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 7rem;
+  height: 4rem;
+  width: 4.5rem;
+  padding-bottom: 1rem;
+  border-radius: 50%;
+  color: white;
+}
+
+.Instructors .Instructor-card .Button:hover {
+  cursor: pointer;
 }

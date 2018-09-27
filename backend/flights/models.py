@@ -23,7 +23,7 @@ class Aircraft(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     license_type = models.CharField(max_length=40, choices=license_choices, default="Airplane SEL")
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    photo = models.ImageField(default="/plane.jpg", upload_to="aircrafts/%Y/%m/%D/", blank=True)
+    photo = models.CharField(max_length=300)
     class Meta:
         verbose_name_plural = "Aircraft"
 
