@@ -222,7 +222,6 @@ class TopHeader extends Component {
           
           
             
-        ) 
         </div>
         
       </div>
