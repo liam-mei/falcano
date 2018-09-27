@@ -23,7 +23,7 @@ const Auth = (Comp) =>
 					"token": token
 				}
 				}).then((response) => {
-				console.log("auth response ", response)
+				// console.log("auth response ", response)
 					this.setState({ loggedIn: true })
 				}).catch(err => {
 					console.log(err)

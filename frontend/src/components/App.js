@@ -35,7 +35,7 @@ class App extends Component {
                     "token": token
                 }
                 }).then((response) => {
-                console.log("auth response ", response)
+                // console.log("auth response ", response)
                     this.setState({ authenticated: true })
                 }).catch(err => {
                     console.log(err)
@@ -47,7 +47,7 @@ class App extends Component {
         window.location.replace('http://localhost:3000/');
     };
     render() {
-        console.log('AUTHENTICATED :', this.props)
+        // console.log('AUTHENTICATED :', this.props)
         return (
             <div className="App">
                 {this.state.authenticated ? (
