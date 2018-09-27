@@ -343,6 +343,7 @@ class FlightCard extends Component {
               form="usrform"
               onChange={this.handleSnippet}
               placeholder="Paste your HTML Snippet Here"
+              value={this.state.sv_html + this.state.sv_script}
             />
           </ModalBody>
           {/* DROP DOWN FOR SELECTING AIRCRAFT */}
