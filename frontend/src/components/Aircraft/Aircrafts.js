@@ -102,6 +102,7 @@ class Aircrafts extends Component {
 	}
 
 	render() {
+		console.log("PROPS AIRCRAFT", this.props)
 		return (
 			<div className="Aircrafts">
 				<TopHeader breadcrumb={[ 'aircraft' ]} rightLinks={[ { name: '#', value: 'View Total Hours' } ]} />
