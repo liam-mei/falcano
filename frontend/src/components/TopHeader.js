@@ -19,8 +19,6 @@ import {
 import axios from 'axios';
 //
 
-import { signout} from "../utils/helper/helperFuncions";
-
 const headers = {
   Authorization: 'JWT ' + localStorage.getItem('token')
 };

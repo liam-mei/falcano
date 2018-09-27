@@ -7,14 +7,14 @@ import HomePage from './HomePage';
 
 import './LandingPage.css';
 import '../utils/Images/landingPage.svg';
-import '../utils/Images/Logo.svg';
+import logo from '../utils/Images/Logo.svg';
+
 class LandingPage extends Component {
 	render() {
 		return (
 			<div className="LandingPage">
 				<div className="LandingPage-card">
-					<img src={'../utils/Images/Logo.svg'}/>
-					<h1 className="card-logo">FALCANO</h1>
+					<img src={logo } className="Falcano-Logo" alt="logo"/>
 					<h3 className="card-slogan">Time flies</h3>
 					<p className="card-mission-statement">
 						Mission statement Demand to be let outside at once, and expect owner to wait for me as i think about it
