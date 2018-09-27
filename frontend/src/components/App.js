@@ -21,9 +21,7 @@ const dev = true;
 
 
 class App extends Component {
-    state = {
-        authenticated: false,
-    };
+    
 
     componentDidMount() {
         let token = localStorage.getItem('token')
@@ -42,26 +40,13 @@ class App extends Component {
                     // window.location.replace('http://localhost:3000/');
                 })
     }
-    signOut = () => {
-        localStorage.removeItem('token');
-        window.location.replace('http://localhost:3000/');
-    };
+    
     render() {
         // console.log('AUTHENTICATED :', this.props)
         return (
             <div className="App">
-                {this.state.authenticated ? (
-                    <div className="TopBar">
-                        <span className="SignOut" onClick={this.signOut}>
-                            Signout
-                        </span>
-                    </div>
-                ) : (
-                    ''
-                )}
-				<div>
-					signOut
-				</div>
+                
+    
                     <Route exact path="/" component={LandingPage} />
                     <Route exact path="/home" component={HomePage} />
                     <Route path="/signUp" component={SignUp} />
