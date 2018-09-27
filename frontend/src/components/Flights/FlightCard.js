@@ -359,7 +359,7 @@ class FlightCard extends Component {
                   <DropdownItem
                     onClick={this.handleDropDownButton}
                     name={aircraft.tail_number}
-                    key={aircraft.tail_number+=Math.random()}
+                    key={aircraft.tail_number+Math.random()}
                   >
                     {aircraft.tail_number}
                   </DropdownItem>
