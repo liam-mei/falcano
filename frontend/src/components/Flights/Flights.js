@@ -77,7 +77,7 @@ class Flights extends Component {
     let sv_html = arr[0] + '</div>';
     let sv_script = arr[1];
 
-    console.log('SV HTML ', sv_html);
+    // console.log('SV HTML ', sv_html);
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
 
@@ -88,7 +88,7 @@ class Flights extends Component {
 
   handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log('namechange', this.state.name);
+    // console.log('namechange', this.state.name);
   };
 
   // ADD NEW FLIGHT
@@ -139,7 +139,7 @@ class Flights extends Component {
       headers: headers
     })
       .then((response) => {
-        console.log('??????????', response);
+        // console.log('??????????', response);
       })
       .catch((error) => {
         console.log('put error', error);
@@ -161,7 +161,7 @@ class Flights extends Component {
     })
       .then((response) => {
         this.setState({ aircraftChoice: response.data });
-        console.log('ac state', this.state.aircraftChoice);
+        // console.log('ac state', this.state.aircraftChoice);
       })
       .catch((err) => {
         this.props.history.push('/');
@@ -173,7 +173,7 @@ class Flights extends Component {
       headers: headers
     })
       .then((response) => {
-        console.log('====D flights get response', response.data);
+        // console.log('====D flights get response', response.data);
         this.setState({ flightData: response.data });
       })
       .catch((error) => {
@@ -181,8 +181,8 @@ class Flights extends Component {
       });
   }
   render() {
-    console.log('FLIGHTS PROPS', this.props);
-    console.log('E TARGET VALUE ', this.state.sv_html);
+    // console.log('FLIGHTS PROPS', this.props);
+    // console.log('E TARGET VALUE ', this.state.sv_html);
     return (
       <div className="Flights">
         <TopHeader
@@ -251,6 +251,7 @@ class Flights extends Component {
                         <DropdownItem
                           onClick={this.handleDropDownButton}
                           name={aircraft.tail_number}
+                          key={aircraft.tail_number+=Math.random()}
                         >
                           {aircraft.tail_number}
                         </DropdownItem>

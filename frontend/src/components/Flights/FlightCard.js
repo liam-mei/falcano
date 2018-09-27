@@ -175,7 +175,7 @@ class FlightCard extends Component {
     let sv_html = arr[0] + '</div>';
     let sv_script = arr[1];
 
-    console.log('SV HTML ', sv_html);
+    // console.log('SV HTML ', sv_html);
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
 
@@ -223,7 +223,7 @@ class FlightCard extends Component {
       headers: headers
     })
       .then((response) => {
-        console.log('??????????', response);
+        // console.log('??????????', response);
       })
       .catch((error) => {
         console.log('put error', error);
@@ -237,7 +237,7 @@ class FlightCard extends Component {
   render() {
     // console.log('====== aircraft BIG ============D:', this.props);
     // console.log('====== sv2: ', this.state.xxxsv_script2, this.state.xxxsv_html2)
-    console.log('======= Skinny Props: ', this.props);
+    // console.log('======= Skinny Props: ', this.props);
     return (
       // flight card list
       <div className="FlightCard" onClick={this.modalToggle}>
@@ -359,6 +359,7 @@ class FlightCard extends Component {
                   <DropdownItem
                     onClick={this.handleDropDownButton}
                     name={aircraft.tail_number}
+                    key={aircraft.tail_number+=Math.random()}
                   >
                     {aircraft.tail_number}
                   </DropdownItem>
