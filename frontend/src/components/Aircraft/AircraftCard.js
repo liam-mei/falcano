@@ -4,7 +4,15 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import "./AircraftCard.css";
 import axios from "axios";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { 
+  Modal, 
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from "reactstrap";
 import Dropzone from "react-dropzone";
 import {Helmet} from 'react-helmet';
 const headers = {
@@ -26,17 +34,19 @@ class AircraftCardModal extends React.Component {
       data: [],
       files: [],
       id: "",
+      dropdownButtonTitle: 'Airplane SEL',
+      dropdownOpen: false,
       tail_number: "",
-      tail_number_edit: "",
       man_type: "",
+      tail_number_edit: "",
       man_type_edit: "",
-      license_type: "",
       license_type_edit: "",
+      license_type: "",
       photo: "",
       modal: false,
       nestedModal: false,
       closeAll: false, 
-      uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg',
+      uploadurl: '',
     };
   }
 
@@ -52,13 +62,13 @@ class AircraftCardModal extends React.Component {
       headers: headers
     })
       .then(response => {
-        console.log("MODAL RES", response.data.aircraft);
+        // console.log("MODAL RES", response.data.aircraft);
         this.setState({ data: response.data });
       })
       .catch(error => {
         console.log("error :", error);
       });
-      console.log("STATE::", this.state.uploadurl)
+      // console.log("STATE::", this.state.uploadurl)
   };
 
   toggleNested = () => {
@@ -68,10 +78,19 @@ class AircraftCardModal extends React.Component {
     });
   };
 
+  handleDropDownButton = e => {
+    this.setState({ dropdownButtonTitle: e.target.name, license_type: e.target.name });
+  };
+
+  toggleDropdownButton = () => {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  };
   // Handles the change in input
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log("statechange", this.state.license_type_edit);
+    // console.log("statechange", this.state.license_type_edit);
   };
 
   // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
@@ -79,7 +98,7 @@ class AircraftCardModal extends React.Component {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: false
-    });
+    })
     
     axios({
       method: "PUT",
@@ -87,14 +106,14 @@ class AircraftCardModal extends React.Component {
       data: {
         man_type: this.state.man_type_edit,
         tail_number: this.state.tail_number_edit,
-        license_type: this.state.license_type_edit,
+        license_type: this.state.license_type,
         id: this.state.id,
         photo: this.state.uploadurl
       },
       headers: headers
     })
       .then(response => {
-        console.log("put response", response);
+        // console.log("put response", response);
       })
       .catch(error => {
         console.log("put error", error);
@@ -102,9 +121,10 @@ class AircraftCardModal extends React.Component {
     this.setState({
       tail_number: this.state.tail_number_edit,
       man_type: this.state.man_type_edit,
-      license_type: this.state.license_type_edit,
+      license_type: this.state.license_type,
       photo: this.state.uploadurl
     });
+    // window.location.reload();
   };
 
   toggleAll = () => {
@@ -123,37 +143,43 @@ class AircraftCardModal extends React.Component {
     
   };
 
-  cloud = (error, result) => {
-
-  }
-
   upload = () => {
     window.cloudinary.openUploadWidget(
       { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
       (error, result) => {
-        console.log(error, result);
-        this.setState({ uploadurl: result[0].url });
-        console.log('===== stateurl: ', this.state.uploadurl);
+        // console.log(error, result);
+        if(this.state.uploadurl === ''){
+          let imgurl;
+          (result ? imgurl = result[0].url : imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg` )
+          this.setState({ uploadurl: imgurl });
+        } else if(this.state.uploadurl !== ''){
+          let imgurl
+          imgurl = this.state.uploadurl
+          this.setState({ uploadurl: imgurl });
+        }
+        // this.setState({ uploadurl: imgurl });
+        // console.log('===== stateurl: ', this.state.uploadurl);
       }
     ),
       false;
   };
 
   componentDidMount() {
-    console.log("URL", URL);
+    // console.log("URL", URL);
     this.setState({
       tail_number: this.props.data.tail_number,
       id: this.props.data.id,
       tail_number_edit: this.props.data.tail_number,
       license_type_edit: this.props.data.license_type,
+      license_type: this.props.data.license_type,
       man_type_edit: this.props.data.man_type,
       photo: this.props.data.photo
     });
   }
 
   render() {
-    console.log("filesdata", this.state.data);
+    // console.log("filesdata", this.state.data);
     let [
       pic_sum,
       no_ldg,
@@ -183,9 +209,10 @@ class AircraftCardModal extends React.Component {
       <div className="AircraftCard">
         <Card onClick={this.toggle} className="AircraftCard-Card">
           <Typography className="card-typography" onClick={this.toggle}>
-            <p className="card-typography-p">{this.state.tail_number}</p>
-            <p className="card-typography-p">{this.props.data.man_type}</p>
+            <h4 className="card-typography-p">{this.state.tail_number}</h4>
           </Typography>
+            <p className="card-typography-p">{this.props.data.man_type}</p>
+          
           <CardMedia
             onClick={this.toggle}
             component="img"
@@ -226,12 +253,28 @@ class AircraftCardModal extends React.Component {
                   onChange={this.handleChange}
                   placeholder={this.props.data.tail_number}
                 />
-                <input
-                  className="edit-input-lt"
-                  name="license_type_edit"
-                  onChange={this.handleChange}
-                  placeholder={this.props.data.license_type}
-                />
+                 <ButtonDropdown
+                    isOpen={this.state.dropdownOpen}
+                    toggle={this.toggleDropdownButton}
+                  >
+                    <DropdownToggle caret>
+                      {this.state.license_type}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}> 
+												Airplane SEL
+											</DropdownItem>
+											<DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}> 
+												Airplane SES
+											</DropdownItem>
+											<DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}> 
+												Airplane MEL
+											</DropdownItem>
+											<DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}> 
+												Airplane MES
+											</DropdownItem>
+                    </DropdownMenu>
+                  </ButtonDropdown>
                 <input
                   className="edit-input-mt"
                   name="man_type_edit"
@@ -255,7 +298,7 @@ class AircraftCardModal extends React.Component {
           </ModalBody>
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
-              <li>Airplane SEL</li>
+              <li>{this.state.license_type}</li>
               <li>Cross Country {cross_country}</li>
               <li>
                 No. Instr. App.
@@ -279,7 +322,7 @@ class AircraftCardModal extends React.Component {
               <li>Grnd Trainer</li>
               <li>PIC: {pic_sum}</li>
               <li>Dual Rec: {dualrec}</li>
-              <li>Total Hourse: {total_hours}</li>
+              <li>Total Hours: {total_hours}</li>
             </ul>
           </ModalFooter>
         </Modal>
