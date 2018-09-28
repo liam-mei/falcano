@@ -63,7 +63,7 @@ class Aircrafts extends Component {
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log("statechange", this.state.license_type_edit);
+    // console.log("statechange", this.state.license_type_edit);
   };
 
   toggleModal = e => {
@@ -92,7 +92,7 @@ class Aircrafts extends Component {
       headers: headers
     })
       .then(response => {
-        console.log("put response", response);
+        // console.log("put response", response);
       })
       .catch(error => {
         console.log("put error", error);
@@ -111,7 +111,7 @@ class Aircrafts extends Component {
   };
 
   componentDidMount() {
-    console.log("URL", URL);
+    // console.log("URL", URL);
     const headers = {
       Authorization: "JWT " + localStorage.getItem("token")
     };
@@ -121,7 +121,7 @@ class Aircrafts extends Component {
       headers: headers
     })
       .then(response => {
-        console.log("aircraft res", response.data);
+        // console.log("aircraft res", response.data);
         this.setState({
           data: response.data
         });
@@ -137,18 +137,18 @@ class Aircrafts extends Component {
       { cloud_name: "dkzzjjjj9", upload_preset: "ggbmyqmo" },
 
       (error, result) => {
-        console.log(error, result);
-        // let imgurl;
-        // (result ? imgurl = result[0].url : imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg` )
-        this.setState({ uploadurl: result[0].url });
-        console.log("===== stateurl: ", this.state.uploadurl);
+        // console.log(error, result);
+        let imgurl;
+        (result ? imgurl = result[0].url : imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg` )
+        this.setState({ uploadurl: imgurl });
+        // console.log("===== stateurl: ", this.state.uploadurl);
       }
     ),
       false;
   };
 
   render() {
-    console.log("PROPS AIRCRAFT", this.props);
+    // console.log("PROPS AIRCRAFT", this.props);
     return (
       <div className="Aircrafts">
         <TopHeader
