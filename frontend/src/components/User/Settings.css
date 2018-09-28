@@ -89,3 +89,11 @@ label {
     font-size: 18px;
     margin: 1rem;
 }
+.NewPassword input{
+    
+    margin:1.8rem;
+}
+.Save{
+    
+    margin:2rem;
+}
