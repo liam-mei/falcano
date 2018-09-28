@@ -54,12 +54,10 @@ const Total = (props) => {
 */
 
 // Decide whether to use local or production urls for both front and back end
-const [ FRONT_URL_DEV, BACK_URL_DEV ] = [ true, true ];
-
-const [ FRONT_URL, BACK_URL ] = [
-	FRONT_URL_DEV ? 'http://localhost:3000' : 'https://stoic-meitner-50ac30.netlify.com',
-	BACK_URL_DEV ? 'http://localhost:8000/api' : 'https://flightloggercs10.herokuapp.com/api',
-];
+// const [ FRONT_URL_DEV, BACK_URL_DEV ] = [ true, true ];
+let dev = true;
+let URL;
+dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
 const headers = {
 	Authorization: 'JWT ' + localStorage.getItem('token'),
@@ -168,7 +166,7 @@ class TopHeader extends Component {
 	componentDidMount() {
 		axios({
 			method: 'GET',
-			BACK_URL: `${BACK_URL}/flights/`,
+			url: `${URL}/flights/`,
 			headers: headers,
 		})
 			.then((response) => {
