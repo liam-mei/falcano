@@ -6,6 +6,7 @@
     grid-template-rows: 4rem 1fr;
     background-image: url('../../utils/Images/settings.svg');
     background-repeat: no-repeat;
+    
 }
 
 .Settings .Settings-Form {
@@ -46,4 +47,54 @@
 
 .Settings .SaveDiv {
     box-shadow: 1.5px 1.5px grey;
+}
+/* Navigation bar */
+
+/* Setting */
+.CurrentPass {
+    margin: 10px 0px;
+}
+
+.ChangePassword {
+    margin: 300px 0px;
+}
+
+input {
+    padding: 7px;
+    min-width: 300px;
+    border-radius: 3px;
+    border: 1px solid #ddd;
+}
+
+input:hover {
+    border: 1px solid #0099e6;
+}
+
+.savePass,
+.saveProfile {
+    padding: 7px;
+    margin: 6px 0px;
+    border-radius: 3px;
+    border: 1px solid #06f;
+    background-color: #05f;
+    color: white;
+}
+
+.savePass:hover,
+.saveProfile:hover {
+    background-color: #1a75ff;
+}
+
+label {
+    font-size: 18px;
+    margin: 1rem;
+}
+.NewPassword input{
+    
+    margin:1.8rem;
+}
+.Settings .Save{
+    
+display:flex;
+margin-right:60rem;
 }

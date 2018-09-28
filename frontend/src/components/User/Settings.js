@@ -21,9 +21,9 @@ class Settings extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			oldPassword: '',
-			newPassword: '',
-			confirmnewpassword: '',
+			CurrentPassword: '',
+			NewPassword: '',
+			ConfirmPassword: '',
 			errorMessage: '',
 		};
 	}
@@ -34,28 +34,30 @@ class Settings extends Component {
 
 	changePassword = (e) => {
 		
-		if (this.state.newPassword !== this.state.confirmnewpassword) {
+		if (this.state.NewPassword !== this.state.ConfirmPassword) {
 			e.preventDefault();
 			this.setState({ errorMessage: 'The passwords do not match' });
 			
 		}else {
 			
 			axios({
-				method: 'PUT',
-				url: URL,
-				data: {
-					old_password: this.state.oldPassword,
-					new_password: this.state.newPassword
-				},
-				headers: headers
-			}).then(res => {
-				console.log("res", res)
-			}).catch(err => {
-				if(err) {
-					alert("Old password is wrong!")
-				}
-				console.log("ERRRORRRRRRRR", err.status)
-			})
+        method: "PUT",
+        url: URL,
+        data: {
+          old_password: this.state.CurrentPassword,
+          new_password: this.state.NewPassword
+        },
+        headers: headers
+      })
+        .then(res => {
+          console.log("res", res);
+        })
+        .catch(err => {
+          if (err) {
+            alert("Old password is wrong!");
+          }
+          console.log("ERRRORRRRRRRR", err.status);
+        });
 		}
 	}
 		render() {
@@ -67,29 +69,33 @@ class Settings extends Component {
 
 				<div className="Settings-Form">
 					<form>
-						<div className="OldPassWord">
-							<label className="PasswordBox">Current Password</label>
-							<input name="oldPassword" className="OldPasswordType" type="text" onChange={this.handleChange}/>
-						</div>
+						<div className="App">
+							<div className="ChangePassword">
+								<h1>Change password:</h1>
+								<div className="CurrentPassword">
+									<label className="CurrentPassword"><b>Current password:</b></label>
+									<input name="CurrentPassword" type="password" onChange={this.handleChange}></input>
+								</div>
+								<div className="danger">{this.state.errorMessage ? this.state.errorMessage : ''}</div>
+								<div className="NewPassword">
+									<label className="NewPassword"><b>New password:</b></label>
+									<input name="NewPassword" type="password" className="NewPassword" onChange={this.handleChange}></input>
+								</div>
+								<div className="ConfirmPassword">
+									<label className="ConfirmPassword"><b>Confirm password:</b></label>
+									<input className="ConfirmPassword" name="ConfirmPassword" type="password" onChange={this.handleChange}></input>
+								</div>
+								<div className="Save">
+									<button className="savePass" onClick={this.changePassword}>Save changes</button>
+								</div>
 
-					<div className="danger">{this.state.errorMessage ? this.state.errorMessage : ''}</div>
-						<br />
-						<div className="NewPassWord">
-							<label className="NewPasswordBox">New Password</label>
-							<input name="newPassword" className="NewPasswordType" type="text" onChange={this.handleChange}/>
-						</div>
-						<div className="NewPassWord">
-							<label className="NewPasswordBox">Confirm New Password</label>
-							<input name="confirmnewpassword" className="NewPasswordType" type="text" onChange={this.handleChange}/>
-						</div>
-						<div className="Save">
-							<div className="SaveDiv" onClick={this.changePassword}>
-								<button>save</button>
 							</div>
 						</div>
+			
 					</form>
 				</div>
-			</div>
+				</div>
+			
 		);
 	}
 }
