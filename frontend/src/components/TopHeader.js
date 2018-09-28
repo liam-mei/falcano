@@ -246,48 +246,13 @@ class TopHeader extends Component {
 						''
 					)}
 
-
-          <button onClick={this.toggleModal}>TOTAL</button>
-          <span className="SignOut" onClick={this.signOut}>
-                    Signout
-            </span>
-          <Modal toggle={this.toggleModal} isOpen={this.state.openModal}>
-            Airplane SEL Hours:
-            {this.state.sel}
-            <br />
-            Airplane MEL Hours :{this.state.mel}
-            <br />
-            Airplane SES Hours :{this.state.ses}
-            <br />
-            Airplane MES Hours :{this.state.mes}
-            <br />
-            Cross Country: {this.state.cross_country}
-            <br />
-            No. Instr. App. : {this.state.no_instument_app}
-            <br />
-            No. Ldg. : {this.state.no_ldg}
-            <br />
-            day: {this.state.day}
-            <br />
-            night: {this.state.night}
-            <br />
-            actual: {this.state.actual_instr}
-            <br />
-            sim: {this.state.sim_instr}
-            <br />
-            pic: {this.state.pic}
-            <br />
-            dual rec: {this.state.dual_rec}
-            <br />
-            Total Hours: {this.state.total}
-          </Modal>
-          
-  
-        </div>
-        
-      </div>
-    );
-  }
+					<span className="SignOut" onClick={this.signOut}>
+						Signout
+					</span>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default TopHeader;
