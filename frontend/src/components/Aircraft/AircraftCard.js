@@ -4,7 +4,15 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import "./AircraftCard.css";
 import axios from "axios";
-import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import { 
+  Modal, 
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  ButtonDropdown,
+  DropdownToggle,
+  DropdownMenu,
+  DropdownItem } from "reactstrap";
 import Dropzone from "react-dropzone";
 import {Helmet} from 'react-helmet';
 const headers = {
@@ -26,12 +34,14 @@ class AircraftCardModal extends React.Component {
       data: [],
       files: [],
       id: "",
+      dropdownButtonTitle: 'Airplane SEL',
+      dropdownOpen: false,
       tail_number: "",
-      tail_number_edit: "",
       man_type: "",
+      tail_number_edit: "",
       man_type_edit: "",
-      license_type: "",
       license_type_edit: "",
+      license_type: "",
       photo: "",
       modal: false,
       nestedModal: false,
@@ -68,6 +78,15 @@ class AircraftCardModal extends React.Component {
     });
   };
 
+  handleDropDownButton = e => {
+    this.setState({ dropdownButtonTitle: e.target.name, license_type: e.target.name });
+  };
+
+  toggleDropdownButton = () => {
+    this.setState({
+      dropdownOpen: !this.state.dropdownOpen
+    });
+  };
   // Handles the change in input
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -79,7 +98,7 @@ class AircraftCardModal extends React.Component {
     this.setState({
       nestedModal: !this.state.nestedModal,
       closeAll: false
-    });
+    })
     
     axios({
       method: "PUT",
@@ -87,7 +106,7 @@ class AircraftCardModal extends React.Component {
       data: {
         man_type: this.state.man_type_edit,
         tail_number: this.state.tail_number_edit,
-        license_type: this.state.license_type_edit,
+        license_type: this.state.license_type,
         id: this.state.id,
         photo: this.state.uploadurl
       },
@@ -102,9 +121,10 @@ class AircraftCardModal extends React.Component {
     this.setState({
       tail_number: this.state.tail_number_edit,
       man_type: this.state.man_type_edit,
-      license_type: this.state.license_type_edit,
+      license_type: this.state.license_type,
       photo: this.state.uploadurl
     });
+    // window.location.reload();
   };
 
   toggleAll = () => {
@@ -122,10 +142,6 @@ class AircraftCardModal extends React.Component {
     };
     
   };
-
-  cloud = (error, result) => {
-
-  }
 
   upload = () => {
     window.cloudinary.openUploadWidget(
@@ -147,6 +163,7 @@ class AircraftCardModal extends React.Component {
       id: this.props.data.id,
       tail_number_edit: this.props.data.tail_number,
       license_type_edit: this.props.data.license_type,
+      license_type: this.props.data.license_type,
       man_type_edit: this.props.data.man_type,
       photo: this.props.data.photo
     });
@@ -226,12 +243,28 @@ class AircraftCardModal extends React.Component {
                   onChange={this.handleChange}
                   placeholder={this.props.data.tail_number}
                 />
-                <input
-                  className="edit-input-lt"
-                  name="license_type_edit"
-                  onChange={this.handleChange}
-                  placeholder={this.props.data.license_type}
-                />
+                 <ButtonDropdown
+                    isOpen={this.state.dropdownOpen}
+                    toggle={this.toggleDropdownButton}
+                  >
+                    <DropdownToggle caret>
+                      {this.state.license_type}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}> 
+												Airplane SEL
+											</DropdownItem>
+											<DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}> 
+												Airplane SES
+											</DropdownItem>
+											<DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}> 
+												Airplane MEL
+											</DropdownItem>
+											<DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}> 
+												Airplane MES
+											</DropdownItem>
+                    </DropdownMenu>
+                  </ButtonDropdown>
                 <input
                   className="edit-input-mt"
                   name="man_type_edit"
@@ -255,7 +288,7 @@ class AircraftCardModal extends React.Component {
           </ModalBody>
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
-              <li>Airplane SEL</li>
+              <li>{this.state.license_type}</li>
               <li>Cross Country {cross_country}</li>
               <li>
                 No. Instr. App.
@@ -279,7 +312,7 @@ class AircraftCardModal extends React.Component {
               <li>Grnd Trainer</li>
               <li>PIC: {pic_sum}</li>
               <li>Dual Rec: {dualrec}</li>
-              <li>Total Hourse: {total_hours}</li>
+              <li>Total Hours: {total_hours}</li>
             </ul>
           </ModalFooter>
         </Modal>

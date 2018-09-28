@@ -220,9 +220,7 @@ class TopHeader extends Component {
             Total Hours: {this.state.total}
           </Modal>
           
-          
-            
-         
+  
         </div>
         
       </div>

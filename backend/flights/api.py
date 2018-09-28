@@ -1,5 +1,5 @@
 from rest_framework import serializers, viewsets
-from .models import Flights, Aircraft
+from .models import Flights, Aircraft, Instructor
 
 from django.db.models import Sum, Count, F
 
@@ -20,6 +20,32 @@ class FlightsSerializer(serializers.HyperlinkedModelSerializer):
         flight = Flights.objects.create(user=user, **validated_data)
         return flight
 
+
+class InstructorSerializer(serializers.HyperlinkedModelSerializer):
+
+    class Meta:
+        model = Instructor
+        fields = ( 'id', 'name', 'description', 
+                    'license_number', 'ratings', 'photo', 
+                        'contact_number', 'contact_email')
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        instructor = Instructor.objects.create(user=user, **validated_data)
+        return instructor
+
+
+class InstructorViewSet(viewsets.ModelViewSet):
+    serializer_class = InstructorSerializer
+    queryset = Instructor.objects.none()
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_anonymous:
+            return Instructor.objects.none()
+        else:
+            return Instructor.objects.filter(user=user)
 
 class FlightsViewSet(viewsets.ModelViewSet):
     serializer_class = FlightsSerializer
