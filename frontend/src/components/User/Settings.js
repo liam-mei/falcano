@@ -44,8 +44,8 @@ class Settings extends Component {
         method: "PUT",
         url: URL,
         data: {
-          Current_Password: this.state.ChangePassword,
-          New_Password: this.state.NewPassword
+          old_password: this.state.CurrentPassword,
+          new_password: this.state.NewPassword
         },
         headers: headers
       })
@@ -74,19 +74,19 @@ class Settings extends Component {
 								<h1>Change password:</h1>
 								<div className="CurrentPassword">
 									<label className="CurrentPassword"><b>Current password:</b></label>
-									<input name="CurrentPassword" type="text" onChange={this.handleChange}></input>
+									<input name="CurrentPassword" type="password" onChange={this.handleChange}></input>
 								</div>
 								<div className="danger">{this.state.errorMessage ? this.state.errorMessage : ''}</div>
 								<div className="NewPassword">
 									<label className="NewPassword"><b>New password:</b></label>
-									<input name="NewPassword" type="text" className="NewPassword" onChange={this.handleChange}></input>
+									<input name="NewPassword" type="password" className="NewPassword" onChange={this.handleChange}></input>
 								</div>
 								<div className="ConfirmPassword">
 									<label className="ConfirmPassword"><b>Confirm password:</b></label>
-									<input className="ConfirmPassword" name="confirmPassword" type="text" onChange={this.handleChange}></input>
+									<input className="ConfirmPassword" name="ConfirmPassword" type="password" onChange={this.handleChange}></input>
 								</div>
 								<div className="Save">
-									<button className="savePass" onChange={this.changePassword}>Save changes</button>
+									<button className="savePass" onClick={this.changePassword}>Save changes</button>
 								</div>
 
 							</div>
