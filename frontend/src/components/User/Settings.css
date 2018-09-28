@@ -93,7 +93,8 @@ label {
     
     margin:1.8rem;
 }
-.Save{
+.Settings .Save{
     
-    margin:2rem;
+display:flex;
+margin-right:60rem;
 }
