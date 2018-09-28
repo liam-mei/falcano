@@ -1,29 +1,44 @@
 .Topheader {
   grid-column: 1 / -1;
   grid-row: 1 / 2;
-  display: flex;
-  justify-content: space-between;
-  padding: .5rem;
+  display: grid;
+  grid-template-columns: 4fr 2fr;
+  /*border-bottom: var(--solidBorder) var(--darkGrey);*/
 }
+
 .Topheader .BreadCrumb {
-  flex: 3;
   display: flex;
+  align-items: flex-end;
+  padding-left: 2em;
+  padding-bottom: 1rem;
 }
+
 .Topheader .Right {
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    ". . . s"
+    " . t . ."
 }
+
 .Topheader .Right .SignOut {
+  grid-area: s;
   border: 2px solid gray;
   border-radius: 3px;
+
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 1rem;
-  margin-left: 1rem;
+  margin-right: 1rem;
 }
+
 .Topheader .Right .SignOut:hover {
   background: gray;
   color: white;
   cursor: pointer;
+}
+
+.Topheader .Right .ToTal {
+  grid-area: t;
 }

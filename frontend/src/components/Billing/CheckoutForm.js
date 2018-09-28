@@ -89,7 +89,7 @@ class CheckoutForm extends React.Component {
         )}
         <form onSubmit={this.handleSubmit}>
           <label>
-            <h2>Card Details</h2>
+            <h2 className="Card-Details">Card Details</h2>
             <CardElement onChange={this.handleCardErrors} />
             <div role="alert">
               <h2>{this.state.card_errors}</h2>
@@ -99,7 +99,7 @@ class CheckoutForm extends React.Component {
           <div className="radio" onClick={this.handleMonthly}>
             <label>
               <input
-                type="radio"
+                type="radio" className="radio-selection"
                 value="99"
                 checked={this.state.amount === '99'}
                 onChange={this.handleChange}
@@ -110,7 +110,7 @@ class CheckoutForm extends React.Component {
           <div className="radio">
             <label>
               <input
-                type="radio"
+                type="radio" className="radio-selection"
                 value="1999"
                 checked={this.state.amount === '1999'}
                 onChange={this.handleChange}

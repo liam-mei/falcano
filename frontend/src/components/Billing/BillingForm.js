@@ -9,7 +9,7 @@ const BillingForm = () => {
     <StripeProvider apiKey="pk_test_tYvByOjo3u4ZLzcoJYTe4NHT">
       <div className="Billing-Card">
         <Elements>
-          <CheckoutForm />
+          <CheckoutForm/>
         </Elements>
       </div>
     </StripeProvider>

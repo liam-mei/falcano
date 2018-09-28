@@ -46,7 +46,7 @@ class AircraftCardModal extends React.Component {
       modal: false,
       nestedModal: false,
       closeAll: false, 
-      uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg',
+      uploadurl: '',
     };
   }
 
@@ -62,13 +62,13 @@ class AircraftCardModal extends React.Component {
       headers: headers
     })
       .then(response => {
-        console.log("MODAL RES", response.data.aircraft);
+        // console.log("MODAL RES", response.data.aircraft);
         this.setState({ data: response.data });
       })
       .catch(error => {
         console.log("error :", error);
       });
-      console.log("STATE::", this.state.uploadurl)
+      // console.log("STATE::", this.state.uploadurl)
   };
 
   toggleNested = () => {
@@ -90,7 +90,7 @@ class AircraftCardModal extends React.Component {
   // Handles the change in input
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
-    console.log("statechange", this.state.license_type_edit);
+    // console.log("statechange", this.state.license_type_edit);
   };
 
   // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
@@ -113,7 +113,7 @@ class AircraftCardModal extends React.Component {
       headers: headers
     })
       .then(response => {
-        console.log("put response", response);
+        // console.log("put response", response);
       })
       .catch(error => {
         console.log("put error", error);
@@ -148,16 +148,25 @@ class AircraftCardModal extends React.Component {
       { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
       (error, result) => {
-        console.log(error, result);
-        this.setState({ uploadurl: result[0].url });
-        console.log('===== stateurl: ', this.state.uploadurl);
+        // console.log(error, result);
+        if(this.state.uploadurl === ''){
+          let imgurl;
+          (result ? imgurl = result[0].url : imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg` )
+          this.setState({ uploadurl: imgurl });
+        } else if(this.state.uploadurl !== ''){
+          let imgurl
+          imgurl = this.state.uploadurl
+          this.setState({ uploadurl: imgurl });
+        }
+        // this.setState({ uploadurl: imgurl });
+        // console.log('===== stateurl: ', this.state.uploadurl);
       }
     ),
       false;
   };
 
   componentDidMount() {
-    console.log("URL", URL);
+    // console.log("URL", URL);
     this.setState({
       tail_number: this.props.data.tail_number,
       id: this.props.data.id,
@@ -170,7 +179,7 @@ class AircraftCardModal extends React.Component {
   }
 
   render() {
-    console.log("filesdata", this.state.data);
+    // console.log("filesdata", this.state.data);
     let [
       pic_sum,
       no_ldg,
@@ -200,9 +209,10 @@ class AircraftCardModal extends React.Component {
       <div className="AircraftCard">
         <Card onClick={this.toggle} className="AircraftCard-Card">
           <Typography className="card-typography" onClick={this.toggle}>
-            <p className="card-typography-p">{this.state.tail_number}</p>
-            <p className="card-typography-p">{this.props.data.man_type}</p>
+            <h4 className="card-typography-p">{this.state.tail_number}</h4>
           </Typography>
+            <p className="card-typography-p">{this.props.data.man_type}</p>
+          
           <CardMedia
             onClick={this.toggle}
             component="img"
