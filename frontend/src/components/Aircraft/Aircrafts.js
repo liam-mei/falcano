@@ -1,65 +1,63 @@
-import axios from "axios";
-import React, { Component } from "react";
-import AircraftCard from "./AircraftCard";
-import NavBar from "../NavBar";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import Typography from "@material-ui/core/Typography";
+import axios from 'axios';
+import React, { Component } from 'react';
+import AircraftCard from './AircraftCard';
+import NavBar from '../NavBar';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import {
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  ButtonDropdown,
-  DropdownToggle,
-  DropdownMenu,
-  DropdownItem
-} from "reactstrap";
-import CardMedia from "@material-ui/core/CardMedia";
-import "./AircraftCard.css";
-import Dropzone from "react-dropzone";
+	Modal,
+	ModalHeader,
+	ModalBody,
+	ModalFooter,
+	ButtonDropdown,
+	DropdownToggle,
+	DropdownMenu,
+	DropdownItem,
+} from 'reactstrap';
+import CardMedia from '@material-ui/core/CardMedia';
+import './AircraftCard.css';
+import Dropzone from 'react-dropzone';
 
-import TopHeader from "../TopHeader";
+import TopHeader from '../TopHeader';
 
-import Auth from "./../Authenication/Auth";
+import Auth from './../Authenication/Auth';
 
-import "./Aircrafts.css";
+import './Aircrafts.css';
 
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
 let dev = true;
 
 let URL;
-dev
-  ? (URL = "http://127.0.0.1:8000/api")
-  : (URL = "https://flightloggercs10.herokuapp.com/api");
+dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
 class Aircrafts extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      token: "",
-      name: "",
-      content: "",
-      openModal: false,
+	constructor(props) {
+		super(props);
+		this.state = {
+			token: '',
+			name: '',
+			content: '',
+			openModal: false,
 			dropdownOpen: false,
 			dropdownButtonTitle: 'Airplane SEL',
-			tail_number_edit: "",
-      man_type_edit: "",
-      license_type_edit: "Airplane SEL",
-      uploadurl:
-        "http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg",
-      data: [
-        {
-          id: "",
-          man_type: "",
-          tail_number: "",
-          license_type: "",
-          uploadurl: ""
-        }
-      ]
-    };
-  }
+			tail_number_edit: '',
+			man_type_edit: '',
+			license_type_edit: 'Airplane SEL',
+			uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg',
+			data: [
+				{
+					id: '',
+					man_type: '',
+					tail_number: '',
+					license_type: '',
+					uploadurl: '',
+				},
+			],
+		};
+	}
+
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
@@ -100,15 +98,16 @@ class Aircrafts extends Component {
     window.location.reload();
   };
 
-  handleDropDownButton = e => {
-    this.setState({ dropdownButtonTitle: e.target.name, license_type_edit: e.target.name });
-  };
 
-  toggleDropdownButton = () => {
-    this.setState({
-      dropdownOpen: !this.state.dropdownOpen
-    });
-  };
+	handleDropDownButton = (e) => {
+		this.setState({ dropdownButtonTitle: e.target.name, license_type_edit: e.target.name });
+	};
+
+	toggleDropdownButton = () => {
+		this.setState({
+			dropdownOpen: !this.state.dropdownOpen,
+		});
+	};
 
   componentDidMount() {
     // console.log("URL", URL);
@@ -175,56 +174,52 @@ class Aircrafts extends Component {
                     placeholder="Tail Number"
                   />
                   {/* <input
+
                     className="new-aircraft-input-lt"
                     name="license_type_edit"
                     onChange={this.handleChange}
                     placeholder="License Type"
 									/> */}
-                  <ButtonDropdown
-                    isOpen={this.state.dropdownOpen}
-                    toggle={this.toggleDropdownButton}
-                  >
-                    <DropdownToggle caret>
-                      {this.state.dropdownButtonTitle}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}> 
+									<ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdownButton}>
+										<DropdownToggle caret>{this.state.dropdownButtonTitle}</DropdownToggle>
+										<DropdownMenu>
+											<DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}>
 												Airplane SEL
 											</DropdownItem>
-											<DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}> 
+											<DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}>
 												Airplane SES
 											</DropdownItem>
-											<DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}> 
+											<DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}>
 												Airplane MEL
 											</DropdownItem>
-											<DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}> 
+											<DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}>
 												Airplane MES
 											</DropdownItem>
-                    </DropdownMenu>
-                  </ButtonDropdown>
-                  <input
-                    className="new-aircraft-input-mt"
-                    name="man_type_edit"
-                    onChange={this.handleChange}
-                    placeholder="Manufacturer Type"
-                  />
-                </ModalHeader>
-                <ModalBody className="nested-modal-body">
-                  <button onClick={this.upload}>CLICK ME TO UPLOAD</button>
-                </ModalBody>
-                <ModalFooter>
-                  {/* CLOSE NESTED */}
-                  <button className="edit-button" onClick={this.toggleAndPost}>
-                    Save
-                  </button>
-                </ModalFooter>
-              </Modal>
-            </CardContent>
-          </Card>
-        </div>
-      </div>
-    );
-  }
+										</DropdownMenu>
+									</ButtonDropdown>
+									<input
+										className="new-aircraft-input-mt"
+										name="man_type_edit"
+										onChange={this.handleChange}
+										placeholder="Manufacturer Type"
+									/>
+								</ModalHeader>
+								<ModalBody className="nested-modal-body">
+									<button onClick={this.upload}>CLICK ME TO UPLOAD</button>
+								</ModalBody>
+								<ModalFooter>
+									{/* CLOSE NESTED */}
+									<button className="edit-button" onClick={this.toggleAndPost}>
+										Save
+									</button>
+								</ModalFooter>
+							</Modal>
+						</CardContent>
+					</Card>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default Auth(Aircrafts);
