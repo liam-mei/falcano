@@ -15,14 +15,39 @@
   grid-row: 2/ -1;
   padding: 2rem 3rem;
   padding: 2rem 3rem;
+  margin-top: 5rem;
   margin-bottom: 25rem;
-  border: solid red 1px;
+  display: inline-block;
+  border: solid #d4d1d1 .5px;
   border-radius: 7px;
   background: rgb(235, 239, 243);
   padding: 2rem 7rem;
   width: 25rem;
 }
 
-.Elements {
-  border: 1px solid purple;
+.Card-Details {
+  border-bottom: solid #d4d1d1 1px;
+  color: var(--sky);
+  margin-bottom: .5em;
+}
+
+.radio {
+  margin: .5em;
+}
+
+.radio-selection {
+  margin-right: .5rem;
+}
+
+.form-btn {
+  margin: .5rem 0;
+  padding: .4rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+}
+
+.form-btn:hover {
+  cursor: pointer;
+  background-color: #0009D0;
+  color: white;
 }
