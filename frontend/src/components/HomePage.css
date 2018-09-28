@@ -12,10 +12,12 @@
   background-repeat: no-repeat;
 }
 .HomePage .HomePage-info h2 {
-  margin: 20rem 0 0 3rem;
-  align: left;
+  margin: 15rem 0 .5em 3rem;
 }
 .HomePage .HomePage-info h2::first-letter {
   font-size: 200%;
   color: var(--sky);
+}
+.HomePage .HomePage-info p {
+  margin: 0 0 0 3rem;
 }

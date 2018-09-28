@@ -17,9 +17,7 @@ class LandingPage extends Component {
 					<img src={logo } className="Falcano-Logo" alt="logo"/>
 					<h3 className="card-slogan">Time flies</h3>
 					<p className="card-mission-statement">
-						Mission statement Demand to be let outside at once, and expect owner to wait for me as i think about it
-						human is washing you why halp oh the horror flee scratch hiss bite cry louder at reflection so swat at dog,
-						but i can haz, so meow meow toilet paper attack claws fluff everywhere meow miao french ciao litterbox.
+					Gone are the days of untracked flights.  Here at <strong>Falcano</strong> we make it easy for you to track your flights.  Simply click and trips, instructors, hours and much more are easily managed.  We've even made it easy for you to visually track your trips with a SkyVector map.  Take us on your next flight and see what all the fuss is about.
 					</p>
 					<div className="card-registration">
 						<Link className="registration-signin" to={'/signin'}>

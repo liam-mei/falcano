@@ -1,0 +1,25 @@
+.CheckoutForm {
+  display: flex;
+}
+
+.CheckoutForm .radio {
+  margin: .5em;
+  border: 3px solid red;
+}
+
+.CheckoutForm .radio-selection {
+  margin-right: .6rem;
+}
+
+.CheckoutForm .form-btn {
+  margin: .5rem 0;
+  padding: .4rem 1.5rem;
+  font-size: 1.2rem;
+  border-radius: 5px;
+}
+
+.CheckoutForm .form-btn:hover {
+  cursor: pointer;
+  background-color: #0009D0;
+  color: white;
+}

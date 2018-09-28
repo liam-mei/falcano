@@ -19,7 +19,8 @@ class HomePage extends Component {
 				<div className="HomePage-info">
 				{/*<img src={logo } className="Falcano-Logo" alt="logo"/>*/}
 					<h2>Fly with ease, take us on your next flight.</h2>
-					<p>Whether you're off to the bahamas or off to a simulated flight - we've got you covered.  Track your flights with us.</p>
+					<p>Whether you're off to the Bahamas or off to a simulated flight - we've got you covered.</p>
+					<p>Track your flights with us.</p>
 				</div>
 			</div>
 		);

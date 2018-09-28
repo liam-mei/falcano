@@ -4,9 +4,9 @@
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-template-rows: 1fr;
-  height: 100vh;
   background-image: url('../utils/Images/landingPage.svg');
   background-repeat: no-repeat;
+  height: 100vh;
 }
 .LandingPage .LandingPage-card {
   grid-column: 4 / -1;
@@ -20,6 +20,7 @@
   height: 30rem;
   border-radius: 7px;
   opacity: .8;
+  padding: 1rem;
   margin-bottom: 8rem;
 }
 .LandingPage .LandingPage-card .card-logo {
@@ -47,6 +48,9 @@
   color: #fff;
   text-decoration: none;
   background-color: #0009D0;
+}
+.LandingPage .LandingPage-card .card-registration {
+  margin-bottom: 2rem;
 }
 .LandingPage .LandingPage-card .registration-signin {
   margin-left: .5rem;
