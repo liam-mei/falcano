@@ -42,6 +42,11 @@ class Aircrafts extends Component {
       name: "",
       content: "",
       openModal: false,
+			dropdownOpen: false,
+			dropdownButtonTitle: 'Airplane SEL',
+			tail_number_edit: "",
+      man_type_edit: "",
+      license_type_edit: "Airplane SEL",
       uploadurl:
         "http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg",
       data: [
@@ -93,13 +98,13 @@ class Aircrafts extends Component {
         console.log("put error", error);
       });
     window.location.reload();
-	};
-	
-	handleDropDownButton = e => {
-    this.setState({ dropdownButtonTitle: e.target.name });
-	};
-	
-	toggleDropdownButton = () => {
+  };
+
+  handleDropDownButton = e => {
+    this.setState({ dropdownButtonTitle: e.target.name, license_type_edit: e.target.name });
+  };
+
+  toggleDropdownButton = () => {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen
     });
@@ -169,12 +174,34 @@ class Aircrafts extends Component {
                     onChange={this.handleChange}
                     placeholder="Tail Number"
                   />
-                  <input
+                  {/* <input
                     className="new-aircraft-input-lt"
                     name="license_type_edit"
                     onChange={this.handleChange}
                     placeholder="License Type"
-                  />
+									/> */}
+                  <ButtonDropdown
+                    isOpen={this.state.dropdownOpen}
+                    toggle={this.toggleDropdownButton}
+                  >
+                    <DropdownToggle caret>
+                      {this.state.dropdownButtonTitle}
+                    </DropdownToggle>
+                    <DropdownMenu>
+                      <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}> 
+												Airplane SEL
+											</DropdownItem>
+											<DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}> 
+												Airplane SES
+											</DropdownItem>
+											<DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}> 
+												Airplane MEL
+											</DropdownItem>
+											<DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}> 
+												Airplane MES
+											</DropdownItem>
+                    </DropdownMenu>
+                  </ButtonDropdown>
                   <input
                     className="new-aircraft-input-mt"
                     name="man_type_edit"

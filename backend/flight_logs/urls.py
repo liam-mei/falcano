@@ -19,7 +19,7 @@ from django.contrib import admin
 from rest_framework import routers, generics
 from django.urls import path, include, re_path
 from rest_framework.authtoken import views
-from flights.api import FlightsViewSet, AircraftViewSet, FilterAircraftViewSet, FilterFlightsViewSet
+from flights.api import FlightsViewSet, AircraftViewSet, FilterAircraftViewSet, FilterFlightsViewSet, InstructorViewSet
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
 from django.conf import settings
 from django.views.static import serve
@@ -33,6 +33,7 @@ from django.conf.urls.static import static
 router = routers.DefaultRouter()
 router.register(r'flights', FlightsViewSet)
 router.register(r'aircraft', AircraftViewSet)
+router.register(r'instructors', InstructorViewSet)
 # router.register(r'filteraircraft', FilterAircraftViewSet)
 # router.register(r'filterflights', FilterFlightsViewSet)
 
