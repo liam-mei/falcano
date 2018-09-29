@@ -4,17 +4,18 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import "./AircraftCard.css";
 import axios from "axios";
-import { 
-  Modal, 
+import {
+  Modal,
   ModalHeader,
   ModalBody,
   ModalFooter,
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem } from "reactstrap";
+  DropdownItem
+} from "reactstrap";
 import Dropzone from "react-dropzone";
-import {Helmet} from 'react-helmet';
+import { Helmet } from "react-helmet";
 const headers = {
   Authorization: "JWT " + localStorage.getItem("token")
 };
@@ -34,7 +35,7 @@ class AircraftCardModal extends React.Component {
       data: [],
       files: [],
       id: "",
-      dropdownButtonTitle: 'Airplane SEL',
+      dropdownButtonTitle: "Airplane SEL",
       dropdownOpen: false,
       tail_number: "",
       man_type: "",
@@ -45,8 +46,8 @@ class AircraftCardModal extends React.Component {
       photo: "",
       modal: false,
       nestedModal: false,
-      closeAll: false, 
-      uploadurl: '',
+      closeAll: false,
+      uploadurl: ""
     };
   }
 
@@ -68,7 +69,7 @@ class AircraftCardModal extends React.Component {
       .catch(error => {
         console.log("error :", error);
       });
-      // console.log("STATE::", this.state.uploadurl)
+    // console.log("STATE::", this.state.uploadurl)
   };
 
   toggleNested = () => {
@@ -79,7 +80,10 @@ class AircraftCardModal extends React.Component {
   };
 
   handleDropDownButton = e => {
-    this.setState({ dropdownButtonTitle: e.target.name, license_type: e.target.name });
+    this.setState({
+      dropdownButtonTitle: e.target.name,
+      license_type: e.target.name
+    });
   };
 
   toggleDropdownButton = () => {
@@ -95,36 +99,64 @@ class AircraftCardModal extends React.Component {
 
   // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
   toggleNestedAndPut = e => {
-    this.setState({
-      nestedModal: !this.state.nestedModal,
-      closeAll: false
-    })
-    
-    axios({
-      method: "PUT",
-      url: `${URL}/aircraft/${this.state.id}/`,
-      data: {
-        man_type: this.state.man_type_edit,
-        tail_number: this.state.tail_number_edit,
-        license_type: this.state.license_type,
-        id: this.state.id,
-        photo: this.state.uploadurl
-      },
-      headers: headers
-    })
-      .then(response => {
-        // console.log("put response", response);
+    if (this.state.uploadurl === "") {
+      axios({
+        method: "PUT",
+        url: `${URL}/aircraft/${this.state.id}/`,
+        data: {
+          man_type: this.state.man_type_edit,
+          tail_number: this.state.tail_number_edit,
+          license_type: this.state.license_type,
+          id: this.state.id,
+          photo: this.state.photo
+        },
+        headers: headers
       })
-      .catch(error => {
-        console.log("put error", error);
+        .then(response => {
+          // console.log("put response", response);
+        })
+        .catch(error => {
+          console.log("put error", error);
+        });
+      this.setState({
+        nestedModal: !this.state.nestedModal,
+        closeAll: false,
+        tail_number: this.state.tail_number_edit,
+        man_type: this.state.man_type_edit,
+        license_type: this.state.license_type,
       });
-    this.setState({
-      tail_number: this.state.tail_number_edit,
-      man_type: this.state.man_type_edit,
-      license_type: this.state.license_type,
-      photo: this.state.uploadurl
-    });
-    // window.location.reload();
+      window.location.reload();
+
+    } else {
+      
+      axios({
+        method: "PUT",
+        url: `${URL}/aircraft/${this.state.id}/`,
+        data: {
+          man_type: this.state.man_type_edit,
+          tail_number: this.state.tail_number_edit,
+          license_type: this.state.license_type,
+          id: this.state.id,
+          photo: this.state.uploadurl
+        },
+        headers: headers
+      })
+        .then(response => {
+          // console.log("put response", response);
+        })
+        .catch(error => {
+          console.log("put error", error);
+        });
+      this.setState({
+        nestedModal: !this.state.nestedModal,
+        closeAll: false,
+        tail_number: this.state.tail_number_edit,
+        man_type: this.state.man_type_edit,
+        license_type: this.state.license_type,
+        photo: this.state.uploadurl
+      });
+      window.location.reload();
+    }
   };
 
   toggleAll = () => {
@@ -140,22 +172,23 @@ class AircraftCardModal extends React.Component {
     const headers = {
       Authorization: "JWT " + localStorage.getItem("token")
     };
-    
   };
 
   upload = () => {
     window.cloudinary.openUploadWidget(
-      { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
+      { cloud_name: "dkzzjjjj9", upload_preset: "ggbmyqmo", cors: "no-cors" },
 
       (error, result) => {
         // console.log(error, result);
-        if(this.state.uploadurl === ''){
+        if (this.state.uploadurl === "") {
           let imgurl;
-          (result ? imgurl = result[0].url : imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg` )
+          result
+            ? (imgurl = result[0].url)
+            : (imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg`);
           this.setState({ uploadurl: imgurl });
-        } else if(this.state.uploadurl !== ''){
-          let imgurl
-          imgurl = this.state.uploadurl
+        } else if (this.state.uploadurl !== "") {
+          let imgurl;
+          imgurl = this.state.uploadurl;
           this.setState({ uploadurl: imgurl });
         }
         // this.setState({ uploadurl: imgurl });
@@ -204,15 +237,15 @@ class AircraftCardModal extends React.Component {
       no_instument_app += this.state.data[i].no_instument_app;
       total_hours += this.state.data[i].total_hours;
     }
-    
+
     return (
       <div className="AircraftCard">
         <Card onClick={this.toggle} className="AircraftCard-Card">
           <Typography className="card-typography" onClick={this.toggle}>
             <h4 className="card-typography-p">{this.state.tail_number}</h4>
           </Typography>
-            <p className="card-typography-p">{this.props.data.man_type}</p>
-          
+          <p className="card-typography-p">{this.props.data.man_type}</p>
+
           <CardMedia
             onClick={this.toggle}
             component="img"
@@ -253,28 +286,40 @@ class AircraftCardModal extends React.Component {
                   onChange={this.handleChange}
                   placeholder={this.props.data.tail_number}
                 />
-                 <ButtonDropdown
-                    isOpen={this.state.dropdownOpen}
-                    toggle={this.toggleDropdownButton}
-                  >
-                    <DropdownToggle caret>
-                      {this.state.license_type}
-                    </DropdownToggle>
-                    <DropdownMenu>
-                      <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}> 
-												Airplane SEL
-											</DropdownItem>
-											<DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}> 
-												Airplane SES
-											</DropdownItem>
-											<DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}> 
-												Airplane MEL
-											</DropdownItem>
-											<DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}> 
-												Airplane MES
-											</DropdownItem>
-                    </DropdownMenu>
-                  </ButtonDropdown>
+                <ButtonDropdown
+                  isOpen={this.state.dropdownOpen}
+                  toggle={this.toggleDropdownButton}
+                >
+                  <DropdownToggle caret>
+                    {this.state.license_type}
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    <DropdownItem
+                      name="Airplane SEL"
+                      onClick={this.handleDropDownButton}
+                    >
+                      Airplane SEL
+                    </DropdownItem>
+                    <DropdownItem
+                      name="Airplane SES"
+                      onClick={this.handleDropDownButton}
+                    >
+                      Airplane SES
+                    </DropdownItem>
+                    <DropdownItem
+                      name="Airplane MEL"
+                      onClick={this.handleDropDownButton}
+                    >
+                      Airplane MEL
+                    </DropdownItem>
+                    <DropdownItem
+                      name="Airplane MES"
+                      onClick={this.handleDropDownButton}
+                    >
+                      Airplane MES
+                    </DropdownItem>
+                  </DropdownMenu>
+                </ButtonDropdown>
                 <input
                   className="edit-input-mt"
                   name="man_type_edit"

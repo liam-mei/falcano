@@ -141,12 +141,11 @@ class Aircrafts extends Component {
 		}),
 			false;
 	};
-
 	render() {
-		// console.log("PROPS AIRCRAFT", this.props);
+		console.log("PROPS AIRCRAFT", this.props);
 		return (
 			<div className="Aircrafts">
-				<TopHeader breadcrumb={[ 'aircraft' ]} displayTotal={true} />
+				<TopHeader breadcrumb={[ 'aircraft' ]} displayTotal={true} username={this.props.username} />
 				<NavBar />
 				<div className="AircraftList">
 					{this.state.data.map((plane) => {

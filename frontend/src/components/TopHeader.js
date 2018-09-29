@@ -189,6 +189,7 @@ class TopHeader extends Component {
 		window.location.replace('/');
 	};
 	render() {
+    console.log("TOP HEADER PROPS", this.props)
 		return (
 			<div className="Topheader">
 				<Modal toggle={this.toggleModal} isOpen={this.state.openModal}>
@@ -247,6 +248,9 @@ class TopHeader extends Component {
 					<span className="SignOut" onClick={this.signOut}>
 						Signout
 					</span>
+          <span>
+            {this.props.username}
+          </span>
 				</div>
 			</div>
 		);

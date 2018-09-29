@@ -18,6 +18,7 @@ import {
   DropdownMenu,
   DropdownItem
 } from 'reactstrap';
+import { CardContent } from '@material-ui/core';
 
 // let URL = this.props.flight.aircraft
 const dev = true;
@@ -240,16 +241,18 @@ class FlightCard extends Component {
     // console.log('======= Skinny Props: ', this.state.license_type);
     return (
       // flight card list
-      <div className="FlightCard" onClick={this.modalToggle}>
-        <h3>{this.props.flight.name}</h3>
-        <p>{this.props.flight.airports_visited}</p>
-        <p>{this.state.aircraft_whatever.tail_number}</p>
+      <Card className="FlightCard" onClick={this.modalToggle}>
+        <Typography>{this.props.flight.name}</Typography>
+        <Typography>{this.props.flight.airports_visited}</Typography>
+        <Typography>{this.state.aircraft_whatever.tail_number}</Typography>
+        <CardContent>
         {Parser(this.props.flight.sv_html)}
         <Helmet>{Parser(this.props.flight.sv_script)}</Helmet>
         <div className="FLightCard-Hours-Date">
           <span>{this.props.flight.fly_date}</span>
           <span>{this.props.flight.total_hours}</span>
         </div>
+        </CardContent>
         <Modal
           props={this.props.flight}
           isOpen={this.state.openModal}
@@ -477,7 +480,8 @@ class FlightCard extends Component {
             </div>
           </ModalFooter>
         </Modal>
-      </div>
+        <br />
+      </Card>
     );
   }
 }
