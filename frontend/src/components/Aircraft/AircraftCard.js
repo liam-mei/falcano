@@ -97,6 +97,22 @@ class AircraftCardModal extends React.Component {
     // console.log("statechange", this.state.license_type_edit);
   };
 
+  toggleDelete = () => {
+    axios({
+      method: "DELETE",
+      url: `${URL}/aircraft/${this.state.id}/`,
+      headers: headers
+  }).then(response => {
+    console.log(response)
+    window.location.reload()
+  }).catch( err => {
+    console.log(err)
+  })
+  // this.setState({modal: !this.state.modal})
+}
+  
+
+
   // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
   toggleNestedAndPut = e => {
     if (this.state.uploadurl === "") {
@@ -265,6 +281,10 @@ class AircraftCardModal extends React.Component {
           <ModalHeader className="modal-title">
             <p className="modal-header-p">{this.state.tail_number}</p>
             <p className="modal-header-p">{this.props.data.man_type}</p>
+
+            <button onClick={this.toggleDelete} className="edit-button">
+              Delete
+            </button>
 
             <button onClick={this.toggleNested} className="edit-button">
               Edit
