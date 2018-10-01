@@ -41,6 +41,9 @@ INSTALLED_APPS = [
 
     'flights',
     'rest_framework',
+
+    'drf_multiple_model',
+
     'corsheaders',
     'rest_framework.authtoken',
     'django.contrib.admin',
