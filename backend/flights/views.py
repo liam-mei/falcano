@@ -103,7 +103,6 @@ class UpdatePassword(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-
 # class IndexView(ListView):
 #     context_object_name = 'home_list'    
 #     # template_name = 'contacts/index.html'
@@ -152,3 +151,4 @@ class TextAPIView(ObjectMultipleModelAPIView):
             return querylist
 
     # use above querylist janky js annotate into one array and send to flight cards
+

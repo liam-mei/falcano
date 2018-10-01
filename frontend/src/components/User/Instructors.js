@@ -2,75 +2,97 @@ import React from "react";
 import ReactDOM from "react-dom";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import axios from "axios";
-import NavBar from '../NavBar';
-import TopHeader from '../TopHeader';
+import NavBar from "../NavBar";
+import TopHeader from "../TopHeader";
 import "./Instructors.css";
+import InstructorCard from "./InstructorCard";
 
-class Instructors extends React.Component
-{
-	constructor( props )
-	{
-		super( props );
-		this.state = {
-			name: "",
-			license: "",
-			photo: "",
-			rating: "",
-			contact_info: "",
-			modal: false,
-			closeAll: false
-		};
+const dev = true;
+let URL;
+dev
+  ? (URL = "http://127.0.0.1:8000/api")
+  : (URL = "https://flightloggercs10.herokuapp.com/api");
+const headers = {
+  Authorization: "JWT " + localStorage.getItem("token")
+};
 
-		this.toggle = this.toggle.bind( this );
-		this.toggleput = this.toggleput.bind( this );
-	}
+class Instructors extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      instructors: [],
+      name: "",
+      license_number: "",
+      photo: "",
+      ratings: "",
+      contact_number: "",
+      contact_email: "",
+      description: "",
+      modal: false,
+      closeAll: false
+    };
 
-	toggle()
-	{
-		this.setState( {
-			modal: !this.state.modal
-		} );
-	}
-	toggleput()
-	{
-		this.setState( {
-			modal: !this.state.modal
-		} );
+    
+  }
 
-		axios( {
-			method: "PUT",
-			// url: `${URL}/Instructors/${this.state.id}/`,
-			data: {
-				name: this.state.name,
-				license: this.state.license,
-				photo: this.state.photo,
-				rating: this.state.rating,
-				contact_info: this.state.contact_info
+  toggle = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+  }
+  togglePost = () => {
+    this.setState({
+      modal: !this.state.modal
+    });
+
+    axios({
+      method: "POST",
+      url: `${URL}/instructors/`,
+      data: {
+        name: this.state.name,
+        license_number: this.state.license_number,
+        photo: this.state.photo,
+        ratings: this.state.ratings,
+				contact_number: this.state.contact_number,
+				contact_email: this.contact_email
 			},
-			// headers: headers
-		} )
+			
+      headers: headers
+    })
+      .then(response => {
+        console.log("put response", response);
+      })
+      .catch(error => {
+        console.log("put error", error);
+			});
+			window.location.reload()
+  }
 
-			.then( response =>
-			{
-				console.log( "put response", response );
-			} )
-			.catch( error =>
-			{
-				console.log( "put error", error );
-			} );
-	}
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
 
-	handleChange = e =>
-	{
-		this.setState( { [ e.target.name ]: e.target.value } );
-	};
+  componentDidMount() {
+    axios({
+      method: "GET",
+      url: `${URL}/instructors/`,
+      headers: headers
+    })
+      .then(res => {
+        this.setState({ instructors: res.data });
+      })
+      .catch(err => {
+        console.log("ERROR :", err);
+      });
+  }
 
-	render()
-	{
-		return <div className="Instructors">
+  render() {
+    console.log("INSTR STATE", this.state.instructors);
+    return (
+      <div className="Instructors">
         <TopHeader breadcrumb={["settings"]} />
-			<NavBar />
-			<div className="Instructors-container">
+        <NavBar />
+        {/* <div className="Instructors-container">
 				<div className="Instructor-card ">
 					<div className="card-name">Charles Martinez</div>
 					<div className="card-number">141423523537</div>
@@ -84,9 +106,9 @@ class Instructors extends React.Component
               Instuctors Staff. He holds the following.
             </div>
 					</div>
-					<div className="card-rating">
-						<div className="rating-title">Ratings:</div>
-						<div className="rating-details">CFI,CFII,MEI</div>
+					<div className="card-ratings">
+						<div className="ratings-title">Ratings:</div>
+						<div className="ratings-details">CFI,CFII,MEI</div>
 					</div>
 					<div className="card-contact">
 						<div className="contact-title">Contact</div>
@@ -109,9 +131,9 @@ class Instructors extends React.Component
               Staff. He holds the following.
             </div>
 					</div>
-					<div className="card-rating">
-						<div className="rating-title">Ratings:</div>
-						<div className="rating-details">CFI,CFII,MEI</div>
+					<div className="card-ratings">
+						<div className="ratings-title">Ratings:</div>
+						<div className="ratings-details">CFI,CFII,MEI</div>
 					</div>
 					<div className="card-contact">
 						<div className="contact-title">Contact</div>
@@ -120,13 +142,74 @@ class Instructors extends React.Component
 							<div className="contact-number">501-123-4567</div>
 						</div>
 					</div>
-				</div>
-
-				<div className="Instructor-card">
-					<span className="Button">+</span>
-				</div>
-			</div>
+				</div> */}
+        <div>
+          {this.state.instructors.map(instr => {
+            return (
+              <InstructorCard key={instr.id} data={instr}>
+                name: {instr.name}
+                asas
+              </InstructorCard>
+            );
+          })}
+        </div>
+        <Modal isOpen={this.state.modal} toggle={this.toggle}>
+          <div>
+            <div className="Instructors-container">
+              <div className="Instructor-card ">
+                <input
+                  className="card-name"
+                  name="name"
+                  onChange={this.handleChange}
+                  placeholder="Instructor Name"
+                />
+                <input
+                  className="card-number"
+                  name="license_number"
+                  placeholder="License Number"
+                  onChange={this.handleChange}
+                />
+                <div className="card-img">
+                  <img src={this.state.photo} />
+                </div>
+                <div className="card-description">
+                  <div className="description-title">Descriptions/Notes</div>
+                  <input
+                    name="description"
+                    onChange={this.handleChange}
+                    placeholder="Description"
+                    className="description-content"
+                  >
+                  </input>
+                </div>
+                <div className="card-ratings">
+                  <div className="ratings-title">Ratings:</div>
+                  <input name="ratings" onChange={this.handleChange} placeholder="Ratings" className="ratings-details"></input>
+                </div>
+                <div className="card-contact">
+                  <div className="contact-title">Contact</div>
+                  <div className="contact-info">
+                    <input onChange={this.handleChange} name="contact_email" placeholder="Contact Email" className="contact-email">
+                    </input>
+                    <input onChange={this.handleChange} name="contact_number" placeholder="Contact Number" className="contact-number">
+                    </input>
+                  </div>
+                </div>
+								<Button onClick={this.togglePost}>
+								Save
+								</Button>
+              </div>
+            </div>
+          </div>
+        </Modal>
+        <div className="Instructor-card">
+          <span className="Button" onClick={this.toggle}>
+            +
+          </span>
+          {/* </div> */}
+        </div>
       </div>
-	}
+    );
+  }
 }
 export default Instructors;

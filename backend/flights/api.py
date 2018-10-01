@@ -57,7 +57,7 @@ class FlightsViewSet(viewsets.ModelViewSet):
         if user.is_anonymous:
             return Flights.objects.none()
         else:
-            return Flights.objects.filter(user=user)
+            return Flights.objects.filter(user=user).order_by('-created_at')
 
 
 class AircraftSerializer(serializers.HyperlinkedModelSerializer):
@@ -82,7 +82,7 @@ class AircraftViewSet(viewsets.ModelViewSet):
         if user.is_anonymous:
             return Aircraft.objects.none()
         else:
-            return Aircraft.objects.filter(user=user)
+            return Aircraft.objects.filter(user=user).order_by("tail_number")
 
 
 class LicenseViewSet(viewsets.ModelViewSet):

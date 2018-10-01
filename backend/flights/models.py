@@ -82,12 +82,12 @@ class Instructor(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=75)
-    description = models.CharField(max_length=200)
-    license_number = models.CharField(max_length=100)
-    ratings = models.CharField(max_length=200)
-    photo = models.CharField(max_length=200)
-    contact_number = models.CharField(max_length=30)
-    contact_email = models.CharField(max_length=100)
+    description = models.CharField(max_length=200, blank=True)
+    license_number = models.CharField(max_length=100, blank=True)
+    ratings = models.CharField(max_length=200, blank=True)
+    photo = models.CharField(max_length=200, blank=True)
+    contact_number = models.CharField(max_length=30, blank=True)
+    contact_email = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
