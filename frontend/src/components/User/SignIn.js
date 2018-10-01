@@ -68,10 +68,11 @@ class SignIn extends Component {
           /*changed.push('/') to .push('/flights')*/
         
         this.props.history.push('/home');
-        window.location.reload();
+        // window.location.reload();
       })
       .catch((err) => {
         console.log(err);
+        this.setState({errorMessage: "Username or Password is Incorrect"})
       });
   };
 
