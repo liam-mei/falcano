@@ -116,3 +116,75 @@
 .Instructors .Instructor-card .Button:hover {
   cursor: pointer;
 }
+.card-name {
+ display: flex;
+ flex-direction: column;
+ align-content:center;
+}
+
+.card-number {
+
+  display: flex;
+  flex-direction: column;
+  align-content:center;
+ 
+}
+
+.description-title {
+ 
+  display: flex;
+  flex-direction: column;
+  align-content:center;
+}
+.description-content{
+  
+  display: flex;
+  flex-direction: column;
+  align-content:center;
+}
+
+.ratings-details{
+ display: flex;
+ flex-direction: column;
+ align-content:center;
+}
+
+.ratings-title {
+ display: flex;
+ flex-direction: column;
+ align-content:center;
+
+}
+
+.contact-number {
+
+  display: flex;
+  flex-direction: column;
+  align-content:center;
+}
+
+.contact-title {
+
+ display: flex;
+ flex-direction: column;
+ align-content:center;
+}
+
+.contact-email{
+  display: flex;
+  flex-direction: column;
+  align-content:center;
+}
+
+.card-contact {
+
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+
+}
+.card-img{
+   display: flex;
+   flex-direction: column;
+   align-content: center;
+}
