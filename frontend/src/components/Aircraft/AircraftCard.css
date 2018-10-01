@@ -128,8 +128,42 @@
 .nested-modal-body {
   border: 1px solid purple;
 }
+.card-name{
+ 
+  margin-bottom:1rem;
+}
+.card-number{
+ 
+  display:flex;
+  flex-direction: column;
+  margin-bottom:1rem;
+}
+.description-title{
+    /* border:2px solid orange; */
+    margin-top:1rem;
+    padding:1rem;
+}
 
 
+.ratings-title{
+/* border:2px solid red; */
+margin-top:1rem;
+padding:1rem;
 
-
-
+}
+.contact-number {
+  
+  display:flex;
+  flex-direction: column;
+  margin-top:1rem;
+}
+.contact-title{
+ 
+  margin-top:1rem;
+  padding:1rem;
+}
+.card-contact{
+  
+  display:flex;
+  flex-direction: column;
+}
