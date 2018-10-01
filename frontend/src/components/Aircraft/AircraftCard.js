@@ -262,7 +262,7 @@ class AircraftCardModal extends React.Component {
           </Typography>
           <p className="card-typography-p">{this.props.data.man_type}</p>
 
-          <CardMedia
+          <CardMedia className="CardMedia"
             onClick={this.toggle}
             component="img"
             height="140"
