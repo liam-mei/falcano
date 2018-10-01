@@ -174,13 +174,16 @@ class Flights extends Component {
 				<TopHeader breadcrumb={[ 'flights' ]} data={this.state.flightData} displayTotal={true} />
 				<NavBar />
 				<div className="FlightList">
+        <Card>
+        <CardContent>
+        CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button>
+        </CardContent>
+        </Card>
 					{this.state.flightData.map((flight) => {
 						return <FlightCard aircraftChoice={this.state.aircraftChoice} flight={flight} key={flight.created_at} />;
 					})}
 					<Card onClick={this.toggle} className="NewFlightsCard-Card">
 						<Typography className="card-typography" onClick={this.toggle} />
-						<CardContent>
-							CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button>
 							<Modal isOpen={this.state.openModal} toggle={this.toggleModal}>
 								<ModalHeader>
 									<input
@@ -291,7 +294,6 @@ class Flights extends Component {
 									</div>
 								</ModalFooter>
 							</Modal>
-						</CardContent>
 					</Card>
 				</div>
 			</div>

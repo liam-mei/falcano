@@ -11,6 +11,7 @@ const Auth = (Comp) =>
 	class extends Component {
 		state = {
 			loggedIn: false,
+			username: '',
 		};
 
 		componentDidMount() {
@@ -23,14 +24,14 @@ const Auth = (Comp) =>
 					"token": token
 				}
 				}).then((response) => {
-				// console.log("auth response ", response)
-					this.setState({ loggedIn: true })
+				console.log("auth response ", response)
+					this.setState({ loggedIn: true, username: response.data.user.username })
 				}).catch(err => {
 					console.log(err)
 				})
 			}
 			render() {
-						return <Comp loggedIn={this.state.loggedIn} {...this.props} />;
+						return <Comp loggedIn={this.state.loggedIn} username={this.state.username} {...this.props} />;
 					}
 				};
 
