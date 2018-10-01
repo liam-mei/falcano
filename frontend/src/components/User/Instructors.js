@@ -32,16 +32,15 @@ class Instructors extends React.Component {
       closeAll: false
     };
 
-    this.toggle = this.toggle.bind(this);
-    this.toggleput = this.toggleput.bind(this);
+    
   }
 
-  toggle() {
+  toggle = () => {
     this.setState({
       modal: !this.state.modal
     });
   }
-  toggleput() {
+  togglePost = () => {
     this.setState({
       modal: !this.state.modal
     });
@@ -53,8 +52,7 @@ class Instructors extends React.Component {
         name: this.state.name,
         license_number: this.state.license_number,
         photo: this.state.photo,
-        rating: this.state.rating,
-				contact_info: this.state.contact_info,
+        ratings: this.state.ratings,
 				contact_number: this.state.contact_number,
 				contact_email: this.contact_email
 			},
@@ -108,9 +106,9 @@ class Instructors extends React.Component {
               Instuctors Staff. He holds the following.
             </div>
 					</div>
-					<div className="card-rating">
-						<div className="rating-title">Ratings:</div>
-						<div className="rating-details">CFI,CFII,MEI</div>
+					<div className="card-ratings">
+						<div className="ratings-title">Ratings:</div>
+						<div className="ratings-details">CFI,CFII,MEI</div>
 					</div>
 					<div className="card-contact">
 						<div className="contact-title">Contact</div>
@@ -133,9 +131,9 @@ class Instructors extends React.Component {
               Staff. He holds the following.
             </div>
 					</div>
-					<div className="card-rating">
-						<div className="rating-title">Ratings:</div>
-						<div className="rating-details">CFI,CFII,MEI</div>
+					<div className="card-ratings">
+						<div className="ratings-title">Ratings:</div>
+						<div className="ratings-details">CFI,CFII,MEI</div>
 					</div>
 					<div className="card-contact">
 						<div className="contact-title">Contact</div>
@@ -148,7 +146,7 @@ class Instructors extends React.Component {
         <div>
           {this.state.instructors.map(instr => {
             return (
-              <InstructorCard data={instr}>
+              <InstructorCard key={instr.id} data={instr}>
                 name: {instr.name}
                 asas
               </InstructorCard>
@@ -184,9 +182,9 @@ class Instructors extends React.Component {
                   >
                   </input>
                 </div>
-                <div className="card-rating">
-                  <div className="rating-title">Ratings:</div>
-                  <input name="ratings" onChange={this.handleChange} placeholder="Ratings" className="rating-details"></input>
+                <div className="card-ratings">
+                  <div className="ratings-title">Ratings:</div>
+                  <input name="ratings" onChange={this.handleChange} placeholder="Ratings" className="ratings-details"></input>
                 </div>
                 <div className="card-contact">
                   <div className="contact-title">Contact</div>
@@ -197,7 +195,7 @@ class Instructors extends React.Component {
                     </input>
                   </div>
                 </div>
-								<Button onClick={this.toggleput}>
+								<Button onClick={this.togglePost}>
 								Save
 								</Button>
               </div>
