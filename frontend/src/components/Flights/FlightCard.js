@@ -180,6 +180,21 @@ class FlightCard extends Component {
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
 
+
+  toggleDelete = () => {
+    axios({
+      method: "DELETE",
+      url: `${URL}flights/${this.state.id}/`,
+      headers: headers
+  }).then(response => {
+    console.log(response)
+    window.location.reload()
+  }).catch( err => {
+    console.log(err)
+  })
+  // this.setState({modal: !this.state.modal})
+}
+
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
@@ -264,6 +279,11 @@ class FlightCard extends Component {
               {this.props.flight.name}
               {this.props.flight.fly_date}
             </h4>
+
+            <button onClick={this.toggleDelete} className="edit-button">
+              Delete
+            </button>
+
             <h4>
               {this.props.flight.airports_visited}{' '}
               <button onClick={this.nestedModalToggle}>Edit</button>

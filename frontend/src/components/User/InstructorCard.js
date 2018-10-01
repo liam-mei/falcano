@@ -112,6 +112,21 @@ class InstructorCard extends Component {
       false;
   };
 
+  
+  toggleDelete = () => {
+    axios({
+      method: "DELETE",
+      url: `${URL}/instructors/${this.props.data.id}/`,
+      headers: headers
+  }).then(response => {
+    console.log(response)
+    window.location.reload()
+  }).catch( err => {
+    console.log(err)
+  })
+  // this.setState({modal: !this.state.modal})
+}
+
   componentDidMount() {
     const {
       name,
@@ -139,6 +154,9 @@ class InstructorCard extends Component {
         <div className="Instructors-container">
           <div className="Instructor-card ">
           <Button style={{ width: '50px'}}onClick={this.toggleEditModal}>Edit</Button>
+          <button onClick={this.toggleDelete} className="edit-button">
+              Delete
+            </button>
           <br />
             <div className="card-name">{this.props.data.name}</div>
             <div className="card-number">{this.props.data.license_number}</div>
