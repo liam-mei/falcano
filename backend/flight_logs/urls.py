@@ -19,12 +19,16 @@ from django.contrib import admin
 from rest_framework import routers, generics
 from django.urls import path, include, re_path
 from rest_framework.authtoken import views
-from flights.api import FlightsViewSet, AircraftViewSet, FilterAircraftViewSet, FilterFlightsViewSet, InstructorViewSet
+from flights.api import FlightsViewSet, AircraftViewSet, FilterAircraftViewSet, FilterFlightsViewSet, InstructorViewSet, 
+# UpdateLicenseViewSet
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
 from django.conf import settings
 from django.views.static import serve
 from django.conf.urls import url
-from flights.views import Filter3ViewSet, UserList, UpdatePassword
+from flights.views import Filter3ViewSet, UserList, UpdatePassword, 
+# TextAPIView
+
+
 
 # from stripe stuff
 from django.conf import settings
@@ -49,7 +53,11 @@ urlpatterns = [
     url('^api/passwordchange/', UpdatePassword.as_view()),
     re_path(r'^api-token-refresh/', refresh_jwt_token),
     url(r'^api/', include('stripe_payments.urls')),
-    url(r'^media/(?P<path>.*)$', serve, { 'document_root': settings.MEDIA_ROOT, })
-]   
+    url(r'^media/(?P<path>.*)$', serve, { 'document_root': settings.MEDIA_ROOT, }),
+    # url(r'^zzz/', IndexView.as_view(), name="home_list"),
+
+    url('^api/joined/(?P<aircraft>.+)/$', TextAPIView.as_view()),
+    url('^api/update/', UpdateLicenseViewSet.as_view({'get': 'list'})),
+]
 
 # urlpatterns += router.urls
