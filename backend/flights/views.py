@@ -124,7 +124,7 @@ class TextAPIView(ObjectMultipleModelAPIView):
         # print("USER:", self.request.user)
         # aircraft = self.kwargs['aircraft']
         # # model = Flights
-        aircraft = self.kwargs['aircraft']
+        # aircraft = self.kwargs['aircraft']
         
         return Flights.objects.none()
         
@@ -132,7 +132,7 @@ class TextAPIView(ObjectMultipleModelAPIView):
     def get_querylist(self):
 
         user = self.request.user
-        aircraft = self.kwargs['aircraft']
+        # aircraft = self.kwargs['aircraft']
 
         if user.is_anonymous:
             return Flights.objects.none()

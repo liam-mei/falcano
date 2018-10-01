@@ -305,7 +305,7 @@ class FlightCard extends Component {
           </ModalBody>
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
-              <li>{this.props.flight.license_type}</li>
+              <li>{this.state.aircraft_whatever.license_type}</li>
               <li>Cross Country {this.props.flight.cross_country}</li>
               <li>No. Instr. App. {this.props.flight.no_instument_app}</li>
               <li>No. Ldg: {this.props.flight.no_ldg}</li>
