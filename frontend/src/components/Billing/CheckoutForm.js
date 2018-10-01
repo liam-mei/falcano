@@ -76,7 +76,7 @@ class CheckoutForm extends React.Component {
   render() {
     console.log('state message: ', this.state.message);
     return (
-      <div>
+      <div className="CheckoutForm">
         {this.state.resp_message && (
           <h1>
             {this.state.resp_message} <br /> Thank you for purchasing our{' '}

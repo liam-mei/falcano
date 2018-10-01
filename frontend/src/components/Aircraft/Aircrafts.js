@@ -58,46 +58,44 @@ class Aircrafts extends Component {
 		};
 	}
 
+	handleChange = (e) => {
+		this.setState({ [e.target.name]: e.target.value });
+		// console.log("statechange", this.state.license_type_edit);
+	};
 
-  handleChange = e => {
-    this.setState({ [e.target.name]: e.target.value });
-    // console.log("statechange", this.state.license_type_edit);
-  };
-
-  toggleModal = e => {
-    this.setState({ openModal: !this.state.openModal });
-  };
-  toggleAndPost = e => {
-    // console.log("+++++++ this.state.uploadurl ++++++: ", this.state.uploadurl)
-    // this.state.uploadurl ? this.setState({uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg'}) : undefined
-    // console.log("+++++++ this.state.uploadurl2 ======== ", this.state.uploadurl)
-    this.setState({
-      openModal: !this.state.openModal
-    });
-    const headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
-    };
-    axios({
-      method: "POST",
-      url: `${URL}/aircraft/`,
-      data: {
-        man_type: this.state.man_type_edit,
-        tail_number: this.state.tail_number_edit,
-        license_type: this.state.license_type_edit,
-        id: this.state.id,
-        photo: this.state.uploadurl
-      },
-      headers: headers
-    })
-      .then(response => {
-        // console.log("put response", response);
-      })
-      .catch(error => {
-        console.log("put error", error);
-      });
-    window.location.reload();
-  };
-
+	toggleModal = (e) => {
+		this.setState({ openModal: !this.state.openModal });
+	};
+	toggleAndPost = (e) => {
+		// console.log("+++++++ this.state.uploadurl ++++++: ", this.state.uploadurl)
+		// this.state.uploadurl ? this.setState({uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg'}) : undefined
+		// console.log("+++++++ this.state.uploadurl2 ======== ", this.state.uploadurl)
+		this.setState({
+			openModal: !this.state.openModal,
+		});
+		const headers = {
+			Authorization: 'JWT ' + localStorage.getItem('token'),
+		};
+		axios({
+			method: 'POST',
+			url: `${URL}/aircraft/`,
+			data: {
+				man_type: this.state.man_type_edit,
+				tail_number: this.state.tail_number_edit,
+				license_type: this.state.license_type_edit,
+				id: this.state.id,
+				photo: this.state.uploadurl,
+			},
+			headers: headers,
+		})
+			.then((response) => {
+				// console.log("put response", response);
+			})
+			.catch((error) => {
+				console.log('put error', error);
+			});
+		window.location.reload();
+	};
 
 	handleDropDownButton = (e) => {
 		this.setState({ dropdownButtonTitle: e.target.name, license_type_edit: e.target.name });
@@ -109,71 +107,64 @@ class Aircrafts extends Component {
 		});
 	};
 
-  componentDidMount() {
-    // console.log("URL", URL);
-    const headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
-    };
-    axios({
-      method: "GET",
-      url: `${URL}/aircraft/`,
-      headers: headers
-    })
-      .then(response => {
-        // console.log("aircraft res", response.data);
-        this.setState({
-          data: response.data
-        });
-      })
-      .catch(error => {
-        console.log("error :", error);
-        this.props.history.push("/");
-      });
-  }
-  upload = () => {
-    // this.setState({ uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg' })
-    window.cloudinary.openUploadWidget(
-      { cloud_name: "dkzzjjjj9", upload_preset: "ggbmyqmo" },
-
-      (error, result) => {
-        // console.log(error, result);
-        let imgurl;
-        (result ? imgurl = result[0].url : imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg` )
-        this.setState({ uploadurl: imgurl });
-        // console.log("===== stateurl: ", this.state.uploadurl);
-      }
-    ),
-      false;
-  };
-
-  render() {
-    // console.log("PROPS AIRCRAFT", this.props);
-    return (
-      <div className="Aircrafts">
-        <TopHeader
-          breadcrumb={["aircraft"]}
-          rightLinks={[{ name: "#", value: "View Total Hours" }]}
-        />
-        <NavBar />
-        <div className="AircraftList">
-          {this.state.data.map(plane => {
-            let id = plane.id;
-            return <AircraftCard key={id} data={plane} props={this.props} />;
-          })}
-          <Card onClick={this.toggle} className="AircraftCard-Card">
-            <Typography className="card-typography" onClick={this.toggle} />
-            <CardContent>
-              CLICK ME ---->>{" "}
-              <button onClick={this.toggleModal}>NEW AIRCRAFT</button>
-              <Modal isOpen={this.state.openModal} toggle={this.toggleModal}>
-                <ModalHeader>
-                  <input
-                    className="new-aircraft-input-tn"
-                    name="tail_number_edit"
-                    onChange={this.handleChange}
-                    placeholder="Tail Number"
-                  />
-                  {/* <input
+	componentDidMount() {
+		// console.log("URL", URL);
+		const headers = {
+			Authorization: 'JWT ' + localStorage.getItem('token'),
+		};
+		axios({
+			method: 'GET',
+			url: `${URL}/aircraft/`,
+			headers: headers,
+		})
+			.then((response) => {
+				// console.log("aircraft res", response.data);
+				this.setState({
+					data: response.data,
+				});
+			})
+			.catch((error) => {
+				console.log('error :', error);
+				this.props.history.push('/');
+			});
+	}
+	upload = () => {
+		// this.setState({ uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg' })
+		window.cloudinary.openUploadWidget({ cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo' }, (error, result) => {
+			// console.log(error, result);
+			let imgurl;
+			result
+				? (imgurl = result[0].url)
+				: (imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg`);
+			this.setState({ uploadurl: imgurl });
+			// console.log("===== stateurl: ", this.state.uploadurl);
+		}),
+			false;
+	};
+	render() {
+		console.log("PROPS AIRCRAFT", this.props);
+		return (
+			<div className="Aircrafts">
+				<TopHeader breadcrumb={[ 'aircraft' ]} displayTotal={true} username={this.props.username} />
+				<NavBar />
+				<div className="AircraftList">
+					{this.state.data.map((plane) => {
+						let id = plane.id;
+						return <AircraftCard key={id} data={plane} props={this.props} />;
+					})}
+					<Card onClick={this.toggle} className="AircraftCard-Card">
+						<Typography className="card-typography" onClick={this.toggle} />
+						<CardContent>
+							CLICK ME ---->> <button onClick={this.toggleModal}>NEW AIRCRAFT</button>
+							<Modal isOpen={this.state.openModal} toggle={this.toggleModal}>
+								<ModalHeader>
+									<input
+										className="new-aircraft-input-tn"
+										name="tail_number_edit"
+										onChange={this.handleChange}
+										placeholder="Tail Number"
+									/>
+									{/* <input
 
                     className="new-aircraft-input-lt"
                     name="license_type_edit"

@@ -54,12 +54,10 @@ const Total = (props) => {
 */
 
 // Decide whether to use local or production urls for both front and back end
-const [ FRONT_URL_DEV, BACK_URL_DEV ] = [ true, true ];
-
-const [ FRONT_URL, BACK_URL ] = [
-	FRONT_URL_DEV ? 'http://localhost:3000' : 'https://stoic-meitner-50ac30.netlify.com',
-	BACK_URL_DEV ? 'http://localhost:8000/api' : 'https://flightloggercs10.herokuapp.com/api',
-];
+// const [ FRONT_URL_DEV, BACK_URL_DEV ] = [ true, true ];
+let dev = true;
+let URL;
+dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
 const headers = {
 	Authorization: 'JWT ' + localStorage.getItem('token'),
@@ -168,7 +166,7 @@ class TopHeader extends Component {
 	componentDidMount() {
 		axios({
 			method: 'GET',
-			BACK_URL: `${BACK_URL}/flights/`,
+			url: `${URL}/flights/`,
 			headers: headers,
 		})
 			.then((response) => {
@@ -191,6 +189,7 @@ class TopHeader extends Component {
 		window.location.replace('/');
 	};
 	render() {
+    console.log("TOP HEADER PROPS", this.props)
 		return (
 			<div className="Topheader">
 				<Modal toggle={this.toggleModal} isOpen={this.state.openModal}>
@@ -246,48 +245,16 @@ class TopHeader extends Component {
 						''
 					)}
 
-
-          <button onClick={this.toggleModal}>TOTAL</button>
-          <span className="SignOut" onClick={this.signOut}>
-                    Signout
-            </span>
-          <Modal toggle={this.toggleModal} isOpen={this.state.openModal}>
-            Airplane SEL Hours:
-            {this.state.sel}
-            <br />
-            Airplane MEL Hours :{this.state.mel}
-            <br />
-            Airplane SES Hours :{this.state.ses}
-            <br />
-            Airplane MES Hours :{this.state.mes}
-            <br />
-            Cross Country: {this.state.cross_country}
-            <br />
-            No. Instr. App. : {this.state.no_instument_app}
-            <br />
-            No. Ldg. : {this.state.no_ldg}
-            <br />
-            day: {this.state.day}
-            <br />
-            night: {this.state.night}
-            <br />
-            actual: {this.state.actual_instr}
-            <br />
-            sim: {this.state.sim_instr}
-            <br />
-            pic: {this.state.pic}
-            <br />
-            dual rec: {this.state.dual_rec}
-            <br />
-            Total Hours: {this.state.total}
-          </Modal>
-          
-  
-        </div>
-        
-      </div>
-    );
-  }
+					<span className="SignOut" onClick={this.signOut}>
+						Signout
+					</span>
+          <span>
+            {this.props.username}
+          </span>
+				</div>
+			</div>
+		);
+	}
 }
 
 export default TopHeader;

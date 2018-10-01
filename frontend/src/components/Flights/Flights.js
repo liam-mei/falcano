@@ -7,6 +7,7 @@ import './Flights.css';
 import FlightCard from './FlightCard';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
+import PlusIcon from '../../utils/Images/PlusIcon.png'
 import Typography from '@material-ui/core/Typography';
 import {
 	Modal,
@@ -18,6 +19,7 @@ import {
 	DropdownMenu,
 	DropdownItem,
 } from 'reactstrap';
+import { CardMedia } from '@material-ui/core';
 const dev = true;
 let URL;
 dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
@@ -52,11 +54,17 @@ class Flights extends Component {
 			license_type: '',
 			total_hours: null,
 			sv_html: '',
-			sv_script: '',
+      sv_script: '',
+      errorMessage: false,
+      openModalAlert: false,
 		};
 	}
 	toggleModal = () => {
-		this.setState({ openModal: !this.state.openModal });
+    if (this.state.aircraftChoice.length <= 0){
+      this.setState({errorMessage: !this.state.errorMessage, openModalAlert: !this.state.openModalAlert})
+    }else{
+      this.setState({ openModal: !this.state.openModal });
+    }
 	};
 	//TOGGLES DROPDOWN BUTTON FOR SELECTING AIRCRAFT WHEN ADDING NEW FLIGHT
 	toggleDropdownButton = () => {
@@ -168,19 +176,32 @@ class Flights extends Component {
 	}
 	render() {
 		// console.log('FLIGHTS PROPS', this.props);
-		// console.log('E TARGET VALUE ', this.state.sv_html);
+    // console.log('E TARGET VALUE ', this.state.sv_html);
 		return (
 			<div className="Flights">
 				<TopHeader breadcrumb={[ 'flights' ]} data={this.state.flightData} displayTotal={true} />
 				<NavBar />
 				<div className="FlightList">
+        <Card onClick={this.toggleModal} style={{ boxShadow: this.state.openModal ? 'inset 1px 1px 1px gray' : ''}}>
+          <Modal toggle={this.toggleModal}isOpen={this.state.openModalAlert}>
+          <ModalHeader>
+          {this.state.errorMessage ? 'Please create an aircraft first' : ''}
+          </ModalHeader>
+          </Modal>
+        <CardContent>
+        {/* CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button> */}
+        <CardMedia onClick={this.toggleModal} style={{ display: 'flex', justifyContent: 'center'  }}>
+          <h1 style={{ alignSelf: 'center', marginRight: "70px", marginLeft: '20px' }}>Add {" "} </h1>
+          <img style={{ width: "75px", height: "75px", position: "absolute" }}src={PlusIcon}></img>
+          <h1 style={{ alignSelf: 'center', marginLeft: '20px' }}> Flight {" "} </h1>
+        </CardMedia>
+        </CardContent>
+        </Card>
 					{this.state.flightData.map((flight) => {
 						return <FlightCard aircraftChoice={this.state.aircraftChoice} flight={flight} key={flight.created_at} />;
 					})}
 					<Card onClick={this.toggle} className="NewFlightsCard-Card">
 						<Typography className="card-typography" onClick={this.toggle} />
-						<CardContent>
-							CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button>
 							<Modal isOpen={this.state.openModal} toggle={this.toggleModal}>
 								<ModalHeader>
 									<input
@@ -221,7 +242,7 @@ class Flights extends Component {
 												<DropdownItem
 													onClick={this.handleDropDownButton}
 													name={aircraft.tail_number}
-													key={aircraft.tail_number + Math.random()}
+													key={aircraft.id}
 												>
 													{aircraft.tail_number}
 												</DropdownItem>
@@ -291,7 +312,6 @@ class Flights extends Component {
 									</div>
 								</ModalFooter>
 							</Modal>
-						</CardContent>
 					</Card>
 				</div>
 			</div>
