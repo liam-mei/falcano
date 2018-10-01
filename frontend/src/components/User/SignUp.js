@@ -48,6 +48,10 @@ class SignUp extends Component {
 				this.setState({ errorMessage: 'Please enter a password' });
 				return; // terminates the handle function function
 			}
+			else if (this.state.password.length < 6) {
+				this.setState({errorMessage: "Please enter a password that is 6 characters or longer"})
+				return;
+			}
 			//check if the passwords match
 			if (this.state.password !== this.state.passwordComfirm) {
 				this.setState({ errorMessage: 'The password does not match' });
@@ -77,6 +81,9 @@ class SignUp extends Component {
 						window.location.reload();
 					})
 					.catch((err) => {
+						if (err.response.status === 400) {
+							this.setState({errorMessage: "Username already exists. Please choose another Username"})
+						}
 						console.log(err);
 					});
 			}
