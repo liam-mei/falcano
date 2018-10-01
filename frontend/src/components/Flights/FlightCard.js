@@ -21,11 +21,11 @@ import {
 import { CardContent } from '@material-ui/core';
 
 // let URL = this.props.flight.aircraft
-const dev = true;
+const dev = process.env.DEV;
 let URL;
 dev
   ? (URL = 'http://127.0.0.1:8000/api/')
-  : (URL = 'https://flightloggercs10.herokuapp.com/api');
+  : (URL = 'https://flightloggercs10.herokuapp.com/api/');
 
 const headers = {
   Authorization: 'JWT ' + localStorage.getItem('token')
@@ -305,7 +305,7 @@ class FlightCard extends Component {
           </ModalBody>
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
-              <li>{this.props.flight.license_type}</li>
+              <li>{this.state.aircraft_whatever.license_type}</li>
               <li>Cross Country {this.props.flight.cross_country}</li>
               <li>No. Instr. App. {this.props.flight.no_instument_app}</li>
               <li>No. Ldg: {this.props.flight.no_ldg}</li>

@@ -11,7 +11,7 @@ const headers = {
   Authorization: "JWT " + localStorage.getItem("token")
 };
 
-const dev = true;
+const dev = process.env.DEV;
 let URL;
 dev
   ? (URL = "http://127.0.0.1:8000/api/passwordchange/")

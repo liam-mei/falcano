@@ -4,7 +4,7 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import CardMedia from '@material-ui/core/CardMedia'
 import TopHeader from "../TopHeader";
 
-const dev = true;
+const dev = process.env.DEV;
 let URL;
 dev
   ? (URL = "http://127.0.0.1:8000/api")

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { isLoggedIn } from '../../utils/helper/helperFuncions';
-const dev = true;
+const dev = process.env.DEV;
 	let URL
 	(dev ? URL = "http://127.0.0.1:8000/api-token-verify/"
 		: URL = "https://flightloggercs10.herokuapp.com/api-token-verify/");

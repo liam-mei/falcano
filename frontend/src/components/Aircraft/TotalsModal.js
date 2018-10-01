@@ -5,6 +5,13 @@ import { Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 const headers = {
 	'Authorization': 'JWT ' + localStorage.getItem('token')
 }
+
+const dev = process.env.DEV;
+let URL;
+dev
+  ? (URL = "http://127.0.0.1:8000/api/flights/")
+  : (URL = "https://flightloggercs10.herokuapp.com/api/flights/");
+
 class TotalsModal extends Component {
   constructor(props) {
     super(props);
@@ -17,7 +24,7 @@ class TotalsModal extends Component {
   toggleModal = () => {
     axios({
       method: "GET",
-			url: "http://127.0.0.1:8000/api/flights/",
+			url: URL,
 			header: headers,
 		}).then(response => {
       console.log("flightdata res", response.data)
