@@ -7,6 +7,12 @@ import { injectStripe, CardElement } from 'react-stripe-elements';
 //The token with the encrypted credit card info is sent to my backend
 // So I can send it to stripe
 
+const dev = process.env.DEV;
+let URL;
+dev
+  ? (URL = "http://127.0.0.1:8000/api/")
+  : (URL = "https://flightloggercs10.herokuapp.com/api/");
+
 class CheckoutForm extends React.Component {
   state = {
     resp_message: '',
@@ -59,7 +65,7 @@ class CheckoutForm extends React.Component {
             formData.append('amount', this.state.amount);
             formData.append('source', result.token.id);
             // need to create endpoint on django
-            return fetch(`http://127.0.0.1:8000/api/create-charge/`, {
+            return fetch(`${URL}create-charge/`, {
               method: 'POST',
               headers: {
                 accept: 'application/json'

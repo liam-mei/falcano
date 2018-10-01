@@ -20,7 +20,7 @@ import {
 	DropdownItem,
 } from 'reactstrap';
 import { CardMedia } from '@material-ui/core';
-const dev = true;
+const dev = process.env.DEV;
 let URL;
 dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 const headers = {

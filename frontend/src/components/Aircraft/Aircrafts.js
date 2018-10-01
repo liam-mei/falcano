@@ -27,7 +27,7 @@ import './Aircrafts.css';
 
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
-let dev = true;
+let dev = process.env.DEV;
 
 let URL;
 dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');

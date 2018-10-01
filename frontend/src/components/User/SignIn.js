@@ -7,7 +7,7 @@ import './SignIn.css';
 
 import '../../utils/Images/logIn.svg';
 
-const dev = true;
+const dev = process.env.DEV;
 let URL;
 dev
   ? (URL = 'http://127.0.0.1:8000')

@@ -55,7 +55,7 @@ const Total = (props) => {
 
 // Decide whether to use local or production urls for both front and back end
 // const [ FRONT_URL_DEV, BACK_URL_DEV ] = [ true, true ];
-let dev = true;
+let dev = process.env.DEV;
 let URL;
 dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
