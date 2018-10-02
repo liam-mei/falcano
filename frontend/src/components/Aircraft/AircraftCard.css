@@ -13,9 +13,8 @@
 }
 
 .modal-content {
-  width: 650px !important;
+  width: 750px !important;
   border-radius: 0px!important;
-  border: 3px solid red;
   display: flex;
   flex-direction: column;
 }
@@ -96,10 +95,30 @@
 }
 
 /* me testing */
-.AircraftCard-Card {
-  border: 1px solid green;
+/* Start Card */
+.AircraftCard{
+  /* border: solid .125rem rgb(238, 234, 236);
+  border-radius: 7px;
+  height: 20rem;
+  padding: 1rem; */
+  /* box-shadow: 1px 0 2px -1px rgba(113, 115, 117, 0.8), -1px 0 2px -1px rgba(113, 115, 117, 0.8); */
 }
 
+.CardMedia {
+  width: 100%;
+  height: auto;
+  padding: 1rem 1rem 1rem 1rem;
+  margin-bottom: 4rem;
+}
+/* End Card */
+
+/* Start Modal */
+
+.modal-content{
+
+  border: 3px solid orange;
+  background: red;
+}
 .modal-title{
   border: 1px solid red;
 }
@@ -107,8 +126,4 @@
 .nested-modal-body {
   border: 1px solid purple;
 }
-
-
-
-
 

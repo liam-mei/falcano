@@ -7,11 +7,12 @@ import './SignIn.css';
 
 import '../../utils/Images/logIn.svg';
 
-const dev = process.env.DEV;
-let URL;
-dev
-  ? (URL = 'http://127.0.0.1:8000')
-  : (URL = 'https://flightloggercs10.herokuapp.com');
+const URL = process.env.REACT_APP_URL;
+
+// dev
+//   ? (URL = 'http://127.0.0.1:8000')
+//   : (URL = 'https://flightloggercs10.herokuapp.com');
+
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -24,9 +25,8 @@ class SignIn extends Component {
 
   componentDidMount() {
     if (isLoggedIn()) {
-      
-        /*changed endpoint from '/' to '/home'*/
-      
+      /*changed endpoint from '/' to '/home'*/
+
       this.props.history.push('/home');
       window.location.reload();
     }
@@ -55,7 +55,7 @@ class SignIn extends Component {
       password: this.state.password
     };
     axios
-      .post(`${URL}/token-auth/`, user)
+      .post(`${URL}token-auth/`, user)
       .then((response) => {
         // set the token to local storage
         localStorage.setItem('token', response.data.token);
@@ -64,15 +64,15 @@ class SignIn extends Component {
           password: '',
           errorMessage: ''
         });
-        
-          /*changed.push('/') to .push('/flights')*/
-        
+
+        /*changed.push('/') to .push('/flights')*/
+
         this.props.history.push('/home');
         // window.location.reload();
       })
       .catch((err) => {
         console.log(err);
-        this.setState({errorMessage: "Username or Password is Incorrect"})
+        this.setState({ errorMessage: 'Username or Password is Incorrect' });
       });
   };
 
@@ -93,7 +93,6 @@ class SignIn extends Component {
               className="form-control"
               placeholder="Username"
             />
-
             <input
               onChange={this.handleChange}
               value={this.state.password}
@@ -102,6 +101,7 @@ class SignIn extends Component {
               className="form-control"
               placeholder="Password"
             />
+            <div>Signing into {URL}</div>
 
             <button>Sign In</button>
             <div className="danger">

@@ -9,10 +9,12 @@ import './SignUp.css';
 
 import '../../utils/Images/signUpPage.svg';
 
-const dev = process.env.DEV;
-	let URL
-	(dev ? URL = "http://127.0.0.1:8000"
-		: URL = "https://flightloggercs10.herokuapp.com");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// 	let URL
+// 	(dev ? URL = "http://127.0.0.1:8000"
+// 		: URL = "https://flightloggercs10.herokuapp.com");
+
+let URL = process.env.REACT_APP_URL;
 
 class SignUp extends Component {
 	constructor(props) {
@@ -62,7 +64,7 @@ class SignUp extends Component {
 					password: this.state.password,
 				};
 				axios
-					.post(`${URL}/user_admin/users/`, user)
+					.post(`${URL}user_admin/users/`, user)
 					.then((response) => {
 						// set the token to local storage
 						localStorage.setItem('token', response.data.token);

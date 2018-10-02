@@ -8,11 +8,14 @@ import "./Instructors.css";
 import InstructorCard from "./InstructorCard";
 import CardMedia from "@material-ui/core/CardMedia";
 
-const dev = process.env.DEV;
-let URL;
-dev
-  ? (URL = "http://127.0.0.1:8000/api")
-  : (URL = "https://flightloggercs10.herokuapp.com/api");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = "http://127.0.0.1:8000/api")
+//   : (URL = "https://flightloggercs10.herokuapp.com/api");
+
+let URL = process.env.REACT_APP_URL;
+
 const headers = {
   Authorization: "JWT " + localStorage.getItem("token")
 };

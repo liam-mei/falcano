@@ -22,11 +22,14 @@ const headers = {
 
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
-const dev = process.env.DEV;
-let URL;
-dev
-  ? (URL = "http://127.0.0.1:8000/api")
-  : (URL = "https://flightloggercs10.herokuapp.com/api");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = "http://127.0.0.1:8000/api")
+//   : (URL = "https://flightloggercs10.herokuapp.com/api");
+
+let URL = process.env.REACT_APP_URL;
+
 class AircraftCardModal extends React.Component {
   constructor() {
     super();
@@ -59,7 +62,7 @@ class AircraftCardModal extends React.Component {
     };
     axios({
       method: "GET",
-      url: `${URL}/filteredflights/${this.state.id}`,
+      url: `${URL}api/filteredflights/${this.state.id}`,
       headers: headers
     })
       .then(response => {
@@ -100,7 +103,7 @@ class AircraftCardModal extends React.Component {
   toggleDelete = () => {
     axios({
       method: "DELETE",
-      url: `${URL}/aircraft/${this.state.id}/`,
+      url: `${URL}api/aircraft/${this.state.id}/`,
       headers: headers
   }).then(response => {
     console.log(response)
@@ -118,7 +121,7 @@ class AircraftCardModal extends React.Component {
     if (this.state.uploadurl === "") {
       axios({
         method: "PUT",
-        url: `${URL}/aircraft/${this.state.id}/`,
+        url: `${URL}api/aircraft/${this.state.id}/`,
         data: {
           man_type: this.state.man_type_edit,
           tail_number: this.state.tail_number_edit,
@@ -147,7 +150,7 @@ class AircraftCardModal extends React.Component {
       
       axios({
         method: "PUT",
-        url: `${URL}/aircraft/${this.state.id}/`,
+        url: `${URL}api/aircraft/${this.state.id}/`,
         data: {
           man_type: this.state.man_type_edit,
           tail_number: this.state.tail_number_edit,
@@ -258,11 +261,12 @@ class AircraftCardModal extends React.Component {
       <div className="AircraftCard">
         <Card onClick={this.toggle} className="AircraftCard-Card">
           <Typography className="card-typography" onClick={this.toggle}>
-            <h4 className="card-typography-p">{this.state.tail_number}</h4>
+            {this.state.tail_number}
           </Typography>
           <p className="card-typography-p">{this.props.data.man_type}</p>
 
           <CardMedia
+            className="CardMedia"
             onClick={this.toggle}
             component="img"
             height="140"

@@ -21,11 +21,13 @@ import {
 import { CardContent } from '@material-ui/core';
 
 // let URL = this.props.flight.aircraft
-const dev = process.env.DEV;
-let URL;
-dev
-  ? (URL = 'http://127.0.0.1:8000/api/')
-  : (URL = 'https://flightloggercs10.herokuapp.com/api/');
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = 'http://127.0.0.1:8000/api/')
+//   : (URL = 'https://flightloggercs10.herokuapp.com/api/');
+
+let URL = process.env.REACT_APP_URL;
 
 const headers = {
   Authorization: 'JWT ' + localStorage.getItem('token')
@@ -184,7 +186,7 @@ class FlightCard extends Component {
   toggleDelete = () => {
     axios({
       method: "DELETE",
-      url: `${URL}flights/${this.state.id}/`,
+      url: `${URL}api/flights/${this.state.id}/`,
       headers: headers
   }).then(response => {
     console.log(response)
@@ -198,7 +200,7 @@ class FlightCard extends Component {
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
-    let aircraftURL = `${URL}aircraft/`;
+    let aircraftURL = `${URL}api/aircraft/`;
     let licensetype;
     for (let i = 0; i < this.state.aircraftChoice.length; i++) {
       if (
@@ -214,7 +216,7 @@ class FlightCard extends Component {
     }
     axios({
       method: 'PUT',
-      url: `${URL}flights/${this.state.id}/`,
+      url: `${URL}api/flights/${this.state.id}/`,
       data: {
         name: this.state.name,
         remarks: this.state.remarks,
