@@ -28,7 +28,7 @@ const Auth = (Comp) =>
 				console.log("auth response ", response)
 					this.setState({ loggedIn: true, username: response.data.user.username })
 				}).catch(err => {
-					console.log(err)
+					console.log("eeeeeeeeerrrrrrrrrrrrrorrrrrrrrrr", err)
 				})
 			}
 			render() {

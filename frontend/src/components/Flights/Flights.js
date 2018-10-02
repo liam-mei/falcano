@@ -194,8 +194,8 @@ class Flights extends Component {
         <CardContent>
         {/* CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button> */}
         <CardMedia onClick={this.toggleModal} style={{ display: 'flex', justifyContent: 'center'  }}>
-          <h1 style={{ alignSelf: 'center', marginRight: "70px", marginLeft: '20px' }}>Add {" "} </h1>
-          <img style={{ width: "75px", height: "75px", position: "absolute" }}src={PlusIcon}></img>
+          <img style={{ width: "35px", height: "35px", marginRight: "50%", alignSelf: 'center' }}src={PlusIcon}></img>
+          <h1 style={{ alignSelf: 'center',  }}>Add {" "} </h1>
           <h1 style={{ alignSelf: 'center', marginLeft: '20px' }}> Flight {" "} </h1>
         </CardMedia>
         </CardContent>
