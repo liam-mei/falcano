@@ -23,9 +23,9 @@ class Settings extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			CurrentPassword: '',
-			NewPassword: '',
-			ConfirmPassword: '',
+			CurrPassword: '',
+			NewestPassword: '',
+			ConfirmedPassword: '',
 			errorMessage: '',
 		};
 	}
@@ -35,7 +35,7 @@ class Settings extends Component {
 	}
 
 	changePassword = (e) => {
-		
+		console.log("SETTINGS STATE", this.state)
 		if (this.state.NewPassword !== this.state.ConfirmPassword) {
 			e.preventDefault();
 			this.setState({ errorMessage: 'The passwords do not match' });
@@ -46,8 +46,8 @@ class Settings extends Component {
         method: "PUT",
         url: `${URL}api/passwordchange/`,
         data: {
-          old_password: this.state.CurrentPassword,
-          new_password: this.state.NewPassword
+          old_password: this.state.CurrPassword,
+          new_password: this.state.NewestPassword
         },
         headers: headers
       })
@@ -58,7 +58,7 @@ class Settings extends Component {
           if (err) {
             alert("Old password is wrong!");
           }
-          console.log("ERRRORRRRRRRR", err.status);
+          console.log("ERRRORRRRRRRR", err.response.status);
         });
 		}
 	}
@@ -76,16 +76,16 @@ class Settings extends Component {
 								<h1>Change password:</h1>
 								<div className="CurrentPassword">
 									<label className="CurrentPassword"><b>Current password:</b></label>
-									<input name="CurrentPassword" type="password" onChange={this.handleChange}></input>
+									<input name="CurrPassword" type="password" onChange={this.handleChange}></input>
 								</div>
 								<div className="danger">{this.state.errorMessage ? this.state.errorMessage : ''}</div>
 								<div className="NewPassword">
 									<label className="NewPassword"><b>New password:</b></label>
-									<input name="NewPassword" type="password" className="NewPassword" onChange={this.handleChange}></input>
+									<input name="NewestPassword" type="password" className="NewPassword" onChange={this.handleChange}></input>
 								</div>
 								<div className="ConfirmPassword">
 									<label className="ConfirmPassword"><b>Confirm password:</b></label>
-									<input className="ConfirmPassword" name="ConfirmPassword" type="password" onChange={this.handleChange}></input>
+									<input className="ConfirmPassword" name="ConfirmedPassword" type="password" onChange={this.handleChange}></input>
 								</div>
 								<div className="Save">
 									<button className="savePass" onClick={this.changePassword}>Save changes</button>

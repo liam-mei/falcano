@@ -44,7 +44,7 @@ class InstructorCard extends Component {
     if (this.state.uploadurl === "") {
       axios({
         method: "PUT",
-        url: `${URL}/instructors/${this.props.data.id}/`,
+        url: `${URL}api/instructors/${this.props.data.id}/`,
         data: {
           name: this.state.name,
           license_number: this.state.license_number,
@@ -68,7 +68,7 @@ class InstructorCard extends Component {
       
       axios({
         method: "PUT",
-        url: `${URL}/instructors/${this.props.data.id}/`,
+        url: `${URL}api/instructors/${this.props.data.id}/`,
         data: {
           name: this.state.name,
           license_number: this.state.license_number,
@@ -119,7 +119,7 @@ class InstructorCard extends Component {
   toggleDelete = () => {
     axios({
       method: "DELETE",
-      url: `${URL}/instructors/${this.props.data.id}/`,
+      url: `${URL}api/instructors/${this.props.data.id}/`,
       headers: headers
   }).then(response => {
     console.log(response)

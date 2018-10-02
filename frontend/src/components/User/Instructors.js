@@ -49,7 +49,7 @@ class Instructors extends React.Component {
     if (this.state.uploadurl === "") {
       axios({
         method: "POST",
-        url: `${URL}/instructors/`,
+        url: `${URL}api/instructors/`,
         data: {
           name: this.state.name,
           license_number: this.state.license_number,
@@ -73,7 +73,7 @@ class Instructors extends React.Component {
       
       axios({
         method: "POST",
-        url: `${URL}/instructors/`,
+        url: `${URL}api/instructors/`,
         data: {
           name: this.state.name,
           license_number: this.state.license_number,
@@ -128,7 +128,7 @@ class Instructors extends React.Component {
   componentDidMount() {
     axios({
       method: "GET",
-      url: `${URL}/instructors/`,
+      url: `${URL}api/instructors/`,
       headers: headers
     })
       .then(res => {
