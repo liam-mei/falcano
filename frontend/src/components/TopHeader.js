@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Flights from './Flights/Flights';
 import './TopHeader.css';
+import Auth from './Authenication/Auth';
 import LandingPage from './LandingPage';
 import { Link } from 'react-router-dom';
 import Card from '@material-ui/core/Card';
@@ -18,54 +19,10 @@ import {
 } from 'reactstrap';
 import axios from 'axios';
 
-/*
-const Total = (props) => {
-  return <Modal toggle={this.toggleModal} isOpen={this.state.openModal}>
-    Airplane SEL Hours:
-						{this.state.sel}
-    <br />
-    Airplane MEL Hours :{this.state.mel}
-    <br />
-    Airplane SES Hours :{this.state.ses}
-    <br />
-    Airplane MES Hours :{this.state.mes}
-    <br />
-    Cross Country: {this.state.cross_country}
-    <br />
-    No. Instr. App. : {this.state.no_instument_app}
-    <br />
-    No. Ldg. : {this.state.no_ldg}
-    <br />
-    day: {this.state.day}
-    <br />
-    night: {this.state.night}
-    <br />
-    actual: {this.state.actual_instr}
-    <br />
-    sim: {this.state.sim_instr}
-    <br />
-    pic: {this.state.pic}
-    <br />
-    dual rec: {this.state.dual_rec}
-    <br />
-    Total Hours: {this.state.total}
-  </Modal>
-} 
-*/
-
-// Decide whether to use local or production urls for both front and back end
-// const [ FRONT_URL_DEV, BACK_URL_DEV ] = [ true, true ];
-// const dev = process.env.REACT_APP_DEV === 'true' ? true : false;
-// let URL;
-// dev
-//   ? (URL = 'http://127.0.0.1:8000/api')
-//   : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
 let URL = process.env.REACT_APP_URL;
 
-const headers = {
-  Authorization: 'JWT ' + localStorage.getItem('token')
-};
+let headers
 
 // logic for totals modal
 // get ALL flights for user
@@ -102,10 +59,6 @@ class TopHeader extends Component {
   };
   toggleModal = () => {
     let [
-      SELtotal,
-      MELtotal,
-      SEStotal,
-      MEStotal,
       cross_country_total,
       no_instrument_app_total,
       no_ldg_total,
@@ -117,39 +70,30 @@ class TopHeader extends Component {
       totalhrs,
       recTotal
     ] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+
+    let license_totals = {
+      SEL: 0,
+      SES: 0,
+      MEL: 0,
+      MES: 0
+    }
+
     let agg = true;
     while (agg === true) {
-      // console.log("====== pp======: ", this.state.flightList)
-      for (let i = 0; i < this.state.flightList.length; i++) {
-        console.log(
-          '====== ith license type======: ',
-          this.state.flightList[i].license_type
-        );
-        if (this.state.flightList[i].license_type === 'Airplane SEL') {
-          SELtotal += this.state.flightList[i].total_hours;
-          this.setState({ sel: SELtotal });
-        } else if (this.state.flightList[i].license_type === 'Airplane MEL') {
-          MELtotal += this.state.flightList[i].total_hours;
-          this.setState({ mel: MELtotal });
-        } else if (this.state.flightList[i].license_type === 'Airplane SES') {
-          SEStotal += this.state.flightList[i].total_hours;
-          this.setState({ ses: SEStotal });
-        } else if (this.state.flightList[i].license_type === 'Airplane MES') {
-          MEStotal += this.state.flightList[i].total_hours;
-          this.setState({ mes: MEStotal });
+      for (var key in this.state.flightList) {
+        for (let i = 0; i< this.state.flightList[key].length; i++) {
+          cross_country_total += this.state.flightList[key][i].cross_country
+          no_instrument_app_total += this.state.flightList[key][i].no_instument_app
+          no_ldg_total += this.state.flightList[key][i].no_ldg
+          dayTotal += this.state.flightList[key][i].day
+          nightTotal += this.state.flightList[key][i].night
+          actualTotal += this.state.flightList[key][i].actual_instr
+          simTotal += this.state.flightList[key][i].sim_instr
+          picTotal += this.state.flightList[key][i].pic
+          totalhrs += this.state.flightList[key][i].total_hours
+          recTotal += this.state.flightList[key][i].dual_rec
+          license_totals[key] += this.state.flightList[key][i].total_hours
         }
-        // console.log("************ STATE SES***************", this.state.ses)
-        // console.log("======SESESES====", SEStotal)
-        cross_country_total += this.state.flightList[i].cross_country;
-        no_instrument_app_total += this.state.flightList[i].no_instument_app;
-        no_ldg_total += this.state.flightList[i].no_ldg;
-        dayTotal += this.state.flightList[i].day;
-        nightTotal += this.state.flightList[i].night;
-        actualTotal += this.state.flightList[i].actual_instr;
-        simTotal += this.state.flightList[i].sim_instr;
-        picTotal += this.state.flightList[i].pic;
-        recTotal += this.state.flightList[i].dual_rec;
-        totalhrs += this.state.flightList[i].total_hours;
       }
       this.setState({
         day: Math.round(dayTotal * 10) / 10,
@@ -161,7 +105,11 @@ class TopHeader extends Component {
         total: Math.round(totalhrs * 10) / 10,
         cross_country: Math.round(cross_country_total * 10) / 10,
         no_instument_app: Math.round(no_instrument_app_total * 10) / 10,
-        no_ldg: Math.round(no_ldg_total * 10) / 10
+        no_ldg: Math.round(no_ldg_total * 10) / 10,
+        sel: Math.round(license_totals.SEL * 10) / 10,
+        ses: Math.round(license_totals.SES * 10) / 10,
+        mes: Math.round(license_totals.MES * 10) / 10,
+        mel: Math.round(license_totals.MEL *10) / 10,
       });
       agg = false;
     }
@@ -173,7 +121,7 @@ class TopHeader extends Component {
   componentDidMount() {
     axios({
       method: 'GET',
-      url: `${URL}api/flights/`,
+      url: `${URL}api/joined/`,
       headers: headers
     })
       .then((response) => {
@@ -196,6 +144,9 @@ class TopHeader extends Component {
     window.location.replace('/');
   };
   render() {
+    headers = {
+      Authorization: 'JWT ' + localStorage.getItem('token')
+    };
     console.log('TOP HEADER PROPS', this.props);
     return (
       <div className="Topheader">
