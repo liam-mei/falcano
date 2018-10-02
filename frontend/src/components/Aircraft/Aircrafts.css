@@ -6,6 +6,59 @@
   grid-template-rows: 4rem 1fr;
 }
 
+.NewAircraft-content .new-aircraft-input-tn {
+  margin: 0 1rem 1rem 0;
+}
+
+.Aircrafts .Aircraft-NewCard{
+  box-shadow: none; 
+}
+
+.Aircrafts  .NewAircraft-button {
+  border-radius: 4px;
+  background-color: white;
+  padding: .25rem 1rem;
+  border: 2px solid blue;
+}
+
+.NewAircraft-content .nested-modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.NewAircraft-content .nested-modal-button {
+  padding: .4rem 1rem;
+  border-radius: 2px;
+  border: 0;
+  box-shadow: 1px 1px 1px 1px var(--buttonGrey);
+}
+
+.NewAircraft-content .nested-modal-button:hover {
+  background-color: var(--buttonGrey);
+  color: white;
+  cursor: pointer;
+}
+
+.NewAircraft-content .modal-footer .save-button {
+  padding: .2rem 1rem;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 1px 1px 1px 1px var(--buttonGrey);
+}
+
+.NewAircraft-content .modal-footer .save-button:hover {
+  background-color: var(--buttonGrey);
+  color: white;
+  cursor: pointer;
+}
+
+.NewAircraft-content .modal-content .modal-header {
+  border-bottom: none;
+}
+.NewAircraft-content .modal-content .modal-footer {
+  border-top: none;
+}
 
 .Aircrafts .AircraftList {
   grid-column: 3/ -1;
@@ -16,10 +69,3 @@
   grid-gap: 1rem;
 }
 
-/* Bee Testing */
-.nested-modal-body .modal-body {
-  border-radius: 4px;
-  color: red;
-  border: 1px solid red !important;
-  width: 5rem !important;
-}
