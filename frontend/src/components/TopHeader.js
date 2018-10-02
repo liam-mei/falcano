@@ -130,25 +130,31 @@ class TopHeader extends Component {
     console.log('TOP HEADER PROPS', this.props);
     return (
       <div className="Topheader">
-        <Modal toggle={this.toggleModal} isOpen={this.state.openModal}>
+        <Modal
+          className="TotalsModal"
+          toggle={this.toggleModal}
+          isOpen={this.state.openModal}
+        >
           <ModalHeader>
-            <div className="TotalsHeader">
+            <div>
               <p className="LicenseType">SEL Hours : {this.state.sel}</p>
               <p className="LicenseType">SES Hours : {this.state.ses}</p>
+            </div>
+            <div>
               <p className="LicenseType">MEL Hours : {this.state.mel}</p>
               <p className="LicenseType">MES Hours : {this.state.mes}</p>
             </div>
           </ModalHeader>
           <ModalBody>
-            <div>
-              <div>
+            <div className="TotalsBodyChildren">
+              <div classname="XXX">
                 <p>Cross Country :</p>
                 <p>No. Instr. App. :</p>
                 <p>No. Ldg. :</p>
                 <p>Day :</p>
-                <p>Night :</p>
+                <p>Nsssight :</p>
               </div>
-              <div>
+              <div classname="XXX">
                 <p>{this.state.cross_country}</p>
                 <p>{this.state.no_instument_app}</p>
                 <p>{this.state.no_ldg}</p>
@@ -156,15 +162,16 @@ class TopHeader extends Component {
                 <p>{this.state.night}</p>
               </div>
             </div>
-            <div>
-              <div>
+
+            <div className="TotalsBodyChildren">
+              <div classname="XXX">
                 <p>Actual :</p>
                 <p>SIM :</p>
                 <p>Grnd Trnr. :</p>
                 <p>PIC :</p>
                 <p>Dual Rec. :</p>
               </div>
-              <div>
+              <div classname="XXX">
                 <p>{this.state.actual_instr}</p>
                 <p>{this.state.sim_instr}</p>
                 <p>0</p>
@@ -172,6 +179,7 @@ class TopHeader extends Component {
                 <p>{this.state.dual_rec}</p>
               </div>
             </div>
+            {/* </div> */}
           </ModalBody>
           <ModalFooter>Total Hours: {this.state.total}</ModalFooter>
         </Modal>

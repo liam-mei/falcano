@@ -3,7 +3,7 @@
   grid-row: 1 / 2;
   display: grid;
   grid-template-columns: 4fr 2fr;
-  border-bottom: var(--solidBorder) var(--darkGrey);
+  /* border-bottom: var(--solidBorder) var(--darkGrey); */
 }
 
 .Topheader .HeaderLeft {
@@ -45,8 +45,51 @@
   cursor: pointer;
 }
 
-.TotalsHeader {
-  margin: 2px solid purple;
+
+.TotalsModal {
+  width: 90%;
+  border: 10px solid brown
+
+}
+
+.TotalsModal .modal-content {
+  border: 20px solid black;
+}
+
+.TotalsModal .modal-header {
+  /* border: 20px solid purple; */
   display: flex;
   justify-content: space-around;
+  /* height: 150px; */
+}
+
+.TotalsModal .modal-title {
+  display: flex;
+  justify-content: space-around;
+  /* border: 5px solid pink; */
+  border: none;
+  width: 100%;
+}
+
+.TotalsModal .modal-body {
+  /* border: 5px solid teal; */
+  display: flex;
+  justify-content: space-around
+}
+
+.TotalsBodyChildren {
+  display: flex;
+  padding: 2rem;
+  /* border: 5px solid green; */
+}
+
+.TotalsModal .modal-body p {
+  /* border: 5px solid orange; */
+  padding-right: 15px;
+}
+
+.TotalsModal .modal-footer {
+  /* border: 5px solid gold; */
+  font-size: 1.5rem;
+  justify-content: center;
 }
