@@ -1,0 +1,64 @@
+
+
+.Instructors .InstructorCard .button-container {
+  display: flex;
+  justify-content: space-between;  
+  padding: 0px;
+}
+
+.Instructors .InstructorCard .Instructors-card-footer {
+  align-items: flex-start;
+}
+
+.Instructors .InstructorCard .edit-card-button {
+  /* justify-self: flex-end; */
+  margin-left: 15px ;
+  padding-bottom: 15px;
+}
+
+.Instructors .InstructorCard .delete-button {
+  margin-right: 15px; 
+}
+
+.Instructor-edit-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.edit-instructor-save {
+  justify-content: center;
+  align-self: center;
+  width: 100px;
+}
+
+.Instructor-edit-card-modal .modal-content {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 350px;
+}
+
+.Instructor-edit-card-modal .Instructor-edit-card {
+  padding: 30px;
+  box-shadow: 2px, 2px 6px, gray;
+}
+
+.Instructor-edit-card-modal .rating-details {
+  width: 100%;
+  align-self: center;
+  /* border: 1px red; */
+}
+
+.Instructor-edit-card-modal .contact-email {
+  width: 100%;
+}
+
+.Instructor-edit-card-modal .contact-number {
+  width: 100%;
+}
+
+.Instructor-edit-card-modal .description-content {
+  width: 100%;
+}
