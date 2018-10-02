@@ -1,8 +1,18 @@
 import React, { Component } from "react";
 import axios from "axios";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import CardMedia from '@material-ui/core/CardMedia'
-import TopHeader from "../TopHeader";
+import {
+  Button,
+  Modal,
+  ModalHeader,
+  ModalBody,
+  ModalFooter,
+  Glyphicon
+} from "reactstrap";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import CardMedia from "@material-ui/core/CardMedia";
+import Typography from "@material-ui/core/Typography";
+import "./InstructorCard.css";
 
 // const dev = process.env.REACT_APP_DEV === "true" ? true : false;
 // let URL;
@@ -29,6 +39,7 @@ class InstructorCard extends Component {
       description: "",
       modal: false,
       uploadurl: "",
+      deleteModal: false
     };
   }
 
@@ -63,9 +74,7 @@ class InstructorCard extends Component {
         .catch(error => {
           console.log("put error", error);
         });
-
     } else {
-      
       axios({
         method: "PUT",
         url: `${URL}api/instructors/${this.props.data.id}/`,
@@ -89,7 +98,6 @@ class InstructorCard extends Component {
         });
     }
   };
-
 
   upload = () => {
     window.cloudinary.openUploadWidget(
@@ -115,20 +123,26 @@ class InstructorCard extends Component {
       false;
   };
 
-  
   toggleDelete = () => {
+    this.setState({ deleteModal: !this.state.deleteModal });
+
+    // this.setState({modal: !this.state.modal})
+  };
+
+  confirmDelete = () => {
     axios({
       method: "DELETE",
       url: `${URL}api/instructors/${this.props.data.id}/`,
       headers: headers
-  }).then(response => {
-    console.log(response)
-    window.location.reload()
-  }).catch( err => {
-    console.log(err)
-  })
-  // this.setState({modal: !this.state.modal})
-}
+    })
+      .then(response => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch(err => {
+        console.log(err);
+      });
+  };
 
   componentDidMount() {
     const {
@@ -137,7 +151,8 @@ class InstructorCard extends Component {
       description,
       photo,
       contact_number,
-      contact_email, ratings
+      contact_email,
+      ratings
     } = this.props.data;
     this.setState({
       name: name,
@@ -146,122 +161,193 @@ class InstructorCard extends Component {
       photo: photo,
       contact_number: contact_number,
       contact_email: contact_email,
-      ratings: ratings,
+      ratings: ratings
     });
   }
 
   render() {
     console.log("INSTR CARD STATE: ", this.props.data);
     return (
-      <div>
-        <div className="Instructors-container">
-          <div className="Instructor-card ">
-          <Button style={{ width: '50px'}}onClick={this.toggleEditModal}>Edit</Button>
-          <button onClick={this.toggleDelete} className="edit-button">
-              Delete
-            </button>
-          <br />
-            <div className="card-name">{this.props.data.name}</div>
-            <div className="card-number">{this.props.data.license_number}</div>
-            <div className="card-img">
-              <img src={this.props.data.photo} />
-            </div>
-            <div className="card-description">
-              <div className="description-title">Descriptions/Notes</div>
-              <div className="description-content">
-                {this.props.data.description}
-              </div>
-            </div>
-            <div className="card-rating">
-              <div className="rating-title">Ratings:</div>
-              <div className="rating-details">{this.props.data.ratings}</div>
-            </div>
-            <div className="card-contact">
-              <div className="contact-title">Contact</div>
-              <div className="contact-info">
-                <div className="contact-email">
-                  {this.props.data.contact_email}
-                </div>
-                <div className="contact-number">
-                  {this.props.data.contact_number}
-                </div>
-              </div>
+      <div className={""}>
+        <Card className={""}>
+          <CardContent>
+            <Typography className={"Instructors-card-name"}>
+              {this.props.data.name}
+            </Typography>
+            <Typography className={"Instructors-card-license-number"}>
+              {this.props.data.license_number}
+            </Typography>
+          </CardContent>
+          <CardMedia
+            className="Instructors-card-img"
+            onClick={this.toggle}
+            component="img"
+            height="250"
+            image={this.props.data.photo}
+            style={{ marginLeft: "auto", marginRight: "auto", width: "400px", height: '225px' }}
+          />
+          <CardContent>
+            Description:
+            <Typography className={"Instructors-card-description"}>
+              {this.props.data.description}
+            </Typography>
+            <br />
+            Ratings:
+            <Typography className={"Instructors-card-ratings"}>
+              {this.props.data.ratings}
+            </Typography>
+          </CardContent>
+          <div className="Instructors-card-footer">
+            <CardContent>
+              Contact Info
+              <Typography>{this.props.data.contact_email}</Typography>
+              <Typography>{this.props.data.contact_number}</Typography>
+            </CardContent>
+            <div className={"button-container"}>
+              <i
+                class="fa fa-pencil-square-o fa-lg edit-card-button"
+                aria-hidden="true"
+                onClick={this.toggleEditModal}
+              />
+              <i
+                class="fa fa-trash fa-lg delete-button"
+                onClick={this.toggleDelete}
+                aria-hidden="true"
+              />
             </div>
           </div>
-        </div>
-      {/* EDIT MODAL START */}
-        <Modal isOpen={this.state.modal} toggle={this.toggleEditModal}>
-          <div>
-            <div className="Instructors-container">
-              <div className="Instructor-card ">
+        </Card>
+        {/* CONFIRM DELETE MODAL START */}
+        <Modal
+          className="confirm-instructor-delete"
+          size="sm"
+          style={{
+            display: "flex",
+            padding: "10px",
+            height: "100px",
+            width: "200px",
+            textAlign: "center",
+            marginTop: "20%",
+            marginLeft: "50%"
+          }}
+          isOpen={this.state.deleteModal}
+          toggle={this.toggleDelete}
+        >
+          <div className="confirm-delete-content">
+            Confirm Delete?
+            <br />
+            <br />
+            <Button
+              color="danger"
+              onClick={this.confirmDelete}
+              style={{
+                fontSize: "14px",
+                fontWeight: "bold",
+                color: "#FFFFFF",
+                width: "89px",
+                borderRadius: "0"
+              }}
+            >
+              {" "}
+              Delete{" "}
+            </Button>
+            <Button
+              onClick={this.toggleDelete}
+              style={{
+                fontSize: "14px",
+                fontWeight: "bold",
+                color: "#FFFFFF",
+                width: "89px",
+                borderRadius: "0"
+              }}
+            >
+              Cancel
+            </Button>
+          </div>
+        </Modal>
+        {/* EDIT MODAL START */}
+        <Modal
+          className="Instructor-edit-card-modal"
+          isOpen={this.state.modal}
+          toggle={this.toggleEditModal}
+        >
+          <div className="Instructor-edit-card">
+          <h4> Edit Instructor </h4>
+            <input
+              className="Instructor-edit-card-name"
+              name="name"
+              onChange={this.handleChange}
+              placeholder="Instructor Name"
+              value={this.state.name}
+            />
+            <br />
+
+            <input
+              className="card-number"
+              name="license_number"
+              placeholder="License Number"
+              onChange={this.handleChange}
+              value={this.state.license_number}
+            />
+            <ModalBody className="nested-modal-instructor-edit-body">
+              <br />
+              <i
+                class="fa fa-cloud-upload fa-lg"
+                onClick={this.upload}
+                aria-hidden="true"
+              >
+                Upload Image
+              </i>
+              {/* <button onClick={this.upload}>CLICK ME TO UPLOAD</button> */}
+            </ModalBody>
+            <br />
+            <div className="card-description">
+              <textarea
+                name="description"
+                onChange={this.handleChange}
+                placeholder="Description"
+                className="description-content"
+                value={this.state.description}
+                cols="35" 
+                wrap="soft"
+              />
+            </div>
+            <div className="card-rating">
+              <input
+                name="ratings"
+                onChange={this.handleChange}
+                placeholder="Ratings"
+                className="rating-details"
+                value={this.state.ratings}
+              />
+            </div>
+            <div className="card-contact">
+            <br />
+                <div className="contact-info">
                 <input
-                  className="card-name"
-                  name="name"
                   onChange={this.handleChange}
-                  placeholder="Instructor Name"
-                  value={this.state.name}
+                  name="contact_email"
+                  placeholder="Contact Email"
+                  className="contact-email"
+                  value={this.state.contact_email}
                 />
+                <br />
+    
                 <input
-                  className="card-number"
-                  name="license_number"
-                  placeholder="License Number"
                   onChange={this.handleChange}
-                  value={this.state.license_number}
+                  name="contact_number"
+                  placeholder="Contact Number"
+                  className="contact-number"
+                  value={this.state.contact_number}
                 />
-                <ModalBody className="nested-modal-body">
-                {/* <div className="card-img">
-                  <img src={this.state.photo} />
-                </div> */}
-                <CardMedia
-                  component="img"
-                  height="auto"
-                  image={this.state.photo}
-                  title="Instructor"
-                />
-                <button onClick={this.upload}>CLICK ME TO UPLOAD</button>
-              </ModalBody>
-                <div className="card-description">
-                  <div className="description-title">Descriptions/Notes</div>
-                  <input
-                    name="description"
-                    onChange={this.handleChange}
-                    placeholder="Description"
-                    className="description-content"
-                    value={this.state.description}
-                  />
-                </div>
-                <div className="card-rating">
-                  <div className="rating-title">Ratings:</div>
-                  <input
-                    name="ratings"
-                    onChange={this.handleChange}
-                    placeholder="Ratings"
-                    className="rating-details"
-                    value={this.state.ratings}
-                  />
-                </div>
-                <div className="card-contact">
-                  <div className="contact-title">Contact</div>
-                  <div className="contact-info">
-                    <input
-                      onChange={this.handleChange}
-                      name="contact_email"
-                      placeholder="Contact Email"
-                      className="contact-email"
-                      value={this.state.contact_email}
-                    />
-                    <input
-                      onChange={this.handleChange}
-                      name="contact_number"
-                      placeholder="Contact Number"
-                      className="contact-number"
-                      value={this.state.contact_number}
-                    />
-                  </div>
-                </div>
-                <Button onClick={this.toggleAndPut}>Save</Button>
               </div>
             </div>
+            <Button
+              className="edit-instructor-save"
+              onClick={this.toggleAndPut}
+            >
+              Save
+            </Button>
           </div>
         </Modal>
       </div>

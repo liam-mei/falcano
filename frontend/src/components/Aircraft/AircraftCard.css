@@ -1,134 +1,104 @@
-
-
-.air-card {
-  width: 250px;
-  margin: 10px 10px 10px 15%;
-}
-
-.card-typography {
-  display: flex;
-}
-
-.card-typography-p {
-  display: inline-block;
-  padding: 5px 20px 0px 10px;
-}
-
-.modal-content {
-  width: 750px !important;
-  border-radius: 0px!important;
-  display: flex;
-  flex-direction: column;
-}
-
-.modal-title {
-  display: inline-flex;
-  flex-direction: row;
-}
-
-.modal-header-p {
-  flex-wrap: nowrap;
-  padding: 0px 20px 0px 10px;
-}
-
-.edit-button {
-  display: inline-block;
-  height: 30px;
-  background: white;
-  color: black;
-  margin-left: 58%;
-  font-size: 15px;
-  border: 1px solid black;
-}
-
-.modal-body {
-  display: flex;
-  justify-content: center;
-  padding: 0px !important;
-}
-
-.modal-body-img {
-  height: 250px;
-  width: 396px;
-}
-.modal-footer {
-  display: flex;
-  padding: 0px !important;
-}
-
-.ul-1 {
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  margin: 20px 0px 20px 0% !important;
-  padding: 0px 30px 0px 0px;
-  list-style-type: none;
-}
-
-.ul-2 {  
-  font-size: 14px;
-  display: flex;
-  flex-direction: column;
-  margin: 20px 40px 20px 0px;
-  padding: 0px 10px 0px 20px;
-  list-style-type: none;
-}
-
-.nested-modal-body {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  justify-content: center;
-  height: 350px;
-  width: 400px;
-}
-
-.edit-input-tn {
-  margin-right: 50px;
-  width: 120px;
-  font-size: 14px;
-  height: 20px;
-}
-
-.edit-input-lt {
-  width: 120px;
-  font-size: 14px;
-  height: 20px;
-}
-
-/* me testing */
-/* Start Card */
-.AircraftCard{
-  /* border: solid .125rem rgb(238, 234, 236);
-  border-radius: 7px;
-  height: 20rem;
-  padding: 1rem; */
-  /* box-shadow: 1px 0 2px -1px rgba(113, 115, 117, 0.8), -1px 0 2px -1px rgba(113, 115, 117, 0.8); */
-
-}
-/* End Card */
-
-
-.CardMedia {
+.AircraftCard .CardMedia {
   width: 100%;
   height: auto;
-  padding: 1rem 1rem 1rem 1rem;
-  margin-bottom: 4rem;
-}
-/* End Card */
-
-/* Start Modal */
-
-.modal-content{
-
-  border: 3px solid orange;
-  background: red;
-}
-.modal-title{
-  border: 1px solid red;
+  min-height: 7rem;
+  overflow: hidden;
+  padding: 1rem;
+  margin-bottom: 1rem;
 }
 
-.nested-modal-body {
-  border: 1px solid purple;
+.AircraftCard .Content-aircraft .card-typography {
+  display: flex;
+  padding: 1rem;
+  font-size: 1rem;
 }
 
+.AircraftCard .Content-aircraft .card-typography-p {
+  display: flex;
+  padding-left: 1rem;
+}
+
+.Detailed-aircraft .modal-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 500px;
+}
+
+.Detailed-aircraft .edit-button {
+  border: 0;
+  box-shadow: 1px 1px 1px 1px var(--buttonGrey);
+  border-radius: 2px;
+  padding: .4rem 1rem;
+}
+
+.Detailed-aircraft-edit .modal-body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Detailed-aircraft-edit .edit-input-tn {
+  margin: 0 1rem 1rem 0;
+}
+
+.Detailed-aircraft-edit .nested-modal-button {
+  padding: .4rem 1rem;
+  border-radius: 2px;
+  border: 0;
+  box-shadow: 1px 1px 1px 1px var(--buttonGrey);
+}
+
+.Detailed-aircraft-edit .nested-modal-button:hover {
+  background-color: var(--buttonGrey);
+  color: white;
+  cursor: pointer;
+}
+
+.Detailed-aircraft-edit .modal-content .save-button {
+  padding: .2rem 1rem;
+  border-radius: 2px;
+  border: none;
+  box-shadow: 1px 1px 1px 1px var(--buttonGrey);
+}
+.Detailed-aircraft-edit .modal-content .save-button:hover {
+  background-color: var(--buttonGrey);
+  color: white;
+  cursor: pointer;
+}
+
+.Detailed-aircraft-edit .modal-content .modal-header {
+  border-bottom: none;
+}
+.Detailed-aircraft-edit  .modal-content .modal-footer {
+  border-top: none;
+}
+
+.Detailed-aircraft .modal-body-img {
+  height: auto;
+  width: 100%;
+  min-height: 20rem;
+  max-height: 40rem;
+}
+
+.Detailed-aircraft .ul-1 {
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+}
+
+.Detailed-aircraft .ul-2 {  
+  display: flex;
+  flex-direction: column;
+  list-style-type: none;
+}
+
+.Detailed-aircraft .modal-footer{
+  display: flex;
+  justify-content: space-around;
+}
+
+.Detailed-aircraft .Edit-delete {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 3rem;
+}
