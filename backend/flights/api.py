@@ -168,3 +168,25 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
 
         # return sum
         # return c
+
+
+
+# doesn't quite work yet
+
+# class UpdateLicenseViewSet(viewsets.ModelViewSet):
+#     serializer_class = FlightsSerializer
+#     queryset = Flights.objects.none()
+#     def get_queryset(self):
+#         queryset2 = Flights.objects.filter(aircraft__license_type__contains='MES')
+#         queryset2.update(license_type="Airplane MES")
+#         return queryset2
+
+
+    # def get_queryset(self, **kwargs):
+    #     user = self.request.user
+    #     # return Aircraft.objects.filter(license_type='sel')
+
+    #     if user.is_anonymous:
+    #         return Flights.objects.none()
+    #     else:
+    #         return Flights.objects.filter(aircraft__license_type__contains='MES', user=user).update(license_type="Airplane MES"),

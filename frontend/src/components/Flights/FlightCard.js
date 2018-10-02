@@ -21,11 +21,13 @@ import {
 import { CardContent } from '@material-ui/core';
 
 // let URL = this.props.flight.aircraft
-const dev = true;
-let URL;
-dev
-  ? (URL = 'http://127.0.0.1:8000/api/')
-  : (URL = 'https://flightloggercs10.herokuapp.com/api');
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = 'http://127.0.0.1:8000/api/')
+//   : (URL = 'https://flightloggercs10.herokuapp.com/api/');
+
+let URL = process.env.REACT_APP_URL;
 
 const headers = {
   Authorization: 'JWT ' + localStorage.getItem('token')
@@ -180,10 +182,25 @@ class FlightCard extends Component {
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
 
+
+  toggleDelete = () => {
+    axios({
+      method: "DELETE",
+      url: `${URL}api/flights/${this.state.id}/`,
+      headers: headers
+  }).then(response => {
+    console.log(response)
+    window.location.reload()
+  }).catch( err => {
+    console.log(err)
+  })
+  // this.setState({modal: !this.state.modal})
+}
+
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
-    let aircraftURL = `${URL}aircraft/`;
+    let aircraftURL = `${URL}api/aircraft/`;
     let licensetype;
     for (let i = 0; i < this.state.aircraftChoice.length; i++) {
       if (
@@ -199,7 +216,7 @@ class FlightCard extends Component {
     }
     axios({
       method: 'PUT',
-      url: `${URL}flights/${this.state.id}/`,
+      url: `${URL}api/flights/${this.state.id}/`,
       data: {
         name: this.state.name,
         remarks: this.state.remarks,
@@ -264,6 +281,11 @@ class FlightCard extends Component {
               {this.props.flight.name}
               {this.props.flight.fly_date}
             </h4>
+
+            <button onClick={this.toggleDelete} className="edit-button">
+              Delete
+            </button>
+
             <h4>
               {this.props.flight.airports_visited}{' '}
               <button onClick={this.nestedModalToggle}>Edit</button>
@@ -285,7 +307,7 @@ class FlightCard extends Component {
           </ModalBody>
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
-              <li>{this.props.flight.license_type}</li>
+              <li>{this.state.aircraft_whatever.license_type}</li>
               <li>Cross Country {this.props.flight.cross_country}</li>
               <li>No. Instr. App. {this.props.flight.no_instument_app}</li>
               <li>No. Ldg: {this.props.flight.no_ldg}</li>

@@ -22,11 +22,14 @@ const headers = {
 
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
-const dev = true;
-let URL;
-dev
-  ? (URL = "http://127.0.0.1:8000/api")
-  : (URL = "https://flightloggercs10.herokuapp.com/api");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = "http://127.0.0.1:8000/api")
+//   : (URL = "https://flightloggercs10.herokuapp.com/api");
+
+let URL = process.env.REACT_APP_URL;
+
 class AircraftCardModal extends React.Component {
   constructor() {
     super();
@@ -59,7 +62,7 @@ class AircraftCardModal extends React.Component {
     };
     axios({
       method: "GET",
-      url: `${URL}/filteredflights/${this.state.id}`,
+      url: `${URL}api/filteredflights/${this.state.id}`,
       headers: headers
     })
       .then(response => {
@@ -97,12 +100,28 @@ class AircraftCardModal extends React.Component {
     // console.log("statechange", this.state.license_type_edit);
   };
 
+  toggleDelete = () => {
+    axios({
+      method: "DELETE",
+      url: `${URL}api/aircraft/${this.state.id}/`,
+      headers: headers
+  }).then(response => {
+    console.log(response)
+    window.location.reload()
+  }).catch( err => {
+    console.log(err)
+  })
+  // this.setState({modal: !this.state.modal})
+}
+  
+
+
   // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
   toggleNestedAndPut = e => {
     if (this.state.uploadurl === "") {
       axios({
         method: "PUT",
-        url: `${URL}/aircraft/${this.state.id}/`,
+        url: `${URL}api/aircraft/${this.state.id}/`,
         data: {
           man_type: this.state.man_type_edit,
           tail_number: this.state.tail_number_edit,
@@ -131,7 +150,7 @@ class AircraftCardModal extends React.Component {
       
       axios({
         method: "PUT",
-        url: `${URL}/aircraft/${this.state.id}/`,
+        url: `${URL}api/aircraft/${this.state.id}/`,
         data: {
           man_type: this.state.man_type_edit,
           tail_number: this.state.tail_number_edit,
@@ -242,9 +261,10 @@ class AircraftCardModal extends React.Component {
       <div className="AircraftCard">
         <Card onClick={this.toggle} className="AircraftCard-Card">
           <Typography className="card-typography" onClick={this.toggle}>
-            <h4 className="card-typography-p">{this.state.tail_number}</h4>
+            {this.state.tail_number}
           </Typography>
           <p className="card-typography-p">{this.props.data.man_type}</p>
+
 
           <CardMedia className="CardMedia"
             onClick={this.toggle}
@@ -265,6 +285,10 @@ class AircraftCardModal extends React.Component {
           <ModalHeader className="modal-title">
             <p className="modal-header-p">{this.state.tail_number}</p>
             <p className="modal-header-p">{this.props.data.man_type}</p>
+
+            <button onClick={this.toggleDelete} className="edit-button">
+              Delete
+            </button>
 
             <button onClick={this.toggleNested} className="edit-button">
               Edit

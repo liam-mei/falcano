@@ -9,10 +9,12 @@ import './SignUp.css';
 
 import '../../utils/Images/signUpPage.svg';
 
-const dev = true;
-	let URL
-	(dev ? URL = "http://127.0.0.1:8000"
-		: URL = "https://flightloggercs10.herokuapp.com");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// 	let URL
+// 	(dev ? URL = "http://127.0.0.1:8000"
+// 		: URL = "https://flightloggercs10.herokuapp.com");
+
+let URL = process.env.REACT_APP_URL;
 
 class SignUp extends Component {
 	constructor(props) {
@@ -48,6 +50,10 @@ class SignUp extends Component {
 				this.setState({ errorMessage: 'Please enter a password' });
 				return; // terminates the handle function function
 			}
+			else if (this.state.password.length < 6) {
+				this.setState({errorMessage: "Please enter a password that is 6 characters or longer"})
+				return;
+			}
 			//check if the passwords match
 			if (this.state.password !== this.state.passwordComfirm) {
 				this.setState({ errorMessage: 'The password does not match' });
@@ -58,7 +64,7 @@ class SignUp extends Component {
 					password: this.state.password,
 				};
 				axios
-					.post(`${URL}/user_admin/users/`, user)
+					.post(`${URL}user_admin/users/`, user)
 					.then((response) => {
 						// set the token to local storage
 						localStorage.setItem('token', response.data.token);
@@ -77,6 +83,9 @@ class SignUp extends Component {
 						window.location.reload();
 					})
 					.catch((err) => {
+						if (err.response.status === 400) {
+							this.setState({errorMessage: "Username already exists. Please choose another Username"})
+						}
 						console.log(err);
 					});
 			}

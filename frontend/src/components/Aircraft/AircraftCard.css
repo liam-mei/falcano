@@ -112,6 +112,19 @@
 
 /* Bee testing */
 /* Start Card */
+<<<<<<< HEAD
+=======
+.AircraftCard{
+  /* border: solid .125rem rgb(238, 234, 236);
+  border-radius: 7px;
+  height: 20rem;
+  padding: 1rem; */
+  /* box-shadow: 1px 0 2px -1px rgba(113, 115, 117, 0.8), -1px 0 2px -1px rgba(113, 115, 117, 0.8); */
+
+}
+/* End Card */
+
+>>>>>>> d2e7c85473d5808c58fe4b4873743abffff95e9d
 
 .CardMedia {
   width: 100%;
@@ -143,18 +156,3 @@
   text-align: right;
   color: green;
 }
-
-.UploadButton {
-  border: 3px solid grey;
-  background: white;
-  border-radius: 4px;
-  width: 8rem;
-  padding: 0 1rem 0 1rem;
-}
-
-.aircraftcard-modal .modal-content .modal-footer {
-  border-top: none;
-}
-
-
-

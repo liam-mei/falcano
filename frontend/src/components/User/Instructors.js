@@ -6,12 +6,16 @@ import NavBar from "../NavBar";
 import TopHeader from "../TopHeader";
 import "./Instructors.css";
 import InstructorCard from "./InstructorCard";
+import CardMedia from "@material-ui/core/CardMedia";
 
-const dev = true;
-let URL;
-dev
-  ? (URL = "http://127.0.0.1:8000/api")
-  : (URL = "https://flightloggercs10.herokuapp.com/api");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = "http://127.0.0.1:8000/api")
+//   : (URL = "https://flightloggercs10.herokuapp.com/api");
+
+let URL = process.env.REACT_APP_URL;
+
 const headers = {
   Authorization: "JWT " + localStorage.getItem("token")
 };
@@ -29,7 +33,8 @@ class Instructors extends React.Component {
       contact_email: "",
       description: "",
       modal: false,
-      closeAll: false
+      closeAll: false,
+      uploadurl: ""
     };
 
     
@@ -41,41 +46,89 @@ class Instructors extends React.Component {
     });
   }
   togglePost = () => {
-    this.setState({
-      modal: !this.state.modal
-    });
-
-    axios({
-      method: "POST",
-      url: `${URL}/instructors/`,
-      data: {
-        name: this.state.name,
-        license_number: this.state.license_number,
-        photo: this.state.photo,
-        ratings: this.state.ratings,
-				contact_number: this.state.contact_number,
-				contact_email: this.contact_email
-			},
-			
-      headers: headers
-    })
-      .then(response => {
-        console.log("put response", response);
+    if (this.state.uploadurl === "") {
+      axios({
+        method: "POST",
+        url: `${URL}api/instructors/`,
+        data: {
+          name: this.state.name,
+          license_number: this.state.license_number,
+          ratings: this.state.ratings,
+          contact_email: this.state.contact_email,
+          contact_number: this.state.contact_number,
+          description: this.state.description,
+          photo: this.state.photo
+        },
+        headers: headers
       })
-      .catch(error => {
-        console.log("put error", error);
-			});
-			window.location.reload()
+        .then(response => {
+          // console.log("put response", response);
+          window.location.reload();
+        })
+        .catch(error => {
+          console.log("put error", error);
+        });
+
+    } else {
+      
+      axios({
+        method: "POST",
+        url: `${URL}api/instructors/`,
+        data: {
+          name: this.state.name,
+          license_number: this.state.license_number,
+          ratings: this.state.ratings,
+          contact_email: this.state.contact_email,
+          contact_number: this.state.contact_number,
+          description: this.state.description,
+          photo: this.state.uploadurl
+        },
+        headers: headers
+      })
+        .then(response => {
+          // console.log("put response", response);
+          window.location.reload();
+        })
+        .catch(error => {
+          console.log("put error", error);
+        });
+    }
   }
 
   handleChange = e => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+
+  upload = () => {
+    window.cloudinary.openUploadWidget(
+      { cloud_name: "dkzzjjjj9", upload_preset: "ggbmyqmo", cors: "no-cors" },
+
+      (error, result) => {
+        // console.log(error, result);
+        if (this.state.uploadurl === "") {
+          let imgurl;
+          result
+            ? (imgurl = result[0].url)
+            : (imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg`);
+          this.setState({ uploadurl: imgurl });
+        } else if (this.state.uploadurl !== "") {
+          let imgurl;
+          imgurl = this.state.uploadurl;
+          this.setState({ uploadurl: imgurl });
+        }
+        // this.setState({ uploadurl: imgurl });
+        // console.log('===== stateurl: ', this.state.uploadurl);
+      }
+    ),
+      false;
+  };
+
+
   componentDidMount() {
     axios({
       method: "GET",
-      url: `${URL}/instructors/`,
+      url: `${URL}api/instructors/`,
       headers: headers
     })
       .then(res => {
@@ -170,7 +223,16 @@ class Instructors extends React.Component {
                   onChange={this.handleChange}
                 />
                 <div className="card-img">
-                  <img src={this.state.photo} />
+                <ModalBody className="nested-modal-body">
+                
+               <CardMedia
+                 component="img"
+                 height="auto"
+                 image={this.state.photo}
+                 title="Instructor"
+               />
+               <button onClick={this.upload}>CLICK ME TO UPLOAD</button>
+             </ModalBody>
                 </div>
                 <div className="card-description">
                   <div className="description-title">Descriptions/Notes</div>

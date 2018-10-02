@@ -4,11 +4,14 @@ import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import CardMedia from '@material-ui/core/CardMedia'
 import TopHeader from "../TopHeader";
 
-const dev = true;
-let URL;
-dev
-  ? (URL = "http://127.0.0.1:8000/api")
-  : (URL = "https://flightloggercs10.herokuapp.com/api");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = "http://127.0.0.1:8000/api")
+//   : (URL = "https://flightloggercs10.herokuapp.com/api");
+
+let URL = process.env.REACT_APP_URL;
+
 const headers = {
   Authorization: "JWT " + localStorage.getItem("token")
 };
@@ -41,7 +44,7 @@ class InstructorCard extends Component {
     if (this.state.uploadurl === "") {
       axios({
         method: "PUT",
-        url: `${URL}/instructors/${this.props.data.id}/`,
+        url: `${URL}api/instructors/${this.props.data.id}/`,
         data: {
           name: this.state.name,
           license_number: this.state.license_number,
@@ -65,7 +68,7 @@ class InstructorCard extends Component {
       
       axios({
         method: "PUT",
-        url: `${URL}/instructors/${this.props.data.id}/`,
+        url: `${URL}api/instructors/${this.props.data.id}/`,
         data: {
           name: this.state.name,
           license_number: this.state.license_number,
@@ -112,6 +115,21 @@ class InstructorCard extends Component {
       false;
   };
 
+  
+  toggleDelete = () => {
+    axios({
+      method: "DELETE",
+      url: `${URL}api/instructors/${this.props.data.id}/`,
+      headers: headers
+  }).then(response => {
+    console.log(response)
+    window.location.reload()
+  }).catch( err => {
+    console.log(err)
+  })
+  // this.setState({modal: !this.state.modal})
+}
+
   componentDidMount() {
     const {
       name,
@@ -139,6 +157,9 @@ class InstructorCard extends Component {
         <div className="Instructors-container">
           <div className="Instructor-card ">
           <Button style={{ width: '50px'}}onClick={this.toggleEditModal}>Edit</Button>
+          <button onClick={this.toggleDelete} className="edit-button">
+              Delete
+            </button>
           <br />
             <div className="card-name">{this.props.data.name}</div>
             <div className="card-number">{this.props.data.license_number}</div>

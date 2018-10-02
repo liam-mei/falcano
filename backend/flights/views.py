@@ -14,6 +14,12 @@ from rest_framework import generics
 
 from django.db.models import Sum
 
+
+from django.views.generic.list import ListView
+
+from drf_multiple_model.views import ObjectMultipleModelAPIView
+
+
 # Create your views here.
 @api_view(['GET'])
 def current_user(request):
@@ -95,4 +101,54 @@ class UpdatePassword(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+# class IndexView(ListView):
+#     context_object_name = 'home_list'    
+#     # template_name = 'contacts/index.html'
+#     queryset = Flights.objects.all()
+
+#     def get_context_data(self, **kwargs):
+#         context = super(IndexView, self).get_context_data(**kwargs)
+#         context['aircraft'] = Aircraft.objects.all()
+#         # context['venue_list'] = Venue.objects.all()
+#         # context['festival_list'] = Festival.objects.all()
+#         # And so on for more models
+#         return context
+
+
+class TextAPIView(ObjectMultipleModelAPIView):
+
+    def get_queryset(self):
+        # user = self.request.user
+        # print("USER:", self.request.user)
+        # aircraft = self.kwargs['aircraft']
+        # # model = Flights
+        # aircraft = self.kwargs['aircraft']
         
+        return Flights.objects.none()
+        
+        
+    def get_querylist(self):
+
+        user = self.request.user
+        # aircraft = self.kwargs['aircraft']
+
+        if user.is_anonymous:
+            return Flights.objects.none()
+        else:
+
+            querylist = [
+                {'queryset': Flights.objects.filter(aircraft__license_type__contains='MES', user=user), 'serializer_class': FlightsSerializer, 'label':'MES'},
+                {'queryset': Flights.objects.filter(aircraft__license_type__contains='MEL', user=user), 'serializer_class': FlightsSerializer, 'label':'MEL'},
+                {'queryset': Flights.objects.filter(aircraft__license_type__contains='SEL', user=user), 'serializer_class': FlightsSerializer, 'label':'SEL'},
+                {'queryset': Flights.objects.filter(aircraft__license_type__contains='SES', user=user), 'serializer_class': FlightsSerializer, 'label':'SES'},
+                # {'queryset': Flights.objects.filter(user=user), 'serializer_class': FlightsSerializer,},
+
+                # {'queryset': Aircraft.objects.filter(id=aircraft), 'serializer_class': AircraftSerializer,},
+            ]
+
+            return querylist
+
+    # use above querylist janky js annotate into one array and send to flight cards
+
