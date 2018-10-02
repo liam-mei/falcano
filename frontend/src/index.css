@@ -4,14 +4,16 @@
   --malachite: #20bf55;
   --royal: #0B4F6C;
   --silver: #DDDDDD;
-  --sky: #01BAEF;
+  --sky: #03a9f4;
   --slate: #EAEAEA;
   --white: #FFFFFF;
+  --buttonGrey: #6c757d;
   --h1: 2rem;
   --h2: 1.5rem;
   --h3: 1.125rem;
   --solidBorder: 1px solid;
   --oneRem: 1rem;
+  
   /* --blue: #007bff;
     --indigo: #6610f2;
     --purple: #6f42c1;
@@ -54,4 +56,8 @@ a {
 }
 .danger {
   color: var(--red);
+}
+.Plus-sign {
+  font-size: 7rem;
+  color: var(--sky);
 }

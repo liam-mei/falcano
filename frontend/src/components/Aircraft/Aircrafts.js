@@ -154,11 +154,12 @@ class Aircrafts extends Component {
 						let id = plane.id;
 						return <AircraftCard key={id} data={plane} props={this.props} />;
 					})}
-					<Card onClick={this.toggle} className="AircraftCard-Card">
+					<i class="fa fa-plus-circle Plus-sign" onClick={this.toggleModal}></i>
+					<Card onClick={this.toggle} className="Aircraft-NewCard">
 						<Typography className="card-typography" onClick={this.toggle} />
 						<CardContent>
-							CLICK ME ---->> <button onClick={this.toggleModal}>NEW AIRCRAFT</button>
-							<Modal isOpen={this.state.openModal} toggle={this.toggleModal}>
+						
+							<Modal className="NewAircraft-content" isOpen={this.state.openModal} toggle={this.toggleModal}>
 								<ModalHeader>
 									<input
 										className="new-aircraft-input-tn"
@@ -198,11 +199,11 @@ class Aircrafts extends Component {
 									/>
 								</ModalHeader>
 								<ModalBody className="nested-modal-body">
-									<button onClick={this.upload}>CLICK ME TO UPLOAD</button>
+									<button className="nested-modal-button" onClick={this.upload}>CLICK ME TO UPLOAD</button>
 								</ModalBody>
 								<ModalFooter>
 									{/* CLOSE NESTED */}
-									<button className="edit-button" onClick={this.toggleAndPost}>
+									<button className="save-button" onClick={this.toggleAndPost}>
 										Save
 									</button>
 								</ModalFooter>

@@ -259,7 +259,7 @@ class AircraftCardModal extends React.Component {
 
     return (
       <div className="AircraftCard">
-        <Card onClick={this.toggle} className="AircraftCard-Card">
+        <Card onClick={this.toggle} className="Content-aircraft">
           <Typography className="card-typography" onClick={this.toggle}>
             {this.state.tail_number}
           </Typography>
@@ -278,27 +278,19 @@ class AircraftCardModal extends React.Component {
 
         {/* MODAL START */}
         <Modal
-          className="modal-content"
+          className="Detailed-aircraft modal-content"
           isOpen={this.state.modal}
           toggle={this.toggle}
         >
           <ModalHeader className="modal-title">
             <p className="modal-header-p">{this.state.tail_number}</p>
             <p className="modal-header-p">{this.props.data.man_type}</p>
-
-            <button onClick={this.toggleDelete} className="edit-button">
-              Delete
-            </button>
-
-            <button onClick={this.toggleNested} className="edit-button">
-              Edit
-            </button>
           </ModalHeader>
           <ModalBody className="modal-body">
             <br />
             <img className="modal-body-img" src={this.state.photo} />
             {/* NESTED MODAL */}
-            <Modal
+            <Modal className="Detailed-aircraft-edit"
               isOpen={this.state.nestedModal}
               toggle={this.toggleNested}
               onClosed={this.state.closeAll ? this.toggle : undefined}
@@ -352,12 +344,12 @@ class AircraftCardModal extends React.Component {
                 />
               </ModalHeader>
               <ModalBody className="nested-modal-body">
-                <button onClick={this.upload}>CLICK ME TO UPLOAD</button>
+                <button className="nested-modal-button " onClick={this.upload}>CLICK TO UPLOAD IMAGE</button>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="ModalFooter">
                 {/* CLOSE NESTED */}
                 <button
-                  className="edit-button"
+                  className="save-button"
                   onClick={this.toggleNestedAndPut}
                 >
                   Save
@@ -393,6 +385,18 @@ class AircraftCardModal extends React.Component {
               <li>Dual Rec: {dualrec}</li>
               <li>Total Hours: {total_hours}</li>
             </ul>
+          </ModalFooter>
+          <ModalFooter className="Edit-delete">
+            <i class="fa fa-pencil-square-o fa-lg edit-card-button"
+            
+                  aria-hidden="true"
+                  onClick={this.toggleNested}
+            />
+            
+            <i class="fa fa-trash fa-lg delete-button"
+              onClick={this.toggleDelete}
+              aria-hidden="true"
+            />
           </ModalFooter>
         </Modal>
       </div>
