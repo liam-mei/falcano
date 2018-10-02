@@ -20,9 +20,12 @@ import {
 	DropdownItem,
 } from 'reactstrap';
 import { CardMedia } from '@material-ui/core';
-const dev = process.env.DEV;
-let URL;
-dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
+
+let URL = process.env.REACT_APP_URL;
+
 const headers = {
 	Authorization: 'JWT ' + localStorage.getItem('token'),
 };
@@ -96,7 +99,7 @@ class Flights extends Component {
 			alert('Please Select The Aircraft You Flew With');
 			return;
 		}
-		let aircraftURL = `${URL}/aircraft/`;
+		let aircraftURL = `${URL}api/aircraft/`;
 		let licensetype;
 		for (let i = 0; i < this.state.aircraftChoice.length; i++) {
 			if (this.state.aircraftChoice[i].tail_number === this.state.dropdownButtonTitle) {
@@ -109,7 +112,7 @@ class Flights extends Component {
 		}
 		axios({
 			method: 'POST',
-			url: `${URL}/flights/`,
+			url: `${URL}api/flights/`,
 			data: {
 				name: this.state.name,
 				remarks: this.state.remarks,
@@ -150,7 +153,7 @@ class Flights extends Component {
 		};
 		axios({
 			method: 'GET',
-			url: `${URL}/aircraft/`,
+			url: `${URL}api/aircraft/`,
 			headers: headers,
 		})
 			.then((response) => {
@@ -163,7 +166,7 @@ class Flights extends Component {
 			});
 		axios({
 			method: 'get',
-			url: `${URL}/flights/`,
+			url: `${URL}api/flights/`,
 			headers: headers,
 		})
 			.then((response) => {

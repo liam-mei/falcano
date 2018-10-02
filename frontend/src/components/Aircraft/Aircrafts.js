@@ -27,10 +27,12 @@ import './Aircrafts.css';
 
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
-let dev = process.env.DEV;
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
 
-let URL;
-dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
+// let URL;
+// dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
+
+let URL = process.env.REACT_APP_URL;
 
 class Aircrafts extends Component {
 	constructor(props) {
@@ -78,7 +80,7 @@ class Aircrafts extends Component {
 		};
 		axios({
 			method: 'POST',
-			url: `${URL}/aircraft/`,
+			url: `${URL}api/aircraft/`,
 			data: {
 				man_type: this.state.man_type_edit,
 				tail_number: this.state.tail_number_edit,
@@ -114,7 +116,7 @@ class Aircrafts extends Component {
 		};
 		axios({
 			method: 'GET',
-			url: `${URL}/aircraft/`,
+			url: `${URL}api/aircraft/`,
 			headers: headers,
 		})
 			.then((response) => {

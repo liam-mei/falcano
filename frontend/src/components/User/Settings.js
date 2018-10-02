@@ -11,11 +11,13 @@ const headers = {
   Authorization: "JWT " + localStorage.getItem("token")
 };
 
-const dev = process.env.DEV;
-let URL;
-dev
-  ? (URL = "http://127.0.0.1:8000/api/passwordchange/")
-  : (URL = "https://flightloggercs10.herokuapp.com/api/passwordchange/");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = "http://127.0.0.1:8000/api/passwordchange/")
+//   : (URL = "https://flightloggercs10.herokuapp.com/api/passwordchange/");
+
+let URL = process.env.REACT_APP_URL;
 
 class Settings extends Component {
 	constructor(props) {
@@ -42,7 +44,7 @@ class Settings extends Component {
 			
 			axios({
         method: "PUT",
-        url: URL,
+        url: `${URL}api/passwordchange/`,
         data: {
           old_password: this.state.CurrentPassword,
           new_password: this.state.NewPassword

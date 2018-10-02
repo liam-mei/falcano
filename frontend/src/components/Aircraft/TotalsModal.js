@@ -6,11 +6,13 @@ const headers = {
 	'Authorization': 'JWT ' + localStorage.getItem('token')
 }
 
-const dev = process.env.DEV;
-let URL;
-dev
-  ? (URL = "http://127.0.0.1:8000/api/flights/")
-  : (URL = "https://flightloggercs10.herokuapp.com/api/flights/");
+// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
+// let URL;
+// dev
+//   ? (URL = "http://127.0.0.1:8000/api/flights/")
+//   : (URL = "https://flightloggercs10.herokuapp.com/api/flights/");
+
+let URL = process.env.REACT_APP_URL;
 
 class TotalsModal extends Component {
   constructor(props) {

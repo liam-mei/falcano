@@ -104,7 +104,10 @@
   height: 20rem;
   padding: 1rem; */
   /* box-shadow: 1px 0 2px -1px rgba(113, 115, 117, 0.8), -1px 0 2px -1px rgba(113, 115, 117, 0.8); */
+
 }
+/* End Card */
+
 
 .CardMedia {
   width: 100%;
@@ -128,8 +131,4 @@
 .nested-modal-body {
   border: 1px solid purple;
 }
-
-
-
-
 
