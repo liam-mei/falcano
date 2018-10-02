@@ -15,15 +15,15 @@
 }
 
 .modal-content {
-  width: 750px !important;
+  width: 760px !important;
   border-radius: 0px!important;
   display: flex;
   flex-direction: column;
 }
 
 .modal-title {
-  display: inline-flex;
-  flex-direction: row;
+  display: flex;
+  flex-direction: space-between;
 }
 
 .modal-header-p {
@@ -34,11 +34,24 @@
 .edit-button {
   display: inline-block;
   height: 30px;
-  background: white;
   color: black;
-  margin-left: 58%;
+  margin-left: 100%;
   font-size: 15px;
-  border: 1px solid black;
+  border: 2px solid var(--sky);
+  border-radius: 2px;
+  padding: 0 .5rem 0 .5rem;
+  margin: 0 1rem 1rem 0;
+}
+
+.save-button{
+  display: flex;
+  color: black;
+  font-size: 15px;
+  border: 2px solid var(--sky);
+  border-radius: 2px;
+  padding: 0 .5rem 0 .5rem;
+  margin: 0 1rem 1rem 0;
+  align-items: flex-end;
 }
 
 .modal-body {
@@ -54,6 +67,7 @@
 .modal-footer {
   display: flex;
   padding: 0px !important;
+  justify-content: space-around !important;
 }
 
 .ul-1 {
@@ -96,40 +110,51 @@
   height: 20px;
 }
 
-/* me testing */
+/* Bee testing */
 /* Start Card */
-.AircraftCard{
-  /* border: solid .125rem rgb(238, 234, 236);
-  border-radius: 7px;
-  height: 20rem;
-  padding: 1rem; */
-  /* box-shadow: 1px 0 2px -1px rgba(113, 115, 117, 0.8), -1px 0 2px -1px rgba(113, 115, 117, 0.8); */
-}
 
 .CardMedia {
   width: 100%;
   height: auto;
+  min-height: 7rem;
+  overflow: hidden;
   padding: 1rem 1rem 1rem 1rem;
   margin-bottom: 4rem;
 }
 /* End Card */
 
 /* Start Modal */
-
-.modal-content{
-
-  border: 3px solid orange;
-  background: red;
-}
-.modal-title{
-  border: 1px solid red;
-}
-
 .nested-modal-body {
-  border: 1px solid purple;
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  border: 3px solid orangered;
+  margin: 1rem;
+  width: auto;
 }
 
+.edit-input-tn, .edit-input-mt{
+  background: rgb(248, 248, 248);
+}
 
+.ModalFooter{
+  background: yellow;
+  display: flex;
+  text-align: right;
+  color: green;
+}
+
+.UploadButton {
+  border: 3px solid grey;
+  background: white;
+  border-radius: 4px;
+  width: 8rem;
+  padding: 0 1rem 0 1rem;
+}
+
+.aircraftcard-modal .modal-content .modal-footer {
+  border-top: none;
+}
 
 
 

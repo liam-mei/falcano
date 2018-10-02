@@ -224,7 +224,7 @@ class TopHeader extends Component {
 				</Modal>
 				<div className="BreadCrumb">
 					<Link className="BreadCrumb-link" to={'/home'}>
-						Home
+						Home>
 					</Link>
 					{this.state.breadcrumb.map((link, index) => {
 						const linkTag = link.toLowerCase();

@@ -15,3 +15,11 @@
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   grid-gap: 1rem;
 }
+
+/* Bee Testing */
+.nested-modal-body .modal-body {
+  border-radius: 4px;
+  color: red;
+  border: 1px solid red !important;
+  width: 5rem !important;
+}

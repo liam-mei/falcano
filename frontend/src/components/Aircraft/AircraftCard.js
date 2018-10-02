@@ -286,6 +286,12 @@ class AircraftCardModal extends React.Component {
                   onChange={this.handleChange}
                   placeholder={this.props.data.tail_number}
                 />
+                <input
+                  className="edit-input-mt"
+                  name="man_type_edit"
+                  onChange={this.handleChange}
+                  placeholder={this.props.data.man_type}
+                />
                 <ButtonDropdown
                   isOpen={this.state.dropdownOpen}
                   toggle={this.toggleDropdownButton}
@@ -320,17 +326,11 @@ class AircraftCardModal extends React.Component {
                     </DropdownItem>
                   </DropdownMenu>
                 </ButtonDropdown>
-                <input
-                  className="edit-input-mt"
-                  name="man_type_edit"
-                  onChange={this.handleChange}
-                  placeholder={this.props.data.man_type}
-                />
               </ModalHeader>
               <ModalBody className="nested-modal-body">
-                <button onClick={this.upload}>CLICK ME TO UPLOAD</button>
+                <button className="UploadButton" onClick={this.upload}>CLICK ME TO UPLOAD</button>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="ModalFooter">
                 {/* CLOSE NESTED */}
                 <button
                   className="edit-button"
