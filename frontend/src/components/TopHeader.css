@@ -3,42 +3,93 @@
   grid-row: 1 / 2;
   display: grid;
   grid-template-columns: 4fr 2fr;
-  /*border-bottom: var(--solidBorder) var(--darkGrey);*/
+  /* border-bottom: var(--solidBorder) var(--darkGrey); */
 }
 
-.Topheader .BreadCrumb {
+.Topheader .HeaderLeft {
   display: flex;
-  align-items: flex-end;
-  padding-left: 2em;
-  padding-bottom: 1rem;
 }
 
-.Topheader .Right {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-template-rows: 1fr 1fr;
-  grid-template-areas:
-    ". . . s"
-    " . t . ."
+.Topheader .HeaderLeft .BreadCrumb-link {
+  align-self: center;
+  padding: 0.4rem;
 }
 
-.Topheader .Right .SignOut {
-  grid-area: s;
+.Topheader .HeaderRight {
+  display: flex;
+  justify-content: space-between;
+  /* height: 2rem; */
+}
+
+.Topheader .HeaderRight .ToTal {
   border: 2px solid gray;
   border-radius: 3px;
-
-  display: flex;
   justify-content: center;
-  align-items: center;
-  margin-right: 1rem;
+  align-self: center;
+  height: 2rem;
+  padding: 0.2rem;
 }
 
-.Topheader .Right .SignOut:hover {
+.Topheader .HeaderRight .SignOut {
+  border: 2px solid gray;
+  border-radius: 3px;
+  display: flex;
+  align-items: center;
+  height: 2rem;
+  padding: 0.2rem;
+}
+
+.Topheader .HeaderRight .SignOut:hover {
   background: gray;
   color: white;
   cursor: pointer;
 }
 
-.Topheader .Right .ToTal {
-  grid-area: t;
+
+.TotalsModal {
+  width: 90%;
+  border: 10px solid brown
+
+}
+
+.TotalsModal .modal-content {
+  border: 20px solid black;
+}
+
+.TotalsModal .modal-header {
+  /* border: 20px solid purple; */
+  display: flex;
+  justify-content: space-around;
+  /* height: 150px; */
+}
+
+.TotalsModal .modal-title {
+  display: flex;
+  justify-content: space-around;
+  /* border: 5px solid pink; */
+  border: none;
+  width: 100%;
+}
+
+.TotalsModal .modal-body {
+  /* border: 5px solid teal; */
+  display: flex;
+  justify-content: space-around
+}
+
+.TotalsBodyChildren {
+  display: flex;
+  padding: 2rem;
+  /* border: 5px solid green; */
+}
+
+.TotalsModal .modal-body p {
+  /* border: 5px solid orange; */
+  padding-right: 15px;
+}
+
+.TotalsModal .modal-footer {
+  /* border: 5px solid gold; */
+  font-size: 1.5rem;
+  justify-content: center;
 }

@@ -19,6 +19,11 @@ class LandingPage extends Component {
 			<div className="LandingPage-card">
 				<img src={logo } className="Falcano-Logo" alt="logo"/>
 				<h3 className="card-slogan">Time flies</h3>
+
+
+				<p>process.env.REACT_APP_URL = {process.env.REACT_APP_URL}</p>
+				
+				
 				<p className="card-mission-statement">
 				Gone are the days of untracked flights.  Here at <strong>Falcano</strong> we make it easy for you to track your flights.  Simply click and trips, instructors, hours and much more are easily managed.  We've even made it easy for you to visually track your trips with a SkyVector map.  Take us on your next flight and see what all the fuss is about.
 				</p>
