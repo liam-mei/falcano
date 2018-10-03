@@ -3,7 +3,9 @@
   grid-row: 1 / 2;
   display: grid;
   grid-template-columns: 4fr 2fr;
-  /* border-bottom: var(--solidBorder) var(--darkGrey); */
+  box-shadow: 0 0 4px 0 var(--darkGrey);
+  /* box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12); */
+  background-color: white;
 }
 
 .Topheader .HeaderLeft {
@@ -26,7 +28,8 @@
 }
 
 .Topheader .HeaderRight .ToTal {
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   border-radius: 3px;
   
   /* border: 2px solid orange; */
@@ -36,17 +39,24 @@
   /* margin: auto auto; */
 }
 
+.Topheader .HeaderRight .ToTal:hover {
+  background: var(--sky);
+  color: white;
+  cursor: pointer;
+}
+
 .Topheader .HeaderRight .SignOut {
-  border: 2px solid gray;
+  /* border: 2px solid gray; */
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
   border-radius: 3px;
 
   height: 2rem;
   padding: 0.2rem;
-
+  margin-right: 1rem;
 }
 
 .Topheader .HeaderRight .SignOut:hover {
-  background: gray;
+  background: var(--sky);
   color: white;
   cursor: pointer;
 }
