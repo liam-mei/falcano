@@ -206,21 +206,18 @@ class TopHeader extends Component {
         </div>
 
         <div className="HeaderRight">
-
           <div className="SignOut" onClick={this.signOut}>
             Signout
           </div>
-          
+
           {this.state.displayTotal ? (
-            <button className="ToTal" onClick={this.toggleModal}>
+            <div className="ToTal" onClick={this.toggleModal}>
               View Total Hours
-            </button>
+            </div>
           ) : (
             ''
           )}
-
         </div>
-        
       </div>
     );
   }
