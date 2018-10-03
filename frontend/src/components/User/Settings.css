@@ -6,95 +6,116 @@
     grid-template-rows: 4rem 1fr;
     background-image: url('../../utils/Images/settings.svg');
     background-repeat: no-repeat;
+    max-height: 600px;
     
 }
 
 .Settings .Settings-Form {
-    grid-column: 3/ -1;
-    grid-row: 2/ -1;
+    grid-column: 4/ 8;
+    grid-row: 2/ 3;
     padding: 2rem 3rem;
     padding: 2rem 3rem;
+    max-height: 600px;
+    text-align: left;
+    min-width: 620px;
+    width: 620px;
+    max-width: 620px;
+    min-height: 520px;
+    max-height: 520px;
 }
 
-
-.Settings .NameText,
-.Settings .OldPassWord,
-.Settings .NewPassWord {
+.Settings .Settings-Form .settings-cardcontent {
     display: flex;
-    justify-content: space-between;
-    width: 24rem;
-    margin-bottom: 1rem;
+    flex-direction: column;
+    margin-top: 30px;
 }
 
-.Settings .NameType,
-.Settings .OldPasswordType,
-.Settings .NewPasswordType {
-    right: 8rem;
+.changePassword-title {
+    text-align: center;
+    
 }
 
-.Settings .OldPasswordType {
-    width: 5rem;
+h1 {
+    text-decoration: underline var(--sky);
 }
 
-.Settings .NewPasswordType {
-    width: 5rem;
+
+.currentPassword {
+    text-align: left;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+.currentPassword-label {
+    margin-right: 2%;
+    margin-left: 2%;
 }
 
-.Settings .Save {
-    display: flex;
-    justify-content: center;
+.currentPassword-input {
+    margin-left: 3%;
+    min-width: 300px;
 }
 
-.Settings .SaveDiv {
-    box-shadow: 1.5px 1.5px grey;
-}
-/* Navigation bar */
-
-/* Setting */
-.CurrentPass {
-    margin: 10px 0px;
+.newPassword {
+    text-align: left;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
-.ChangePassword {
-    margin: 300px 0px;
+.newPassword-label {
+    margin-right: 10%;
+    margin-left: 2%;
+}
+
+.newPassword-input {
+    /* margin-left: 12%; */
+    /* display: inline-block; */
+    min-width: 300px;
+    margin : 0 auto;
+}
+.confirmPassword {
+    text-align: left;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+.confirmPassword-label {
+    margin-right: 4%;
+    margin-left: 2%;
+}
+
+.confirmPassword-input {
+    min-width: 300px;
+    margin : 0 auto;
+}
+
+.Save {
+    margin-top: 3rem;
+}
+
+.savePass {
+    padding: .6rem 1.2rem;
+    border-radius: 2px;
+    border: 0;
+    box-shadow: 1px 1px 1px 1px var(--buttonGrey);
+    background-color: white;
+}
+
+.savePass:hover {
+    background-color: var(--sky);
+    color: white;
+    cursor: pointer;
 }
 
 input {
     padding: 7px;
-    min-width: 300px;
+    min-width: 200px;
     border-radius: 3px;
     border: 1px solid #ddd;
+    margin: 0 auto;
 }
 
 input:hover {
-    border: 1px solid #0099e6;
+    border: 1px solid var(--sky);
 }
 
-.savePass,
-.saveProfile {
-    padding: 7px;
-    margin: 6px 0px;
-    border-radius: 3px;
-    border: 1px solid #06f;
-    background-color: #05f;
-    color: white;
-}
 
-.savePass:hover,
-.saveProfile:hover {
-    background-color: #1a75ff;
-}
-
-label {
-    font-size: 18px;
-    margin: 1rem;
-}
-.NewPassword input{
-    
-    margin:1.8rem;
-}
-.Settings .Save{
-    
-display:flex;
-margin-right:60rem;
-}
