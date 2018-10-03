@@ -209,7 +209,7 @@ class Instructors extends React.Component {
             );
           })}
           <Card style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px'}}>
-          <i class="fa fa-plus-circle Plus-sign" aria-hidden="true"></i>
+          <i class="fa fa-plus-circle Plus-sign" aria-hidden="true" onClick={this.toggle}></i>
           </Card> 
         </div>
         <Modal
