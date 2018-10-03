@@ -10,6 +10,10 @@
   align-items: flex-start;
 }
 
+.upload-button:hover {
+  cursor: pointer;
+}
+
 .Instructors .InstructorCard .edit-card-button {
   /* justify-self: flex-end; */
   margin-left: 15px ;

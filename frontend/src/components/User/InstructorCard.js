@@ -292,7 +292,7 @@ class InstructorCard extends Component {
             <ModalBody className="nested-modal-instructor-edit-body">
               <br />
               <i
-                class="fa fa-cloud-upload fa-lg"
+                class="fa fa-cloud-upload fa-3x upload-button"
                 onClick={this.upload}
                 aria-hidden="true"
               >
