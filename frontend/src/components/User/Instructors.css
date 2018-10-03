@@ -13,16 +13,19 @@
   grid-column: 3/ -1;
   grid-row: 2/ -1;
   display: grid;
-  padding-left: 2rem;
-  padding-bottom: 2rem;
-  padding-right: 2rem;
-  grid-template-columns: repeat(auto-fit, minmax(310px, 1fr));
-  grid-auto-rows: 593px;
+  padding: 2rem;
+  padding-top: 0rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
   grid-gap: 2rem;
   text-align: center;
+  
 }
 
-.Instructors .InstructorCard .NewInstructor {
+.Instructors .InstructorCard .Instructor-card-card {
+  max-width: 400px;
+  min-height: 568px;
+  max-height: 568px;
+  min-width: 400px;
 }
 
 .Instructors .NewInstructor .FormContainer {
