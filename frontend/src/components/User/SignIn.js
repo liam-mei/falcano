@@ -101,7 +101,7 @@ class SignIn extends Component {
               className="form-control"
               placeholder="Password"
             />
-            <div>Signing into {URL}</div>
+          
 
             <button>Sign In</button>
             <div className="danger">
