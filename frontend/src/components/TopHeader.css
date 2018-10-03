@@ -47,13 +47,14 @@
 
 
 .TotalsModal {
-  width: 90%;
-  border: 10px solid brown
+  /* width: 100%; */
+  /* border: 10px solid brown */
 
 }
 
 .TotalsModal .modal-content {
-  border: 20px solid black;
+  border: 3px solid black;
+  width: 500px;
 }
 
 .TotalsModal .modal-header {

@@ -152,7 +152,7 @@ class TopHeader extends Component {
                 <p>No. Instr. App. :</p>
                 <p>No. Ldg. :</p>
                 <p>Day :</p>
-                <p>Nsssight :</p>
+                <p>Night :</p>
               </div>
               <div classname="XXX">
                 <p>{this.state.cross_country}</p>
