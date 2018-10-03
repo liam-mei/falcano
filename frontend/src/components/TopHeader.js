@@ -127,7 +127,7 @@ class TopHeader extends Component {
     headers = {
       Authorization: 'JWT ' + localStorage.getItem('token')
     };
-    console.log('TOP HEADER PROPS', this.props);
+    // console.log('TOP HEADER PROPS', this.props);
     return (
       <div className="Topheader">
         <Modal
@@ -202,10 +202,15 @@ class TopHeader extends Component {
               </div>
             );
           })}
-          {/* <span className="BreadCrumb-link">Welcome {this.props.username.charAt(0).toUpperCase() + this.props.username.slice(1).toLowerCase()}</span> */}
+          <span className="BreadCrumb-link">Welcome {this.props.username}</span>
         </div>
 
         <div className="HeaderRight">
+
+          <div className="SignOut" onClick={this.signOut}>
+            Signout
+          </div>
+          
           {this.state.displayTotal ? (
             <button className="ToTal" onClick={this.toggleModal}>
               View Total Hours
@@ -214,10 +219,8 @@ class TopHeader extends Component {
             ''
           )}
 
-          <span className="SignOut" onClick={this.signOut}>
-            Signout
-          </span>
         </div>
+        
       </div>
     );
   }
