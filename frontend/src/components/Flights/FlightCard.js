@@ -173,7 +173,7 @@ class FlightCard extends Component {
 
   handleSnippet = (e) => {
     let html = e.target.value;
-    html = html.split('200px; height: 200px;').join('300px; height: 300px;');
+    html = html.split('200px; height: 200px;').join('100%; height: 165px;');
     let arr = html.split('</div>');
     let sv_html = arr[0] + '</div>';
     let sv_script = arr[1];
@@ -182,20 +182,21 @@ class FlightCard extends Component {
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
 
-
   toggleDelete = () => {
     axios({
-      method: "DELETE",
+      method: 'DELETE',
       url: `${URL}api/flights/${this.state.id}/`,
       headers: headers
-  }).then(response => {
-    console.log(response)
-    window.location.reload()
-  }).catch( err => {
-    console.log(err)
-  })
-  // this.setState({modal: !this.state.modal})
-}
+    })
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // this.setState({modal: !this.state.modal})
+  };
 
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
@@ -258,38 +259,59 @@ class FlightCard extends Component {
     // console.log('======= Skinny Props: ', this.state.license_type);
     return (
       // flight card list
-      <Card className="FlightCard" onClick={this.modalToggle}>
-        <Typography>{this.props.flight.name}</Typography>
-        <Typography>{this.props.flight.airports_visited}</Typography>
-        <Typography>{this.state.aircraft_whatever.tail_number}</Typography>
-        <CardContent>
-        {Parser(this.props.flight.sv_html)}
-        <Helmet>{Parser(this.props.flight.sv_script)}</Helmet>
-        <div className="FLightCard-Hours-Date">
-          <span>{this.props.flight.fly_date}</span>
-          <span>{this.props.flight.total_hours}</span>
-        </div>
-        </CardContent>
+      <div className="TopFlightCard">
+        <Card className="FlightCard" onClick={this.modalToggle}>
+          <div className="FlightCardHeader">
+            <Typography className="FlightCardTitle">
+              {this.props.flight.name}
+            </Typography>
+            <Typography className="FlightCardTitle">
+              {this.props.flight.airports_visited}
+            </Typography>
+            <Typography className="FlightCardTitle">
+              {this.state.aircraft_whatever.tail_number}
+            </Typography>
+          </div>
+
+          <div className="FlightCardHTMLSnippet">
+            {Parser(this.props.flight.sv_html)}
+            <Helmet>{Parser(this.props.flight.sv_script)}</Helmet>
+          </div>
+
+          <div className="FlightCardFooter">
+            <div className="FLightCard-Hours-Date">
+              <span>{this.props.flight.fly_date}</span>
+              <span>{this.props.flight.total_hours}</span>
+            </div>
+            <div className="FlightIcons">
+              <i class="fas fa-edit fa-lg" onClick={this.modalToggle} />
+              <i
+                class="fa fa-trash fa-lg delete-button"
+                onClick={this.toggleDelete}
+                aria-hidden="true"
+              />
+            </div>
+          </div>
+        </Card>
+
+        {/* View */}
         <Modal
+          className="ViewFlightCardModal"
           props={this.props.flight}
           isOpen={this.state.openModal}
           toggle={this.modalToggle}
         >
           {/* This is where the Flight Card Modal Starts */}
           <ModalHeader>
-            <h4>
-              {this.props.flight.name}
-              {this.props.flight.fly_date}
-            </h4>
-
-            <button onClick={this.toggleDelete} className="edit-button">
-              Delete
-            </button>
-
-            <h4>
-              {this.props.flight.airports_visited}{' '}
-              <button onClick={this.nestedModalToggle}>Edit</button>
-            </h4>
+            <div className="ViewFlightHeader">
+              <div className="ViewFlightHeaderTop">
+                <h4 className="testasdf">{this.props.flight.name}</h4>
+                <h4>{this.props.flight.fly_date}</h4>
+              </div>
+              <h4 className="ViewFlightHeaderBottom">
+                {this.props.flight.airports_visited}{' '}
+              </h4>
+            </div>
           </ModalHeader>
           <ModalBody>
             {Parser(this.state.xxxsv_html2)}
@@ -331,7 +353,17 @@ class FlightCard extends Component {
               <li>Total {this.props.flight.total_hours}</li>
             </ul>
           </ModalFooter>
+          <div className="FlightIcons">
+            <i class="fas fa-edit fa-lg" onClick={this.modalToggle} />
+            <i
+              class="fa fa-trash fa-lg delete-button"
+              onClick={this.toggleDelete}
+              aria-hidden="true"
+            />
+          </div>
         </Modal>
+
+        {/* EDIT MODAL STARTS HERE */}
         <Modal
           isOpen={this.state.nestedModal}
           toggle={this.nestedModalToggle}
@@ -502,8 +534,7 @@ class FlightCard extends Component {
             </div>
           </ModalFooter>
         </Modal>
-        <br />
-      </Card>
+      </div>
     );
   }
 }
