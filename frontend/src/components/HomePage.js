@@ -6,7 +6,6 @@ import Card from "@material-ui/core/Card";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import CardContent from "@material-ui/core/CardContent";
-import TabContainer from "./tabs";
 import { HorizontalBar } from "react-chartjs-2";
 
 import logo from "../utils/Images/Logo.svg";
