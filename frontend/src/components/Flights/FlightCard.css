@@ -1,30 +1,90 @@
 .FlightCard {
-    display: flex;
-    flex-direction: column;
-    background: #E9E8E8;
-    padding: 1rem;
-    margin: 0;
-    height: 370px;
-    border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: #e9e8e8;
+  padding: 1rem;
+  margin: 0;
+  height: 370px;
+  /* border: 1px solid red; */
 }
 
 .FlightCard h3 {
-    margin: 0 0 1rem 0;
-    padding: 0;
+  margin: 0 0 1rem 0;
+  padding: 0;
 }
 
 .FlightCard p {
-    margin: 0 0 .5rem 0;
-    padding: 0;
+  margin: 0 0 0.5rem 0;
+  padding: 0;
 }
 
-.FlightCard .FlightCard-Image {
-    margin: 0 0 .5rem 0;
-    padding: 0;
-    height: 200px;
+.FlightCard .FlightCardHeader {
+  /* border: 1px solid purple; */
+}
+
+.FlightCard .FlightCardHTMLSnippet {
+  /* border: 1px solid blue; */
+  height: 165px;
+  min-height: 165px;
+}
+
+.FlightCard .FlightCardFooter {
+  /* border: 1px solid green; */
+  display: flex;
+  flex-direction: column;
+  /* align-items: flex-start; */
+  justify-content: space-between;
+  height: 60px;
 }
 
 .FlightCard .FLightCard-Hours-Date {
+  display: flex;
+  justify-content: space-between;
+}
+
+.FlightCard .FlightCardFooter .FlightIcons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.ViewFlightHeader {
+    /* border: 1px solid purple; */
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
+    /* height: 75px; */
+    width: 100%;
+}
+
+.ViewFlightCardModal h5 {
+    width: 100%;
+    justify-content: space-between;
+}
+
+.ViewFlightHeader .ViewFlightHeaderTop{
+    /* border: 1px solid green; */
+}
+
+.ViewFlightHeader .ViewFlightHeaderBottom{
+    /* border: 1px solid blue; */
+}
+
+.TopFlightCard .ViewFlightCardModal .modal-header .modal-title {
+    width: 100%;
+}
+
+.TopFlightCard .ViewFlightCardModal .modal-header {
+    width: 100%;
+}
+
+.testasdf {
+    /* border: 3px solid teal; */
+}
+
+
+@media (min-width: 600px) {
+  .HTMLSnippet .MuiCardContent-root-29 {
+    padding: 0px;
+  }
 }
