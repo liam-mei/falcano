@@ -6,6 +6,36 @@
   grid-template-rows: 4rem 1fr;
 }
 
+.Aircrafts .Aircraft-content {
+  grid-column: 3/ -1;
+  grid-row: 2/ -1;
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.Aircrafts .Aircraft-content .Plus-sign {
+  font-size: 4rem;
+  color: var(--sky);
+  margin-top: 1rem;
+  margin-left: 1rem;
+  width: 4rem;
+  box-shadow: 2px 1px rgba(0, 0, 0, 0.2);
+  border-radius: 50%;
+}
+
+.Aircrafts .Aircraft-content .Plus-sign:hover {
+  cursor: pointer;
+  color: #0195da;
+}
+
+.Aircrafts .AircraftList {
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+}
+
 .NewAircraft-content .new-aircraft-input-tn {
   margin: 0 1rem 1rem 0;
 }
@@ -60,12 +90,4 @@
   border-top: none;
 }
 
-.Aircrafts .AircraftList {
-  grid-column: 3/ -1;
-  grid-row: 2/ -1;
-  display: grid;
-  padding: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  grid-gap: 1rem;
-}
 

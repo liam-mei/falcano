@@ -25,13 +25,6 @@ import Auth from './../Authenication/Auth';
 
 import './Aircrafts.css';
 
-// change dev to false if you want axios to get request from heroku server
-// set dev to true if you want to work on local machine
-// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
-
-// let URL;
-// dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
-
 let URL = process.env.REACT_APP_URL;
 
 class Aircrafts extends Component {
@@ -62,16 +55,12 @@ class Aircrafts extends Component {
 
 	handleChange = (e) => {
 		this.setState({ [e.target.name]: e.target.value });
-		// console.log("statechange", this.state.license_type_edit);
 	};
 
 	toggleModal = (e) => {
 		this.setState({ openModal: !this.state.openModal });
 	};
 	toggleAndPost = (e) => {
-		// console.log("+++++++ this.state.uploadurl ++++++: ", this.state.uploadurl)
-		// this.state.uploadurl ? this.setState({uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg'}) : undefined
-		// console.log("+++++++ this.state.uploadurl2 ======== ", this.state.uploadurl)
 		this.setState({
 			openModal: !this.state.openModal,
 		});
@@ -91,7 +80,6 @@ class Aircrafts extends Component {
 			headers: headers,
 		})
 			.then((response) => {
-				// console.log("put response", response);
 			})
 			.catch((error) => {
 				console.log('put error', error);
@@ -110,7 +98,6 @@ class Aircrafts extends Component {
 	};
 
 	componentDidMount() {
-		// console.log("URL", URL);
 		const headers = {
 			Authorization: 'JWT ' + localStorage.getItem('token'),
 		};
@@ -120,9 +107,9 @@ class Aircrafts extends Component {
 			headers: headers,
 		})
 			.then((response) => {
-				// console.log("aircraft res", response.data);
+				const reversed_data = response.data.reverse();
 				this.setState({
-					data: response.data,
+					data: reversed_data,
 				});
 			})
 			.catch((error) => {
@@ -131,15 +118,12 @@ class Aircrafts extends Component {
 			});
 	}
 	upload = () => {
-		// this.setState({ uploadurl: 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg' })
 		window.cloudinary.openUploadWidget({ cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo' }, (error, result) => {
-			// console.log(error, result);
 			let imgurl;
 			result
 				? (imgurl = result[0].url)
 				: (imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg`);
 			this.setState({ uploadurl: imgurl });
-			// console.log("===== stateurl: ", this.state.uploadurl);
 		}),
 			false;
 	};
@@ -149,12 +133,13 @@ class Aircrafts extends Component {
 			<div className="Aircrafts">
 				<TopHeader breadcrumb={[ 'aircraft' ]} displayTotal={true} username={this.props.username} />
 				<NavBar />
+				<div className="Aircraft-content">
+					<i class="fas fa-plus-circle Plus-sign" onClick={this.toggleModal}></i>
 				<div className="AircraftList">
 					{this.state.data.map((plane) => {
 						let id = plane.id;
 						return <AircraftCard key={id} data={plane} props={this.props} />;
 					})}
-					<i class="fa fa-plus-circle Plus-sign" onClick={this.toggleModal}></i>
 					<Card onClick={this.toggle} className="Aircraft-NewCard">
 						<Typography className="card-typography" onClick={this.toggle} />
 						<CardContent>
@@ -167,13 +152,6 @@ class Aircrafts extends Component {
 										onChange={this.handleChange}
 										placeholder="Tail Number"
 									/>
-									{/* <input
-
-                    className="new-aircraft-input-lt"
-                    name="license_type_edit"
-                    onChange={this.handleChange}
-                    placeholder="License Type"
-									/> */}
 									<ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdownButton}>
 										<DropdownToggle caret>{this.state.dropdownButtonTitle}</DropdownToggle>
 										<DropdownMenu>
@@ -202,7 +180,6 @@ class Aircrafts extends Component {
 									<button className="nested-modal-button" onClick={this.upload}>CLICK ME TO UPLOAD</button>
 								</ModalBody>
 								<ModalFooter>
-									{/* CLOSE NESTED */}
 									<button className="save-button" onClick={this.toggleAndPost}>
 										Save
 									</button>
@@ -210,6 +187,7 @@ class Aircrafts extends Component {
 							</Modal>
 						</CardContent>
 					</Card>
+				</div>
 				</div>
 			</div>
 		);

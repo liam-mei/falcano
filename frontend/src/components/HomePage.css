@@ -38,7 +38,6 @@
   background-color: white;
 }
 
-
 .HomePage .HomePage-info .Homepage-totalscard .homepage-license {
   display: flex;
   justify-content: center;
@@ -46,26 +45,17 @@
 .license-type1 {
   border-right: 2px solid black;
 }
- .license-type2 { 
- }
 
- .LicenseType1 {
-
- }
-
- .TotalsBodyChildren .totals-1 {
-   text-align: left !important;
- }
+.TotalsBodyChildren .totals-1 {
+    text-align: left !important;
+}
 
 .HomePage .HomePage-info .Homepage-totalscard .TotalsBodyChildren {
   display: flex;
   justify-content: space-around;
   text-align: left;
-  /* box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2), 0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12); */
 
 }
-
-
 
 .HomePage .HomePage-info h2 {
   margin: 15rem 0 .5em 3rem;
@@ -74,9 +64,6 @@
   font-size: 200%;
   color: var(--sky);
 }
-/* .HomePage .HomePage-info p {
-  margin: 0 0 0 3rem;
-} */
 
 .load-bar {
   position: relative;

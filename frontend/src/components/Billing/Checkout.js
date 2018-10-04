@@ -58,7 +58,7 @@ class Checkout extends React.Component {
             formData.append('amount', this.state.amount);
             formData.append('source', result.token.id);
             // need to create endpoint on django
-            return fetch(`${URL}create-charge/`, {
+            return fetch(`${URL}api/create-charge/`, {
               method: 'POST',
               headers: {
                 accept: 'application/json'
