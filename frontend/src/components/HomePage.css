@@ -8,7 +8,7 @@
 .HomePage .HomePage-info {
   grid-column: 3 / -1;
   grid-row: 2 / -1;
-  background-image: url('../utils/Images/homePageIllustration.svg');
+  background-image: url('../utils/Images/homePageIllustrationBlue.svg');
   background-repeat: no-repeat;
   text-align: center;
 }
