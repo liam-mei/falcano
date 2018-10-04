@@ -1,6 +1,6 @@
-// import axios from 'axios';
 import React, { Component } from 'react';
-import BillingForm from './BillingForm';
+import { Elements, StripeProvider } from 'react-stripe-elements';
+import Checkout from './Checkout';
 import NavBar from '../NavBar';
 import TopHeader from '../TopHeader';
 
@@ -17,8 +17,12 @@ class Billing extends Component {
 			<div className="Billing">
 				<TopHeader breadcrumb={[ 'billing' ]} />
 				<NavBar />
-				<div className="Billing-card">
-					<BillingForm />
+				<div className="Billing-details">
+					<StripeProvider apiKey="pk_test_tYvByOjo3u4ZLzcoJYTe4NHT">
+						<Elements>
+							<Checkout/>
+						</Elements>
+					</StripeProvider>
 				</div>
 			</div>
 		);

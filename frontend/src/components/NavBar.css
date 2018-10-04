@@ -13,3 +13,18 @@
   text-transform: uppercase;
   color: white;
 }
+.Navbar-icon-small {
+  display: none;
+}
+@media only screen and (max-width: 900px) {
+  .NavBar  {
+    
+  }
+  .Navbar-icon-small {
+    display: inline-block;
+    font-size: 2rem;
+  }
+  .Navbar-icon-large {
+    display: none;
+  }
+}

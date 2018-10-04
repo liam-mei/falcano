@@ -6,116 +6,74 @@
     grid-template-rows: 4rem 1fr;
     background-image: url('../../utils/Images/settings.svg');
     background-repeat: no-repeat;
-    max-height: 600px;
     
 }
-
-.Settings .Settings-Form {
-    grid-column: 4/ 8;
-    grid-row: 2/ 3;
-    padding: 2rem 3rem;
-    padding: 2rem 3rem;
-    max-height: 600px;
-    text-align: left;
-    min-width: 620px;
-    width: 620px;
-    max-width: 620px;
-    min-height: 520px;
-    max-height: 520px;
+.Settings-content {
+    grid-column: 3 / -1;
+    grid-row: 2 / -1;
+    display: flex;
+    justify-content: center;
+    margin-top: 5rem;
 }
 
-.Settings .Settings-Form .settings-cardcontent {
+.Settings-content .Settings-card {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
-}
-
-.changePassword-title {
-    text-align: center;
-    
-}
-
-h1 {
-    text-decoration: underline var(--sky);
-}
-
-
-.currentPassword {
-    text-align: left;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-.currentPassword-label {
-    margin-right: 2%;
-    margin-left: 2%;
-}
-
-.currentPassword-input {
-    margin-left: 3%;
-    min-width: 300px;
-}
-
-.newPassword {
-    text-align: left;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-.newPassword-label {
-    margin-right: 10%;
-    margin-left: 2%;
-}
-
-.newPassword-input {
-    /* margin-left: 12%; */
-    /* display: inline-block; */
-    min-width: 300px;
-    margin : 0 auto;
-}
-.confirmPassword {
-    text-align: left;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-.confirmPassword-label {
-    margin-right: 4%;
-    margin-left: 2%;
-}
-
-.confirmPassword-input {
-    min-width: 300px;
-    margin : 0 auto;
-}
-
-.Save {
-    margin-top: 3rem;
-}
-
-.savePass {
-    padding: .6rem 1.2rem;
-    border-radius: 2px;
-    border: 0;
-    box-shadow: 1px 1px 1px 1px var(--buttonGrey);
+    justify-content: center;
+    align-items: center;
+    border: 1px solid #E8E8E8;
+    width: 30rem;
+    border-radius: 7px;
+    padding: 1rem;
     background-color: white;
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+        0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+        0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    height:25rem;
 }
 
-.savePass:hover {
-    background-color: var(--sky);
-    color: white;
-    cursor: pointer;
+@media only screen and (max-width: 600px) {
+    .Settings-content .Settings-card{
+        width: 23rem;
+    }
 }
 
-input {
-    padding: 7px;
-    min-width: 200px;
+.Settings-content .SignUp-CardText {
+    font-size: 1.75rem;
+    color: var(--sky);
+    padding-bottom: 1.5rem;
+}
+
+.Settings-content .Settings-card form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.Settings-content .Settings-card form input {
+    margin: .5rem 0;
+    padding: .4rem 0.2rem;
+    font-size: 1.2rem;
+    opacity: 0.6;
+}
+
+.Settings-content .Settings-card form button {
+    box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14),
+    0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    color: var(--sky);
+    padding-top: .4rem;
+    padding-bottom: .4rem;
     border-radius: 3px;
-    border: 1px solid #ddd;
-    margin: 0 auto;
+    font-size: 1.3rem;
+    margin-top: 1.5rem;
+    background-color: #fff;
+    font-size: 1.5rem;
+    border:.3px;
 }
-
-input:hover {
-    border: 1px solid var(--sky);
+.Settings-content .Settings-card form button:hover {
+    cursor: pointer;
+    color: #fff;
+    text-decoration: none;
+    background-color: var(--sky);
 }
-
-
