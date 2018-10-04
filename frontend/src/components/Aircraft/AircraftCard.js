@@ -16,6 +16,7 @@ import {
 } from "reactstrap";
 import Dropzone from "react-dropzone";
 import { Helmet } from "react-helmet";
+
 const headers = {
   Authorization: "JWT " + localStorage.getItem("token")
 };
@@ -387,13 +388,13 @@ class AircraftCardModal extends React.Component {
             </ul>
           </ModalFooter>
           <ModalFooter className="Edit-delete">
-            <i class="fa fa-pencil-square-o fa-lg edit-card-button"
+            <i class="fas fa-edit edit-card-button"
             
                   aria-hidden="true"
                   onClick={this.toggleNested}
             />
             
-            <i class="fa fa-trash fa-lg delete-button"
+            <i class="fas fa-trash delete-button"
               onClick={this.toggleDelete}
               aria-hidden="true"
             />

@@ -5,6 +5,7 @@
   --royal: #0B4F6C;
   --silver: #DDDDDD;
   --sky: #03a9f4;
+  --dark-blue: #013e7a;
   --slate: #EAEAEA;
   --white: #FFFFFF;
   --buttonGrey: #6c757d;
@@ -60,11 +61,6 @@ a {
 
 .danger {
   color: var(--red);
-}
-
-.Plus-sign {
-  font-size: 7rem;
-  color: var(--sky);
 }
 
 .bold {

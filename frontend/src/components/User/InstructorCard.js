@@ -205,12 +205,12 @@ class InstructorCard extends Component {
             </CardContent>
             <div className={"button-container"}>
               <i
-                class="fa fa-pencil-square-o fa-lg edit-card-button"
+                class="fas fa-edit edit-card-button"
                 aria-hidden="true"
                 onClick={this.toggleEditModal}
               />
               <i
-                class="fa fa-trash fa-lg delete-button"
+                class="fa fa-trash delete-button"
                 onClick={this.toggleDelete}
                 aria-hidden="true"
               />
