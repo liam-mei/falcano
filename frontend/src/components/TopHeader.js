@@ -1,8 +1,5 @@
 import React, { Component } from 'react';
-// import Flights from './Flights/Flights';
 import './TopHeader.css';
-// import Auth from './Authenication/Auth';
-// import LandingPage from './LandingPage';
 import { Link } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
@@ -11,7 +8,8 @@ let URL = process.env.REACT_APP_URL;
 
 let headers;
 
-class TopHeader extends Component {
+class TopHeader extends Component
+{
   state = {
     authenticated: false,
     displayTotal: false,
@@ -32,10 +30,11 @@ class TopHeader extends Component {
     sim_instr: 0,
     pic: 0,
     dual_rec: 0,
-    total: 0
+    total: 0,
   };
 
-  toggleModal = () => {
+  toggleModal = () =>
+  {
     let [
       cross_country_total,
       no_instrument_app_total,
@@ -46,95 +45,100 @@ class TopHeader extends Component {
       simTotal,
       picTotal,
       totalhrs,
-      recTotal
-    ] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      recTotal,
+    ] = [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ];
 
     let license_totals = {
       SEL: 0,
       SES: 0,
       MEL: 0,
-      MES: 0
+      MES: 0,
     };
 
     let agg = true;
-    while (agg === true) {
-      for (var key in this.state.flightList) {
-        for (let i = 0; i < this.state.flightList[key].length; i++) {
-          cross_country_total += this.state.flightList[key][i].cross_country;
-          no_instrument_app_total += this.state.flightList[key][i]
-            .no_instument_app;
-          no_ldg_total += this.state.flightList[key][i].no_ldg;
-          dayTotal += this.state.flightList[key][i].day;
-          nightTotal += this.state.flightList[key][i].night;
-          actualTotal += this.state.flightList[key][i].actual_instr;
-          simTotal += this.state.flightList[key][i].sim_instr;
-          picTotal += this.state.flightList[key][i].pic;
-          totalhrs += this.state.flightList[key][i].total_hours;
-          recTotal += this.state.flightList[key][i].dual_rec;
-          license_totals[key] += this.state.flightList[key][i].total_hours;
+    while ( agg === true )
+    {
+      for ( var key in this.state.flightList )
+      {
+        for ( let i = 0; i < this.state.flightList[ key ].length; i++ )
+        {
+          cross_country_total += this.state.flightList[ key ][ i ].cross_country;
+          no_instrument_app_total += this.state.flightList[ key ][ i ].no_instument_app;
+          no_ldg_total += this.state.flightList[ key ][ i ].no_ldg;
+          dayTotal += this.state.flightList[ key ][ i ].day;
+          nightTotal += this.state.flightList[ key ][ i ].night;
+          actualTotal += this.state.flightList[ key ][ i ].actual_instr;
+          simTotal += this.state.flightList[ key ][ i ].sim_instr;
+          picTotal += this.state.flightList[ key ][ i ].pic;
+          totalhrs += this.state.flightList[ key ][ i ].total_hours;
+          recTotal += this.state.flightList[ key ][ i ].dual_rec;
+          license_totals[ key ] += this.state.flightList[ key ][ i ].total_hours;
         }
       }
-      this.setState({
-        day: Math.round(dayTotal * 10) / 10,
-        night: Math.round(nightTotal * 10) / 10,
-        actual_instr: Math.round(actualTotal * 10) / 10,
-        sim_instr: Math.round(simTotal * 10) / 10,
-        pic: Math.round(picTotal * 10) / 10,
-        dual_rec: Math.round(recTotal * 10) / 10,
-        total: Math.round(totalhrs * 10) / 10,
-        cross_country: Math.round(cross_country_total * 10) / 10,
-        no_instument_app: Math.round(no_instrument_app_total * 10) / 10,
-        no_ldg: Math.round(no_ldg_total * 10) / 10,
-        sel: Math.round(license_totals.SEL * 10) / 10,
-        ses: Math.round(license_totals.SES * 10) / 10,
-        mes: Math.round(license_totals.MES * 10) / 10,
-        mel: Math.round(license_totals.MEL * 10) / 10
-      });
+      this.setState( {
+        day: Math.round( dayTotal * 10 ) / 10,
+        night: Math.round( nightTotal * 10 ) / 10,
+        actual_instr: Math.round( actualTotal * 10 ) / 10,
+        sim_instr: Math.round( simTotal * 10 ) / 10,
+        pic: Math.round( picTotal * 10 ) / 10,
+        dual_rec: Math.round( recTotal * 10 ) / 10,
+        total: Math.round( totalhrs * 10 ) / 10,
+        cross_country: Math.round( cross_country_total * 10 ) / 10,
+        no_instument_app: Math.round( no_instrument_app_total * 10 ) / 10,
+        no_ldg: Math.round( no_ldg_total * 10 ) / 10,
+        sel: Math.round( license_totals.SEL * 10 ) / 10,
+        ses: Math.round( license_totals.SES * 10 ) / 10,
+        mes: Math.round( license_totals.MES * 10 ) / 10,
+        mel: Math.round( license_totals.MEL * 10 ) / 10,
+      } );
       agg = false;
     }
-    if (agg === false) {
-      this.setState({ openModal: !this.state.openModal });
+    if ( agg === false )
+    {
+      this.setState( { openModal: !this.state.openModal } );
     }
   };
 
-  componentDidMount() {
-    axios({
+  componentDidMount()
+  {
+    axios( {
       method: 'GET',
-      url: `${URL}api/joined/`,
-      headers: headers
-    })
-      .then((response) => {
-        this.setState({ flightList: response.data });
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-    if (Array.isArray(this.props.breadcrumb)) {
-      this.setState({ breadcrumb: this.props.breadcrumb });
+      url: `${ URL }api/joined/`,
+      headers: headers,
+    } )
+      .then( ( response ) =>
+      {
+        this.setState( { flightList: response.data } );
+      } )
+      .catch( ( err ) =>
+      {
+        console.log( err );
+      } );
+    if ( Array.isArray( this.props.breadcrumb ) )
+    {
+      this.setState( { breadcrumb: this.props.breadcrumb } );
     }
 
-    if (this.props.displayTotal) {
-      this.setState({ displayTotal: true });
+    if ( this.props.displayTotal )
+    {
+      this.setState( { displayTotal: true } );
     }
   }
 
-  signOut = () => {
-    localStorage.removeItem('token');
-    window.location.replace('/');
+  signOut = () =>
+  {
+    localStorage.removeItem( 'token' );
+    window.location.replace( '/' );
   };
 
-  render() {
+  render()
+  {
     headers = {
-      Authorization: 'JWT ' + localStorage.getItem('token')
+      Authorization: 'JWT ' + localStorage.getItem( 'token' ),
     };
-    // console.log('TOP HEADER PROPS', this.props);
     return (
       <div className="Topheader">
-        <Modal
-          className="TotalsModal"
-          toggle={this.toggleModal}
-          isOpen={this.state.openModal}
-        >
+        <Modal className="TotalsModal" toggle={this.toggleModal} isOpen={this.state.openModal}>
           <ModalHeader>
             <div>
               <p className="LicenseType">SEL Hours : {this.state.sel}</p>
@@ -179,44 +183,46 @@ class TopHeader extends Component {
                 <p>{this.state.dual_rec}</p>
               </div>
             </div>
-            {/* </div> */}
           </ModalBody>
           <ModalFooter>Total Hours: {this.state.total}</ModalFooter>
         </Modal>
 
         <div className="HeaderLeft">
           <Link className="BreadCrumb-link" to={'/home'}>
-            Home
+            <span className="desktop-home">Home</span>
+            <i class="fas fa-home fa-lg mobile-home" aria-hidden="true" />
           </Link>
 
-          {this.state.breadcrumb.map((item, i) => {
-            // const linkTag = link.toLowerCase();
-            const label =
-              item.charAt(0).toUpperCase() + item.slice(1).toLowerCase();
+          {this.state.breadcrumb.map( ( item, i ) =>
+          {
+            const label = item.charAt( 0 ).toUpperCase() + item.slice( 1 ).toLowerCase();
             return (
               <div className="HeaderLeft">
-                <div className="BreadCrumb-link">></div>
-                <div key={i} className="BreadCrumb-link">
+                <div className="BreadCrumb-link desktop-home">
+                  <i class="fas fa-angle-right BreadCrumb-link-angle-right " />
+                </div>
+                <div key={i} className="BreadCrumb-link desktop-home">
                   {label}
                 </div>
               </div>
             );
-          })}
-          <span className="BreadCrumb-link">Welcome {this.props.username}</span>
+          } )}
+          <span className="BreadCrumb-link desktop-home">Welcome {this.props.username}</span>
         </div>
 
         <div className="HeaderRight">
           <div className="SignOut" onClick={this.signOut}>
             Signout
-          </div>
+					</div>
 
           {this.state.displayTotal ? (
             <div className="ToTal" onClick={this.toggleModal}>
-              View Total Hours
+              <span className="desktop">View Total Hours</span>
+              <span className="mobile">Hours</span>
             </div>
           ) : (
-            ''
-          )}
+              ''
+            )}
         </div>
       </div>
     );
