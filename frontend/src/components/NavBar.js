@@ -7,23 +7,44 @@ class NavBar extends Component {
 		return (
 			<div className="NavBar">
 				<Link className="NavBar-link" to={'/flights'}>
-					Flights
+					<span className="Navbar-icon-large">Flights</span>
+					<i class="fas fa-plane-departure fa-lg Navbar-icon-small"
+            
+              aria-hidden="true"
+          />
 				</Link>
 				<br />
 				<Link className="NavBar-link" to={'/aircrafts'}>
-					Aircraft
+				<span className="Navbar-icon-large">Aircraft</span>
+				<i class="fas fa-plane fa-lg Navbar-icon-small"
+					
+						aria-hidden="true"
+				/>
+				
 				</Link>
 				<br />
 				<Link className="NavBar-link" to={'/instructors'}>
-					Instructors
+				<span className="Navbar-icon-large">Instructors</span>
+				<i class="fas fa-chalkboard-teacher fa-lg Navbar-icon-small"
+					
+						aria-hidden="true"
+				/>	
 				</Link>
 				<br />
 				<Link className="NavBar-link" to={'/billing'}>
-					Billing
+				<span className="Navbar-icon-large">Billing</span>
+				<i class="fas fa-file-invoice-dollar fa-lg Navbar-icon-small"
+					
+						aria-hidden="true"
+				/>
 				</Link>
 				<br />
 				<Link className="NavBar-link" to={'/settings'}>
-					Settings
+				<span className="Navbar-icon-large">Settings</span>
+				<i class="fas fa-cog fa-lg Navbar-icon-small"
+					
+						aria-hidden="true"
+				/>
 				</Link>
 			</div>
 		);

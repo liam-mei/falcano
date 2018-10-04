@@ -9,25 +9,11 @@
 }
 
 
-.Billing .Billing-card {
-  grid-column: 4/ 6;
-  /* grid-column: 3/ -1; */
-  grid-row: 2/ -1;
-  padding: 2rem 3rem;
-  padding: 2rem 3rem;
+.Billing .Billing-details {
+  grid-column: 3 / -1;
+  grid-row: 2 / -1;
+  display: flex;
+  justify-content: center;
   margin-top: 5rem;
-  margin-bottom: 25rem;
-  display: inline-block;
-  border: solid #d4d1d1 .5px;
-  border-radius: 7px;
-  background: rgb(235, 239, 243);
-  padding: 2rem 7rem;
-  width: 25rem;
-}
-
-.Card-Details {
-  border-bottom: solid #d4d1d1 1px;
-  color: var(--sky);
-  margin-bottom: .5em;
 }
 

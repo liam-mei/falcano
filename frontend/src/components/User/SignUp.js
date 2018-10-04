@@ -9,11 +9,6 @@ import './SignUp.css';
 
 import '../../utils/Images/signUpPage.svg';
 
-// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
-// 	let URL
-// 	(dev ? URL = "http://127.0.0.1:8000"
-// 		: URL = "https://flightloggercs10.herokuapp.com");
-
 let URL = process.env.REACT_APP_URL;
 
 class SignUp extends Component {
@@ -29,9 +24,6 @@ class SignUp extends Component {
 
 	componentDidMount() {
 		if (isLoggedIn()) {
-			{
-				/*changed endpoint from '/' to '/home'*/
-			}
 			this.props.history.push('/home');
 			window.location.reload();
 		}
@@ -76,9 +68,7 @@ class SignUp extends Component {
 							passwordComfirm: '',
 							errorMessage: '',
 						});
-						{
-							/*changed.push('/') to .push('/flights')*/
-						}
+					
 						this.props.history.push('/home');
 						window.location.reload();
 					})
@@ -97,12 +87,10 @@ class SignUp extends Component {
 	render() {
 		return (
 			<div className="SignUp">
-				{/*most likely don't need top nav in SignUp*/}
-				{/*<TopHeader />*/}
 				<div className="SignUp-Text">
 				<p>Be ready.</p>
 				<p>Be organized.</p>
-				<p>Be <strong>Falcano</strong>.</p>
+				<p>Be <span className="bold">Falcano</span></p>
 				</div>
 				<div className="SignUp-card">
 					<div className="SignUp-CardText">

@@ -9,9 +9,6 @@ import '../../utils/Images/logIn.svg';
 
 const URL = process.env.REACT_APP_URL;
 
-// dev
-//   ? (URL = 'http://127.0.0.1:8000')
-//   : (URL = 'https://flightloggercs10.herokuapp.com');
 
 class SignIn extends Component {
   constructor(props) {
@@ -25,8 +22,6 @@ class SignIn extends Component {
 
   componentDidMount() {
     if (isLoggedIn()) {
-      /*changed endpoint from '/' to '/home'*/
-
       this.props.history.push('/home');
       window.location.reload();
     }
@@ -65,10 +60,8 @@ class SignIn extends Component {
           errorMessage: ''
         });
 
-        /*changed.push('/') to .push('/flights')*/
-
         this.props.history.push('/home');
-        // window.location.reload();
+
       })
       .catch((err) => {
         console.log(err);
