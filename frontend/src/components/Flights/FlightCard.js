@@ -269,13 +269,13 @@ class FlightCard extends Component {
       <div className="TopFlightCard">
         <Card className="FlightCard" onClick={this.modalToggle}>
           <div className="FlightCardHeader">
-            <Typography className="FlightCardTitle">
+            <Typography variant="title" className="FlightCardTitle">
               {this.props.flight.name}
             </Typography>
-            <Typography className="FlightCardTitle">
+            <Typography className="FlightCardSubTitle">
               {this.props.flight.airports_visited}
             </Typography>
-            <Typography className="FlightCardTitle">
+            <Typography className="FlightCardSubTitle">
               {this.state.aircraft_whatever.tail_number}
             </Typography>
           </div>

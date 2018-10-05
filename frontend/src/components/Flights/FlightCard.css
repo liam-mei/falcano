@@ -42,6 +42,14 @@
   height: 60px;
 }
 
+.FlightCard .FlightCardTitle {
+  padding-bottom: 7px;
+}
+
+.FlightCard .FlightCardSubTitle {
+  margin-bottom: 3px;
+}
+
 .FlightCard .FLightCard-Hours-Date {
   display: flex;
   justify-content: space-between;
