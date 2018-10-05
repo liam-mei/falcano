@@ -303,7 +303,7 @@ class Flights extends Component {
               <ModalFooter>
                 <div>
                   <div>
-                    Pic1
+                    Pic
                     <input
                       className="new-flight-pic-input"
                       name="pic"
