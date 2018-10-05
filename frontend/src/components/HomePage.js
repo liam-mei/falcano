@@ -272,7 +272,8 @@ class HomePage extends Component {
                 marginTop: "10%",
                 maxWidth: "800px",
                 height: "600px",
-                marginLeft: "15%"
+                marginLeft: "15%",
+                boxShadow: 'none',
               }}
             >
               <div className="load-bar">

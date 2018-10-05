@@ -42,6 +42,14 @@
   height: 60px;
 }
 
+.FlightCard .FlightCardTitle {
+  padding-bottom: 7px;
+}
+
+.FlightCard .FlightCardSubTitle {
+  margin-bottom: 3px;
+}
+
 .FlightCard .FLightCard-Hours-Date {
   display: flex;
   justify-content: space-between;
@@ -191,6 +199,16 @@
   height: 32px;
   padding: 0px;
   margin-bottom: 10px;
+}
+
+.FlightEditModal a {
+  text-decoration: none;
+  color: var(--sky);
+  font-size: 0.9rem;
+}
+
+.FlightEditModal a:hover {
+  text-decoration: none;
 }
 
 
