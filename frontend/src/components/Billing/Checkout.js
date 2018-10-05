@@ -11,7 +11,6 @@ class Checkout extends React.Component {
     resp_message: '',
     card_errors: '',
     amount: '',
-    message: ''
   };
   handleCardErrors = (card_dets) => {
     console.log('Card Section dets', card_dets);
@@ -77,7 +76,7 @@ class Checkout extends React.Component {
       <div className="Checkout">
         <div className="Checkout-card">
           <div className="Checkout-CardText">
-            {this.state.message} 
+            {this.state.resp_message}
           </div>
           <form onSubmit={this.handleSubmit}>
             <label>
