@@ -16,9 +16,7 @@ import InstructorCard from "./InstructorCard";
 
 let URL = process.env.REACT_APP_URL;
 
-const headers = {
-  Authorization: "JWT " + localStorage.getItem("token")
-};
+let headers;
 
 class Instructors extends React.Component {
   constructor(props) {
@@ -34,7 +32,8 @@ class Instructors extends React.Component {
       description: "",
       modal: false,
       closeAll: false,
-      uploadurl: ""
+      uploadurl: "",
+      loading: true,
     };
 
     
@@ -126,6 +125,7 @@ class Instructors extends React.Component {
 
 
   componentDidMount() {
+    setTimeout(() => this.setState({ loading: false }), 950);
     axios({
       method: "GET",
       url: `${URL}api/instructors/`,
@@ -141,11 +141,43 @@ class Instructors extends React.Component {
 
   render() {
     console.log("INSTR STATE", this.state.instructors);
+    headers = {
+      Authorization: "JWT " + localStorage.getItem("token")
+    };
+
+    const { loading } = this.state;
+    if (loading) {
+      return (
+        <div className="Instructors">
+          <NavBar />
+          <TopHeader />
+          <div className="InstructorCard">
+            <Card
+            className="Instructor-card-card"
+              >
+              <div className="load-bar">
+                <div className="bar" />
+                <div className="bar" />
+                <div className="bar" />
+              </div>
+            </Card>
+          </div>
+        </div>
+
+    );
+  }else
     return (
       <div className="Instructors">
         <TopHeader breadcrumb={["settings"]} />
         <NavBar />
         <div className="InstructorCard">
+        <Card 
+        onClick={this.toggle}
+        style={{ 
+          boxShadow: this.state.modal ? "inset 1px 1px 1px gray" : "",
+          display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px', maxHeight: "568px"}}>
+          <i class="fa fa-plus-circle fa-3x Plus-sign" aria-hidden="true" onClick={this.toggle}></i>
+          </Card> 
           {this.state.instructors.map(instr => {
             return (
               <InstructorCard  key={instr.id} data={instr}>
@@ -153,9 +185,6 @@ class Instructors extends React.Component {
               </InstructorCard>
             );
           })}
-          <Card style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px', maxHeight: "568px"}}>
-          <i class="fa fa-plus-circle Plus-sign" aria-hidden="true" onClick={this.toggle}></i>
-          </Card> 
         </div>
         <Modal
           className="Instructor-edit-card-modal"

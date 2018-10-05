@@ -18,19 +18,18 @@ import {
 import CardMedia from '@material-ui/core/CardMedia';
 import './AircraftCard.css';
 import Dropzone from 'react-dropzone';
-
 import TopHeader from '../TopHeader';
-
 import Auth from './../Authenication/Auth';
-
 import './Aircrafts.css';
 
+let headers;
 let URL = process.env.REACT_APP_URL;
 
 class Aircrafts extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			loading: true,
 			token: '',
 			name: '',
 			content: '',
@@ -64,9 +63,7 @@ class Aircrafts extends Component {
 		this.setState({
 			openModal: !this.state.openModal,
 		});
-		const headers = {
-			Authorization: 'JWT ' + localStorage.getItem('token'),
-		};
+		
 		axios({
 			method: 'POST',
 			url: `${URL}api/aircraft/`,
@@ -98,9 +95,7 @@ class Aircrafts extends Component {
 	};
 
 	componentDidMount() {
-		const headers = {
-			Authorization: 'JWT ' + localStorage.getItem('token'),
-		};
+		setTimeout(() => this.setState({ loading: false }), 950);
 		axios({
 			method: 'GET',
 			url: `${URL}api/aircraft/`,
@@ -128,14 +123,50 @@ class Aircrafts extends Component {
 			false;
 	};
 	render() {
-		console.log("PROPS AIRCRAFT", this.props);
+		headers = {
+      Authorization: "JWT " + localStorage.getItem("token")
+    };
+
+    const { loading } = this.state;
+    if (loading) {
+      return (
+        <div className="Aircrafts">
+          <NavBar />
+          <TopHeader />
+          <div className="Aircraft-content">
+            <Card
+            className="AircraftList-loading"
+              >
+              <div className="load-bar">
+                <div className="bar" />
+                <div className="bar" />
+                <div className="bar" />
+              </div>
+            </Card>
+          </div>
+        </div>
+
+    );
+  }else
 		return (
 			<div className="Aircrafts">
 				<TopHeader breadcrumb={[ 'aircraft' ]} displayTotal={true} username={this.props.username} />
 				<NavBar />
 				<div className="Aircraft-content">
-					<i class="fas fa-plus-circle Plus-sign" onClick={this.toggleModal}></i>
 				<div className="AircraftList">
+				<Card
+            onClick={this.toggleModal}
+            style={{
+              boxShadow: this.state.openModal ? "inset 1px 1px 1px gray" : "",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+							height: "287px",
+							width: '244px',
+            }}
+          >
+					<i class="fas fa-plus-circle Plus-sign" onClick={this.toggleModal}></i>
+					</Card>
 					{this.state.data.map((plane) => {
 						let id = plane.id;
 						return <AircraftCard key={id} data={plane} props={this.props} />;

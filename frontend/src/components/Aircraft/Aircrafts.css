@@ -14,6 +14,10 @@
   
 }
 
+.Aircrafts .AircraftList-loading {
+  box-shadow: none;
+}
+
 .Aircrafts .Aircraft-content .Plus-sign {
   font-size: 4rem;
   color: var(--sky);
@@ -91,3 +95,36 @@
 }
 
 
+.Aircrafts .load-bar {
+  position: relative;
+  margin-left: 5%;
+  margin-top: 30%;
+  width: 60%;
+  height: 9px;
+  background-color: var(--sky);
+}
+.Aircrafts .bar {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 50%;
+  text-align: center;
+}
+.Aircrafts .bar:nth-child(1) {
+  background-color: #eff3f9;
+  animation: loading 3s linear infinite;
+}
+.Aircrafts .bar:nth-child(2) {
+  background-color: var(--sky);
+  animation: loading 3s linear 1s infinite;
+}
+.Aircrafts .bar:nth-child(3) {
+  background-color: var(--silver);
+  animation: loading 3s linear 2s infinite;
+}
+@keyframes loading {
+    from {left: 50%; width: 0;z-index:100;}
+    33.3333% {left: 0; width: 100%;z-index: 10;}
+    to {left: 0; width: 100%;}
+}

@@ -12,7 +12,8 @@ import {
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Button
 } from "reactstrap";
 import Dropzone from "react-dropzone";
 import { Helmet } from "react-helmet";
@@ -101,7 +102,7 @@ class AircraftCardModal extends React.Component {
     // console.log("statechange", this.state.license_type_edit);
   };
 
-  toggleDelete = () => {
+  confirmDelete = () => {
     axios({
       method: "DELETE",
       url: `${URL}api/aircraft/${this.state.id}/`,
@@ -177,6 +178,12 @@ class AircraftCardModal extends React.Component {
       });
       window.location.reload();
     }
+  };
+
+  toggleDelete = () => {
+    this.setState({ deleteModal: !this.state.deleteModal });
+
+    // this.setState({modal: !this.state.modal})
   };
 
   toggleAll = () => {
@@ -399,6 +406,53 @@ class AircraftCardModal extends React.Component {
               aria-hidden="true"
             />
           </ModalFooter>
+        </Modal>
+        <Modal
+          className="confirm-instructor-delete"
+          size="sm"
+          style={{
+            display: "flex",
+            padding: "10px",
+            height: "100px",
+            width: "200px",
+            textAlign: "center",
+            marginTop: "20%",
+            marginLeft: "50%"
+          }}
+          isOpen={this.state.deleteModal}
+          toggle={this.toggleDelete}
+        >
+          <div className="confirm-delete-content">
+            Confirm Delete?
+            <br />
+            <br />
+            <Button
+              color="danger"
+              onClick={this.confirmDelete}
+              style={{
+                fontSize: "14px",
+                fontWeight: "bold",
+                color: "#FFFFFF",
+                width: "89px",
+                borderRadius: "0"
+              }}
+            >
+              {" "}
+              Delete{" "}
+            </Button>
+            <Button
+              onClick={this.toggleDelete}
+              style={{
+                fontSize: "14px",
+                fontWeight: "bold",
+                color: "#FFFFFF",
+                width: "89px",
+                borderRadius: "0"
+              }}
+            >
+              Cancel
+            </Button>
+          </div>
         </Modal>
       </div>
     );
