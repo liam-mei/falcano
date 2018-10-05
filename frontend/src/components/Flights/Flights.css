@@ -34,12 +34,24 @@
   min-width: 290px;
 }
 
+.NewFlightModal a {
+  text-decoration: none;
+  color: var(--sky);
+  font-size: 0.9rem;
+}
+
+.NewFlightModal a:hover {
+  text-decoration: none;
+}
+
+
 .Flights .Flights-NewCard-Loading {
   max-width: 590px;
   min-height: 585px;
   max-height: 585px;
   min-width: 590px;
   margin-left: 20%;
+  box-shadow: none;
 }
 
 .Flights .FlightList .Flights-NewCard .Plus-sign {

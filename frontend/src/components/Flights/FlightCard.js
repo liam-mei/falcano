@@ -87,6 +87,14 @@ class FlightCard extends Component {
     });
   };
 
+  normalAndNestedModalToggle = () => {
+    this.setState({
+      openModal: !this.state.openModal,
+      nestedModal: !this.state.nestedModal,
+      closeAll: false
+    });
+  };
+
   nestedModalToggle = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
@@ -304,7 +312,7 @@ class FlightCard extends Component {
           <ModalHeader>
             <div className="ViewFlightHeader">
               <div className="ViewFlightHeaderTop">
-                <h4 className="ViewFlightHeaderTitle">{this.props.flight.name}</h4>
+                <h2 className="ViewFlightHeaderTitle">{this.props.flight.name}</h2>
                 <h4 className="Header-title-flydate">{this.props.flight.fly_date}</h4>
               </div>
               <h4 className="ViewFlightHeaderBottom">
@@ -356,7 +364,7 @@ class FlightCard extends Component {
           <div className="FlightIcons">
             <i className="fas fa-edit fa-lg" onClick={this.nestedModalToggle} />
             <i
-              className="fa fa-trash delete-button"
+              className="fa fa-trash fa-lg delete-button"
               onClick={this.toggleDelete}
               aria-hidden="true"
               />
@@ -428,6 +436,7 @@ class FlightCard extends Component {
 
           </ModalHeader>
           <ModalBody className="new-flight-snippet">
+          <a className="SnippetLink" target="_blank" rel="noopener noreferrer" href="https://skyvector.com/"> Visit Skyvector.com to get an HTML Snippet</a>
             <textarea
             className="snippet-text-area"
               rows="4"

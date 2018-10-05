@@ -193,6 +193,16 @@
   margin-bottom: 10px;
 }
 
+.FlightEditModal a {
+  text-decoration: none;
+  color: var(--sky);
+  font-size: 0.9rem;
+}
+
+.FlightEditModal a:hover {
+  text-decoration: none;
+}
+
 
 .FlightEditModal  .new-flight-snippet .snippet-text-area {
   height: 130px;

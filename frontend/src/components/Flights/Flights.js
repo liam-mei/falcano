@@ -156,7 +156,7 @@ class Flights extends Component {
     const headers = {
       Authorization: "JWT " + localStorage.getItem("token")
     };
-    setTimeout(() => this.setState({ loading: false }), 750);
+    setTimeout(() => this.setState({ loading: false }), 1250);
     axios({
       method: "GET",
       url: `${URL}api/aircraft/`,
@@ -317,6 +317,7 @@ class Flights extends Component {
               </div>
             </ModalHeader>
             <ModalBody className="NewFlightHTMLSnippet">
+            <a className="SnippetLink" target="_blank" rel="noopener noreferrer" href="https://skyvector.com/"> Visit Skyvector.com to get an HTML Snippet</a>
               <textarea
                 className="snippet-text-area"
                 rows="4"
