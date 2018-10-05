@@ -1,8 +1,9 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import './TopHeader.css';
 import { Link } from 'react-router-dom';
 import { Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import axios from 'axios';
+
 
 let URL = process.env.REACT_APP_URL;
 
@@ -186,44 +187,40 @@ class TopHeader extends Component
           </ModalBody>
           <ModalFooter>Total Hours: {this.state.total}</ModalFooter>
         </Modal>
-
-        <div className="HeaderLeft">
+        <div className="BreadCrumb">
           <Link className="BreadCrumb-link" to={'/home'}>
-            <span className="desktop-home">Home</span>
-            <i class="fas fa-home fa-lg mobile-home" aria-hidden="true" />
+            <span className="desktop">Home</span>
+            <i class="fas fa-home fa-lg tablet" aria-hidden="true" />
           </Link>
 
           {this.state.breadcrumb.map( ( item, i ) =>
           {
             const label = item.charAt( 0 ).toUpperCase() + item.slice( 1 ).toLowerCase();
             return (
-              <div className="HeaderLeft">
-                <div className="BreadCrumb-link desktop-home">
-                  <i class="fas fa-angle-right BreadCrumb-link-angle-right " />
-                </div>
-                <div key={i} className="BreadCrumb-link desktop-home">
+              <Fragment>
+                  <i class="fas fa-angle-right BreadCrumb-link-angle-right desktop" />
+                <div key={i} className="BreadCrumb-link desktop">
                   {label}
                 </div>
-              </div>
+              </Fragment>
             );
           } )}
-          <span className="BreadCrumb-link desktop-home">Welcome {this.props.username}</span>
-        </div>
-
-        <div className="HeaderRight">
-          <div className="SignOut" onClick={this.signOut}>
-            Signout
-					</div>
-
-          {this.state.displayTotal ? (
-            <div className="ToTal" onClick={this.toggleModal}>
-              <span className="desktop">View Total Hours</span>
-              <span className="mobile">Hours</span>
-            </div>
-          ) : (
+          </div> {/* end of breadcrumb*/}
+            {this.state.displayTotal ? (
+              <Fragment>
+                <div  className="Total desktop" onClick={this.toggleModal}>
+                  <span>View Total Hours</span>
+                </div>
+                <div  className="Total tablet" onClick={this.toggleModal}>
+                  <span>Hours</span>
+                </div>
+              </Fragment>
+            ) : (
               ''
             )}
-        </div>
+          
+          <span className="Welcome desktop">Welcome {this.props.username}</span>
+          <span className="SignOut" onClick={this.signOut}>Signout</span>
       </div>
     );
   }
