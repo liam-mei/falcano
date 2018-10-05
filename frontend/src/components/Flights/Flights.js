@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import NavBar from '../NavBar';
-import TopHeader from '../TopHeader';
-import axios from 'axios';
-import Auth from './../Authenication/Auth';
-import './Flights.css';
-import FlightCard from './FlightCard';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import PlusIcon from '../../utils/Images/PlusIcon.png';
-import Typography from '@material-ui/core/Typography';
+import React, { Component } from "react";
+import NavBar from "../NavBar";
+import TopHeader from "../TopHeader";
+import axios from "axios";
+import Auth from "./../Authenication/Auth";
+import "./Flights.css";
+import FlightCard from "./FlightCard";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
+import PlusIcon from "../../utils/Images/PlusIcon.png";
+import Typography from "@material-ui/core/Typography";
 import {
   Modal,
   ModalHeader,
@@ -18,28 +18,26 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from 'reactstrap';
-import { CardMedia } from '@material-ui/core';
+} from "reactstrap";
+import { CardMedia } from "@material-ui/core";
 // const dev = process.env.REACT_APP_DEV === "true" ? true : false;
 // let URL;
 // dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
 let URL = process.env.REACT_APP_URL;
 
-const headers = {
-  Authorization: 'JWT ' + localStorage.getItem('token')
-};
+let headers;
 class Flights extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropdownButtonTitle: 'Aircraft Choice',
+      dropdownButtonTitle: "Aircraft Choice",
       aircraftChoice: [],
       dropdownOpen: false,
       flightData: [],
       openModal: false,
-      name: '',
-      remarks: '',
+      name: "",
+      remarks: "",
       no_instument_app: null,
       no_ldg: null,
       cross_country: null,
@@ -49,17 +47,18 @@ class Flights extends Component {
       sim_instr: null,
       day: null,
       night: null,
-      airports_visited: '',
+      airports_visited: "",
       fly_date: null,
-      snippet: '',
+      snippet: "",
       aircraft: null,
       id: null,
-      license_type: '',
+      license_type: "",
       total_hours: null,
-      sv_html: '',
-      sv_script: '',
+      sv_html: "",
+      sv_script: "",
       errorMessage: false,
-      openModalAlert: false
+      openModalAlert: false,
+      loading: true,
     };
   }
   toggleModal = () => {
@@ -78,28 +77,28 @@ class Flights extends Component {
       dropdownOpen: !this.state.dropdownOpen
     });
   };
-  handleSnippet = (e) => {
+  handleSnippet = e => {
     let html = e.target.value;
-    html = html.split('200px; height: 200px;').join('100%; height: 165px;');
-    let arr = html.split('</div>');
-    let sv_html = arr[0] + '</div>';
+    html = html.split("200px; height: 200px;").join("100%; height: 165px;");
+    let arr = html.split("</div>");
+    let sv_html = arr[0] + "</div>";
     let sv_script = arr[1];
     // console.log('SV HTML ', sv_html);
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
   //CHANGES TITLE OF DROPDOWN BUTTON WHEN USER SELECTS THE AIRCRAFT USED WHEN CREATING NEW FLIGHT
-  handleDropDownButton = (e) => {
+  handleDropDownButton = e => {
     this.setState({ dropdownButtonTitle: e.target.name });
   };
-  handleInputChange = (e) => {
+  handleInputChange = e => {
     this.setState({ [e.target.name]: e.target.value });
     // console.log('namechange', this.state.name);
   };
   // ADD NEW FLIGHT
-  toggleAndPost = (e) => {
+  toggleAndPost = e => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
-    if (this.state.dropdownButtonTitle === 'Aircraft Choice') {
-      alert('Please Select The Aircraft You Flew With');
+    if (this.state.dropdownButtonTitle === "Aircraft Choice") {
+      alert("Please Select The Aircraft You Flew With");
       return;
     }
     let aircraftURL = `${URL}api/aircraft/`;
@@ -109,7 +108,7 @@ class Flights extends Component {
         this.state.aircraftChoice[i].tail_number ===
         this.state.dropdownButtonTitle
       ) {
-        aircraftURL += this.state.aircraftChoice[i].id + '/';
+        aircraftURL += this.state.aircraftChoice[i].id + "/";
         licensetype = this.state.aircraftChoice[i].license_type;
         // console.log('flightlic', this.state.aircraftChoice[i].license_type);
       }
@@ -117,7 +116,7 @@ class Flights extends Component {
       //   console.log('flightlicstate', this.state.license_type);
     }
     axios({
-      method: 'POST',
+      method: "POST",
       url: `${URL}api/flights/`,
       data: {
         name: this.state.name,
@@ -142,11 +141,11 @@ class Flights extends Component {
       },
       headers: headers
     })
-      .then((response) => {
+      .then(response => {
         // console.log('??????????', response);
       })
-      .catch((error) => {
-        console.log('put error', error);
+      .catch(error => {
+        console.log("put error", error);
       });
     this.setState({
       openModal: !this.state.openModal
@@ -155,41 +154,69 @@ class Flights extends Component {
   };
   componentDidMount() {
     const headers = {
-      Authorization: 'JWT ' + localStorage.getItem('token')
+      Authorization: "JWT " + localStorage.getItem("token")
     };
+    setTimeout(() => this.setState({ loading: false }), 750);
     axios({
-      method: 'GET',
+      method: "GET",
       url: `${URL}api/aircraft/`,
       headers: headers
     })
-      .then((response) => {
+      .then(response => {
         this.setState({ aircraftChoice: response.data });
         // console.log('ac state', this.state.aircraftChoice);
       })
-      .catch((err) => {
-        this.props.history.push('/');
+      .catch(err => {
+        this.props.history.push("/");
         console.log(err);
       });
     axios({
-      method: 'get',
+      method: "get",
       url: `${URL}api/flights/`,
       headers: headers
     })
-      .then((response) => {
+      .then(response => {
         // console.log('====D flights get response', response.data);
         this.setState({ flightData: response.data });
       })
-      .catch((error) => {
-        console.log('flights get error', error);
+      .catch(error => {
+        console.log("flights get error", error);
       });
   }
   render() {
     // console.log('FLIGHTS PROPS', this.props);
     // console.log('E TARGET VALUE ', this.state.sv_html);
-    return (
+    headers = {
+      Authorization: "JWT " + localStorage.getItem("token")
+    };
+
+    const { loading } = this.state;
+    if (loading) {
+      return(
+
+        <div className="Flights">
+          <NavBar />
+          <TopHeader />
+          <div className="FlightList-loading">
+            <Card
+              className="Flights-NewCard-Loading"
+              >
+              <div className="load-bar">
+                <div className="bar" />
+                <div className="bar" />
+                <div className="bar" />
+              </div>
+            </Card>
+          </div>
+        </div>
+      );
+    } else {
+      
+    
+      return (
       <div className="Flights">
         <TopHeader
-          breadcrumb={['flights']}
+          breadcrumb={["flights"]}
           data={this.state.flightData}
           displayTotal={true}
         />
@@ -199,34 +226,34 @@ class Flights extends Component {
             onClick={this.toggleModal}
             className="Flights-NewCard"
             style={{
-              boxShadow: this.state.openModal ? 'inset 1px 1px 1px gray' : '',
-              display: 'flex',
-              justifyContent: 'center',
-              alignItems: 'center',
-              height: '370px'
+              boxShadow: this.state.openModal ? "inset 1px 1px 1px gray" : "",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "370px"
             }}
           >
             <Modal toggle={this.toggleModal} isOpen={this.state.openModalAlert}>
               <ModalHeader>
                 {this.state.errorMessage
-                  ? 'Please create an aircraft first'
-                  : ''}
+                  ? "Please create an aircraft first"
+                  : ""}
               </ModalHeader>
             </Modal>
             <CardContent>
               {/* CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button> */}
               <CardMedia
                 onClick={this.toggleModal}
-                style={{ display: 'flex', justifyContent: 'center' }}
+                style={{ display: "flex", justifyContent: "center" }}
               >
                 <i
-                  class="fa fa-plus-circle Plus-sign"
+                  className="fa fa-plus-circle fa-3x Plus-sign"
                   onClick={this.toggleModal}
                 />
               </CardMedia>
             </CardContent>
           </Card>
-          {this.state.flightData.map((flight) => {
+          {this.state.flightData.map(flight => {
             return (
               <FlightCard
                 aircraftChoice={this.state.aircraftChoice}
@@ -235,16 +262,46 @@ class Flights extends Component {
               />
             );
           })}
-          <Modal isOpen={this.state.openModal} toggle={this.toggleModal}>
-            <Card onClick={this.toggle} className="NewFlightsCard-Card">
-              <Typography className="card-typography" onClick={this.toggle} />
-              <ModalHeader>
+          {/* NEW FLIGHT MODAL */}
+          <Modal
+            className="NewFlightModal"
+            isOpen={this.state.openModal}
+            toggle={this.toggleModal}
+          >
+            {/* <Card onClick={this.toggle} className="NewFlightsCard-Card"> */}
+            {/* <Typography className="card-typography" onClick={this.toggle} /> */}
+            <ModalHeader className="NewFlightModalHeader">
+              <div className="NewFlight-header-inputs">
                 <input
                   className="new-flight-input-name"
                   name="name"
                   onChange={this.handleInputChange}
                   placeholder="Flight Name"
                 />
+                {/* DROP DOWN FOR SELECTING AIRCRAFT */}
+                <ButtonDropdown
+                  className="NewFlightDropdown"
+                  isOpen={this.state.dropdownOpen}
+                  toggle={this.toggleDropdownButton}
+                >
+                  <DropdownToggle caret>
+                    {this.state.dropdownButtonTitle}
+                  </DropdownToggle>
+                  <DropdownMenu>
+                    {this.state.aircraftChoice.map(aircraft => {
+                      return (
+                        <DropdownItem
+                          onClick={this.handleDropDownButton}
+                          name={aircraft.tail_number}
+                          key={aircraft.id}
+                        >
+                          {aircraft.tail_number}
+                        </DropdownItem>
+                      );
+                    })}
+                  </DropdownMenu>
+                </ButtonDropdown>
+                {/* END DROP DOWN FOR SELECTING AIRCRAFT */}
                 <input
                   className="new-flight-input-av"
                   name="airports_visited"
@@ -252,149 +309,122 @@ class Flights extends Component {
                   placeholder="Airports Visited"
                 />
                 <input
-                  className="new-flight-input-av"
+                  className="new-flight-input-fd"
                   name="fly_date"
                   onChange={this.handleInputChange}
                   type="date"
                 />
-              </ModalHeader>
-              <ModalBody className="new-flight-snippet">
-                <textarea
-                  rows="4"
-                  cols="50"
-                  name="html-snippet"
-                  form="usrform"
-                  onChange={this.handleSnippet}
-                  placeholder="Paste your HTML Snippet Here"
-                />
-              </ModalBody>
-              {/* DROP DOWN FOR SELECTING AIRCRAFT */}
-              <ButtonDropdown
-                isOpen={this.state.dropdownOpen}
-                toggle={this.toggleDropdownButton}
-              >
-                <DropdownToggle caret>
-                  {this.state.dropdownButtonTitle}
-                </DropdownToggle>
-                <DropdownMenu>
-                  {this.state.aircraftChoice.map((aircraft) => {
-                    return (
-                      <DropdownItem
-                        onClick={this.handleDropDownButton}
-                        name={aircraft.tail_number}
-                        key={aircraft.id}
-                      >
-                        {aircraft.tail_number}
-                      </DropdownItem>
-                    );
-                  })}
-                </DropdownMenu>
-              </ButtonDropdown>
-              {/* END DROP DOWN FOR SELECTING AIRCRAFT */}
-              <ModalBody>
-                <textarea
-                  placeholder="Remarks, Procedures, Maneuvers"
-                  name="remarks"
-                  onChange={this.handleInputChange}
-                  rows="4"
-                  cols="50"
-                />
-              </ModalBody>
-              <ModalFooter>
-                <div>
-                  <div>
-                    Pic
-                    <input
-                      className="new-flight-pic-input"
-                      name="pic"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    Cross Country
-                    <input
-                      className="new-flight-pic-input"
-                      name="cross_country"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    No Instr app.
-                    <input
-                      className="new-flight-pic-input"
-                      name="no_instument_app"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    No. Ldg.
-                    <input
-                      className="new-flight-pic-input"
-                      name="no_ldg"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    Day
-                    <input
-                      className="new-flight-pic-input"
-                      name="day"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    Night
-                    <input
-                      className="new-flight-pic-input"
-                      name="night"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    Actual Instr.
-                    <input
-                      className="new-flight-pic-input"
-                      name="actual_instr"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    Sim. Instr.
-                    <input
-                      className="new-flight-pic-input"
-                      name="sim_instr"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    Dual Rec.
-                    <input
-                      className="new-flight-pic-input"
-                      name="dual_rec"
-                      onChange={this.handleInputChange}
-                    />
-                  </div>
-                  <div>
-                    Total
-                    <input
-                      className="new-flight-pic-input"
-                      name="total_hours"
-                      onChange={this.handleInputChange}
-                    />
-                    <button
-                      className="edit-button"
-                      onClick={this.toggleAndPost}
-                    >
-                      Save
-                    </button>
-                  </div>
+              </div>
+            </ModalHeader>
+            <ModalBody className="NewFlightHTMLSnippet">
+              <textarea
+                className="snippet-text-area"
+                rows="4"
+                cols="50"
+                name="html-snippet"
+                form="usrform"
+                onChange={this.handleSnippet}
+                placeholder="Paste your HTML Snippet Here"
+              />
+            </ModalBody>
+
+            <ModalBody className="NewFlightRemarks">
+              <textarea
+                className="remarks-area"
+                placeholder="Remarks, Procedures, Maneuvers"
+                name="remarks"
+                onChange={this.handleInputChange}
+                rows="4"
+                cols="50"
+              />
+            </ModalBody>
+            <ModalFooter className="NewModalFooter">
+              <div className="NewModalFooterChildren">
+                <div classname="hhh">
+                  <span>Cross Country :</span>
+                  <span>No. Instr. App. :</span>
+                  <span>No. Ldg. :</span>
+                  <span>Day :</span>
+                  <span>Night :</span>
                 </div>
-              </ModalFooter>
-            </Card>
+                <div className="YYY">
+                  <input
+                    className="new-flight-pic-input"
+                    name="cross_country"
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    className="new-flight-pic-input"
+                    name="no_instument_app"
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    className="new-flight-pic-input"
+                    name="no_ldg"
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    className="new-flight-pic-input"
+                    name="day"
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    className="new-flight-pic-input"
+                    name="night"
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+              </div>
+              <div className="NewModalFooterChildren">
+                <div id="zzz">
+                  <span>Actual :</span>
+                  <span>SIM :</span>
+                  <span>Dual Rec. :</span>
+                  <span>PIC :</span>
+                  <span>Total :</span>
+                </div>
+                <div className="YYY">
+                  <input
+                    className="new-flight-pic-input"
+                    name="actual_instr"
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    className="new-flight-pic-input"
+                    name="sim_instr"
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    className="new-flight-pic-input"
+                    name="dual_rec"
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    className="new-flight-pic-input"
+                    name="pic"
+                    onChange={this.handleInputChange}
+                  />
+                  <input
+                    className="new-flight-pic-input"
+                    name="total_hours"
+                    onChange={this.handleInputChange}
+                  />
+                </div>
+              </div>
+            </ModalFooter>
+            <div className="flight-edit-save-container">
+              <button
+                className="flight-edit-save-button"
+                onClick={this.toggleAndPost}
+              >
+                Save
+              </button>
+            </div>
           </Modal>
         </div>
       </div>
     );
+  }
   }
 }
 export default Auth(Flights);

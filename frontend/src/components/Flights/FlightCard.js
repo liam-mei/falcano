@@ -43,22 +43,22 @@ class FlightCard extends Component {
 
       name: '',
       remarks: '',
-      no_instument_app: null,
-      no_ldg: null,
-      cross_country: null,
-      pic: null,
-      dual_rec: null,
-      actual_instr: null,
-      sim_instr: null,
-      day: null,
-      night: null,
+      no_instument_app: '',
+      no_ldg: '',
+      cross_country: '',
+      pic: '',
+      dual_rec: '',
+      actual_instr: '',
+      sim_instr: '',
+      day: '',
+      night: '',
       airports_visited: '',
-      fly_date: null,
+      fly_date: '',
       snippet: '',
-      aircraft: null,
-      id: null,
+      aircraft: '',
+      id: '',
       license_type: '',
-      total_hours: null,
+      total_hours: '',
       sv_html: '',
       sv_script: '',
       xxxsv_html2: '',
@@ -283,9 +283,9 @@ class FlightCard extends Component {
               <span>{this.props.flight.total_hours}</span>
             </div>
             <div className="FlightIcons">
-              <i class="fas fa-edit fa-lg" onClick={this.modalToggle} />
+              <i className="fas fa-edit fa-lg" onClick={this.modalToggle} />
               <i
-                class="fa fa-trash fa-lg delete-button"
+                className="fa fa-trash fa-lg delete-button"
                 onClick={this.toggleDelete}
                 aria-hidden="true"
               />
@@ -354,9 +354,9 @@ class FlightCard extends Component {
           </ModalFooter>
           <ModalFooter>
           <div className="FlightIcons">
-            <i class="fas fa-edit fa-lg" onClick={this.nestedModalToggle} />
+            <i className="fas fa-edit fa-lg" onClick={this.nestedModalToggle} />
             <i
-              class="fa fa-trash delete-button"
+              className="fa fa-trash delete-button"
               onClick={this.toggleDelete}
               aria-hidden="true"
               />

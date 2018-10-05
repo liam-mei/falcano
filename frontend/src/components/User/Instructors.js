@@ -1,15 +1,12 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import axios from "axios";
 import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
 import NavBar from "../NavBar";
 import TopHeader from "../TopHeader";
 import "./Instructors.css";
 import InstructorCard from "./InstructorCard";
-import CardMedia from "@material-ui/core/CardMedia";
-import PlusIcon from '../../utils/Images/PlusIcon.png'
+
 
 // const dev = process.env.REACT_APP_DEV === "true" ? true : false;
 // let URL;
