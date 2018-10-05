@@ -1,4 +1,10 @@
+.InstructorCard-Card {
 
+  max-width: 300px;
+  min-height: 568px;
+  max-height: 568px;
+  min-width: 300px;
+}
 
 .Instructors .InstructorCard .button-container {
   display: flex;

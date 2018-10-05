@@ -169,7 +169,7 @@ class InstructorCard extends Component {
     console.log("INSTR CARD STATE: ", this.props.data);
     return (
       <div className={""}>
-        <Card className={""}>
+        <Card className="InstructorCard-Card">
           <CardContent>
             <Typography className={"Instructors-card-name"}>
               {this.props.data.name}

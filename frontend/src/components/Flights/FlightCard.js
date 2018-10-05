@@ -16,7 +16,8 @@ import {
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
+  DropdownItem,
+  Button
 } from 'reactstrap';
 import { CardContent } from '@material-ui/core';
 
@@ -181,6 +182,12 @@ class FlightCard extends Component {
   };
 
   toggleDelete = () => {
+    this.setState({ deleteModal: !this.state.deleteModal });
+
+    // this.setState({modal: !this.state.modal})
+  };
+
+  confirmDelete = () => {
     axios({
       method: 'DELETE',
       url: `${URL}api/flights/${this.state.id}/`,
@@ -540,6 +547,53 @@ class FlightCard extends Component {
                 <button className="flight-edit-save-button" onClick={this.toggleAndPost}>
                   Save
                 </button>
+          </div>
+        </Modal>
+        <Modal
+          className="confirm-instructor-delete"
+          size="sm"
+          style={{
+            display: "flex",
+            padding: "10px",
+            height: "100px",
+            width: "200px",
+            textAlign: "center",
+            marginTop: "20%",
+            marginLeft: "50%"
+          }}
+          isOpen={this.state.deleteModal}
+          toggle={this.toggleDelete}
+        >
+          <div className="confirm-delete-content">
+            Confirm Delete?
+            <br />
+            <br />
+            <Button
+              color="danger"
+              onClick={this.confirmDelete}
+              style={{
+                fontSize: "14px",
+                fontWeight: "bold",
+                color: "#FFFFFF",
+                width: "89px",
+                borderRadius: "0"
+              }}
+            >
+              {" "}
+              Delete{" "}
+            </Button>
+            <Button
+              onClick={this.toggleDelete}
+              style={{
+                fontSize: "14px",
+                fontWeight: "bold",
+                color: "#FFFFFF",
+                width: "89px",
+                borderRadius: "0"
+              }}
+            >
+              Cancel
+            </Button>
           </div>
         </Modal>
       </div>

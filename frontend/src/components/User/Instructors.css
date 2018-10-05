@@ -14,7 +14,6 @@
   grid-row: 2/ -1;
   display: grid;
   padding: 2rem;
-  padding-top: 0rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
   grid-gap: 2rem;
   text-align: center;
@@ -22,11 +21,16 @@
 }
 
 .Instructors .InstructorCard .Instructor-card-card {
-  max-width: 400px;
+  max-width: 300px;
   min-height: 568px;
   max-height: 568px;
-  min-width: 400px;
+  min-width: 300px;
 }
+
+.Instructors .InstructorCard .Plus-sign {
+  color: var(--sky)
+}
+
 
 .Instructors .NewInstructor .FormContainer {
   border: 2px solid gray;
@@ -203,4 +207,39 @@
    flex-direction: column;
    align-content: center;
    margin-bottom: 1rem;
+}
+
+
+.Instructors .load-bar {
+  position: relative;
+  margin-left: 5%;
+  margin-top: 82%;
+  width: 90%;
+  height: 9px;
+  background-color: var(--sky);
+}
+.Instructors .bar {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 100%;
+  left: 50%;
+  text-align: center;
+}
+.Instructors .bar:nth-child(1) {
+  background-color: #eff3f9;
+  animation: loading 3s linear infinite;
+}
+.Instructors .bar:nth-child(2) {
+  background-color: var(--sky);
+  animation: loading 3s linear 1s infinite;
+}
+.Instructors .bar:nth-child(3) {
+  background-color: var(--silver);
+  animation: loading 3s linear 2s infinite;
+}
+@keyframes loading {
+    from {left: 50%; width: 0;z-index:100;}
+    33.3333% {left: 0; width: 100%;z-index: 10;}
+    to {left: 0; width: 100%;}
 }

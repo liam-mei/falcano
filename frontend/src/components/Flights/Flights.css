@@ -314,7 +314,7 @@
   background-color: var(--sky);
  }
 
- .load-bar {
+ .Flights .load-bar {
   position: relative;
   margin-left: 5%;
   margin-top: 42%;
@@ -322,7 +322,7 @@
   height: 9px;
   background-color: var(--sky);
 }
-.bar {
+.Flights .bar {
   content: "";
   position: absolute;
   width: 0;
@@ -330,15 +330,15 @@
   left: 50%;
   text-align: center;
 }
-.bar:nth-child(1) {
+.Flights .bar:nth-child(1) {
   background-color: #eff3f9;
   animation: loading 3s linear infinite;
 }
-.bar:nth-child(2) {
+.Flights .bar:nth-child(2) {
   background-color: var(--sky);
   animation: loading 3s linear 1s infinite;
 }
-.bar:nth-child(3) {
+.Flights .bar:nth-child(3) {
   background-color: var(--silver);
   animation: loading 3s linear 2s infinite;
 }
