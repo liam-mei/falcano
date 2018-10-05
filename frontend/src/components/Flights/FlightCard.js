@@ -298,9 +298,9 @@ class FlightCard extends Component {
               <span>{this.props.flight.total_hours}</span>
             </div>
             <div className="FlightIcons">
-              <i className="fas fa-edit fa-lg" onClick={this.modalToggle} />
+              <i className="fas fa-edit" onClick={this.modalToggle} />
               <i
-                className="fa fa-trash fa-lg delete-button"
+                className="fa fa-trash delete-button"
                 onClick={this.toggleDelete}
                 aria-hidden="true"
               />
