@@ -127,27 +127,28 @@ class Aircrafts extends Component {
       Authorization: "JWT " + localStorage.getItem("token")
     };
 
-    const { loading } = this.state;
-    if (loading) {
-      return (
-        <div className="Aircrafts">
-          <NavBar />
-          <TopHeader />
-          <div className="Aircraft-content">
-            <Card
-            className="AircraftList-loading"
-              >
-              <div className="load-bar">
-                <div className="bar" />
-                <div className="bar" />
-                <div className="bar" />
-              </div>
-            </Card>
-          </div>
-        </div>
+  //   const { loading } = this.state;
+  //   if (loading) {
+  //     return (
+  //       <div className="Aircrafts">
+  //         <NavBar />
+  //         <TopHeader />
+  //         <div className="Aircraft-content">
+	// 				<div className="AircraftList-loading"></div>
+  //           <Card
+  //           className="AircraftCard-loading"
+  //             >
+  //             <div className="load-bar">
+  //               <div className="bar" />
+  //               <div className="bar" />
+  //               <div className="bar" />
+  //             </div>
+  //           </Card>
+  //         </div>
+  //       </div>
 
-    );
-  }else
+  //   );
+  // }else
 		return (
 			<div className="Aircrafts">
 				<TopHeader breadcrumb={[ 'aircraft' ]} displayTotal={true} username={this.props.username} />
@@ -158,14 +159,9 @@ class Aircrafts extends Component {
             onClick={this.toggleModal}
             style={{
               boxShadow: this.state.openModal ? "inset 1px 1px 1px gray" : "",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-							height: "287px",
-							width: '244px',
             }}
           >
-					<i class="fas fa-plus-circle Plus-sign" onClick={this.toggleModal}></i>
+					<i class="fas fa-plus-circle fa-3x Plus-sign" onClick={this.toggleModal}></i>
 					</Card>
 					{this.state.data.map((plane) => {
 						let id = plane.id;

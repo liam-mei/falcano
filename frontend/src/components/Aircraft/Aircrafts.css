@@ -15,17 +15,22 @@
 }
 
 .Aircrafts .AircraftList-loading {
-  box-shadow: none;
+  display: grid;
+  padding: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+  width: 300px;
+  height: 300px;
 }
 
 .Aircrafts .Aircraft-content .Plus-sign {
-  font-size: 4rem;
+  
   color: var(--sky);
-  margin-top: 1rem;
-  margin-left: 1rem;
-  width: 4rem;
-  box-shadow: 2px 1px rgba(0, 0, 0, 0.2);
-  border-radius: 50%;
+  margin-top: 45%;
+  margin-left: 40%;
+ 
+  /* box-shadow: 2px 1px rgba(0, 0, 0, 0.2); */
+
 }
 
 .Aircrafts .Aircraft-content .Plus-sign:hover {

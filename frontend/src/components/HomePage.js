@@ -270,8 +270,8 @@ class HomePage extends Component {
             <Card
               style={{
                 marginTop: "10%",
-                maxWidth: "800px",
-                height: "600px",
+                maxWidth: "700px",
+                height: "500px",
                 marginLeft: "15%",
                 boxShadow: 'none',
               }}
