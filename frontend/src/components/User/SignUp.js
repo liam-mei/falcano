@@ -42,8 +42,8 @@ class SignUp extends Component {
 				this.setState({ errorMessage: 'Please enter a password' });
 				return; // terminates the handle function function
 			}
-			else if (this.state.password.length < 6) {
-				this.setState({errorMessage: "Please enter a password that is 6 characters or longer"})
+			else if (this.state.password.length < 8) {
+				this.setState({errorMessage: "Please enter a password that is 8 characters or longer"})
 				return;
 			}
 			//check if the passwords match
