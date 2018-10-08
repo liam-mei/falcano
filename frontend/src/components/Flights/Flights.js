@@ -59,6 +59,7 @@ class Flights extends Component {
       errorMessage: false,
       openModalAlert: false,
       loading: true,
+      flightNameErrorMessage: ''
     };
   }
   toggleModal = () => {
@@ -97,6 +98,11 @@ class Flights extends Component {
   // ADD NEW FLIGHT
   toggleAndPost = e => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
+    if(this.state.name.length === 0) {
+      e.preventDefault()
+      this.setState({ flightNameErrorMessage: "This is a required field"})
+      return;
+    }
     if (this.state.dropdownButtonTitle === "Aircraft Choice") {
       alert("Please Select The Aircraft You Flew With");
       return;
@@ -240,9 +246,8 @@ class Flights extends Component {
                   : ""}
               </ModalHeader>
             </Modal>
-            <CardContent>
               {/* CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button> */}
-              <CardMedia
+            <CardContent
                 onClick={this.toggleModal}
                 style={{ display: "flex", justifyContent: "center" }}
               >
@@ -250,7 +255,6 @@ class Flights extends Component {
                   className="fa fa-plus-circle fa-3x Plus-sign"
                   onClick={this.toggleModal}
                 />
-              </CardMedia>
             </CardContent>
           </Card>
           {this.state.flightData.map(flight => {
@@ -272,12 +276,23 @@ class Flights extends Component {
             {/* <Typography className="card-typography" onClick={this.toggle} /> */}
             <ModalHeader className="NewFlightModalHeader">
               <div className="NewFlight-header-inputs">
+              {this.state.flightNameErrorMessage ? 
+
                 <input
-                  className="new-flight-input-name"
-                  name="name"
-                  onChange={this.handleInputChange}
-                  placeholder="Flight Name"
+                style={{ border: '.1rem solid red'}}
+                className="new-flight-input-name"
+                name="name"
+                onChange={this.handleInputChange}
+                placeholder="Flight Name is required"
+                /> 
+                :
+                <input
+                className="new-flight-input-name"
+                name="name"
+                onChange={this.handleInputChange}
+                placeholder="Flight Name"
                 />
+              }
                 {/* DROP DOWN FOR SELECTING AIRCRAFT */}
                 <ButtonDropdown
                   className="NewFlightDropdown"
