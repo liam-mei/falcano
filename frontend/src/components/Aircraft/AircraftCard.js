@@ -211,7 +211,7 @@ class AircraftCardModal extends React.Component {
           let imgurl;
           result
             ? (imgurl = result[0].url)
-            : (imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg`);
+            : (imgurl = `https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866643/u6mblomcszwbcs9ovesz.jpg`);
           this.setState({ uploadurl: imgurl });
         } else if (this.state.uploadurl !== "") {
           let imgurl;

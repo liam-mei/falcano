@@ -194,7 +194,7 @@
 .NewFlightModal .NewFlightModalHeader .NewFlightDropdown button {
   height: 32px;
   padding: 0px;
-  width: 144px ;
+  width: 165px ;
   /* color: black;
   background-color: white; */
   
@@ -224,7 +224,7 @@
 .NewFlightModal .NewFlightModalHeader .new-flight-input-name {
   margin-right: 3%;
   margin-left: 10px;
-  width: 62%;
+  width: 58%;
   height: 32px;
   padding: 0px;
   margin-bottom: 10px;
@@ -247,14 +247,14 @@
 .NewFlightModal .NewFlightModalHeader .new-flight-input-av {
   margin-right: 3%;
   margin-left: 10px;
-  width: 62%;
+  width: 58%;
   padding: 0px;
   margin-bottom: 10px
 }
 
 .NewFlightModal .NewFlightModalHeader .new-flight-input-fd {
   height: 34px;
-  width: 31%;
+  width: 36%;
   -webkit-appearance: none;
    -moz-appearance:    none;
    appearance:         none

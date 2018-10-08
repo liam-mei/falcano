@@ -1,10 +1,11 @@
 import React from 'react';
 
 import { injectStripe, CardElement } from 'react-stripe-elements';
-
+import axios from 'axios';
 import "./Checkout.css";
 
 let URL = process.env.REACT_APP_URL;
+let headers;
 
 class Checkout extends React.Component {
   state = {
@@ -65,13 +66,27 @@ class Checkout extends React.Component {
               body: formData
             })
               .then((resp) => resp.json())
-              .then((json) => this.setState({ resp_message: json.message }));
+              .then((json) => this.setState({ resp_message: json.message }))
+              .then(
+                axios({
+                  method: "POST",
+                  url: `${URL}api/billing/`,
+                  data: {
+                    premium: true,
+                  },
+                  headers: headers
+                })
+              )
+              .then( localStorage.setItem('premium', true))
           }
         })
     );
   };
 
   render() {
+    headers = {
+      Authorization: "JWT " + localStorage.getItem("token")
+    };
     return (
       <div className="Checkout">
         <div className="Checkout-card">

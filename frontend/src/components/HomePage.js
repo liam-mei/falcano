@@ -170,6 +170,92 @@ class HomePage extends Component {
     let hoverColor8 = "#0277BD";
     let hoverColor9 = "#01579B";
 
+    let data2 = {
+      labels: types,
+      datasets: [
+        {
+          label: "PIC",
+          data: [5, 2, 1, 7],
+          backgroundColor: color1,
+          hoverBackgroundColor: hoverColor1,
+          hoverBorderWidth: 0
+        },
+        {
+          label: "Dual Rec",
+          data: [3, 6, 0, 5],
+          backgroundColor: color2,
+          hoverBackgroundColor: hoverColor2,
+          hoverBorderWidth: 0
+        },
+        {
+          label: "Sim Instr",
+          data: [2, 5, 2, 8],
+          backgroundColor: color3,
+          hoverBackgroundColor: hoverColor3,
+          hoverBorderWidth: 2
+        },
+        {
+          label: "Actual Instr",
+          data: [9, 1, 2, 5],
+          backgroundColor: color4,
+          hoverBackgroundColor: hoverColor4,
+          hoverBorderWidth: 2
+        },
+        {
+          label: "Day",
+          data: [2, 3, 1, 2],
+          backgroundColor: color5,
+          hoverBackgroundColor: hoverColor5,
+          hoverBorderWidth: 2
+        },
+        {
+          label: "Night",
+          data: [4,2,1,3],
+          backgroundColor: color6,
+          hoverBackgroundColor: hoverColor6,
+          hoverBorderWidth: 2
+        },
+        {
+          label: "Cross Country",
+          data: [3,2,1,6],
+          backgroundColor: color7,
+          hoverBackgroundColor: hoverColor7,
+          hoverBorderWidth: 2,
+          hidden: true
+        },
+        {
+          label: "No Instrument App",
+          data: [1,4,2,0],
+          backgroundColor: color8,
+          hoverBackgroundColor: hoverColor8,
+          hoverBorderWidth: 2,
+          hidden: true
+        },
+        {
+          label: "No Ldg",
+          data: [5,2,1,3],
+          backgroundColor: color9,
+          hoverBackgroundColor: hoverColor9,
+          hoverBorderWidth: 2,
+          hidden: true
+        }
+      ],
+      tooltips: {
+        mode: "index",
+        backgroundColor: "rgba(255,255,255)",
+        borderColor: "rgb(0, 0, 0)",
+        borderWidth: 0.3,
+        cornerRadius: 0,
+        caretSize: 0,
+        xPadding: 70,
+        yPadding: 25,
+        titleFontColor: "rgba(0, 0, 0, 0.87)",
+        titleFontSize: 10,
+        titleFontFamily: "Roboto",
+        bodyFontFamily: "Roboto"
+      }
+    };
+
     let data = {
       labels: types,
       datasets: [
@@ -294,8 +380,9 @@ class HomePage extends Component {
           <div className="HomePage-info">
             {/* <img src={logo } className="Falcano-Logo" alt="logo"/> */}
             <Card className="Homepage-totalscard">
-              <h4 style={{ paddingTop: "30px" }}>Your Falcano Hours</h4>
-              <HorizontalBar data={data} options={options} />
+              <h4 style={{ paddingTop: "30px" }}>{localStorage.getItem('premium') ? 'Your Falcano Hours' : 'Sign up for premium to display your Falcano hours'}</h4>
+              
+                <HorizontalBar data={localStorage.getItem('premium') ? data : data2} options={options} />
               {/* <Chart data={data}>
                 <Axis primary type="ordinal" position="left" />
                 <Axis type="linear" stacked position="bottom" />

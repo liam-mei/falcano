@@ -109,7 +109,7 @@ class InstructorCard extends Component {
           let imgurl;
           result
             ? (imgurl = result[0].url)
-            : (imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg`);
+            : (imgurl = `https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866867/Default%20Images/Portrait_Placeholder.png`);
           this.setState({ uploadurl: imgurl });
         } else if (this.state.uploadurl !== "") {
           let imgurl;
@@ -183,7 +183,7 @@ class InstructorCard extends Component {
             onClick={this.toggle}
             component="img"
             height="250"
-            image={this.props.data.photo}
+            image={this.props.data.photo || `https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866867/Default%20Images/Portrait_Placeholder.png`}
             style={{ marginLeft: "auto", marginRight: "auto", width: "400px", height: '225px' }}
           />
           <CardContent>

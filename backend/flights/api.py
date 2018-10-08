@@ -1,5 +1,5 @@
 from rest_framework import serializers, viewsets
-from .models import Flights, Aircraft, Instructor
+from .models import Flights, Aircraft, Instructor, Billing
 
 from django.db.models import Sum, Count, F
 
@@ -120,18 +120,6 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         print("FLIGHTS USER: ", self.request.user)
-        # import pdb; pdb.set_trace()
-        # user = self.request.user
-        # print(Flights.objects.filter(tail_number='tailnumber1'))
-        # return Flights.objects.filter(tail_number='tailnumber1').aggregate(Sum('pic'))
-        # return Flights.objects.filter(tail_number='tailnumber1').annotate(name_count=Count('pic')).aggregate(Sum('pic'))
-        # sum = []
-        #for i in Flights.objects.filter(tail_number="tail1"):
-        # fl = Flights.objects.filter(tail_number='tail1').values('pic')
-        # print("fl", fl)
-        # sum_fl = fl.annotate(pic_count=Sum('pic'))
-        # print("sum", sum_fl)
-        # return sum_fl
         user = self.request.user
         aircraft = self.request.aircraft.id
         if user.is_anonymous:
@@ -139,54 +127,24 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
         else:
             return Flights.objects.filter(user=user, aircraft=aircraft)
 
-        #     c = Flights.objects.filter(tail_number="tail1")
-        #     sum.append(c[i])
-        # print('SUM', sum)
-        # Flights.objects.annotate(pic_count=sum)
-            # print("ccccccccc", c)
-            # return c 
+    
+class BillingsSerializer(serializers.HyperlinkedModelSerializer):
 
-            #  sum += i.pic
-        # c = Flights.objects.filter(tail_number='tailnumber1')
-        # c = Flights.objects.filter(tail_number='tail1')
-        # print(c)
+    class Meta:
+        model = Billing
+        fields = ('premium',)
 
-        # a = []
-
-        # sum = 0
-
-        # for i in c:
-        #     print("i asdlfkjasd: ", i.pic)
-        #     d = c.annotate(pic_count=Sum('pic'))
-        #     Flights.pic_count.save(d)
-        # return self.pic_count
-        # print('BEFORE ASDFKAS;DLFKJAS;LDF')
-        # print('pic', sum)
-        # print('AFTER AS;DLFKJAS;LDKFJAL;SJ')
-        # print("dddddddddd", d[0].pic_count)
-        # print(dir(c))
-
-        # return sum
-        # return c
+    def create(self, validated_data):
+        user = self.context['request'].user
+        billing = Billing.objects.create(user=user, **validated_data)
+        return billing
 
 
+class BillingViewSet(viewsets.ModelViewSet):
+    serializer_class = BillingsSerializer
+    queryset = Billing.objects.none()
 
-# doesn't quite work yet
-
-# class UpdateLicenseViewSet(viewsets.ModelViewSet):
-#     serializer_class = FlightsSerializer
-#     queryset = Flights.objects.none()
-#     def get_queryset(self):
-#         queryset2 = Flights.objects.filter(aircraft__license_type__contains='MES')
-#         queryset2.update(license_type="Airplane MES")
-#         return queryset2
-
-
-    # def get_queryset(self, **kwargs):
-    #     user = self.request.user
-    #     # return Aircraft.objects.filter(license_type='sel')
-
-    #     if user.is_anonymous:
-    #         return Flights.objects.none()
-    #     else:
-    #         return Flights.objects.filter(aircraft__license_type__contains='MES', user=user).update(license_type="Airplane MES"),
+    def get_queryset(self):
+        user = self.request.user
+        
+        return Billing.objects.filter(user=user)

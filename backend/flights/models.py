@@ -74,8 +74,7 @@ class Flights(models.Model):
 
 class Billing(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    stripe_payment_token = models.CharField(max_length=200)
-    payment_date = models.DateTimeField(auto_now_add=True)
+    premium = models.BooleanField(default=False)
 
 
 class Instructor(models.Model):

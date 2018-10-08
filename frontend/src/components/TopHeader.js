@@ -35,7 +35,12 @@ class TopHeader extends Component
   };
 
   toggleModal = () =>
+  
   {
+  if(localStorage.getItem('premium') !== "true") {
+    alert("Purchase Premium for access to your to total flight hours")
+    return;
+  }
     let [
       cross_country_total,
       no_instrument_app_total,
@@ -128,7 +133,8 @@ class TopHeader extends Component
 
   signOut = () =>
   {
-    localStorage.removeItem( 'token' );
+    localStorage.removeItem('token');
+    localStorage.removeItem('premium');
     window.location.replace( '/' );
   };
 
@@ -197,9 +203,9 @@ class TopHeader extends Component
           {
             const label = item.charAt( 0 ).toUpperCase() + item.slice( 1 ).toLowerCase();
             return (
-              <Fragment>
+              <Fragment key={i}>
                   <i class="fas fa-angle-right BreadCrumb-link-angle-right desktop" />
-                <div key={i} className="BreadCrumb-link desktop">
+                <div className="BreadCrumb-link desktop">
                   {label}
                 </div>
               </Fragment>
