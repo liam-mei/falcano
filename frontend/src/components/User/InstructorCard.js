@@ -1,18 +1,13 @@
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import axios from 'axios';
 import {
-  Button,
-  Modal,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  Glyphicon
-} from "reactstrap";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import "./InstructorCard.css";
+  Button, Modal, ModalHeader, ModalBody, ModalFooter, Glyphicon,
+} from 'reactstrap';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import './InstructorCard.css';
 
 // const dev = process.env.REACT_APP_DEV === "true" ? true : false;
 // let URL;
@@ -20,30 +15,30 @@ import "./InstructorCard.css";
 //   ? (URL = "http://127.0.0.1:8000/api")
 //   : (URL = "https://flightloggercs10.herokuapp.com/api");
 
-let URL = process.env.REACT_APP_URL;
+const URL = process.env.REACT_APP_URL;
 
 const headers = {
-  Authorization: "JWT " + localStorage.getItem("token")
+  Authorization: `JWT ${localStorage.getItem('token')}`,
 };
 
 class InstructorCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: "",
-      license_number: "",
-      photo: "",
-      ratings: "",
-      contact_number: "",
-      contact_email: "",
-      description: "",
+      name: '',
+      license_number: '',
+      photo: '',
+      ratings: '',
+      contact_number: '',
+      contact_email: '',
+      description: '',
       modal: false,
-      uploadurl: "",
-      deleteModal: false
+      uploadurl: '',
+      deleteModal: false,
     };
   }
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -52,9 +47,9 @@ class InstructorCard extends Component {
   };
 
   toggleAndPut = () => {
-    if (this.state.uploadurl === "") {
+    if (this.state.uploadurl === '') {
       axios({
-        method: "PUT",
+        method: 'PUT',
         url: `${URL}api/instructors/${this.props.data.id}/`,
         data: {
           name: this.state.name,
@@ -63,20 +58,20 @@ class InstructorCard extends Component {
           contact_email: this.state.contact_email,
           contact_number: this.state.contact_number,
           description: this.state.description,
-          photo: this.state.photo
+          photo: this.state.photo,
         },
-        headers: headers
+        headers,
       })
-        .then(response => {
+        .then((response) => {
           // console.log("put response", response);
           window.location.reload();
         })
-        .catch(error => {
-          console.log("put error", error);
+        .catch((error) => {
+          console.log('put error', error);
         });
     } else {
       axios({
-        method: "PUT",
+        method: 'PUT',
         url: `${URL}api/instructors/${this.props.data.id}/`,
         data: {
           name: this.state.name,
@@ -85,42 +80,42 @@ class InstructorCard extends Component {
           contact_email: this.state.contact_email,
           contact_number: this.state.contact_number,
           description: this.state.description,
-          photo: this.state.uploadurl
+          photo: this.state.uploadurl,
         },
-        headers: headers
+        headers,
       })
-        .then(response => {
+        .then((response) => {
           // console.log("put response", response);
           window.location.reload();
         })
-        .catch(error => {
-          console.log("put error", error);
+        .catch((error) => {
+          console.log('put error', error);
         });
     }
   };
 
   upload = () => {
     window.cloudinary.openUploadWidget(
-      { cloud_name: "dkzzjjjj9", upload_preset: "ggbmyqmo", cors: "no-cors" },
+      { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
       (error, result) => {
         // console.log(error, result);
-        if (this.state.uploadurl === "") {
+        if (this.state.uploadurl === '') {
           let imgurl;
           result
             ? (imgurl = result[0].url)
-            : (imgurl = `https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866867/Default%20Images/Portrait_Placeholder.png`);
+            : (imgurl = 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866867/Default%20Images/Portrait_Placeholder.png');
           this.setState({ uploadurl: imgurl });
-        } else if (this.state.uploadurl !== "") {
+        } else if (this.state.uploadurl !== '') {
           let imgurl;
           imgurl = this.state.uploadurl;
           this.setState({ uploadurl: imgurl });
         }
         // this.setState({ uploadurl: imgurl });
         // console.log('===== stateurl: ', this.state.uploadurl);
-      }
+      },
     ),
-      false;
+    false;
   };
 
   toggleDelete = () => {
@@ -131,15 +126,15 @@ class InstructorCard extends Component {
 
   confirmDelete = () => {
     axios({
-      method: "DELETE",
+      method: 'DELETE',
       url: `${URL}api/instructors/${this.props.data.id}/`,
-      headers: headers
+      headers,
     })
-      .then(response => {
+      .then((response) => {
         console.log(response);
         window.location.reload();
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       });
   };
@@ -152,58 +147,71 @@ class InstructorCard extends Component {
       photo,
       contact_number,
       contact_email,
-      ratings
+      ratings,
     } = this.props.data;
     this.setState({
-      name: name,
-      license_number: license_number,
-      description: description,
-      photo: photo,
-      contact_number: contact_number,
-      contact_email: contact_email,
-      ratings: ratings
+      name,
+      license_number,
+      description,
+      photo,
+      contact_number,
+      contact_email,
+      ratings,
     });
   }
 
   render() {
-    console.log("INSTR CARD STATE: ", this.props.data);
+    console.log('INSTR CARD STATE: ', this.props.data);
     return (
-      <div className={""}>
+      <div className="">
         <Card className="InstructorCard-Card">
-          <CardContent>
-            <Typography className={"Instructors-card-name"}>
+          <CardContent className="InstructorHeader">
+            <Typography variant="title" className="Instructors-card-name">
               {this.props.data.name}
             </Typography>
-            <Typography className={"Instructors-card-license-number"}>
+            <Typography variant="subheading" className="Instructors-card-license-number">
               {this.props.data.license_number}
             </Typography>
           </CardContent>
-          <CardMedia
-            className="Instructors-card-img"
-            onClick={this.toggle}
-            component="img"
-            height="250"
-            image={this.props.data.photo || `https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866867/Default%20Images/Portrait_Placeholder.png`}
-            style={{ marginLeft: "auto", marginRight: "auto", width: "400px", height: '225px' }}
-          />
-          <CardContent>
+          <div className="InstructorLine" />
+          <div className="InstructorCardImgContainer">
+            <CardMedia
+              className="Instructors-card-img"
+              onClick={this.toggle}
+              component="img"
+              // height="250"
+              image={
+                this.props.data.photo
+                || 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866867/Default%20Images/Portrait_Placeholder.png'
+              }
+              // style={{
+              //   marginLeft: 'auto',
+              //   marginRight: 'auto',
+              //   width: '400px',
+              //   height: '225px',
+              // }}
+            />
+          </div>
+          <div className="InstructorLine" />
+          <CardContent className="InstructorBody">
+
             Description:
-            <Typography className={"Instructors-card-description"}>
+            <Typography className="Instructors-card-description">
               {this.props.data.description}
             </Typography>
             <br />
+
             Ratings:
-            <Typography className={"Instructors-card-ratings"}>
-              {this.props.data.ratings}
-            </Typography>
+            <Typography className="Instructors-card-ratings">{this.props.data.ratings}</Typography>
           </CardContent>
           <div className="Instructors-card-footer">
-            <CardContent>
+            <CardContent className="InstructorCardContact">
+
               Contact Info
               <Typography>{this.props.data.contact_email}</Typography>
               <Typography>{this.props.data.contact_number}</Typography>
             </CardContent>
-            <div className={"button-container"}>
+            <div className="button-container">
               <i
                 className="fas fa-edit edit-card-button hover"
                 aria-hidden="true"
@@ -222,18 +230,19 @@ class InstructorCard extends Component {
           className="confirm-instructor-delete"
           size="sm"
           style={{
-            display: "flex",
-            padding: "10px",
-            height: "100px",
-            width: "200px",
-            textAlign: "center",
-            marginTop: "20%",
-            marginLeft: "50%"
+            display: 'flex',
+            padding: '10px',
+            height: '100px',
+            width: '200px',
+            textAlign: 'center',
+            marginTop: '20%',
+            marginLeft: '50%',
           }}
           isOpen={this.state.deleteModal}
           toggle={this.toggleDelete}
         >
           <div className="confirm-delete-content">
+
             Confirm Delete?
             <br />
             <br />
@@ -241,26 +250,29 @@ class InstructorCard extends Component {
               color="danger"
               onClick={this.confirmDelete}
               style={{
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "#FFFFFF",
-                width: "89px",
-                borderRadius: "0"
+                fontSize: '14px',
+                fontWeight: 'bold',
+                color: '#FFFFFF',
+                width: '89px',
+                borderRadius: '0',
               }}
             >
-              {" "}
-              Delete{" "}
+              {' '}
+
+              Delete
+              {' '}
             </Button>
             <Button
               onClick={this.toggleDelete}
               style={{
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "#FFFFFF",
-                width: "89px",
-                borderRadius: "0"
+                fontSize: '14px',
+                fontWeight: 'bold',
+                color: '#FFFFFF',
+                width: '89px',
+                borderRadius: '0',
               }}
             >
+
               Cancel
             </Button>
           </div>
@@ -272,7 +284,7 @@ class InstructorCard extends Component {
           toggle={this.toggleEditModal}
         >
           <div className="Instructor-edit-card">
-          <h4> Edit Instructor </h4>
+            <h4> Edit Instructor </h4>
             <input
               className="Instructor-edit-card-name"
               name="name"
@@ -296,6 +308,7 @@ class InstructorCard extends Component {
                 onClick={this.upload}
                 aria-hidden="true"
               >
+
                 Upload Image
               </i>
               {/* <button onClick={this.upload}>CLICK ME TO UPLOAD</button> */}
@@ -308,7 +321,7 @@ class InstructorCard extends Component {
                 placeholder="Description"
                 className="description-content"
                 value={this.state.description}
-                cols="35" 
+                cols="35"
                 wrap="soft"
               />
             </div>
@@ -322,8 +335,8 @@ class InstructorCard extends Component {
               />
             </div>
             <div className="card-contact">
-            <br />
-                <div className="contact-info">
+              <br />
+              <div className="contact-info">
                 <input
                   onChange={this.handleChange}
                   name="contact_email"
@@ -332,7 +345,7 @@ class InstructorCard extends Component {
                   value={this.state.contact_email}
                 />
                 <br />
-    
+
                 <input
                   onChange={this.handleChange}
                   name="contact_number"
@@ -342,10 +355,8 @@ class InstructorCard extends Component {
                 />
               </div>
             </div>
-            <Button
-              className="edit-instructor-save"
-              onClick={this.toggleAndPut}
-            >
+            <Button className="edit-instructor-save" onClick={this.toggleAndPut}>
+
               Save
             </Button>
           </div>

@@ -1,5 +1,4 @@
 .InstructorCard-Card {
-
   max-width: 300px;
   min-height: 568px;
   max-height: 568px;
@@ -8,12 +7,11 @@
 
 .Instructors .InstructorCard .button-container {
   display: flex;
-  justify-content: space-between;  
+  justify-content: space-between;
   padding: 0px;
-}
-
-.Instructors .InstructorCard .Instructors-card-footer {
-  align-items: flex-start;
+  margin-top: -15px;
+  width: 100%;
+  /* border: 1px solid burlywood; */
 }
 
 .upload-button:hover {
@@ -22,12 +20,13 @@
 
 .Instructors .InstructorCard .edit-card-button {
   /* justify-self: flex-end; */
-  margin-left: 15px ;
+  margin-left: 15px;
   padding-bottom: 15px;
+  /* border: 1px solid red; */
 }
 
 .Instructors .InstructorCard .delete-button {
-  margin-right: 15px; 
+  margin-right: 15px;
 }
 
 .Instructor-edit-card {
@@ -58,7 +57,7 @@
 .Instructor-edit-card-modal .rating-details {
   width: 100%;
   align-self: center;
-  /* border: 1px red; */
+  /* border: 1px green; */
 }
 
 .Instructor-edit-card-modal .contact-email {
@@ -77,4 +76,65 @@
   /* background: var(--sky);
   color: white; */
   cursor: pointer;
+}
+
+
+.InstructorCard-Card {
+  /* border: 1px solid grey; */
+  justify-content: space-between;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.InstructorCard-Card .InstructorHeader {
+  /* border: 1px solid brown; */
+  height: 82px;
+}
+
+.InstructorCard-Card .Instructors-card-img {
+  /* border: 1px solid red; */
+  width: auto;
+  height: auto;
+  max-height: 258px;
+  max-width: 300px;
+  padding: 5px;
+}
+
+.InstructorCard-Card .InstructorBody {
+  /* border: 1px solid purple; */
+  height: 116px;
+}
+
+.InstructorCard-Card .Instructors-card-footer {
+  align-items: flex-start;
+  /* border: 1px solid blue; */
+  height: 110px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.InstructorCard-Card .InstructorCardImgContainer {
+  /* border: 2px solid yellow; */
+  height: 258px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.InstructorCardContact {
+  /* border: 1px solid black; */
+  height: 119px;
+}
+
+.Instructors-card-description {
+  height: 20px;
+}
+
+.InstructorLine {
+  width: 90%;
+  border: 1px solid rgb(233, 230, 230);
 }
