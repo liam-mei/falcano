@@ -209,7 +209,9 @@ class TopHeader extends Component
             {this.state.displayTotal ? (
               <Fragment>
                 <div  className="Total desktop" onClick={this.toggleModal}>
-                  <span>View Total Hours</span>
+                  <div className="ViewTotal-Span"><span>Total Hours</span>
+                </div>
+                  
                 </div>
                 <div  className="Total tablet" onClick={this.toggleModal}>
                   <span>Hours</span>
