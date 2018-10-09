@@ -13,8 +13,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
+  Tooltip
 } from 'reactstrap';
-import { CardMedia } from '@material-ui/core';
+import { CardMedia} from '@material-ui/core';
 import PlusIcon from '../../utils/Images/PlusIcon.png';
 import FlightCard from './FlightCard';
 import Auth from '../Authenication/Auth';
@@ -53,14 +54,20 @@ class Flights extends Component {
       aircraft: null,
       id: null,
       license_type: '',
-      total_hours: null,
+      total_hours: '',
       sv_html: '',
       sv_script: '',
       errorMessage: false,
       openModalAlert: false,
       loading: true,
-      flightNameErrorMessage: '',
+      flightNameErrorMessage: false,
+      totalsErrorMessage: false,
+      toolTipOpen: false,
     };
+  }
+
+  toolTipToggle = () => {
+    this.setState({ toolTipOpen: !this.state.toolTipOpen })
   }
 
   toggleModal = () => {
@@ -68,9 +75,13 @@ class Flights extends Component {
       this.setState({
         errorMessage: !this.state.errorMessage,
         openModalAlert: !this.state.openModalAlert,
+        
       });
     } else {
-      this.setState({ openModal: !this.state.openModal });
+      this.setState({ openModal: !this.state.openModal,
+                      flightNameErrorMessage: false,
+                      totalsErrorMessage: false,
+                    });
     }
   };
 
@@ -104,11 +115,18 @@ class Flights extends Component {
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
-    if (this.state.name.length === 0) {
+    if (this.state.name.length === 0 ) {
       e.preventDefault();
-      this.setState({ flightNameErrorMessage: 'This is a required field' });
+      this.setState({ flightNameErrorMessage: true });
+      return;
+    }else {
+    if (this.state.total_hours.length === 0 ) {
+      e.preventDefault();
+      this.setState({ totalsErrorMessage: true });
+      console.log("FLIGHT ERR STATE", this.state.totalsErrorMessage)
       return;
     }
+  }
     if (this.state.dropdownButtonTitle === 'Aircraft Choice') {
       alert('Please Select The Aircraft You Flew With');
       return;
@@ -240,6 +258,7 @@ class Flights extends Component {
               height: '370px',
             }}
           >
+
             <Modal toggle={this.toggleModal} isOpen={this.state.openModalAlert}>
               <ModalHeader>
                 {this.state.errorMessage ? 'Please create an aircraft first' : ''}
@@ -247,6 +266,7 @@ class Flights extends Component {
             </Modal>
             {/* CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button> */}
             <CardContent
+            className="NewFlight-Card"
               onClick={this.toggleModal}
               style={{ display: 'flex', justifyContent: 'center' }}
             >
@@ -269,6 +289,9 @@ class Flights extends Component {
             {/* <Card onClick={this.toggle} className="NewFlightsCard-Card"> */}
             {/* <Typography className="card-typography" onClick={this.toggle} /> */}
             <ModalHeader className="NewFlightModalHeader">
+            <h4 style={{ textAlign: 'center', marginBottom: "10px"}}>New Flight</h4>
+            {this.state.flightNameErrorMessage || this.state.totalsErrorMessage ? <p style={{ textAlign: 'center', fontSize: "1.2rem"}}>Please fill out the required fields</p> : null}
+              {/* { this.state.totalsErrorMessage  ? <p style={{ textAlign: 'center', fontSize: "1.2rem"}}>Please fill out the required fields</p> : null} */}
               <div className="NewFlight-header-inputs">
                 {this.state.flightNameErrorMessage ? (
                   <input
@@ -419,7 +442,7 @@ class Flights extends Component {
                     onChange={this.handleInputChange}
                   />
                   <input
-                    className="new-flight-pic-input"
+                    className={this.state.totalsErrorMessage ? "new-flight-total-input" : ""}
                     name="total_hours"
                     onChange={this.handleInputChange}
                   />

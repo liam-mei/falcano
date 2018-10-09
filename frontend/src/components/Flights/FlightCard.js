@@ -17,7 +17,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button
+  Button,
+  Tooltip
 } from 'reactstrap';
 import { CardContent } from '@material-ui/core';
 
@@ -64,7 +65,7 @@ class FlightCard extends Component {
       sv_script: '',
       xxxsv_html2: '',
       xxxsv_script2: '',
-
+      inputError: '',
       aircraftChoice: [],
       dropdownOpen: false,
       dropdownButtonTitle: ''
@@ -229,6 +230,12 @@ class FlightCard extends Component {
       this.setState({ license_type: licensetype });
       //   console.log('flightlicstate', this.state.license_type);
     }
+
+    if(this.state.name || this.state.total_hours === '') {
+      e.preventDefault();
+      this.setState({ inputError: 'empty field detected'})
+      return;
+    }
     axios({
       method: 'PUT',
       url: `${URL}api/flights/${this.state.id}/`,
@@ -292,8 +299,9 @@ class FlightCard extends Component {
             {Parser(this.props.flight.sv_html)}
             <Helmet>{Parser(this.props.flight.sv_script)}</Helmet>
             </div> : 
-            <CardContent style={{ display: 'flex', height: "165px", width: '100%', alignItems: 'center', backgroundColor: "#eaeaea", border: "1px solid #bababa" }}>
-              <a className="SnippetLink" target="_blank" rel="noopener noreferrer" href="https://skyvector.com/"> Visit Skyvector.com to get a HTML Snippet</a>
+            <CardContent style={{ display: 'flex', height: "165px", width: '100%', alignItems: 'center', backgroundColor: "#fffff", border: "1px solid #bababa", padding: '0px' }}>
+             <img style={{ width: '100%', height: '98%'}}alt="Default Flight map" src="https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539106772/Default%20Images/defaultFlightsListView.png"></img>
+              {/* <a style={{ position: "absolute", width: '100%'}}className="SnippetLink" target="_blank" rel="noopener noreferrer" href="https://skyvector.com/"> Visit Skyvector.com to get a HTML Snippet</a> */}
             </CardContent>
           }
 
@@ -303,7 +311,7 @@ class FlightCard extends Component {
               <span>{this.props.flight.total_hours}</span>
             </div>
             <div className="FlightIcons">
-              <i className="fas fa-edit" onClick={this.modalToggle} />
+              <i className="fas fa-edit flight-card-edit" onClick={this.modalToggle} />
               <i
                 className="fa fa-trash delete-button"
                 onClick={this.toggleDelete}
@@ -332,10 +340,17 @@ class FlightCard extends Component {
               </h4>
             </div>
           </ModalHeader>
+          {this.state.xxxsv_html2 ? 
           <ModalBody className="ViewFlightSnippetBody">
             {Parser(this.state.xxxsv_html2)}
             <Helmet>{Parser(this.state.xxxsv_script2)}</Helmet>
+          </ModalBody> :
+          <ModalBody className="ViewFlightSnippetBody">
+          <img style={{ width: "auto", height: '100%'}}alt="Default Flight map" src="https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539101223/Default%20Images/defaultFlights.svg"></img>
+
           </ModalBody>
+          }
+            
 
           <ModalBody className="ViewFlightManTail">
             <p>{this.state.aircraft_whatever.tail_number}</p>
@@ -374,7 +389,7 @@ class FlightCard extends Component {
           </ModalFooter>
           <ModalFooter>
           <div className="FlightIcons">
-            <i className="fas fa-edit fa-lg" onClick={this.nestedModalToggle} />
+            <i className="fas fa-edit fa-lg flight-card-edit" onClick={this.nestedModalToggle} />
             <i
               className="fa fa-trash fa-lg delete-button"
               onClick={this.toggleDelete}
@@ -441,8 +456,7 @@ class FlightCard extends Component {
               type="date"
               value={this.state.fly_date}
               />
-              {/* DROP DOWN FOR SELECTING AIRCRAFT */}
-          
+            
               </div>
           {/* ====== END DROP DOWN FOR SELECTING AIRCRAFT =========*/}
 
