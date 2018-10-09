@@ -1,52 +1,53 @@
-import React, { Component } from "react";
-import axios from "axios";
-import NavBar from "./NavBar";
-import TopHeader from "./TopHeader";
-import Card from "@material-ui/core/Card";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import CardContent from "@material-ui/core/CardContent";
-import { HorizontalBar } from "react-chartjs-2";
+import React, { Component } from 'react';
+import axios from 'axios';
+import Card from '@material-ui/core/Card';
+import List from '@material-ui/core/List';
+// import ListItem from '@material-ui/core/ListItem';
+import CardContent from '@material-ui/core/CardContent';
+import { HorizontalBar } from 'react-chartjs-2';
+import TopHeader from './TopHeader';
+import NavBar from './NavBar';
+import Auth from './Authenication/Auth';
 
-import logo from "../utils/Images/Logo.svg";
-import "./HomePage.css";
+// import logo from '../utils/Images/Logo.svg';
+import './HomePage.css';
 
-let URL = process.env.REACT_APP_URL;
+const URL = process.env.REACT_APP_URL;
 
 const options = {
   scales: {
     xAxes: [
       {
         stacked: true,
-        gridLines: { display: false }
-      }
+        gridLines: { display: false },
+      },
     ],
     yAxes: [
       {
         stacked: true,
-        gridLines: { display: false }
-      }
-    ]
+        gridLines: { display: false },
+      },
+    ],
   },
   layout: {
     padding: {
       left: 20,
       right: 20,
       top: 0,
-      bottom: 0
-    }
+      bottom: 0,
+    },
   },
   tooltips: {
-    mode: "nearest"
+    mode: 'nearest',
   },
   maintainAspectRatio: true,
   responsive: {
-    "height < 428px": {
+    'height < 428px': {
       legend: {
-        display: false
-      }
-    }
-  }
+        display: false,
+      },
+    },
+  },
 };
 
 // var stackedBar = new Chart({
@@ -88,38 +89,54 @@ class HomePage extends Component {
       sim_instr: [],
       pic: [],
       dual_rec: [],
-      loading: true
+      loading: true,
     };
   }
 
   componentDidMount() {
     setTimeout(() => this.setState({ loading: false }), 1500);
     axios({
-      method: "GET",
+      method: 'GET',
       url: `${URL}api/joined/`,
-      headers: headers
+      headers,
     })
-      .then(response => {
-        console.log("HOME RES", response.data);
+      .then((response) => {
+        console.log('HOME RES', response.data);
         this.setState({ flightList: response.data });
       })
-      .catch(err => {
+      .catch((err) => {
         console.log(err);
       })
-      .then(res => {
-        let cross_country_Arr = Array(4).fill(0),
-          no_instrument_app_Arr = Array(4).fill(0),
-          no_ldg_Arr = Array(4).fill(0),
-          dayArr = Array(4).fill(0),
-          nightArr = Array(4).fill(0),
-          actualArr = Array(4).fill(0),
-          simArr = Array(4).fill(0),
-          picArr = Array(4).fill(0),
-          recArr = Array(4).fill(0);
+      .then((res) => {
+        const cross_country_Arr = Array(4).fill(0);
+
+
+        const no_instrument_app_Arr = Array(4).fill(0);
+
+
+        const no_ldg_Arr = Array(4).fill(0);
+
+
+        const dayArr = Array(4).fill(0);
+
+
+        const nightArr = Array(4).fill(0);
+
+
+        const actualArr = Array(4).fill(0);
+
+
+        const simArr = Array(4).fill(0);
+
+
+        const picArr = Array(4).fill(0);
+
+
+        const recArr = Array(4).fill(0);
 
         let x = 0;
-        let data = this.state.flightList;
-        for (var key in data) {
+        const data = this.state.flightList;
+        for (const key in data) {
           for (let i = 0; i < data[key].length; i++) {
             // console.log(data[key][i].pic)
             cross_country_Arr[x] += data[key][i].cross_country;
@@ -143,207 +160,208 @@ class HomePage extends Component {
           dual_rec: recArr,
           cross_country: cross_country_Arr,
           no_instument_app: no_instrument_app_Arr,
-          no_ldg: no_ldg_Arr
+          no_ldg: no_ldg_Arr,
         });
       });
   }
+
   render() {
-    let types = ["MES", "MEL", "SEL", "SES"];
+    const types = ['MES', 'MEL', 'SEL', 'SES'];
 
-    let color1 = "#BBDEFB";
-    let color2 = "#90CAF9";
-    let color3 = "#64B5F6";
-    let color4 = "#42A5F5";
-    let color5 = "#2196F3";
-    let color6 = "#1E88E5";
-    let color7 = "#1976D2";
-    let color8 = "#1565C0";
-    let color9 = "#0D47A1";
+    const color1 = '#BBDEFB';
+    const color2 = '#90CAF9';
+    const color3 = '#64B5F6';
+    const color4 = '#42A5F5';
+    const color5 = '#2196F3';
+    const color6 = '#1E88E5';
+    const color7 = '#1976D2';
+    const color8 = '#1565C0';
+    const color9 = '#0D47A1';
 
-    let hoverColor1 = "#B3E5FC";
-    let hoverColor2 = "#81D4FA";
-    let hoverColor3 = "#4FC3F7";
-    let hoverColor4 = "#29B6F6";
-    let hoverColor5 = "#03A9F4";
-    let hoverColor6 = "#039BE5";
-    let hoverColor7 = "#0288D1";
-    let hoverColor8 = "#0277BD";
-    let hoverColor9 = "#01579B";
+    const hoverColor1 = '#B3E5FC';
+    const hoverColor2 = '#81D4FA';
+    const hoverColor3 = '#4FC3F7';
+    const hoverColor4 = '#29B6F6';
+    const hoverColor5 = '#03A9F4';
+    const hoverColor6 = '#039BE5';
+    const hoverColor7 = '#0288D1';
+    const hoverColor8 = '#0277BD';
+    const hoverColor9 = '#01579B';
 
-    let data2 = {
+    const data2 = {
       labels: types,
       datasets: [
         {
-          label: "PIC",
+          label: 'PIC',
           data: [5, 2, 1, 7],
           backgroundColor: color1,
           hoverBackgroundColor: hoverColor1,
-          hoverBorderWidth: 0
+          hoverBorderWidth: 0,
         },
         {
-          label: "Dual Rec",
+          label: 'Dual Rec',
           data: [3, 6, 0, 5],
           backgroundColor: color2,
           hoverBackgroundColor: hoverColor2,
-          hoverBorderWidth: 0
+          hoverBorderWidth: 0,
         },
         {
-          label: "Sim Instr",
+          label: 'Sim Instr',
           data: [2, 5, 2, 8],
           backgroundColor: color3,
           hoverBackgroundColor: hoverColor3,
-          hoverBorderWidth: 2
+          hoverBorderWidth: 2,
         },
         {
-          label: "Actual Instr",
+          label: 'Actual Instr',
           data: [9, 1, 2, 5],
           backgroundColor: color4,
           hoverBackgroundColor: hoverColor4,
-          hoverBorderWidth: 2
+          hoverBorderWidth: 2,
         },
         {
-          label: "Day",
+          label: 'Day',
           data: [2, 3, 1, 2],
           backgroundColor: color5,
           hoverBackgroundColor: hoverColor5,
-          hoverBorderWidth: 2
+          hoverBorderWidth: 2,
         },
         {
-          label: "Night",
-          data: [4,2,1,3],
+          label: 'Night',
+          data: [4, 2, 1, 3],
           backgroundColor: color6,
           hoverBackgroundColor: hoverColor6,
-          hoverBorderWidth: 2
+          hoverBorderWidth: 2,
         },
         {
-          label: "Cross Country",
-          data: [3,2,1,6],
+          label: 'Cross Country',
+          data: [3, 2, 1, 6],
           backgroundColor: color7,
           hoverBackgroundColor: hoverColor7,
           hoverBorderWidth: 2,
-          hidden: true
+          hidden: true,
         },
         {
-          label: "No Instrument App",
-          data: [1,4,2,0],
+          label: 'No Instrument App',
+          data: [1, 4, 2, 0],
           backgroundColor: color8,
           hoverBackgroundColor: hoverColor8,
           hoverBorderWidth: 2,
-          hidden: true
+          hidden: true,
         },
         {
-          label: "No Ldg",
-          data: [5,2,1,3],
+          label: 'No Ldg',
+          data: [5, 2, 1, 3],
           backgroundColor: color9,
           hoverBackgroundColor: hoverColor9,
           hoverBorderWidth: 2,
-          hidden: true
-        }
+          hidden: true,
+        },
       ],
       tooltips: {
-        mode: "index",
-        backgroundColor: "rgba(255,255,255)",
-        borderColor: "rgb(0, 0, 0)",
+        mode: 'index',
+        backgroundColor: 'rgba(255,255,255)',
+        borderColor: 'rgb(0, 0, 0)',
         borderWidth: 0.3,
         cornerRadius: 0,
         caretSize: 0,
         xPadding: 70,
         yPadding: 25,
-        titleFontColor: "rgba(0, 0, 0, 0.87)",
+        titleFontColor: 'rgba(0, 0, 0, 0.87)',
         titleFontSize: 10,
-        titleFontFamily: "Roboto",
-        bodyFontFamily: "Roboto"
-      }
+        titleFontFamily: 'Roboto',
+        bodyFontFamily: 'Roboto',
+      },
     };
 
-    let data = {
+    const data = {
       labels: types,
       datasets: [
         {
-          label: "PIC",
+          label: 'PIC',
           data: this.state.pic,
           backgroundColor: color1,
           hoverBackgroundColor: hoverColor1,
-          hoverBorderWidth: 0
+          hoverBorderWidth: 0,
         },
         {
-          label: "Dual Rec",
+          label: 'Dual Rec',
           data: this.state.dual_rec,
           backgroundColor: color2,
           hoverBackgroundColor: hoverColor2,
-          hoverBorderWidth: 0
+          hoverBorderWidth: 0,
         },
         {
-          label: "Sim Instr",
+          label: 'Sim Instr',
           data: this.state.dual_rec,
           backgroundColor: color3,
           hoverBackgroundColor: hoverColor3,
-          hoverBorderWidth: 2
+          hoverBorderWidth: 2,
         },
         {
-          label: "Actual Instr",
+          label: 'Actual Instr',
           data: this.state.actual_instr,
           backgroundColor: color4,
           hoverBackgroundColor: hoverColor4,
-          hoverBorderWidth: 2
+          hoverBorderWidth: 2,
         },
         {
-          label: "Day",
+          label: 'Day',
           data: this.state.day,
           backgroundColor: color5,
           hoverBackgroundColor: hoverColor5,
-          hoverBorderWidth: 2
+          hoverBorderWidth: 2,
         },
         {
-          label: "Night",
+          label: 'Night',
           data: this.state.night,
           backgroundColor: color6,
           hoverBackgroundColor: hoverColor6,
-          hoverBorderWidth: 2
+          hoverBorderWidth: 2,
         },
         {
-          label: "Cross Country",
+          label: 'Cross Country',
           data: this.state.cross_country,
           backgroundColor: color7,
           hoverBackgroundColor: hoverColor7,
           hoverBorderWidth: 2,
-          hidden: true
+          hidden: true,
         },
         {
-          label: "No Instrument App",
+          label: 'No Instrument App',
           data: this.state.no_instument_app,
           backgroundColor: color8,
           hoverBackgroundColor: hoverColor8,
           hoverBorderWidth: 2,
-          hidden: true
+          hidden: true,
         },
         {
-          label: "No Ldg",
+          label: 'No Ldg',
           data: this.state.no_ldg,
           backgroundColor: color9,
           hoverBackgroundColor: hoverColor9,
           hoverBorderWidth: 2,
-          hidden: true
-        }
+          hidden: true,
+        },
       ],
       tooltips: {
-        mode: "index",
-        backgroundColor: "rgba(255,255,255)",
-        borderColor: "rgb(0, 0, 0)",
+        mode: 'index',
+        backgroundColor: 'rgba(255,255,255)',
+        borderColor: 'rgb(0, 0, 0)',
         borderWidth: 0.3,
         cornerRadius: 0,
         caretSize: 0,
         xPadding: 70,
         yPadding: 25,
-        titleFontColor: "rgba(0, 0, 0, 0.87)",
+        titleFontColor: 'rgba(0, 0, 0, 0.87)',
         titleFontSize: 10,
-        titleFontFamily: "Roboto",
-        bodyFontFamily: "Roboto"
-      }
+        titleFontFamily: 'Roboto',
+        bodyFontFamily: 'Roboto',
+      },
     };
-    console.log("HOME STATE", this.state);
+    console.log('HOME STATE', this.state);
     headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
+      Authorization: `JWT ${localStorage.getItem('token')}`,
     };
     const { loading } = this.state;
 
@@ -351,14 +369,14 @@ class HomePage extends Component {
       return (
         <div className="HomePage">
           <NavBar />
-          <TopHeader />
+          <TopHeader username={this.props.username} />
           <div className="HomePage-info-loading">
             <Card
               style={{
-                marginTop: "10%",
-                maxWidth: "700px",
-                height: "500px",
-                marginLeft: "15%",
+                marginTop: '10%',
+                maxWidth: '700px',
+                height: '500px',
+                marginLeft: '15%',
                 boxShadow: 'none',
               }}
             >
@@ -372,18 +390,25 @@ class HomePage extends Component {
           </div>
         </div>
       );
-    } else {
-      return (
-        <div className="HomePage">
-          <NavBar />
-          <TopHeader />
-          <div className="HomePage-info">
-            {/* <img src={logo } className="Falcano-Logo" alt="logo"/> */}
-            <Card className="Homepage-totalscard">
-              <h4 style={{ paddingTop: "30px" }}>{localStorage.getItem('premium') ? 'Your Falcano Hours' : 'Sign up for premium to display your Falcano hours'}</h4>
-              
-                <HorizontalBar data={localStorage.getItem('premium') ? data : data2} options={options} />
-              {/* <Chart data={data}>
+    }
+    return (
+      <div className="HomePage">
+        <NavBar />
+        <TopHeader username={this.props.username} />
+        <div className="HomePage-info">
+          {/* <img src={logo } className="Falcano-Logo" alt="logo"/> */}
+          <Card className="Homepage-totalscard">
+            <h4 style={{ paddingTop: '30px' }}>
+              {localStorage.getItem('premium')
+                ? 'Your Falcano Hours'
+                : 'Sign up for premium to display your Falcano hours'}
+            </h4>
+
+            <HorizontalBar
+              data={localStorage.getItem('premium') ? data : data2}
+              options={options}
+            />
+            {/* <Chart data={data}>
                 <Axis primary type="ordinal" position="left" />
                 <Axis type="linear" stacked position="bottom" />
                 <Series type={Bar} />
@@ -392,7 +417,7 @@ class HomePage extends Component {
                 <Tooltip />
             </Chart> */}
 
-              {/* <div className="homepage-license">
+            {/* <div className="homepage-license">
                 <List className="license-type1">
                   <ListItem>SEL Hours : {this.state.sel}</ListItem>
                   <ListItem className="LicenseType">
@@ -425,12 +450,11 @@ class HomePage extends Component {
                   <p>Dual Rec. : {this.state.dual_rec}</p>
                 </div>
               </CardContent> */}
-            </Card>
-          </div>
+          </Card>
         </div>
-      );
-    }
+      </div>
+    );
   }
 }
 
-export default HomePage;
+export default Auth(HomePage);
