@@ -54,7 +54,7 @@ class HomePage extends Component {
       .catch((err) => {
         console.log(err);
       })
-      .then((res) => {
+      .then(() => {
         const cross_country_Arr = Array(4).fill(0);
 
         const no_instrument_app_Arr = Array(4).fill(0);
@@ -76,7 +76,7 @@ class HomePage extends Component {
         let x = 0;
         const data = this.state.flightList;
         for (const key in data) {
-          for (let i = 0; i < data[key].length; i++) {
+          for (let i = 0; i < data[key].length; i += 1) {
             // console.log(data[key][i].pic)
             cross_country_Arr[x] += data[key][i].cross_country;
             no_instrument_app_Arr[x] += data[key][i].no_instument_app;
@@ -88,7 +88,7 @@ class HomePage extends Component {
             picArr[x] += data[key][i].pic;
             recArr[x] += data[key][i].dual_rec;
           }
-          x = x + 1;
+          x += 1;
         }
         this.setState({
           day: dayArr,
