@@ -81,7 +81,7 @@ a {
   }
 
   .tablet {
-    display: inline-block;
+    display: flex;
   }
 }
 
