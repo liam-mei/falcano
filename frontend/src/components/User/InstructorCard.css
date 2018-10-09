@@ -72,3 +72,9 @@
 .Instructor-edit-card-modal .description-content {
   width: 100%;
 }
+
+.hover:hover {
+  /* background: var(--sky);
+  color: white; */
+  cursor: pointer;
+}

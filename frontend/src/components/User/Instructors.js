@@ -167,6 +167,7 @@ class Instructors extends React.Component {
         <div className="InstructorCard">
           <Card
             onClick={this.toggle}
+            className="hover"
             style={{
               boxShadow: this.state.modal ? 'inset 1px 1px 1px gray' : '',
               display: 'flex',

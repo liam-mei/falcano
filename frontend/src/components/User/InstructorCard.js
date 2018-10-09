@@ -205,12 +205,12 @@ class InstructorCard extends Component {
             </CardContent>
             <div className={"button-container"}>
               <i
-                class="fas fa-edit edit-card-button"
+                className="fas fa-edit edit-card-button hover"
                 aria-hidden="true"
                 onClick={this.toggleEditModal}
               />
               <i
-                class="fa fa-trash delete-button"
+                className="fa fa-trash delete-button hover"
                 onClick={this.toggleDelete}
                 aria-hidden="true"
               />
@@ -292,7 +292,7 @@ class InstructorCard extends Component {
             <ModalBody className="nested-modal-instructor-edit-body">
               <br />
               <i
-                class="fa fa-cloud-upload fa-3x upload-button"
+                className="fa fa-cloud-upload fa-3x upload-button"
                 onClick={this.upload}
                 aria-hidden="true"
               >
