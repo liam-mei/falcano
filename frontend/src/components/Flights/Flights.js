@@ -1,14 +1,9 @@
-import React, { Component } from "react";
-import NavBar from "../NavBar";
-import TopHeader from "../TopHeader";
-import axios from "axios";
-import Auth from "./../Authenication/Auth";
-import "./Flights.css";
-import FlightCard from "./FlightCard";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import PlusIcon from "../../utils/Images/PlusIcon.png";
-import Typography from "@material-ui/core/Typography";
+import React, { Component } from 'react';
+import axios from 'axios';
+import './Flights.css';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
 import {
   Modal,
   ModalHeader,
@@ -17,27 +12,32 @@ import {
   ButtonDropdown,
   DropdownToggle,
   DropdownMenu,
-  DropdownItem
-} from "reactstrap";
-import { CardMedia } from "@material-ui/core";
+  DropdownItem,
+} from 'reactstrap';
+import { CardMedia } from '@material-ui/core';
+import PlusIcon from '../../utils/Images/PlusIcon.png';
+import FlightCard from './FlightCard';
+import Auth from '../Authenication/Auth';
+import TopHeader from '../TopHeader';
+import NavBar from '../NavBar';
 // const dev = process.env.REACT_APP_DEV === "true" ? true : false;
 // let URL;
 // dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
-let URL = process.env.REACT_APP_URL;
+const URL = process.env.REACT_APP_URL;
 
 let headers;
 class Flights extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      dropdownButtonTitle: "Aircraft Choice",
+      dropdownButtonTitle: 'Aircraft Choice',
       aircraftChoice: [],
       dropdownOpen: false,
       flightData: [],
       openModal: false,
-      name: "",
-      remarks: "",
+      name: '',
+      remarks: '',
       no_instument_app: null,
       no_ldg: null,
       cross_country: null,
@@ -47,74 +47,77 @@ class Flights extends Component {
       sim_instr: null,
       day: null,
       night: null,
-      airports_visited: "",
+      airports_visited: '',
       fly_date: null,
-      snippet: "",
+      snippet: '',
       aircraft: null,
       id: null,
-      license_type: "",
+      license_type: '',
       total_hours: null,
-      sv_html: "",
-      sv_script: "",
+      sv_html: '',
+      sv_script: '',
       errorMessage: false,
       openModalAlert: false,
       loading: true,
-      flightNameErrorMessage: ''
+      flightNameErrorMessage: '',
     };
   }
+
   toggleModal = () => {
     if (this.state.aircraftChoice.length <= 0) {
       this.setState({
         errorMessage: !this.state.errorMessage,
-        openModalAlert: !this.state.openModalAlert
+        openModalAlert: !this.state.openModalAlert,
       });
     } else {
       this.setState({ openModal: !this.state.openModal });
     }
   };
-  //TOGGLES DROPDOWN BUTTON FOR SELECTING AIRCRAFT WHEN ADDING NEW FLIGHT
+
+  // TOGGLES DROPDOWN BUTTON FOR SELECTING AIRCRAFT WHEN ADDING NEW FLIGHT
   toggleDropdownButton = () => {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdownOpen: !this.state.dropdownOpen,
     });
   };
-  handleSnippet = e => {
+
+  handleSnippet = (e) => {
     let html = e.target.value;
-    html = html.split("200px; height: 200px;").join("100%; height: 165px;");
-    let arr = html.split("</div>");
-    let sv_html = arr[0] + "</div>";
-    let sv_script = arr[1];
+    html = html.split('200px; height: 200px;').join('100%; height: 165px;');
+    const arr = html.split('</div>');
+    const sv_html = `${arr[0]}</div>`;
+    const sv_script = arr[1];
     // console.log('SV HTML ', sv_html);
-    this.setState({ sv_html: sv_html, sv_script: sv_script });
+    this.setState({ sv_html, sv_script });
   };
-  //CHANGES TITLE OF DROPDOWN BUTTON WHEN USER SELECTS THE AIRCRAFT USED WHEN CREATING NEW FLIGHT
-  handleDropDownButton = e => {
+
+  // CHANGES TITLE OF DROPDOWN BUTTON WHEN USER SELECTS THE AIRCRAFT USED WHEN CREATING NEW FLIGHT
+  handleDropDownButton = (e) => {
     this.setState({ dropdownButtonTitle: e.target.name });
   };
-  handleInputChange = e => {
+
+  handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
     // console.log('namechange', this.state.name);
   };
+
   // ADD NEW FLIGHT
-  toggleAndPost = e => {
+  toggleAndPost = (e) => {
     // console.log('dropdowntitlestate', this.dropdownButtonTitle);
-    if(this.state.name.length === 0) {
-      e.preventDefault()
-      this.setState({ flightNameErrorMessage: "This is a required field"})
+    if (this.state.name.length === 0) {
+      e.preventDefault();
+      this.setState({ flightNameErrorMessage: 'This is a required field' });
       return;
     }
-    if (this.state.dropdownButtonTitle === "Aircraft Choice") {
-      alert("Please Select The Aircraft You Flew With");
+    if (this.state.dropdownButtonTitle === 'Aircraft Choice') {
+      alert('Please Select The Aircraft You Flew With');
       return;
     }
     let aircraftURL = `${URL}api/aircraft/`;
     let licensetype;
     for (let i = 0; i < this.state.aircraftChoice.length; i++) {
-      if (
-        this.state.aircraftChoice[i].tail_number ===
-        this.state.dropdownButtonTitle
-      ) {
-        aircraftURL += this.state.aircraftChoice[i].id + "/";
+      if (this.state.aircraftChoice[i].tail_number === this.state.dropdownButtonTitle) {
+        aircraftURL += `${this.state.aircraftChoice[i].id}/`;
         licensetype = this.state.aircraftChoice[i].license_type;
         // console.log('flightlic', this.state.aircraftChoice[i].license_type);
       }
@@ -122,7 +125,7 @@ class Flights extends Component {
       //   console.log('flightlicstate', this.state.license_type);
     }
     axios({
-      method: "POST",
+      method: 'POST',
       url: `${URL}api/flights/`,
       data: {
         name: this.state.name,
@@ -143,70 +146,69 @@ class Flights extends Component {
         license_type: licensetype,
         total_hours: this.state.total_hours,
         sv_html: this.state.sv_html,
-        sv_script: this.state.sv_script
+        sv_script: this.state.sv_script,
       },
-      headers: headers
+      headers,
     })
-      .then(response => {
+      .then((response) => {
         // console.log('??????????', response);
       })
-      .catch(error => {
-        console.log("put error", error);
+      .catch((error) => {
+        console.log('put error', error);
       });
     this.setState({
-      openModal: !this.state.openModal
+      openModal: !this.state.openModal,
     });
     window.location.reload();
   };
+
   componentDidMount() {
     const headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
+      Authorization: `JWT ${localStorage.getItem('token')}`,
     };
     setTimeout(() => this.setState({ loading: false }), 1250);
     axios({
-      method: "GET",
+      method: 'GET',
       url: `${URL}api/aircraft/`,
-      headers: headers
+      headers,
     })
-      .then(response => {
+      .then((response) => {
         this.setState({ aircraftChoice: response.data });
         // console.log('ac state', this.state.aircraftChoice);
       })
-      .catch(err => {
-        this.props.history.push("/");
+      .catch((err) => {
+        this.props.history.push('/');
         console.log(err);
       });
     axios({
-      method: "get",
+      method: 'get',
       url: `${URL}api/flights/`,
-      headers: headers
+      headers,
     })
-      .then(response => {
+      .then((response) => {
         // console.log('====D flights get response', response.data);
         this.setState({ flightData: response.data });
       })
-      .catch(error => {
-        console.log("flights get error", error);
+      .catch((error) => {
+        console.log('flights get error', error);
       });
   }
+
   render() {
     // console.log('FLIGHTS PROPS', this.props);
     // console.log('E TARGET VALUE ', this.state.sv_html);
     headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
+      Authorization: `JWT ${localStorage.getItem('token')}`,
     };
 
     const { loading } = this.state;
     if (loading) {
-      return(
-
+      return (
         <div className="Flights">
           <NavBar />
-          <TopHeader />
+          <TopHeader username={this.props.username} />
           <div className="FlightList-loading">
-            <Card
-              className="Flights-NewCard-Loading"
-              >
+            <Card className="Flights-NewCard-Loading">
               <div className="load-bar">
                 <div className="bar" />
                 <div className="bar" />
@@ -216,15 +218,14 @@ class Flights extends Component {
           </div>
         </div>
       );
-    } else {
-      
-    
-      return (
+    }
+    return (
       <div className="Flights">
         <TopHeader
-          breadcrumb={["flights"]}
+          username={this.props.username}
+          breadcrumb={['flights']}
           data={this.state.flightData}
-          displayTotal={true}
+          displayTotal
         />
         <NavBar />
         <div className="FlightList">
@@ -232,40 +233,33 @@ class Flights extends Component {
             onClick={this.toggleModal}
             className="Flights-NewCard"
             style={{
-              boxShadow: this.state.openModal ? "inset 1px 1px 1px gray" : "",
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "370px"
+              boxShadow: this.state.openModal ? 'inset 1px 1px 1px gray' : '',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '370px',
             }}
           >
             <Modal toggle={this.toggleModal} isOpen={this.state.openModalAlert}>
               <ModalHeader>
-                {this.state.errorMessage
-                  ? "Please create an aircraft first"
-                  : ""}
+                {this.state.errorMessage ? 'Please create an aircraft first' : ''}
               </ModalHeader>
             </Modal>
-              {/* CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button> */}
+            {/* CLICK ME ---->> <button onClick={this.toggleModal}>NEW FLIGHT</button> */}
             <CardContent
-                onClick={this.toggleModal}
-                style={{ display: "flex", justifyContent: "center" }}
-              >
-                <i
-                  className="fa fa-plus-circle fa-3x Plus-sign"
-                  onClick={this.toggleModal}
-                />
+              onClick={this.toggleModal}
+              style={{ display: 'flex', justifyContent: 'center' }}
+            >
+              <i className="fa fa-plus-circle fa-3x Plus-sign" onClick={this.toggleModal} />
             </CardContent>
           </Card>
-          {this.state.flightData.map(flight => {
-            return (
-              <FlightCard
-                aircraftChoice={this.state.aircraftChoice}
-                flight={flight}
-                key={flight.created_at}
-              />
-            );
-          })}
+          {this.state.flightData.map(flight => (
+            <FlightCard
+              aircraftChoice={this.state.aircraftChoice}
+              flight={flight}
+              key={flight.created_at}
+            />
+          ))}
           {/* NEW FLIGHT MODAL */}
           <Modal
             className="NewFlightModal"
@@ -276,35 +270,31 @@ class Flights extends Component {
             {/* <Typography className="card-typography" onClick={this.toggle} /> */}
             <ModalHeader className="NewFlightModalHeader">
               <div className="NewFlight-header-inputs">
-              {this.state.flightNameErrorMessage ? 
-
-                <input
-                style={{ border: '.1rem solid red'}}
-                className="new-flight-input-name"
-                name="name"
-                onChange={this.handleInputChange}
-                placeholder="Flight Name is required"
-                /> 
-                :
-                <input
-                className="new-flight-input-name"
-                name="name"
-                onChange={this.handleInputChange}
-                placeholder="Flight Name"
-                />
-              }
+                {this.state.flightNameErrorMessage ? (
+                  <input
+                    style={{ border: '.1rem solid red' }}
+                    className="new-flight-input-name"
+                    name="name"
+                    onChange={this.handleInputChange}
+                    placeholder="Flight Name is required"
+                  />
+                ) : (
+                  <input
+                      className="new-flight-input-name"
+                      name="name"
+                      onChange={this.handleInputChange}
+                      placeholder="Flight Name"
+                    />
+                )}
                 {/* DROP DOWN FOR SELECTING AIRCRAFT */}
                 <ButtonDropdown
                   className="NewFlightDropdown"
                   isOpen={this.state.dropdownOpen}
                   toggle={this.toggleDropdownButton}
                 >
-                  <DropdownToggle caret>
-                    {this.state.dropdownButtonTitle}
-                  </DropdownToggle>
+                  <DropdownToggle caret>{this.state.dropdownButtonTitle}</DropdownToggle>
                   <DropdownMenu>
-                    {this.state.aircraftChoice.map(aircraft => {
-                      return (
+                    {this.state.aircraftChoice.map(aircraft => (
                         <DropdownItem
                           onClick={this.handleDropDownButton}
                           name={aircraft.tail_number}
@@ -312,8 +302,7 @@ class Flights extends Component {
                         >
                           {aircraft.tail_number}
                         </DropdownItem>
-                      );
-                    })}
+                      ))}
                   </DropdownMenu>
                 </ButtonDropdown>
                 {/* END DROP DOWN FOR SELECTING AIRCRAFT */}
@@ -332,7 +321,16 @@ class Flights extends Component {
               </div>
             </ModalHeader>
             <ModalBody className="NewFlightHTMLSnippet">
-            <a className="SnippetLink" target="_blank" rel="noopener noreferrer" href="https://skyvector.com/"> Visit Skyvector.com to get an HTML Snippet</a>
+              <a
+                className="SnippetLink"
+                target="_blank"
+                rel="noopener noreferrer"
+                href="https://skyvector.com/"
+              >
+                {' '}
+
+                  Visit Skyvector.com to get an HTML Snippet
+              </a>
               <textarea
                 className="snippet-text-area"
                 rows="4"
@@ -356,7 +354,7 @@ class Flights extends Component {
             </ModalBody>
             <ModalFooter className="NewModalFooter">
               <div className="NewModalFooterChildren">
-                <div classname="hhh">
+                <div className="hhh">
                   <span>Cross Country :</span>
                   <span>No. Instr. App. :</span>
                   <span>No. Ldg. :</span>
@@ -429,18 +427,15 @@ class Flights extends Component {
               </div>
             </ModalFooter>
             <div className="flight-edit-save-container">
-              <button
-                className="flight-edit-save-button"
-                onClick={this.toggleAndPost}
-              >
-                Save
+              <button className="flight-edit-save-button" onClick={this.toggleAndPost}>
+
+                  Save
               </button>
             </div>
           </Modal>
         </div>
       </div>
     );
-  }
   }
 }
 export default Auth(Flights);

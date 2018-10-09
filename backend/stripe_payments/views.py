@@ -78,7 +78,7 @@ def checkout(request):
         print("______STATUS_____", charge['status'])  # should be succeeded
         if charge['status'] == 'succeeded':
             return HttpResponse(json.dumps(
-                {'message': 'Your transaction has been successful.'})
+                {'message': 'your transaction has been successful.'})
             )
         else:
             raise stripe.error.CardError

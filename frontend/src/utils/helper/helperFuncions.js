@@ -1,4 +1,5 @@
-export const isLoggedIn = () => {
-    //TODO login with JWT - verify token then  return true
-    return localStorage.getItem('token') ? true : false;
-};
+export const isLoggedIn = () => (!!localStorage.getItem('token'));
+
+export function Capitalize(name) {
+  return name.charAt(0).toUpperCase() + name.slice(1).toLowerCase();
+}

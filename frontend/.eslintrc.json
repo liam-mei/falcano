@@ -1,3 +1,20 @@
 {
-    "extends": "airbnb"
+  "extends": "airbnb",
+  "rules": {
+    "linebreak-style": 0,
+    "camelcase": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prop-types": [
+      "enabled",
+      { "ignore": "ignore", "customValidators": "customValidator" }
+    ],
+    "react/destructuring-assignment": [
+      "always",
+      {
+        "ignoreClassFields": true
+      }
+    ],
+    "react/no-access-state-in-setstate" : 0
+  },
+  "parser": "babel-eslint"
 }
