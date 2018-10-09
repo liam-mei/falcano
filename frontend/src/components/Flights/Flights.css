@@ -11,8 +11,9 @@
   grid-row: 2/ -1;
   display: grid;
   padding: 2rem;
+  padding-right: 1rem;
   grid-template-columns: repeat(auto-fit, minmax(300px, 300px));
-  grid-gap: 1.5rem;
+  grid-gap: .8rem;
   text-align: center;
 }
 
@@ -46,12 +47,12 @@
 
 
 .Flights .Flights-NewCard-Loading {
-  max-width: 590px;
-  min-height: 585px;
-  max-height: 585px;
-  min-width: 590px;
-  margin-left: 20%;
-  box-shadow: none;
+  max-width: 290px;
+  min-height: 385px;
+  max-height: 385px;
+  min-width: 290px;
+  /* margin-left: 20%; */
+  /* box-shadow: none; */
 }
 
 .Flights .FlightList .Flights-NewCard .Plus-sign {
@@ -193,7 +194,7 @@
 .NewFlightModal .NewFlightModalHeader .NewFlightDropdown button {
   height: 32px;
   padding: 0px;
-  width: 144px ;
+  width: 165px ;
   /* color: black;
   background-color: white; */
   
@@ -223,7 +224,7 @@
 .NewFlightModal .NewFlightModalHeader .new-flight-input-name {
   margin-right: 3%;
   margin-left: 10px;
-  width: 62%;
+  width: 58%;
   height: 32px;
   padding: 0px;
   margin-bottom: 10px;
@@ -246,14 +247,14 @@
 .NewFlightModal .NewFlightModalHeader .new-flight-input-av {
   margin-right: 3%;
   margin-left: 10px;
-  width: 62%;
+  width: 58%;
   padding: 0px;
   margin-bottom: 10px
 }
 
 .NewFlightModal .NewFlightModalHeader .new-flight-input-fd {
   height: 34px;
-  width: 31%;
+  width: 36%;
   -webkit-appearance: none;
    -moz-appearance:    none;
    appearance:         none
@@ -329,7 +330,7 @@
  .Flights .load-bar {
   position: relative;
   margin-left: 5%;
-  margin-top: 42%;
+  margin-top: 60%;
   width: 90%;
   height: 9px;
   background-color: var(--sky);

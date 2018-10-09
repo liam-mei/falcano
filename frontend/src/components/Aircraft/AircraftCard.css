@@ -4,6 +4,13 @@
   height: 300px;
 }
 
+
+.AircraftCard .Content-aircraft {
+  min-height: 300px;
+  max-height: 300px;
+  height: 300px;
+}
+ 
 .AircraftCard .CardMedia {
   width: 100%;
   height: auto;

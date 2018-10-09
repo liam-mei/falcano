@@ -1,9 +1,9 @@
-import React from "react";
-import Card from "@material-ui/core/Card";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
-import "./AircraftCard.css";
-import axios from "axios";
+import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
+import './AircraftCard.css';
+import axios from 'axios';
 import {
   Modal,
   ModalHeader,
@@ -13,13 +13,13 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Button
-} from "reactstrap";
-import Dropzone from "react-dropzone";
-import { Helmet } from "react-helmet";
+  Button,
+} from 'reactstrap';
+// import Dropzone from 'react-dropzone';
+// import { Helmet } from 'react-helmet';
 
 const headers = {
-  Authorization: "JWT " + localStorage.getItem("token")
+  Authorization: `JWT ${localStorage.getItem('token')}`,
 };
 
 // change dev to false if you want axios to get request from heroku server
@@ -30,7 +30,7 @@ const headers = {
 //   ? (URL = "http://127.0.0.1:8000/api")
 //   : (URL = "https://flightloggercs10.herokuapp.com/api");
 
-let URL = process.env.REACT_APP_URL;
+const URL = process.env.REACT_APP_URL;
 
 class AircraftCardModal extends React.Component {
   constructor() {
@@ -38,41 +38,54 @@ class AircraftCardModal extends React.Component {
 
     this.state = {
       data: [],
-      files: [],
-      id: "",
-      dropdownButtonTitle: "Airplane SEL",
+      // files: [],
+      id: '',
+      // dropdownButtonTitle: 'Airplane SEL',
       dropdownOpen: false,
-      tail_number: "",
-      man_type: "",
-      tail_number_edit: "",
-      man_type_edit: "",
-      license_type_edit: "",
-      license_type: "",
-      photo: "",
+      tail_number: '',
+      license_type: '',
+      man_type: '',
+      tail_number_edit: '',
+      license_type_edit: '',
+      man_type_edit: '',
+      photo: '',
       modal: false,
       nestedModal: false,
       closeAll: false,
-      uploadurl: ""
+      uploadurl: '',
     };
+  }
+
+  componentDidMount() {
+    // console.log("URL", URL);
+    this.setState({
+      tail_number: this.props.data.tail_number,
+      id: this.props.data.id,
+      tail_number_edit: this.props.data.tail_number,
+      license_type_edit: this.props.data.license_type,
+      license_type: this.props.data.license_type,
+      man_type_edit: this.props.data.man_type,
+      photo: this.props.data.photo,
+    });
   }
 
   // toggles the modal and populates the data the specific aircraft.
   toggle = () => {
     this.setState({ modal: !this.state.modal });
-    const headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
-    };
+    // const headers = {
+    //   Authorization: `JWT ${localStorage.getItem('token')}`,
+    // };
     axios({
-      method: "GET",
+      method: 'GET',
       url: `${URL}api/filteredflights/${this.state.id}`,
-      headers: headers
+      headers,
     })
-      .then(response => {
+      .then((response) => {
         // console.log("MODAL RES", response.data.aircraft);
         this.setState({ data: response.data });
       })
-      .catch(error => {
-        console.log("error :", error);
+      .catch((error) => {
+        console.log('error :', error);
       });
     // console.log("STATE::", this.state.uploadurl)
   };
@@ -80,64 +93,65 @@ class AircraftCardModal extends React.Component {
   toggleNested = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
-      closeAll: false
+      closeAll: false,
     });
   };
 
-  handleDropDownButton = e => {
+  handleDropDownButton = (e) => {
     this.setState({
       dropdownButtonTitle: e.target.name,
-      license_type: e.target.name
+      license_type: e.target.name,
     });
   };
 
   toggleDropdownButton = () => {
     this.setState({
-      dropdownOpen: !this.state.dropdownOpen
+      dropdownOpen: !this.state.dropdownOpen,
     });
   };
+
   // Handles the change in input
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
     // console.log("statechange", this.state.license_type_edit);
   };
 
   confirmDelete = () => {
     axios({
-      method: "DELETE",
+      method: 'DELETE',
       url: `${URL}api/aircraft/${this.state.id}/`,
-      headers: headers
-  }).then(response => {
-    console.log(response)
-    window.location.reload()
-  }).catch( err => {
-    console.log(err)
-  })
-  // this.setState({modal: !this.state.modal})
-}
-  
-
+      headers,
+    })
+      .then((response) => {
+        console.log(response);
+        window.location.reload();
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+    // this.setState({modal: !this.state.modal})
+  };
 
   // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
-  toggleNestedAndPut = e => {
-    if (this.state.uploadurl === "") {
+  toggleNestedAndPut = (e) => {
+    if (this.state.uploadurl === '') {
       axios({
-        method: "PUT",
+        method: 'PUT',
         url: `${URL}api/aircraft/${this.state.id}/`,
         data: {
           man_type: this.state.man_type_edit,
           tail_number: this.state.tail_number_edit,
           license_type: this.state.license_type,
           id: this.state.id,
-          photo: this.state.photo
+          photo: this.state.photo,
         },
-        headers: headers
+        headers,
       })
-        .then(response => {
+        .then((response) => {
           // console.log("put response", response);
         })
-        .catch(error => {
-          console.log("put error", error);
+        .catch((error) => {
+          console.log('put error', error);
         });
       this.setState({
         nestedModal: !this.state.nestedModal,
@@ -147,26 +161,24 @@ class AircraftCardModal extends React.Component {
         license_type: this.state.license_type,
       });
       window.location.reload();
-
     } else {
-      
       axios({
-        method: "PUT",
+        method: 'PUT',
         url: `${URL}api/aircraft/${this.state.id}/`,
         data: {
           man_type: this.state.man_type_edit,
           tail_number: this.state.tail_number_edit,
           license_type: this.state.license_type,
           id: this.state.id,
-          photo: this.state.uploadurl
+          photo: this.state.uploadurl,
         },
-        headers: headers
+        headers,
       })
-        .then(response => {
+        .then((response) => {
           // console.log("put response", response);
         })
-        .catch(error => {
-          console.log("put error", error);
+        .catch((error) => {
+          console.log('put error', error);
         });
       this.setState({
         nestedModal: !this.state.nestedModal,
@@ -174,7 +186,7 @@ class AircraftCardModal extends React.Component {
         tail_number: this.state.tail_number_edit,
         man_type: this.state.man_type_edit,
         license_type: this.state.license_type,
-        photo: this.state.uploadurl
+        photo: this.state.uploadurl,
       });
       window.location.reload();
     }
@@ -189,54 +201,41 @@ class AircraftCardModal extends React.Component {
   toggleAll = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
-      closeAll: true
+      closeAll: true,
     });
   };
 
-  // DRAG AND DROP UPLOAD HANDLER
-  handleOnDrop = (acceptedfiles, rejectedFiles) => {
-    console.log(acceptedfiles);
-    const headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
-    };
-  };
+  // // DRAG AND DROP UPLOAD HANDLER
+  // handleOnDrop = (acceptedfiles, rejectedFiles) => {
+  //   console.log(acceptedfiles);
+  //   const headers = {
+  //     Authorization: `JWT ${localStorage.getItem('token')}`,
+  //   };
+  // };
 
   upload = () => {
     window.cloudinary.openUploadWidget(
-      { cloud_name: "dkzzjjjj9", upload_preset: "ggbmyqmo", cors: "no-cors" },
+      { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
       (error, result) => {
         // console.log(error, result);
-        if (this.state.uploadurl === "") {
+        if (this.state.uploadurl === '') {
           let imgurl;
           result
             ? (imgurl = result[0].url)
-            : (imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg`);
+            : (imgurl = 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866643/u6mblomcszwbcs9ovesz.jpg');
           this.setState({ uploadurl: imgurl });
-        } else if (this.state.uploadurl !== "") {
+        } else if (this.state.uploadurl !== '') {
           let imgurl;
           imgurl = this.state.uploadurl;
           this.setState({ uploadurl: imgurl });
         }
         // this.setState({ uploadurl: imgurl });
         // console.log('===== stateurl: ', this.state.uploadurl);
-      }
+      },
     ),
-      false;
+    false;
   };
-
-  componentDidMount() {
-    // console.log("URL", URL);
-    this.setState({
-      tail_number: this.props.data.tail_number,
-      id: this.props.data.id,
-      tail_number_edit: this.props.data.tail_number,
-      license_type_edit: this.props.data.license_type,
-      license_type: this.props.data.license_type,
-      man_type_edit: this.props.data.man_type,
-      photo: this.props.data.photo
-    });
-  }
 
   render() {
     // console.log("filesdata", this.state.data);
@@ -250,7 +249,7 @@ class AircraftCardModal extends React.Component {
       sim_instr,
       dualrec,
       no_instument_app,
-      total_hours
+      total_hours,
     ] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     for (let i = 0; i < this.state.data.length; i++) {
       pic_sum += this.state.data[i].pic;
@@ -273,8 +272,8 @@ class AircraftCardModal extends React.Component {
           </Typography>
           <p className="card-typography-p">{this.props.data.man_type}</p>
 
-
-          <CardMedia className="CardMedia"
+          <CardMedia
+            className="CardMedia"
             onClick={this.toggle}
             component="img"
             height="140"
@@ -298,7 +297,8 @@ class AircraftCardModal extends React.Component {
             <br />
             <img className="modal-body-img" src={this.state.photo} />
             {/* NESTED MODAL */}
-            <Modal className="Detailed-aircraft-edit"
+            <Modal
+              className="Detailed-aircraft-edit"
               isOpen={this.state.nestedModal}
               toggle={this.toggleNested}
               onClosed={this.state.closeAll ? this.toggle : undefined}
@@ -310,36 +310,23 @@ class AircraftCardModal extends React.Component {
                   onChange={this.handleChange}
                   placeholder={this.props.data.tail_number}
                 />
-                <ButtonDropdown
-                  isOpen={this.state.dropdownOpen}
-                  toggle={this.toggleDropdownButton}
-                >
-                  <DropdownToggle caret>
-                    {this.state.license_type}
-                  </DropdownToggle>
+                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdownButton}>
+                  <DropdownToggle caret>{this.state.license_type}</DropdownToggle>
                   <DropdownMenu>
-                    <DropdownItem
-                      name="Airplane SEL"
-                      onClick={this.handleDropDownButton}
-                    >
+                    <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}>
+
                       Airplane SEL
                     </DropdownItem>
-                    <DropdownItem
-                      name="Airplane SES"
-                      onClick={this.handleDropDownButton}
-                    >
+                    <DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}>
+
                       Airplane SES
                     </DropdownItem>
-                    <DropdownItem
-                      name="Airplane MEL"
-                      onClick={this.handleDropDownButton}
-                    >
+                    <DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}>
+
                       Airplane MEL
                     </DropdownItem>
-                    <DropdownItem
-                      name="Airplane MES"
-                      onClick={this.handleDropDownButton}
-                    >
+                    <DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}>
+
                       Airplane MES
                     </DropdownItem>
                   </DropdownMenu>
@@ -352,14 +339,15 @@ class AircraftCardModal extends React.Component {
                 />
               </ModalHeader>
               <ModalBody className="nested-modal-body">
-                <button className="nested-modal-button " onClick={this.upload}>CLICK TO UPLOAD IMAGE</button>
+                <button className="nested-modal-button " onClick={this.upload}>
+
+                  CLICK TO UPLOAD IMAGE
+                </button>
               </ModalBody>
               <ModalFooter className="ModalFooter">
                 {/* CLOSE NESTED */}
-                <button
-                  className="save-button"
-                  onClick={this.toggleNestedAndPut}
-                >
+                <button className="save-button" onClick={this.toggleNestedAndPut}>
+
                   Save
                 </button>
               </ModalFooter>
@@ -368,40 +356,72 @@ class AircraftCardModal extends React.Component {
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
               <li>{this.state.license_type}</li>
-              <li>Cross Country {cross_country}</li>
               <li>
+
+                Cross Country
+                {cross_country}
+              </li>
+              <li>
+
                 No. Instr. App.
                 {no_instument_app}
               </li>
-              <li>No. Ldg: {no_ldg}</li>
+              <li>
+
+                No. Ldg:
+                {no_ldg}
+              </li>
             </ul>
             <ul className="ul-2">
-              <li>Day: {day}</li>
-              <li>Night {night}</li>
               <li>
+
+                Day:
+                {day}
+              </li>
+              <li>
+
+                Night
+                {night}
+              </li>
+              <li>
+
                 Actual Instr.
                 {actual_instr}
               </li>
               <li>
+
                 Sim. Instr.
                 {sim_instr}
               </li>
             </ul>
             <ul className="ul-2">
               <li>Grnd Trainer</li>
-              <li>PIC: {pic_sum}</li>
-              <li>Dual Rec: {dualrec}</li>
-              <li>Total Hours: {total_hours}</li>
+              <li>
+
+                PIC:
+                {pic_sum}
+              </li>
+              <li>
+
+                Dual Rec:
+                {dualrec}
+              </li>
+              <li>
+
+                Total Hours:
+                {total_hours}
+              </li>
             </ul>
           </ModalFooter>
           <ModalFooter className="Edit-delete">
-            <i class="fas fa-edit edit-card-button"
-            
-                  aria-hidden="true"
-                  onClick={this.toggleNested}
+            <i
+              className="fas fa-edit edit-card-button"
+              aria-hidden="true"
+              onClick={this.toggleNested}
             />
-            
-            <i class="fas fa-trash delete-button"
+
+            <i
+              className="fas fa-trash delete-button"
               onClick={this.toggleDelete}
               aria-hidden="true"
             />
@@ -411,18 +431,19 @@ class AircraftCardModal extends React.Component {
           className="confirm-instructor-delete"
           size="sm"
           style={{
-            display: "flex",
-            padding: "10px",
-            height: "100px",
-            width: "200px",
-            textAlign: "center",
-            marginTop: "20%",
-            marginLeft: "50%"
+            display: 'flex',
+            padding: '10px',
+            height: '100px',
+            width: '200px',
+            textAlign: 'center',
+            marginTop: '20%',
+            marginLeft: '50%',
           }}
           isOpen={this.state.deleteModal}
           toggle={this.toggleDelete}
         >
           <div className="confirm-delete-content">
+
             Confirm Delete?
             <br />
             <br />
@@ -430,26 +451,29 @@ class AircraftCardModal extends React.Component {
               color="danger"
               onClick={this.confirmDelete}
               style={{
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "#FFFFFF",
-                width: "89px",
-                borderRadius: "0"
+                fontSize: '14px',
+                fontWeight: 'bold',
+                color: '#FFFFFF',
+                width: '89px',
+                borderRadius: '0',
               }}
             >
-              {" "}
-              Delete{" "}
+              {' '}
+
+              Delete
+              {' '}
             </Button>
             <Button
               onClick={this.toggleDelete}
               style={{
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "#FFFFFF",
-                width: "89px",
-                borderRadius: "0"
+                fontSize: '14px',
+                fontWeight: 'bold',
+                color: '#FFFFFF',
+                width: '89px',
+                borderRadius: '0',
               }}
             >
+
               Cancel
             </Button>
           </div>

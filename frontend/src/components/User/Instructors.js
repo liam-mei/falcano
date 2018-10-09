@@ -1,12 +1,14 @@
-import React from "react";
-import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
-import axios from "axios";
-import Card from "@material-ui/core/Card";
-import NavBar from "../NavBar";
-import TopHeader from "../TopHeader";
-import "./Instructors.css";
-import InstructorCard from "./InstructorCard";
-
+import React from 'react';
+import {
+  Button, Modal, ModalBody,
+} from 'reactstrap';
+import axios from 'axios';
+import Card from '@material-ui/core/Card';
+import NavBar from '../NavBar';
+import TopHeader from '../TopHeader';
+import './Instructors.css';
+import InstructorCard from './InstructorCard';
+import Auth from '../Authenication/Auth';
 
 // const dev = process.env.REACT_APP_DEV === "true" ? true : false;
 // let URL;
@@ -14,7 +16,7 @@ import InstructorCard from "./InstructorCard";
 //   ? (URL = "http://127.0.0.1:8000/api")
 //   : (URL = "https://flightloggercs10.herokuapp.com/api");
 
-let URL = process.env.REACT_APP_URL;
+const URL = process.env.REACT_APP_URL;
 
 let headers;
 
@@ -23,55 +25,30 @@ class Instructors extends React.Component {
     super(props);
     this.state = {
       instructors: [],
-      name: "",
-      license_number: "",
-      photo: "",
-      ratings: "",
-      contact_number: "",
-      contact_email: "",
-      description: "",
+      name: '',
+      license_number: '',
+      photo: '',
+      ratings: '',
+      contact_number: '',
+      contact_email: '',
+      description: '',
       modal: false,
       closeAll: false,
-      uploadurl: "",
+      uploadurl: '',
       loading: true,
     };
-
-    
   }
 
   toggle = () => {
     this.setState({
-      modal: !this.state.modal
+      modal: !this.state.modal,
     });
-  }
-  togglePost = () => {
-    if (this.state.uploadurl === "") {
-      axios({
-        method: "POST",
-        url: `${URL}api/instructors/`,
-        data: {
-          name: this.state.name,
-          license_number: this.state.license_number,
-          ratings: this.state.ratings,
-          contact_email: this.state.contact_email,
-          contact_number: this.state.contact_number,
-          description: this.state.description,
-          photo: this.state.photo
-        },
-        headers: headers
-      })
-        .then(response => {
-          // console.log("put response", response);
-          window.location.reload();
-        })
-        .catch(error => {
-          console.log("put error", error);
-        });
+  };
 
-    } else {
-      
+  togglePost = () => {
+    if (this.state.uploadurl === '') {
       axios({
-        method: "POST",
+        method: 'POST',
         url: `${URL}api/instructors/`,
         data: {
           name: this.state.name,
@@ -80,69 +57,89 @@ class Instructors extends React.Component {
           contact_email: this.state.contact_email,
           contact_number: this.state.contact_number,
           description: this.state.description,
-          photo: this.state.uploadurl
+          photo: this.state.photo,
         },
-        headers: headers
+        headers,
       })
-        .then(response => {
+        .then((response) => {
           // console.log("put response", response);
           window.location.reload();
         })
-        .catch(error => {
-          console.log("put error", error);
+        .catch((error) => {
+          console.log('put error', error);
+        });
+    } else {
+      axios({
+        method: 'POST',
+        url: `${URL}api/instructors/`,
+        data: {
+          name: this.state.name,
+          license_number: this.state.license_number,
+          ratings: this.state.ratings,
+          contact_email: this.state.contact_email,
+          contact_number: this.state.contact_number,
+          description: this.state.description,
+          photo: this.state.uploadurl,
+        },
+        headers,
+      })
+        .then((response) => {
+          // console.log("put response", response);
+          window.location.reload();
+        })
+        .catch((error) => {
+          console.log('put error', error);
         });
     }
-  }
+  };
 
-  handleChange = e => {
+  handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-
   upload = () => {
     window.cloudinary.openUploadWidget(
-      { cloud_name: "dkzzjjjj9", upload_preset: "ggbmyqmo", cors: "no-cors" },
+      { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
       (error, result) => {
         // console.log(error, result);
-        if (this.state.uploadurl === "") {
+        if (this.state.uploadurl === '') {
           let imgurl;
           result
             ? (imgurl = result[0].url)
-            : (imgurl = `http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg`);
+            : (imgurl = 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg');
           this.setState({ uploadurl: imgurl });
-        } else if (this.state.uploadurl !== "") {
+        } else if (this.state.uploadurl !== '') {
           let imgurl;
           imgurl = this.state.uploadurl;
           this.setState({ uploadurl: imgurl });
         }
         // this.setState({ uploadurl: imgurl });
         // console.log('===== stateurl: ', this.state.uploadurl);
-      }
+      },
     ),
-      false;
+    false;
   };
-
 
   componentDidMount() {
     setTimeout(() => this.setState({ loading: false }), 950);
     axios({
-      method: "GET",
+      method: 'GET',
       url: `${URL}api/instructors/`,
-      headers: headers
+      headers,
     })
-      .then(res => {
+      .then((res) => {
         this.setState({ instructors: res.data });
       })
-      .catch(err => {
-        console.log("ERROR :", err);
+      .catch((err) => {
+        console.log('ERROR :', err);
       });
   }
 
   render() {
-    console.log("INSTR STATE", this.state.instructors);
+    console.log('INSTR STATE', this.state.instructors);
     headers = {
-      Authorization: "JWT " + localStorage.getItem("token")
+      Authorization: `JWT ${localStorage.getItem('token')}`,
     };
 
     const { loading } = this.state;
@@ -150,11 +147,9 @@ class Instructors extends React.Component {
       return (
         <div className="Instructors">
           <NavBar />
-          <TopHeader />
+          <TopHeader username={this.props.username} />
           <div className="InstructorCard">
-            <Card
-            className="Instructor-card-card"
-              >
+            <Card className="Instructor-card-card">
               <div className="load-bar">
                 <div className="bar" />
                 <div className="bar" />
@@ -163,28 +158,37 @@ class Instructors extends React.Component {
             </Card>
           </div>
         </div>
-
-    );
-  }else
+      );
+    }
     return (
       <div className="Instructors">
-        <TopHeader breadcrumb={["settings"]} />
+        <TopHeader breadcrumb={['settings']} username={this.props.username} />
         <NavBar />
         <div className="InstructorCard">
-        <Card 
-        onClick={this.toggle}
-        style={{ 
-          boxShadow: this.state.modal ? "inset 1px 1px 1px gray" : "",
-          display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '400px', maxHeight: "568px"}}>
-          <i class="fa fa-plus-circle fa-3x Plus-sign" aria-hidden="true" onClick={this.toggle}></i>
-          </Card> 
-          {this.state.instructors.map(instr => {
-            return (
-              <InstructorCard  key={instr.id} data={instr}>
-                name: {instr.name}
-              </InstructorCard>
-            );
-          })}
+          <Card
+            onClick={this.toggle}
+            style={{
+              boxShadow: this.state.modal ? 'inset 1px 1px 1px gray' : '',
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              minHeight: '400px',
+              maxHeight: '568px',
+            }}
+          >
+            <i
+              className="fa fa-plus-circle fa-3x Plus-sign"
+              aria-hidden="true"
+              onClick={this.toggle}
+            />
+          </Card>
+          {this.state.instructors.map(instr => (
+            <InstructorCard key={instr.id} data={instr}>
+
+              name:
+              {instr.name}
+            </InstructorCard>
+          ))}
         </div>
         <Modal
           className="Instructor-edit-card-modal"
@@ -192,7 +196,7 @@ class Instructors extends React.Component {
           toggle={this.toggle}
         >
           <div className="Instructor-edit-card">
-          <h4>New Instructor </h4>
+            <h4>New Instructor </h4>
             <input
               className="Instructor-edit-card-name"
               name="name"
@@ -210,11 +214,8 @@ class Instructors extends React.Component {
             />
             <ModalBody className="nested-modal-instructor-edit-body">
               <br />
-              <i
-                class="fa fa-cloud-upload fa-3x"
-                onClick={this.upload}
-                aria-hidden="true"
-              >
+              <i className="fa fa-cloud-upload fa-3x" onClick={this.upload} aria-hidden="true">
+
                 Upload Image
               </i>
               {/* <button onClick={this.upload}>CLICK ME TO UPLOAD</button> */}
@@ -227,7 +228,7 @@ class Instructors extends React.Component {
                 placeholder="Description"
                 className="description-content"
                 value={this.state.description}
-                cols="35" 
+                cols="35"
                 wrap="soft"
               />
             </div>
@@ -241,7 +242,7 @@ class Instructors extends React.Component {
               />
             </div>
             <div className="card-contact">
-            <br />
+              <br />
               <div className="contact-info">
                 <input
                   onChange={this.handleChange}
@@ -260,17 +261,14 @@ class Instructors extends React.Component {
                 />
               </div>
             </div>
-            <Button
-              className="edit-instructor-save"
-              onClick={this.togglePost}
-            >
+            <Button className="edit-instructor-save" onClick={this.togglePost}>
+
               Save
             </Button>
           </div>
         </Modal>
-        
       </div>
     );
   }
 }
-export default Instructors;
+export default Auth(Instructors);

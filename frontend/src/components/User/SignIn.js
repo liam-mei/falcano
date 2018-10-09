@@ -9,7 +9,6 @@ import '../../utils/Images/logIn.svg';
 
 const URL = process.env.REACT_APP_URL;
 
-
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -25,6 +24,7 @@ class SignIn extends Component {
       this.props.history.push('/home');
       window.location.reload();
     }
+    
   }
 
   handleChange = (e) => {
@@ -58,16 +58,30 @@ class SignIn extends Component {
           username: '',
           password: '',
           errorMessage: ''
-        });
-
-        this.props.history.push('/home');
-
+        })
+        axios({
+          method: "GET",
+          url: `${ URL }api/billing/`,
+          headers: {
+            Authorization: "JWT " + localStorage.getItem("token")
+          }
       })
+      .then(response => {
+        console.log("RESPONSE FOR BILLING", response)
+        if(response.data.length <= 0) {
+          this.props.history.push('/home')
+
+        } else {
+          localStorage.setItem('premium', response.data[0].premium)
+          this.props.history.push('/home')
+        }
+      })
+    })
       .catch((err) => {
         console.log(err);
         this.setState({ errorMessage: 'Username or Password is Incorrect' });
-      });
-  };
+      })
+    }
 
   render() {
     return (

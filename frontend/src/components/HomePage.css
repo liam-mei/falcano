@@ -16,19 +16,20 @@
 .HomePage .HomePage-info-loading {
   grid-column: 3 / -1;
   grid-row: 2 / -1;
-  background-image: url('../utils/Images/homePageIllustrationBlue.svg');
+  /* background-image: url('../utils/Images/homePageIllustrationBlue.svg'); */
   background-repeat: no-repeat;
 }
 
 .HomePage .HomePage-info .Homepage-totalscard {
   max-width: 700px;
   height: 500px;
-  margin-left: 15%;
-  margin-top: 10%;
+  margin-left: 2%;
+  margin-top: 6%;
   text-align: center;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  box-shadow: none;
   
 }
 
@@ -70,7 +71,7 @@
   margin-left: 5%;
   margin-top: 35%;
   width: 90%;
-  height: 6px;
+  height: 9px;
   background-color: var(--sky);
 }
 .bar {

@@ -287,10 +287,15 @@ class FlightCard extends Component {
             </Typography>
           </div>
 
+          {this.props.flight.sv_html ?  
           <div className="FlightCardHTMLSnippet">
             {Parser(this.props.flight.sv_html)}
             <Helmet>{Parser(this.props.flight.sv_script)}</Helmet>
-          </div>
+            </div> : 
+            <CardContent style={{ display: 'flex', height: "165px", width: '100%', alignItems: 'center', backgroundColor: "#eaeaea", border: "1px solid #bababa" }}>
+              <a className="SnippetLink" target="_blank" rel="noopener noreferrer" href="https://skyvector.com/"> Visit Skyvector.com to get a HTML Snippet</a>
+            </CardContent>
+          }
 
           <div className="FlightCardFooter">
             <div className="FLightCard-Hours-Date">
@@ -298,9 +303,9 @@ class FlightCard extends Component {
               <span>{this.props.flight.total_hours}</span>
             </div>
             <div className="FlightIcons">
-              <i className="fas fa-edit fa-lg" onClick={this.modalToggle} />
+              <i className="fas fa-edit" onClick={this.modalToggle} />
               <i
-                className="fa fa-trash fa-lg delete-button"
+                className="fa fa-trash delete-button"
                 onClick={this.toggleDelete}
                 aria-hidden="true"
               />

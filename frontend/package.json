@@ -37,5 +37,13 @@
         "make-landing-css": "lessc src/components/LandingPage.less src/components/LandingPage.css",
         "make-signup-css": "lessc src/components/User/SignUp.less src/components/User/SignUp.css",
         "make-signin-css": "lessc src/components/User/SignIn.less src/components/User/SignIn.css"
+    },
+    "devDependencies": {
+        "babel-eslint": "^10.0.1",
+        "eslint": "^5.6.1",
+        "eslint-config-airbnb": "^17.1.0",
+        "eslint-plugin-import": "^2.14.0",
+        "eslint-plugin-jsx-a11y": "^6.1.2",
+        "eslint-plugin-react": "^7.11.1"
     }
 }
