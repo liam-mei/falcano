@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import Card from '@material-ui/core/Card';
-import List from '@material-ui/core/List';
+// import List from '@material-ui/core/List';
 // import ListItem from '@material-ui/core/ListItem';
 import CardContent from '@material-ui/core/CardContent';
 import { HorizontalBar } from 'react-chartjs-2';
@@ -9,65 +9,12 @@ import TopHeader from './TopHeader';
 import NavBar from './NavBar';
 import Auth from './Authenication/Auth';
 
+import { data2, makeData, options } from '../utils/helper/Data';
+
 // import logo from '../utils/Images/Logo.svg';
 import './HomePage.css';
 
 const URL = process.env.REACT_APP_URL;
-
-const options = {
-  scales: {
-    xAxes: [
-      {
-        stacked: true,
-        gridLines: { display: false },
-      },
-    ],
-    yAxes: [
-      {
-        stacked: true,
-        gridLines: { display: false },
-      },
-    ],
-  },
-  layout: {
-    padding: {
-      left: 20,
-      right: 20,
-      top: 0,
-      bottom: 0,
-    },
-  },
-  tooltips: {
-    mode: 'nearest',
-  },
-  maintainAspectRatio: true,
-  responsive: {
-    'height < 428px': {
-      legend: {
-        display: false,
-      },
-    },
-  },
-};
-
-// var stackedBar = new Chart({
-//   type: "bar",
-//   data: data,
-//   options: {
-//     scales: {
-//       xAxes: [
-//         {
-//           stacked: true
-//         }
-//       ],
-//       yAxes: [
-//         {
-//           stacked: true
-//         }
-//       ]
-//     }
-//   }
-// });
 
 let headers;
 
@@ -110,27 +57,19 @@ class HomePage extends Component {
       .then((res) => {
         const cross_country_Arr = Array(4).fill(0);
 
-
         const no_instrument_app_Arr = Array(4).fill(0);
-
 
         const no_ldg_Arr = Array(4).fill(0);
 
-
         const dayArr = Array(4).fill(0);
-
 
         const nightArr = Array(4).fill(0);
 
-
         const actualArr = Array(4).fill(0);
-
 
         const simArr = Array(4).fill(0);
 
-
         const picArr = Array(4).fill(0);
-
 
         const recArr = Array(4).fill(0);
 
@@ -149,7 +88,7 @@ class HomePage extends Component {
             picArr[x] += data[key][i].pic;
             recArr[x] += data[key][i].dual_rec;
           }
-          x++;
+          x = x + 1;
         }
         this.setState({
           day: dayArr,
@@ -166,199 +105,18 @@ class HomePage extends Component {
   }
 
   render() {
-    const types = ['MES', 'MEL', 'SEL', 'SES'];
+    const data = makeData(
+      this.state.pic,
+      this.state.dual_rec,
+      this.state.sim_instr,
+      this.state.actual_instr,
+      this.state.day,
+      this.state.night,
+      this.state.cross_country,
+      this.state.no_instument_app,
+      this.state.no_ldg,
+    );
 
-    const color1 = '#BBDEFB';
-    const color2 = '#90CAF9';
-    const color3 = '#64B5F6';
-    const color4 = '#42A5F5';
-    const color5 = '#2196F3';
-    const color6 = '#1E88E5';
-    const color7 = '#1976D2';
-    const color8 = '#1565C0';
-    const color9 = '#0D47A1';
-
-    const hoverColor1 = '#B3E5FC';
-    const hoverColor2 = '#81D4FA';
-    const hoverColor3 = '#4FC3F7';
-    const hoverColor4 = '#29B6F6';
-    const hoverColor5 = '#03A9F4';
-    const hoverColor6 = '#039BE5';
-    const hoverColor7 = '#0288D1';
-    const hoverColor8 = '#0277BD';
-    const hoverColor9 = '#01579B';
-
-    const data2 = {
-      labels: types,
-      datasets: [
-        {
-          label: 'PIC',
-          data: [5, 2, 1, 7],
-          backgroundColor: color1,
-          hoverBackgroundColor: hoverColor1,
-          hoverBorderWidth: 0,
-        },
-        {
-          label: 'Dual Rec',
-          data: [3, 6, 0, 5],
-          backgroundColor: color2,
-          hoverBackgroundColor: hoverColor2,
-          hoverBorderWidth: 0,
-        },
-        {
-          label: 'Sim Instr',
-          data: [2, 5, 2, 8],
-          backgroundColor: color3,
-          hoverBackgroundColor: hoverColor3,
-          hoverBorderWidth: 2,
-        },
-        {
-          label: 'Actual Instr',
-          data: [9, 1, 2, 5],
-          backgroundColor: color4,
-          hoverBackgroundColor: hoverColor4,
-          hoverBorderWidth: 2,
-        },
-        {
-          label: 'Day',
-          data: [2, 3, 1, 2],
-          backgroundColor: color5,
-          hoverBackgroundColor: hoverColor5,
-          hoverBorderWidth: 2,
-        },
-        {
-          label: 'Night',
-          data: [4, 2, 1, 3],
-          backgroundColor: color6,
-          hoverBackgroundColor: hoverColor6,
-          hoverBorderWidth: 2,
-        },
-        {
-          label: 'Cross Country',
-          data: [3, 2, 1, 6],
-          backgroundColor: color7,
-          hoverBackgroundColor: hoverColor7,
-          hoverBorderWidth: 2,
-          hidden: true,
-        },
-        {
-          label: 'No Instrument App',
-          data: [1, 4, 2, 0],
-          backgroundColor: color8,
-          hoverBackgroundColor: hoverColor8,
-          hoverBorderWidth: 2,
-          hidden: true,
-        },
-        {
-          label: 'No Ldg',
-          data: [5, 2, 1, 3],
-          backgroundColor: color9,
-          hoverBackgroundColor: hoverColor9,
-          hoverBorderWidth: 2,
-          hidden: true,
-        },
-      ],
-      tooltips: {
-        mode: 'index',
-        backgroundColor: 'rgba(255,255,255)',
-        borderColor: 'rgb(0, 0, 0)',
-        borderWidth: 0.3,
-        cornerRadius: 0,
-        caretSize: 0,
-        xPadding: 70,
-        yPadding: 25,
-        titleFontColor: 'rgba(0, 0, 0, 0.87)',
-        titleFontSize: 10,
-        titleFontFamily: 'Roboto',
-        bodyFontFamily: 'Roboto',
-      },
-    };
-
-    const data = {
-      labels: types,
-      datasets: [
-        {
-          label: 'PIC',
-          data: this.state.pic,
-          backgroundColor: color1,
-          hoverBackgroundColor: hoverColor1,
-          hoverBorderWidth: 0,
-        },
-        {
-          label: 'Dual Rec',
-          data: this.state.dual_rec,
-          backgroundColor: color2,
-          hoverBackgroundColor: hoverColor2,
-          hoverBorderWidth: 0,
-        },
-        {
-          label: 'Sim Instr',
-          data: this.state.dual_rec,
-          backgroundColor: color3,
-          hoverBackgroundColor: hoverColor3,
-          hoverBorderWidth: 2,
-        },
-        {
-          label: 'Actual Instr',
-          data: this.state.actual_instr,
-          backgroundColor: color4,
-          hoverBackgroundColor: hoverColor4,
-          hoverBorderWidth: 2,
-        },
-        {
-          label: 'Day',
-          data: this.state.day,
-          backgroundColor: color5,
-          hoverBackgroundColor: hoverColor5,
-          hoverBorderWidth: 2,
-        },
-        {
-          label: 'Night',
-          data: this.state.night,
-          backgroundColor: color6,
-          hoverBackgroundColor: hoverColor6,
-          hoverBorderWidth: 2,
-        },
-        {
-          label: 'Cross Country',
-          data: this.state.cross_country,
-          backgroundColor: color7,
-          hoverBackgroundColor: hoverColor7,
-          hoverBorderWidth: 2,
-          hidden: true,
-        },
-        {
-          label: 'No Instrument App',
-          data: this.state.no_instument_app,
-          backgroundColor: color8,
-          hoverBackgroundColor: hoverColor8,
-          hoverBorderWidth: 2,
-          hidden: true,
-        },
-        {
-          label: 'No Ldg',
-          data: this.state.no_ldg,
-          backgroundColor: color9,
-          hoverBackgroundColor: hoverColor9,
-          hoverBorderWidth: 2,
-          hidden: true,
-        },
-      ],
-      tooltips: {
-        mode: 'index',
-        backgroundColor: 'rgba(255,255,255)',
-        borderColor: 'rgb(0, 0, 0)',
-        borderWidth: 0.3,
-        cornerRadius: 0,
-        caretSize: 0,
-        xPadding: 70,
-        yPadding: 25,
-        titleFontColor: 'rgba(0, 0, 0, 0.87)',
-        titleFontSize: 10,
-        titleFontFamily: 'Roboto',
-        bodyFontFamily: 'Roboto',
-      },
-    };
     console.log('HOME STATE', this.state);
     headers = {
       Authorization: `JWT ${localStorage.getItem('token')}`,
@@ -408,48 +166,6 @@ class HomePage extends Component {
               data={localStorage.getItem('premium') ? data : data2}
               options={options}
             />
-            {/* <Chart data={data}>
-                <Axis primary type="ordinal" position="left" />
-                <Axis type="linear" stacked position="bottom" />
-                <Series type={Bar} />
-                <Cursor primary />
-                <Cursor />
-                <Tooltip />
-            </Chart> */}
-
-            {/* <div className="homepage-license">
-                <List className="license-type1">
-                  <ListItem>SEL Hours : {this.state.sel}</ListItem>
-                  <ListItem className="LicenseType">
-                    SES Hours : {this.state.ses}
-                  </ListItem>
-                </List>
-                <List className="license-type2">
-                  <ListItem className="LicenseType1">
-                    MEL Hours : {this.state.mel}
-                  </ListItem>
-                  <ListItem className="LicenseType">
-                    MES Hours : {this.state.mes}
-                  </ListItem>
-                </List>
-              </div>
-              <CardContent />
-              <CardContent className="TotalsBodyChildren">
-                <div classname="totals-1">
-                  <p>Cross Country : {this.state.cross_country}</p>
-                  <p>No. Instr. App. : {this.state.no_instument_app}</p>
-                  <p>No. Ldg. : {this.state.no_ldg}</p>
-                  <p>Day : {this.state.day}</p>
-                  <p>Night : {this.state.night}</p>
-                </div>
-                <div classname="totals-2">
-                  <p>Actual : {this.state.actual_instr}</p>
-                  <p>SIM : {this.state.sim_instr}</p>
-                  <p>Grnd Trnr. :</p>
-                  <p>PIC : {this.state.pic}</p>
-                  <p>Dual Rec. : {this.state.dual_rec}</p>
-                </div>
-              </CardContent> */}
           </Card>
         </div>
       </div>
