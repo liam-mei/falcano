@@ -104,11 +104,11 @@ class Checkout extends React.Component {
                 <input
                   type="radio"
                   className="radio-selection form-control"
-                  value="99"
-                  checked={this.state.amount === '99'}
+                  value="499"
+                  checked={this.state.amount === '499'}
                   onChange={this.handleChange}
                 />
-                <span className="Subscription-text">1-Month: $.99</span>
+                <span className="Subscription-text">1-Time Payment: $4.99</span>
               </label>
             </div>
 
@@ -117,11 +117,11 @@ class Checkout extends React.Component {
                 <input
                   type="radio"
                   className="radio-selection form-control"
-                  value="1999"
-                  checked={this.state.amount === '1999'}
+                  value="999"
+                  checked={this.state.amount === '999'}
                   onChange={this.handleChange}
                 />
-                <span className="Subscription-text">1-Year: $9.99</span>
+                <span className="Subscription-text">Support Lambda : $9.99</span>
               </label>
             </div>
 
