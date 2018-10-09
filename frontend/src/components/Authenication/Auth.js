@@ -2,11 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 // import { isLoggedIn } from '../../utils/helper/helperFuncions';
 
-// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
-// 	let URL
-// 	(dev ? URL = "http://127.0.0.1:8000/api-token-verify/"
-// 		: URL = "https://flightloggercs10.herokuapp.com/api-token-verify/");
-
 const URL = process.env.REACT_APP_URL;
 
 const Auth = Comp => class extends Component {

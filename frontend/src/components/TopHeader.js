@@ -5,6 +5,7 @@ import {
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
 import axios from 'axios';
+import { Capitalize } from '../utils/helper/helperFuncions'
 
 const URL = process.env.REACT_APP_URL;
 
@@ -212,8 +213,7 @@ class TopHeader extends Component {
           ''
         )}
         <span className="Welcome desktop">
-          {`Welcome ${this.props.username.charAt(0).toUpperCase()
-            + this.props.username.slice(1).toLowerCase()}`}
+          {`Welcome ${Capitalize(this.props.username)}`}
         </span>
         <span className="SignOut" onClick={this.signOut}>
 

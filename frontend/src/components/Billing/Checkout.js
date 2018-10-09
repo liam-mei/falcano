@@ -3,6 +3,8 @@ import React from 'react';
 import { injectStripe, CardElement } from 'react-stripe-elements';
 import axios from 'axios';
 import './Checkout.css';
+import Auth from '../Authenication/Auth';
+import { Capitalize } from '../../utils/helper/helperFuncions'
 
 const URL = process.env.REACT_APP_URL;
 let headers;
@@ -43,7 +45,7 @@ class Checkout extends React.Component {
     return (
       this.props.stripe
         // Name needs to be dynamic as well depending on user
-        .createToken({ type: 'card', name: 'Derrick Mei' })
+        .createToken({ type: 'card', name: this.props.username })
         .then((result) => {
           if (result.error) {
             console.log('THERE IS AN ERROR IN YOUR FORM', result.error);
@@ -51,7 +53,7 @@ class Checkout extends React.Component {
           }
           console.log('Received Stripe token ---> SENDING TO SERVER: ', result.token);
           const formData = new FormData();
-          formData.append('description', this.state.description);
+          formData.append('description', "Best Flight Logger Ever");
           formData.append('currency', 'usd');
           formData.append('amount', this.state.amount);
           formData.append('source', result.token.id);
@@ -64,7 +66,7 @@ class Checkout extends React.Component {
             body: formData,
           })
             .then(resp => resp.json())
-            .then(json => this.setState({ resp_message: json.message }))
+            .then(json => this.setState({ resp_message: `${Capitalize(this.props.username)}: ${json.message}` }))
             .then(
               axios({
                 method: 'POST',
@@ -134,4 +136,4 @@ class Checkout extends React.Component {
 // The injectStripe HOC provides the this.props.stripe property
 // You can call this.props.stripe.createToken within a component that has been
 // injected in order to submit payment data to Stripe.
-export default injectStripe(Checkout);
+export default Auth(injectStripe(Checkout));
