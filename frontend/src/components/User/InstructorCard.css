@@ -38,7 +38,24 @@
 .edit-instructor-save {
   justify-content: center;
   align-self: center;
-  width: 100px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+  color: black;
+  padding-top: 0.4rem;
+  padding-bottom: 0.4rem;
+  border-radius: 3px;
+  font-style: bold;
+  font-size: 1.2rem;
+  background-color: #fff;
+  border: 0.3px;
+  width: 55%;
+  margin-top: 15px;
+}
+
+.edit-instructor-save:hover {
+  background: var(--sky);
+  color: white;
+  cursor: pointer;
 }
 
 .Instructor-edit-card-modal .modal-content {
@@ -77,7 +94,6 @@
   color: white; */
   cursor: pointer;
 }
-
 
 .InstructorCard-Card {
   /* border: 1px solid grey; */

@@ -1,7 +1,5 @@
 import React from 'react';
-import {
-  Button, Modal, ModalBody,
-} from 'reactstrap';
+import { Button, Modal, ModalBody } from 'reactstrap';
 import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import NavBar from '../NavBar';
@@ -35,7 +33,7 @@ class Instructors extends React.Component {
       modal: false,
       closeAll: false,
       uploadurl: '',
-      loading: true,
+      loading: false,
     };
   }
 
@@ -215,10 +213,18 @@ class Instructors extends React.Component {
             />
             <ModalBody className="nested-modal-instructor-edit-body">
               <br />
-              <i className="fa fa-cloud-upload fa-3x" onClick={this.upload} aria-hidden="true">
+              {/* <i className="fa fa-cloud-upload fa-3x" onClick={this.upload} aria-hidden="true">
 
                 Upload Image
-              </i>
+              </i> */}
+              <button
+                type="submit"
+                className="instructors-nested-modal-button"
+                onClick={this.upload}
+              >
+
+                UPLOAD PHOTO
+              </button>
               {/* <button onClick={this.upload}>CLICK ME TO UPLOAD</button> */}
             </ModalBody>
             <br />
@@ -262,10 +268,10 @@ class Instructors extends React.Component {
                 />
               </div>
             </div>
-            <Button className="edit-instructor-save" onClick={this.togglePost}>
+            <button type="submit" className="edit-instructor-save" onClick={this.togglePost}>
 
-              Save
-            </Button>
+              SAVE
+            </button>
           </div>
         </Modal>
       </div>

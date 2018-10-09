@@ -303,14 +303,24 @@ class InstructorCard extends Component {
             />
             <ModalBody className="nested-modal-instructor-edit-body">
               <br />
-              <i
+              {/* <i
                 className="fa fa-cloud-upload fa-3x upload-button"
                 onClick={this.upload}
                 aria-hidden="true"
               >
 
-                Upload Image
-              </i>
+                Upload Image asdfasdfasdf
+              </i> */}
+
+              <button
+                type="submit"
+                className="instructors-nested-modal-button"
+                onClick={this.upload}
+              >
+
+                UPLOAD PHOTO
+              </button>
+
               {/* <button onClick={this.upload}>CLICK ME TO UPLOAD</button> */}
             </ModalBody>
             <br />
@@ -355,10 +365,10 @@ class InstructorCard extends Component {
                 />
               </div>
             </div>
-            <Button className="edit-instructor-save" onClick={this.toggleAndPut}>
+            <button type="submit" className="edit-instructor-save" onClick={this.toggleAndPut}>
 
               Save
-            </Button>
+            </button>
           </div>
         </Modal>
       </div>
