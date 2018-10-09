@@ -12,21 +12,21 @@ import Billing from './Billing/Billing';
 import './App.css';
 
 class App extends Component {
-	render() {
-		return (
-			<div className="App">
-				<Route exact path="/" component={LandingPage} />
-				<Route exact path="/home" component={HomePage} />
-				<Route path="/signUp" component={SignUp} />
-				<Route path="/signIn" component={SignIn} />
-				<Route path="/aircrafts" component={Aircrafts} />
-				<Route path="/billing" component={Billing} />
-				<Route path="/flights" component={Flights} />
-				<Route path="/settings" component={Settings} />
-				<Route path="/instructors" component={Instructors} />
-			</div>
-		);
-	}
+  render() {
+    return (
+      <div className="App">
+        <Route exact path="/" component={LandingPage} />
+        <Route exact path="/home" component={HomePage} />
+        <Route path="/signUp" component={SignUp} />
+        <Route path="/signIn" component={SignIn} />
+        <Route path="/aircrafts" component={Aircrafts} />
+        <Route path="/billing" component={Billing} />
+        <Route path="/flights" component={Flights} />
+        <Route path="/settings" component={Settings} />
+        <Route path="/instructors" component={Instructors} />
+      </div>
+    );
+  }
 }
 
 export default App;

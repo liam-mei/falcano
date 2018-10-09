@@ -222,13 +222,13 @@ class Aircrafts extends Component {
                   <ModalBody className="nested-modal-body">
                     <button type="submit" className="nested-modal-button" onClick={this.upload}>
 
-                      CLICK ME TO UPLOAD
+                      UPLOAD PHOTO
                     </button>
                   </ModalBody>
                   <ModalFooter>
                     <button className="save-button" onClick={this.toggleAndPost} type="submit">
 
-                      Save
+                      SAVE
                     </button>
                   </ModalFooter>
                 </Modal>

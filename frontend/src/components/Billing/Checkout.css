@@ -41,7 +41,7 @@
 }
 
 .Checkout .Checkout-card form .Subscription input[type=radio] {
-  width: 30px;
+  width: 18px;
 }
 
 .Checkout .Checkout-card form button {
@@ -64,4 +64,9 @@
   color: #fff;
   text-decoration: none;
   background-color: var(--sky);
+}
+
+
+.Subscription-text {
+  padding: 10px;
 }

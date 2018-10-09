@@ -109,7 +109,7 @@
   align-items: center;
   font-size: 7rem;
   height: 4rem;
-  width: 4.5rem;
+  width: 55%;
   padding-bottom: 1rem;
   border-radius: 50%;
   color: white;
@@ -126,6 +126,25 @@
  width: 100px; 
  margin-bottom: 1rem;
 } */
+
+.Instructor-edit-card .modal-body {
+  /* border: 1px solid red; */
+  width: 100%;
+}
+
+.Instructor-edit-card .modal-body .instructors-nested-modal-button {
+  padding: .4rem 1rem;
+  border-radius: 2px;
+  border: 0;
+  box-shadow: 1px 1px 1px 1px var(--buttonGrey);
+  margin: 0 auto;
+}
+
+.Instructor-edit-card .modal-body .instructors-nested-modal-button:hover {
+  background-color: var(--buttonGrey);
+  color: white;
+  cursor: pointer;
+}
 
 .card-number {
 
