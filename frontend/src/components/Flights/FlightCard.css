@@ -162,6 +162,14 @@
   align-items: center;
 }
 
+.flight-card-edit:hover {
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  cursor: pointer;
+}
+
 .FlightEditModal .FlightEditModalHeader .FlightEditDropdown button {
   height: 32px;
   padding: 0px;

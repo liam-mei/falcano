@@ -33,7 +33,40 @@
   min-height: 385px;
   max-height: 385px;
   min-width: 290px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
+
+
+.tooltip {
+  visibility: hidden;
+  width: 120px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  
+  /* Position the tooltip */
+  position: absolute;
+  z-index: 1;
+}
+
+.Flights .FlightList .Flights-NewCard:hover .tooltip {
+  visibility: visible;
+          
+          }
+
+
+
+/* style={{
+  boxShadow: this.state.openModal ? 'inset 1px 1px 1px gray' : '',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  height: '370px',
+}} */
 
 .NewFlightModal a {
   text-decoration: none;
@@ -189,6 +222,10 @@
   display: flex;
   flex-direction: row;
   align-items: center;
+}
+
+.NewFlightModal .new-flight-total-input {
+  border: .1rem solid red;
 }
 
 .NewFlightModal .NewFlightModalHeader .NewFlightDropdown button {
@@ -359,4 +396,8 @@
     from {left: 50%; width: 0;z-index:100;}
     33.3333% {left: 0; width: 100%;z-index: 10;}
     to {left: 0; width: 100%;}
+}
+
+.new-flight-total-input-error {
+border: 0.1rem solid red;
 }
