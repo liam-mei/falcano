@@ -1,6 +1,8 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
+import CardContent from '@material-ui/core/CardContent';
+import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
 import './AircraftCard.css';
 import axios from 'axios';
@@ -18,9 +20,7 @@ import {
 // import Dropzone from 'react-dropzone';
 // import { Helmet } from 'react-helmet';
 
-const headers = {
-  Authorization: `JWT ${localStorage.getItem('token')}`,
-};
+let headers;
 
 // change dev to false if you want axios to get request from heroku server
 // set dev to true if you want to work on local machine
@@ -53,6 +53,7 @@ class AircraftCardModal extends React.Component {
       nestedModal: false,
       closeAll: false,
       uploadurl: '',
+      total_hours: '',
     };
   }
 
@@ -67,17 +68,9 @@ class AircraftCardModal extends React.Component {
       man_type_edit: this.props.data.man_type,
       photo: this.props.data.photo,
     });
-  }
-
-  // toggles the modal and populates the data the specific aircraft.
-  toggle = () => {
-    this.setState({ modal: !this.state.modal });
-    // const headers = {
-    //   Authorization: `JWT ${localStorage.getItem('token')}`,
-    // };
     axios({
       method: 'GET',
-      url: `${URL}api/filteredflights/${this.state.id}`,
+      url: `${URL}api/filteredflights/${this.props.data.id}`,
       headers,
     })
       .then((response) => {
@@ -87,6 +80,14 @@ class AircraftCardModal extends React.Component {
       .catch((error) => {
         console.log('error :', error);
       });
+  }
+
+  // toggles the modal and populates the data the specific aircraft.
+  toggle = () => {
+    this.setState({ modal: !this.state.modal });
+    // const headers = {
+    //   Authorization: `JWT ${localStorage.getItem('token')}`,
+    // };
     // console.log("STATE::", this.state.uploadurl)
   };
 
@@ -221,9 +222,7 @@ class AircraftCardModal extends React.Component {
         // console.log(error, result);
         if (this.state.uploadurl === '') {
           let imgurl;
-          result
-            ? (imgurl = result[0].url)
-            : (imgurl = 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866643/u6mblomcszwbcs9ovesz.jpg');
+          result ? (imgurl = result[0].url) : (imgurl = this.props.data.photo);
           this.setState({ uploadurl: imgurl });
         } else if (this.state.uploadurl !== '') {
           let imgurl;
@@ -238,6 +237,9 @@ class AircraftCardModal extends React.Component {
   };
 
   render() {
+    headers = {
+      Authorization: `JWT ${localStorage.getItem('token')}`,
+    };
     // console.log("filesdata", this.state.data);
     let [
       pic_sum,
@@ -267,19 +269,36 @@ class AircraftCardModal extends React.Component {
     return (
       <div className="AircraftCard">
         <Card onClick={this.toggle} className="Content-aircraft">
-          <Typography className="card-typography" onClick={this.toggle}>
+          {/* <CardContent> */}
+          <Typography className="card-typography-p" variant="title">
             {this.state.tail_number}
           </Typography>
-          <p className="card-typography-p">{this.props.data.man_type}</p>
-
-          <CardMedia
-            className="CardMedia"
-            onClick={this.toggle}
-            component="img"
-            height="140"
-            image={this.state.photo}
-            title="Airplane"
-          />
+          <Typography>{this.props.data.man_type}</Typography>
+          {/* </CardContent> */}
+          {/* <p className="card-typography-p">{this.props.data.man_type}</p> */}
+          <div className="CardMediaContainer">
+            <CardMedia
+              className="CardMedia"
+              onClick={this.toggle}
+              component="img"
+              height="140"
+              image={this.state.photo}
+              title="Airplane"
+            />
+          </div>
+          <Typography>{`Hours: ${total_hours}`}</Typography>
+          <div className="button-container">
+            <i
+              className="fas fa-edit edit-card-button hover"
+              aria-hidden="true"
+              onClick={this.toggleEditModal}
+            />
+            <i
+              className="fa fa-trash delete-button hover"
+              onClick={this.toggleDelete}
+              aria-hidden="true"
+            />
+          </div>
         </Card>
         {/* CARD END */}
 
@@ -290,132 +309,92 @@ class AircraftCardModal extends React.Component {
           toggle={this.toggle}
         >
           <ModalHeader className="modal-title">
-            <p className="modal-header-p">{this.state.tail_number}</p>
+            <p className="modal-header-p1">{this.state.tail_number}</p>
             <p className="modal-header-p">{this.props.data.man_type}</p>
           </ModalHeader>
           <ModalBody className="modal-body">
-            <br />
             <img className="modal-body-img" src={this.state.photo} />
-            {/* NESTED MODAL */}
-            <Modal
-              className="Detailed-aircraft-edit"
-              isOpen={this.state.nestedModal}
-              toggle={this.toggleNested}
-              onClosed={this.state.closeAll ? this.toggle : undefined}
-            >
-              <ModalHeader>
-                <input
-                  className="edit-input-tn"
-                  name="tail_number_edit"
-                  onChange={this.handleChange}
-                  placeholder={this.props.data.tail_number}
-                />
-                <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdownButton}>
-                  <DropdownToggle caret>{this.state.license_type}</DropdownToggle>
-                  <DropdownMenu>
-                    <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}>
-
-                      Airplane SEL
-                    </DropdownItem>
-                    <DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}>
-
-                      Airplane SES
-                    </DropdownItem>
-                    <DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}>
-
-                      Airplane MEL
-                    </DropdownItem>
-                    <DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}>
-
-                      Airplane MES
-                    </DropdownItem>
-                  </DropdownMenu>
-                </ButtonDropdown>
-                <input
-                  className="edit-input-mt"
-                  name="man_type_edit"
-                  onChange={this.handleChange}
-                  placeholder={this.props.data.man_type}
-                />
-              </ModalHeader>
-              <ModalBody className="nested-modal-body">
-                <button className="nested-modal-button " onClick={this.upload}>
-
-                  CLICK TO UPLOAD IMAGE
-                </button>
-              </ModalBody>
-              <ModalFooter className="ModalFooter">
-                {/* CLOSE NESTED */}
-                <button className="save-button" onClick={this.toggleNestedAndPut}>
-
-                  Save
-                </button>
-              </ModalFooter>
-            </Modal>
           </ModalBody>
+          {/* NESTED MODAL */}
+          <Modal
+            className="Detailed-aircraft-edit"
+            isOpen={this.state.nestedModal}
+            toggle={this.toggleNested}
+            onClosed={this.state.closeAll ? this.toggle : undefined}
+          >
+            <ModalHeader>
+              <input
+                className="edit-input-tn"
+                name="tail_number_edit"
+                onChange={this.handleChange}
+                placeholder={this.props.data.tail_number}
+              />
+              <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdownButton}>
+                <DropdownToggle caret>{this.state.license_type}</DropdownToggle>
+                <DropdownMenu>
+                  <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}>
+
+                    Airplane SEL
+                  </DropdownItem>
+                  <DropdownItem name="Airplane SES" onClick={this.handleDropDownButton}>
+
+                    Airplane SES
+                  </DropdownItem>
+                  <DropdownItem name="Airplane MEL" onClick={this.handleDropDownButton}>
+
+                    Airplane MEL
+                  </DropdownItem>
+                  <DropdownItem name="Airplane MES" onClick={this.handleDropDownButton}>
+
+                    Airplane MES
+                  </DropdownItem>
+                </DropdownMenu>
+              </ButtonDropdown>
+              <input
+                className="edit-input-mt"
+                name="man_type_edit"
+                onChange={this.handleChange}
+                placeholder={this.props.data.man_type}
+              />
+            </ModalHeader>
+            <ModalBody className="nested-modal-body">
+              <button className="nested-modal-button " onClick={this.upload}>
+
+                Upload Photo
+              </button>
+            </ModalBody>
+            <ModalFooter className="ModalFooter">
+              {/* CLOSE NESTED */}
+              <button className="save-button" onClick={this.toggleNestedAndPut}>
+
+                Save
+              </button>
+            </ModalFooter>
+          </Modal>
+
           <ModalFooter className="modal-footer">
             <ul className="ul-1">
               <li>{this.state.license_type}</li>
-              <li>
-
-                Cross Country
-                {cross_country}
-              </li>
-              <li>
-
-                No. Instr. App.
-                {no_instument_app}
-              </li>
-              <li>
-
-                No. Ldg:
-                {no_ldg}
-              </li>
+              <li>{`Cross Country: ${cross_country}`}</li>
+              <li>{`No. Instr. App.: ${no_instument_app}`}</li>
+              <li>{`No. Ldg: ${no_ldg}`}</li>
             </ul>
             <ul className="ul-2">
-              <li>
-
-                Day:
-                {day}
-              </li>
-              <li>
-
-                Night
-                {night}
-              </li>
-              <li>
-
-                Actual Instr.
-                {actual_instr}
-              </li>
-              <li>
-
-                Sim. Instr.
-                {sim_instr}
-              </li>
+              <li>{`Day: ${day}`}</li>
+              <li>{`Night: ${night}`}</li>
+              <li>{`Actual Instr.: ${actual_instr}`}</li>
+              <li>{`Sim. Instr.: ${sim_instr}`}</li>
             </ul>
             <ul className="ul-2">
               <li>Grnd Trainer</li>
-              <li>
-
-                PIC:
-                {pic_sum}
-              </li>
-              <li>
-
-                Dual Rec:
-                {dualrec}
-              </li>
-              <li>
-
-                Total Hours:
-                {total_hours}
-              </li>
+              <li>{`PIC: ${pic_sum}`}</li>
+              <li>{`Dual Rec: ${dualrec}`}</li>
+              <li>{`Total Hours: ${total_hours}`}</li>
             </ul>
           </ModalFooter>
           <ModalFooter className="Edit-delete">
             <i
-              className="fas fa-edit edit-card-button"
+              className="fas fa-edit edit-card-button hover"
               aria-hidden="true"
               onClick={this.toggleNested}
             />

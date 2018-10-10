@@ -32,7 +32,8 @@ class Instructors extends React.Component {
       description: '',
       modal: false,
       closeAll: false,
-      uploadurl: '',
+      uploadurl:
+        'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539107817/Default%20Images/defaultInstructor.png',
       loading: false,
       nameError: false,
     };
@@ -111,7 +112,7 @@ class Instructors extends React.Component {
           let imgurl;
           result
             ? (imgurl = result[0].url)
-            : (imgurl = 'http://res.cloudinary.com/dkzzjjjj9/image/upload/v1538078252/rurz4wt0ngzacnfz06io.jpg');
+            : (imgurl = 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539107817/Default%20Images/defaultInstructor.png');
           this.setState({ uploadurl: imgurl });
         } else if (this.state.uploadurl !== '') {
           let imgurl;
