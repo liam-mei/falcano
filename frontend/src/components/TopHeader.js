@@ -206,7 +206,7 @@ class TopHeader extends Component {
               <span className="ViewTotal-Span">Total Hours</span>
             </div>
             <div className="Total tablet" onClick={this.toggleModal}>
-              <span>Hours</span>
+              <span className="ViewTotal-Span">Hours</span>
             </div>
           </Fragment>
         ) : (
