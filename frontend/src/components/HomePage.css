@@ -10,7 +10,24 @@
   grid-row: 2 / -1;
   background-image: url('../utils/Images/homePageIllustrationBlue.svg');
   background-repeat: no-repeat;
+  background-size: 75%;
+  background-position: top right;
   text-align: center;
+}
+
+@media only screen and (max-width: 1300px) {
+  .HomePage .HomePage-info {
+    background-image: url('../utils/Images/homePageIllustrationSmall.svg');
+    background-repeat: no-repeat;
+    background-size: 55%;
+    background-position: top right;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .HomePage .HomePage-info {
+    background-image: none;
+  }
 }
 
 .HomePage .HomePage-info-loading {
