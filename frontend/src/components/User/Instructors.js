@@ -32,11 +32,25 @@ class Instructors extends React.Component {
       description: '',
       modal: false,
       closeAll: false,
-      uploadurl:
-        'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539107817/Default%20Images/defaultInstructor.png',
+      uploadurl: '',
       loading: false,
       nameError: false,
     };
+  }
+
+  componentDidMount() {
+    setTimeout(() => this.setState({ loading: false }), 950);
+    axios({
+      method: 'GET',
+      url: `${URL}api/instructors/`,
+      headers,
+    })
+      .then((res) => {
+        this.setState({ instructors: res.data });
+      })
+      .catch((err) => {
+        console.log('ERROR :', err);
+      });
   }
 
   toggle = () => {
@@ -46,9 +60,9 @@ class Instructors extends React.Component {
   };
 
   togglePost = (e) => {
-    if(this.state.name.length === 0) {
+    if (this.state.name.length === 0) {
       e.preventDefault();
-      this.setState({ nameError: true })
+      this.setState({ nameError: true });
       return;
     }
     if (this.state.uploadurl === '') {
@@ -88,7 +102,7 @@ class Instructors extends React.Component {
         },
         headers,
       })
-        .then((response) => {
+        .then(() => {
           // console.log("put response", response);
           window.location.reload();
         })
@@ -107,7 +121,6 @@ class Instructors extends React.Component {
       { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
       (error, result) => {
-        // console.log(error, result);
         if (this.state.uploadurl === '') {
           let imgurl;
           result
@@ -126,23 +139,7 @@ class Instructors extends React.Component {
     false;
   };
 
-  componentDidMount() {
-    setTimeout(() => this.setState({ loading: false }), 950);
-    axios({
-      method: 'GET',
-      url: `${URL}api/instructors/`,
-      headers,
-    })
-      .then((res) => {
-        this.setState({ instructors: res.data });
-      })
-      .catch((err) => {
-        console.log('ERROR :', err);
-      });
-  }
-
   render() {
-    console.log('INSTR STATE', this.state.instructors);
     headers = {
       Authorization: `JWT ${localStorage.getItem('token')}`,
     };
@@ -189,8 +186,7 @@ class Instructors extends React.Component {
             />
           </Card>
           {this.state.instructors.map(instr => (
-            <InstructorCard key={instr.id} data={instr}>
-            </InstructorCard>
+            <InstructorCard key={instr.id} data={instr} />
           ))}
         </div>
         <Modal
@@ -202,7 +198,11 @@ class Instructors extends React.Component {
             <h4>New Instructor </h4>
             {this.state.nameError ? <p>Please fill out the required fields</p> : null}
             <input
-              className={this.state.nameError ? "Instructor-edit-card-name-required" : "Instructor-edit-card-name"}
+              className={
+                this.state.nameError
+                  ? 'Instructor-edit-card-name-required'
+                  : 'Instructor-edit-card-name'
+              }
               name="name"
               onChange={this.handleChange}
               placeholder="Instructor Name"
@@ -225,9 +225,7 @@ class Instructors extends React.Component {
               <button
                 type="submit"
                 className="instructors-nested-modal-button"
-                onClick={this.upload}
-              >
-
+                onClick={this.upload}>
                 UPLOAD PHOTO
               </button>
               {/* <button onClick={this.upload}>CLICK ME TO UPLOAD</button> */}
@@ -273,10 +271,7 @@ class Instructors extends React.Component {
                 />
               </div>
             </div>
-            <button type="submit" className="edit-instructor-save" onClick={this.togglePost}>
-
-              SAVE
-            </button>
+            <button type="submit" className="edit-instructor-save" onClick={this.togglePost}>SAVE</button>
           </div>
         </Modal>
       </div>

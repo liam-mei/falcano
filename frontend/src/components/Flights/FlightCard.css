@@ -25,6 +25,7 @@
 
 .FlightCard .FlightCardHeader {
   /* border: 1px solid purple; */
+  height: 78px;
 }
 
 .FlightCard .FlightCardHTMLSnippet {

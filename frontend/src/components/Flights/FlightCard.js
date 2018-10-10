@@ -5,7 +5,6 @@ import Parser from 'html-react-parser';
 import { Helmet } from 'react-helmet';
 
 import Card from '@material-ui/core/Card';
-import CardMedia from '@material-ui/core/CardMedia';
 import Typography from '@material-ui/core/Typography';
 import './FlightCard.css';
 import {

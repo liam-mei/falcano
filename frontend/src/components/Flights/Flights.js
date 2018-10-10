@@ -59,7 +59,7 @@ class Flights extends Component {
       sv_script: '',
       errorMessage: false,
       openModalAlert: false,
-      loading: true,
+      loading: false,
       flightNameErrorMessage: false,
       totalsErrorMessage: false,
       toolTipOpen: false,
@@ -270,7 +270,7 @@ class Flights extends Component {
               onClick={this.toggleModal}
               style={{ display: 'flex', justifyContent: 'center' }}
             >
-              <i className="fa fa-plus-circle fa-3x Plus-sign" onClick={this.toggleModal} />
+              <i className="fa fa-plus-circle fa-3x Plus-sign new" onClick={this.toggleModal} />
             </CardContent>
           </Card>
           {this.state.flightData.map(flight => (
