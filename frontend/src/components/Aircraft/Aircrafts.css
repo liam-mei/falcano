@@ -29,9 +29,6 @@
 
 .Aircrafts .Aircraft-content .Plus-sign {
   color: var(--sky);
-  margin-top: 45%;
-  margin-left: 40%; 
-  /* box-shadow: 2px 1px rgba(0, 0, 0, 0.2); */
 }
 
 .Aircrafts .Aircraft-content .Plus-sign:hover {
