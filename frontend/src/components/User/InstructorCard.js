@@ -104,7 +104,7 @@ class InstructorCard extends Component {
           let imgurl;
           result
             ? (imgurl = result[0].url)
-            : (imgurl = 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866867/Default%20Images/Portrait_Placeholder.png');
+            : (imgurl = this.props.data.photo);
           this.setState({ uploadurl: imgurl });
         } else if (this.state.uploadurl !== '') {
           let imgurl;
@@ -131,7 +131,6 @@ class InstructorCard extends Component {
       headers,
     })
       .then((response) => {
-        console.log(response);
         window.location.reload();
       })
       .catch((err) => {
@@ -161,7 +160,6 @@ class InstructorCard extends Component {
   }
 
   render() {
-    console.log('INSTR CARD STATE: ', this.props.data);
     return (
       <div className="">
         <Card className="InstructorCard-Card">
@@ -182,7 +180,7 @@ class InstructorCard extends Component {
               // height="250"
               image={
                 this.props.data.photo
-                || 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1538866867/Default%20Images/Portrait_Placeholder.png'
+                || 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539107817/Default%20Images/defaultInstructor.png'
               }
               // style={{
               //   marginLeft: 'auto',
