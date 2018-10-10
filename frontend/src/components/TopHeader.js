@@ -5,7 +5,7 @@ import {
   Modal, ModalHeader, ModalBody, ModalFooter,
 } from 'reactstrap';
 import axios from 'axios';
-import { Capitalize } from '../utils/helper/helperFuncions'
+import { Capitalize } from '../utils/helper/helperFuncions';
 
 const URL = process.env.REACT_APP_URL;
 
@@ -203,7 +203,7 @@ class TopHeader extends Component {
         {this.state.displayTotal ? (
           <Fragment>
             <div className="Total desktop" onClick={this.toggleModal}>
-            <span className="ViewTotal-Span">Total Hours</span>
+              <span className="ViewTotal-Span">Total Hours</span>
             </div>
             <div className="Total tablet" onClick={this.toggleModal}>
               <span>Hours</span>
@@ -212,9 +212,7 @@ class TopHeader extends Component {
         ) : (
           ''
         )}
-        <span className="Welcome desktop">
-          {`Welcome ${Capitalize(this.props.username)}`}
-        </span>
+        <span className="Welcome desktop">{`Welcome ${Capitalize(this.props.username)}`}</span>
         <span className="SignOut" onClick={this.signOut}>
 
           Signout
