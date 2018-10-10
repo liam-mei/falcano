@@ -92,9 +92,8 @@ class SignUp extends Component {
           <p>Be ready.</p>
           <p>Be organized.</p>
           <p>
-
             Be
-            <span className="bold">Falcano</span>
+            <span className="bold"> Falcano</span>
           </p>
         </div>
         <div className="SignUp-card">
