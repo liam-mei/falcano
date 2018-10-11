@@ -1,8 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
 import CardMedia from '@material-ui/core/CardMedia';
-import CardContent from '@material-ui/core/CardContent';
-import CardHeader from '@material-ui/core/CardHeader';
 import Typography from '@material-ui/core/Typography';
 import './AircraftCard.css';
 import axios from 'axios';
@@ -17,19 +15,8 @@ import {
   DropdownItem,
   Button,
 } from 'reactstrap';
-// import Dropzone from 'react-dropzone';
-// import { Helmet } from 'react-helmet';
 
 let headers;
-
-// change dev to false if you want axios to get request from heroku server
-// set dev to true if you want to work on local machine
-// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
-// let URL;
-// dev
-//   ? (URL = "http://127.0.0.1:8000/api")
-//   : (URL = "https://flightloggercs10.herokuapp.com/api");
-
 const URL = process.env.REACT_APP_URL;
 
 class AircraftCardModal extends React.Component {
@@ -58,13 +45,12 @@ class AircraftCardModal extends React.Component {
   }
 
   componentDidMount() {
-    // console.log("URL", URL);
     this.setState({
-      tail_number: this.props.data.tail_number,
       id: this.props.data.id,
+      tail_number: this.props.data.tail_number,
       tail_number_edit: this.props.data.tail_number,
-      license_type_edit: this.props.data.license_type,
       license_type: this.props.data.license_type,
+      license_type_edit: this.props.data.license_type,
       man_type_edit: this.props.data.man_type,
       photo: this.props.data.photo,
     });
@@ -74,7 +60,6 @@ class AircraftCardModal extends React.Component {
       headers,
     })
       .then((response) => {
-        // console.log("MODAL RES", response.data.aircraft);
         this.setState({ data: response.data });
       })
       .catch((error) => {
@@ -85,10 +70,6 @@ class AircraftCardModal extends React.Component {
   // toggles the modal and populates the data the specific aircraft.
   toggle = () => {
     this.setState({ modal: !this.state.modal });
-    // const headers = {
-    //   Authorization: `JWT ${localStorage.getItem('token')}`,
-    // };
-    // console.log("STATE::", this.state.uploadurl)
   };
 
   toggleNested = () => {
@@ -114,7 +95,6 @@ class AircraftCardModal extends React.Component {
   // Handles the change in input
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
-    // console.log("statechange", this.state.license_type_edit);
   };
 
   confirmDelete = () => {
@@ -130,7 +110,6 @@ class AircraftCardModal extends React.Component {
       .catch((err) => {
         console.log(err);
       });
-    // this.setState({modal: !this.state.modal})
   };
 
   // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
@@ -148,8 +127,7 @@ class AircraftCardModal extends React.Component {
         },
         headers,
       })
-        .then((response) => {
-          // console.log("put response", response);
+        .then(() => {
         })
         .catch((error) => {
           console.log('put error', error);
@@ -175,7 +153,7 @@ class AircraftCardModal extends React.Component {
         },
         headers,
       })
-        .then((response) => {
+        .then(() => {
           // console.log("put response", response);
         })
         .catch((error) => {
@@ -240,7 +218,7 @@ class AircraftCardModal extends React.Component {
     headers = {
       Authorization: `JWT ${localStorage.getItem('token')}`,
     };
-    // console.log("filesdata", this.state.data);
+
     let [
       pic_sum,
       no_ldg,
@@ -253,7 +231,7 @@ class AircraftCardModal extends React.Component {
       no_instument_app,
       total_hours,
     ] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    for (let i = 0; i < this.state.data.length; i++) {
+    for (let i = 0; i < this.state.data.length; i += 1) {
       pic_sum += this.state.data[i].pic;
       no_ldg += this.state.data[i].no_ldg;
       day += this.state.data[i].day;
@@ -269,13 +247,10 @@ class AircraftCardModal extends React.Component {
     return (
       <div className="AircraftCard">
         <Card onClick={this.toggle} className="Content-aircraft">
-          {/* <CardContent> */}
           <Typography className="card-typography-p" variant="title">
             {this.state.tail_number}
           </Typography>
           <Typography>{this.props.data.man_type}</Typography>
-          {/* </CardContent> */}
-          {/* <p className="card-typography-p">{this.props.data.man_type}</p> */}
           <div className="CardMediaContainer">
             <CardMedia
               className="CardMedia"

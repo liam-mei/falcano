@@ -12,8 +12,6 @@ from .api import FlightsSerializer, AircraftSerializer
 from .models import Flights, Aircraft
 from rest_framework import generics
 
-from django.db.models import Sum
-
 
 from django.views.generic.list import ListView
 
@@ -61,19 +59,9 @@ class Filter3ViewSet(generics.ListAPIView):
     
 
     def get_queryset(self):
-        # user = self.request.user
         print("USER:", self.request.user)
         aircraft = self.kwargs['aircraft']
-        # model = Flights
         return Flights.objects.filter(aircraft=aircraft)
-        # return Flights.objects.filter(tail_number=tail_number).aggregate(Sum('pic'))
-        #return Flights.objects.all().aggregate(Sum('pic'))
-
-    # def get_context_data(self, **kwargs):
-
-# class AircraftViewSet(generics.AircraftApiView):
-#     queryset = Aircraft.objects.all()
-#     serializer_class = AircraftSerializer
 
 
 class UpdatePassword(APIView):

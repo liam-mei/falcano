@@ -59,7 +59,7 @@ class Flights extends Component {
       sv_script: '',
       errorMessage: false,
       openModalAlert: false,
-      loading: false,
+      loading: true,
       flightNameErrorMessage: false,
       totalsErrorMessage: false,
       toolTipOpen: false,
@@ -386,26 +386,31 @@ class Flights extends Component {
                 </div>
                 <div className="YYY">
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="cross_country"
                     onChange={this.handleInputChange}
                   />
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="no_instument_app"
                     onChange={this.handleInputChange}
                   />
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="no_ldg"
                     onChange={this.handleInputChange}
                   />
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="day"
                     onChange={this.handleInputChange}
                   />
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="night"
                     onChange={this.handleInputChange}
@@ -422,26 +427,31 @@ class Flights extends Component {
                 </div>
                 <div className="YYY">
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="actual_instr"
                     onChange={this.handleInputChange}
                   />
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="sim_instr"
                     onChange={this.handleInputChange}
                   />
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="dual_rec"
                     onChange={this.handleInputChange}
                   />
                   <input
+                    type="number"
                     className="new-flight-pic-input"
                     name="pic"
                     onChange={this.handleInputChange}
                   />
                   <input
+                    type="number"
                     className={this.state.totalsErrorMessage ? "new-flight-total-input" : ""}
                     name="total_hours"
                     onChange={this.handleInputChange}
