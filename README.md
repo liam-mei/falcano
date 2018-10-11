@@ -52,16 +52,17 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
 * [Parser](https://www.npmjs.com/package/html-react-parser) - HTML to React parser
 * [Helmet](https://www.npmjs.com/package/react-helmet) - manages changes to document head
 * [React Chart JS 2](https://www.npmjs.com/package/react-chartjs-2) - Used for the chart on the home page
-* [@material-ui/core](http://material-ui.com/) - Used for all the cards.
 * [bootstrap](https://getbootstrap.com/) - Needed for the styling of reactstrap
 
-### Back end libraries/frameworks bel
+### Back end libraries/frameworks
 * [django rest framework](https://www.django-rest-framework.org/) - For building web API
 * [django-rest-framework-jwt](https://www.django-rest-framework.org/api-guide/authentication/)
+* [django-rest-framework multiple model](#https://github.com/MattBroach/DjangoRestMultipleModels)
 
 ### CSS
 * [CSS Grid](#)
 * [Flexbox](#https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)
+* [@material-ui/core](http://material-ui.com/) - Used for all the cards.
 * [reactstrap](https://reactstrap.github.io) - Used for modals, and a few buttons.
 * [FontAwesome](https://www.Fontawesome.com) - Icons
   
@@ -72,18 +73,18 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
     - There were a few reasons behind choosing Django for this project. 
     - First and foremost Django has a robust admin interface that makes creating and managing data/users easy and simple to use
     - Django also comes with PostgreSQL out of the box, and having a SQL database would complement our data structure very much as we have heavily relational data.
-    - 
+    - Most importantly, Django is amazing and we wanted to try out new technologies that we hadn't had much experience with before.
     - one of the downfalls about Django is that to fully take advantage of it, you need to have a pretty comprehensive knowledge of Django to make it work
  
  * Reactjs
-    - We were already familiar with react, knowing it would provide us with what we needed in order to 
-      create a UX that was user friendly.
+    - React is a powerful library that is excellent for building single page applications.
+    - React-router also allows us to give users a seamless single page experience 
 
  * Heroku / Netlify 
-    - This one was easy, we had used these services for back/frontend deployment before, knew they worked   and were not too tricky to use.
+    - This one was easy, we had used these services for back/frontend deployment before, knew they worked and were not too tricky to use.
 
  * Material UI
-    - This was recommended to us by our PM, it ended up being a good choice. It looks clean and is          relativly easy to use.
+    - This was recommended to us by our PM, it ended up being a good choice. It looks clean and is relativly easy to use.
 
  * Reactstrap 
     - We chose to use this mostly for the modals, as we were already familiar with reactstrap's modals from the course.
