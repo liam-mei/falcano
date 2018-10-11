@@ -14,6 +14,7 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
     * [Front End Libraries and Frameworks](#front-end-libraries/frameworks)
     * [Back end Libraries](#back-end-libraries)
     * [CSS](#css)
+    * [UI](#ui)
 
 * [Justifications For Tech Stack Chosen](#justifications)
   
@@ -113,13 +114,13 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
     - Where you record which plane you flew on, and where you can upload a picture of it as well if you wish.
 
  #### Instructors  
-   - Keep track of all of your instructors information as well as a picture!
+    - Keep track of all of your instructors information as well as a picture!
 
  #### Settings  
-   - You can change your password here.
+    - You can change your password here.
 
  #### Billing  
-   - Unlock the app's premium features here!
+    - Unlock the app's premium features here!
 
 
 
