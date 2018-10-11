@@ -65,7 +65,18 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
 * [@material-ui/core](http://material-ui.com/) - Used for all the cards.
 * [reactstrap](https://reactstrap.github.io) - Used for modals, and a few buttons.
 * [FontAwesome](https://www.Fontawesome.com) - Icons
-  
+* index.css contains a styleguide to insure uniformity.
+
+### UI
+* Design Direction
+    - Keeping in line with an aviation theme light colors with an airy design was the objective.
+    - Main color are blues with accents of yellows, greens, and greys.
+    - White space utilizing padding and margins were carefully considered to avoid visual overcrowd of text and graphics.
+
+### Custom graphics
+* Adobe Illustrator was used to create vector based custom graphics.
+    - favicon, logo, landing page background, sign-in background, sign-up background, home page illustration, default flights image, default aircraft image, default instructors image, billing page background and illustration, settings background and illustration were all created with Adobe Illustrator. 
+    - If no photos are uploaded custom default graphics will be shown for Flights, Aircraft and Instructor pages.
 
 ## Justifications
 
