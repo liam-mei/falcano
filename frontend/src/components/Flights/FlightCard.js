@@ -358,27 +358,27 @@ class FlightCard extends Component {
           <ModalFooter className="FlightViewCard-modalfooter">
             <ul className="ul-1">
               <li>{this.state.aircraft_whatever.license_type}</li>
-              <li>Cross Country {this.props.flight.cross_country}</li>
-              <li>No. Instr. App. {this.props.flight.no_instument_app}</li>
+              <li>Cross Country: {this.props.flight.cross_country}</li>
+              <li>No. Instr. App.: {this.props.flight.no_instument_app}</li>
               <li>No. Ldg: {this.props.flight.no_ldg}</li>
             </ul>
             <ul className="ul-2">
               <li>Day: {this.props.flight.day}</li>
-              <li>Night {this.props.flight.night}</li>
+              <li>Night: {this.props.flight.night}</li>
               <li>
-                Actual Instr.
+                Actual Instr.:
                 {this.props.flight.actual_instr}
               </li>
               <li>
-                Sim. Instr.
+                Sim. Instr.:
                 {this.props.flight.sim_instr}
               </li>
             </ul>
             <ul className="ul-2">
-              <li>Grnd Trainer</li>
+              <li>Grnd Trainer: 0</li>
               <li>PIC: {this.props.flight.pic}</li>
               <li>Dual Rec: {this.props.flight.dual_rec}</li>
-              <li>Total {this.props.flight.total_hours}</li>
+              <li>Total: {this.props.flight.total_hours}</li>
             </ul>
           </ModalFooter>
           <ModalFooter>
