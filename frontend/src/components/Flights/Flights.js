@@ -3,7 +3,6 @@ import axios from 'axios';
 import './Flights.css';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import {
   Modal,
   ModalHeader,
@@ -13,10 +12,7 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem,
-  Tooltip
 } from 'reactstrap';
-import { CardMedia} from '@material-ui/core';
-import PlusIcon from '../../utils/Images/PlusIcon.png';
 import FlightCard from './FlightCard';
 import Auth from '../Authenication/Auth';
 import TopHeader from '../TopHeader';
@@ -26,7 +22,7 @@ import NavBar from '../NavBar';
 // dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
 const URL = process.env.REACT_APP_URL;
-
+const dev = process.env.REACT_APP_DEV;
 let headers;
 class Flights extends Component {
   constructor(props) {
@@ -123,7 +119,7 @@ class Flights extends Component {
     if (this.state.total_hours.length === 0 ) {
       e.preventDefault();
       this.setState({ totalsErrorMessage: true });
-      console.log("FLIGHT ERR STATE", this.state.totalsErrorMessage)
+      dev ? console.log("FLIGHT ERR STATE", this.state.totalsErrorMessage) : console.log()
       return;
     }
   }
@@ -208,7 +204,7 @@ class Flights extends Component {
         this.setState({ flightData: response.data });
       })
       .catch((error) => {
-        console.log('flights get error', error);
+        dev ? console.log('flights get error', error) : console.log();
       });
   }
 

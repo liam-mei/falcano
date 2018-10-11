@@ -10,7 +10,7 @@ import './SignUp.css';
 import '../../utils/Images/signUpPage.svg';
 
 const URL = process.env.REACT_APP_URL;
-
+const dev = process.env.REACT_APP_DEV;
 class SignUp extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +77,7 @@ class SignUp extends Component {
                 errorMessage: 'Username already exists. Please choose another Username',
               });
             }
-            console.log(err);
+            dev ? console.log(err) : console.log();
           });
       }
     } else {

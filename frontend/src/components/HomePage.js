@@ -15,7 +15,7 @@ import { data2, makeData, options } from '../utils/helper/Data';
 import './HomePage.css';
 
 const URL = process.env.REACT_APP_URL;
-
+const dev = process.env.REACT_APP_DEV;
 let headers;
 
 class HomePage extends Component {
@@ -48,11 +48,11 @@ class HomePage extends Component {
       headers,
     })
       .then((response) => {
-        console.log('HOME RES', response.data);
+        dev ? console.log('HOME RES', response.data) : console.log();
         this.setState({ flightList: response.data });
       })
       .catch((err) => {
-        console.log(err);
+       dev ? console.log(err) : console.log();
       })
       .then(() => {
         const cross_country_Arr = Array(4).fill(0);
@@ -117,7 +117,7 @@ class HomePage extends Component {
       this.state.no_ldg,
     );
 
-    console.log('HOME STATE', this.state);
+    dev ? console.log('HOME STATE', this.state) : console.log();
     headers = {
       Authorization: `JWT ${localStorage.getItem('token')}`,
     };

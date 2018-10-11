@@ -16,6 +16,8 @@ import {
   Button,
 } from 'reactstrap';
 
+const dev = process.env.REACT_APP_DEV;
+
 let headers;
 const URL = process.env.REACT_APP_URL;
 
@@ -63,7 +65,7 @@ class AircraftCardModal extends React.Component {
         this.setState({ data: response.data });
       })
       .catch((error) => {
-        console.log('error :', error);
+        dev ? console.log('error :', error) : console.log();
       });
   }
 
@@ -104,11 +106,11 @@ class AircraftCardModal extends React.Component {
       headers,
     })
       .then((response) => {
-        console.log(response);
+        dev ? console.log(response) : console.log();
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        dev ? console.log(err) : console.log();
       });
   };
 
@@ -130,7 +132,7 @@ class AircraftCardModal extends React.Component {
         .then(() => {
         })
         .catch((error) => {
-          console.log('put error', error);
+          dev ? console.log('put error', error) : console.log();
         });
       this.setState({
         nestedModal: !this.state.nestedModal,
@@ -157,7 +159,7 @@ class AircraftCardModal extends React.Component {
           // console.log("put response", response);
         })
         .catch((error) => {
-          console.log('put error', error);
+         dev ? console.log('put error', error) : console.log();
         });
       this.setState({
         nestedModal: !this.state.nestedModal,
@@ -193,6 +195,7 @@ class AircraftCardModal extends React.Component {
   // };
 
   upload = () => {
+    // eslint-disable-next-line
     window.cloudinary.openUploadWidget(
       { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
@@ -210,7 +213,8 @@ class AircraftCardModal extends React.Component {
         // this.setState({ uploadurl: imgurl });
         // console.log('===== stateurl: ', this.state.uploadurl);
       },
-    ),
+    )
+    //eslint-disable-next-line
     false;
   };
 
@@ -257,7 +261,7 @@ class AircraftCardModal extends React.Component {
               onClick={this.toggle}
               component="img"
               height="140"
-              image={this.state.photo}
+              image={this.props.data.photo || 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539107821/Default%20Images/defaultPlane.png'}
               title="Airplane"
             />
           </div>
@@ -288,7 +292,7 @@ class AircraftCardModal extends React.Component {
             <p className="modal-header-p">{this.props.data.man_type}</p>
           </ModalHeader>
           <ModalBody className="modal-body">
-            <img className="modal-body-img" src={this.state.photo} />
+            <img alt="Aircraft" className="modal-body-img" src={this.state.photo} />
           </ModalBody>
           {/* NESTED MODAL */}
           <Modal

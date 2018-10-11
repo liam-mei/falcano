@@ -1,7 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
 import {
   Modal,
   ModalHeader,
@@ -23,12 +22,12 @@ import './Aircrafts.css';
 
 let headers;
 const URL = process.env.REACT_APP_URL;
-
+const dev = process.env.REACT_APP_DEV;
 class Aircrafts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      // loading: true,
+      loading: true,
       openModal: false,
       dropdownOpen: false,
       dropdownButtonTitle: 'Airplane SEL',
@@ -63,7 +62,7 @@ class Aircrafts extends Component {
         });
       })
       .catch((error) => {
-        console.log('error :', error);
+        dev ? console.log('error :', error) : console.log();
         this.props.history.push('/');
       });
   }
@@ -95,7 +94,7 @@ class Aircrafts extends Component {
     })
       .then()
       .catch((error) => {
-        console.log('put error', error);
+        dev ? console.log('put error', error) : console.log();
       });
     window.location.reload();
   };
@@ -111,6 +110,7 @@ class Aircrafts extends Component {
   };
 
   upload = () => {
+    // eslint-disable-next-line
     window.cloudinary.openUploadWidget(
       { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo' },
       (error, result) => {
@@ -120,46 +120,45 @@ class Aircrafts extends Component {
           : (imgurl = 'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539107821/Default%20Images/defaultPlane.png');
         this.setState({ uploadurl: imgurl });
       },
-    ),
+    )
+    // eslint-disable-next-line
     false;
   };
 
   render() {
-    console.log('aircraft props: ', this.props);
+    dev ? console.log("TESSSSSSSSST", dev) : console.log()
     headers = {
       Authorization: `JWT ${localStorage.getItem('token')}`,
     };
 
-    //   const { loading } = this.state;
-    //   if (loading) {
-    //     return (
-    //       <div className="Aircrafts">
-    //         <NavBar />
-    //         <TopHeader />
-    //         <div className="Aircraft-content">
-    // 				<div className="AircraftList-loading"></div>
-    //           <Card
-    //           className="AircraftCard-loading"
-    //             >
-    //             <div className="load-bar">
-    //               <div className="bar" />
-    //               <div className="bar" />
-    //               <div className="bar" />
-    //             </div>
-    //           </Card>
-    //         </div>
-    //       </div>
+      const { loading } = this.state;
+      if (loading) {
+        return (
+          <div className="Aircrafts">
+            <NavBar />
+            <TopHeader breadcrumb={['aircraft']} displayTotal username={this.props.username} />
+            <div className="Aircraft-content">
+              <Card
+              className="AircraftCard-loading"
+                >
+                <div className="load-bar">
+                  <div className="bar" />
+                  <div className="bar" />
+                  <div className="bar" />
+                </div>
+              </Card>
+            </div>
+          </div>
 
-    //   );
-    // }else
+      );
+    }else
 
     return (
       <div className="Aircrafts">
         <TopHeader breadcrumb={['aircraft']} displayTotal username={this.props.username} />
         <NavBar />
         <div className="Aircraft-content">
-          <Card
-            className="hover"
+        <Card
             onClick={this.toggleModal}
             style={{
               boxShadow: this.state.openModal ? 'inset 1px 1px 1px gray' : '',
@@ -169,13 +168,13 @@ class Aircrafts extends Component {
               height: '385px',
             }}
           >
-            <CardContent
+            <div
               className="NewFlight-Card .Plus-sign .hover"
               onClick={this.toggleModal}
               style={{ display: 'flex', justifyContent: 'center' }}
             >
               <i className="fa fa-plus-circle fa-3x Plus-sign" onClick={this.toggleModal} />
-            </CardContent>
+            </div>
           </Card>
           {this.state.data.map((plane) => {
             const id = plane.id;

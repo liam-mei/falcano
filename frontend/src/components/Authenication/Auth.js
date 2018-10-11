@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 // import { isLoggedIn } from '../../utils/helper/helperFuncions';
-
+const dev = process.env.REACT_APP_DEV;
 const URL = process.env.REACT_APP_URL;
 
 const Auth = Comp => class extends Component {
@@ -21,11 +21,11 @@ const Auth = Comp => class extends Component {
         },
       })
         .then((response) => {
-          console.log('auth response ', response);
+          dev ? console.log('auth response ', response) : console.log();
           this.setState({ loggedIn: true, username: response.data.user.username });
         })
         .catch((err) => {
-          console.log('eeeeeeeeerrrrrrrrrrrrrorrrrrrrrrr', err);
+         dev ? console.log('eeeeeeeeerrrrrrrrrrrrrorrrrrrrrrr', err) : console.log();
         });
     }
 
