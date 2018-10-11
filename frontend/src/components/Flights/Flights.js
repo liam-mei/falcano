@@ -59,7 +59,7 @@ class Flights extends Component {
       sv_script: '',
       errorMessage: false,
       openModalAlert: false,
-      loading: false,
+      loading: true,
       flightNameErrorMessage: false,
       totalsErrorMessage: false,
       toolTipOpen: false,

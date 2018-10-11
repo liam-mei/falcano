@@ -1,27 +1,44 @@
 # Falcano
 
-    Falcano aims to be an easy to use flight log for new and seasoned pilots alike. Create a record of
-your planes and then document your flights and record your hours. It is easy to use, and even         easier to look at. No need to calculate your total hours either, even by specific license type, we    do it all for you! Time flies, but you won't ever lose track of your hours again with Falcano.
+Falcano aims to be an easy to use flight log for new and seasoned pilots alike.  
+Create a record of your planes and then document your flights and record your hours.  
+It is easy to use, and even easier to look at. 
+No need to calculate your total hours either,  
+even by specific license type, we do it all for you!  
+Time flies, but you won't ever lose track of your hours again with Falcano.  
 
 
 ## Table of Contents(#toc)
-* [Main Tech Stack](#mts)
-    * [Front end Libraries](#fel)
-    * [Back end Libraries](#bel)
+* [Tech Stack](#tech-stack)
+    * [Main Tech Stack](#main-tech-stack)
+    * [Front End Libraries and Frameworks](#front-end-libraries/frameworks)
+    * [Back end Libraries](#back-end-libraries)
     * [CSS](#css)
-    * [Justifications](#just)
-* [Basic Overview](#bo)
-    * [Home Page](#home)
+
+* [Justifications For Tech Stack Chosen](#justifications)
+  
+* [Basic Overview](#basic-overview)
+    * [Home Page](#homepage)
     * [Flights](#flights)
     * [Aircraft](#aircraft)
     * [Instructors](#instructors)
-    * [Settings](#sett)
-    * [Billing](#bill)
+    * [Settings](#settings)
+    * [Billing](#billings)
+  
 * [Routes](#routes)
+  
+* [Setting Up](#setting-up)
+    * [Prerequisites](#Prerequisites)
+    * [Getting Started](#getting-started)
+
+* [Deployment](#deployment)
+
+* [License](#license)
 
 
+## Tech-Stack
 
-## [Main Tech Stack](#mts)
+### Main-Tech-Stack
 
 * [Django](https://www.djangoproject.com/) - Backend database management
 * [React](https://reactjs.org/) - The web framework used
@@ -29,25 +46,85 @@ your planes and then document your flights and record your hours. It is easy to 
 * [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client
 * [Stripe](https://stripe.com/) - Online payments company
 
-## [Front end libraries/frameworks](#fel)
+### Front-End-Libraries/Frameworks
 
 * [Cloudinary](https://www.cloudinary.com)
 * [Parser](https://www.npmjs.com/package/html-react-parser) - HTML to React parser
 * [Helmet](https://www.npmjs.com/package/react-helmet) - manages changes to document head
-* [reactstrap](https://reactstrap.github.io) - Used for modals, and a few buttons.
-* [FontAwesome](https://www.Fontawesome.com) - Icons
 * [React Chart JS 2](https://www.npmjs.com/package/react-chartjs-2) - Used for the chart on the home page
 * [@material-ui/core](http://material-ui.com/) - Used for all the cards.
 * [bootstrap](https://getbootstrap.com/) - Needed for the styling of reactstrap
 
-## [Back end libraries/frameworks](#bel)
+### Back end libraries/frameworks bel
 * [django rest framework](https://www.django-rest-framework.org/) - For building web API
 * [django-rest-framework-jwt](https://www.django-rest-framework.org/api-guide/authentication/)
 
-## [CSS](#css)
+### CSS
+* [CSS Grid](#)
+* [Flexbox](#https://developer.mozilla.org/en-US/docs/Learn/CSS/CSS_layout/Flexbox)
+* [reactstrap](https://reactstrap.github.io) - Used for modals, and a few buttons.
+* [FontAwesome](https://www.Fontawesome.com) - Icons
+  
 
-* [CSS Grid]
-* [LESS](http://lesscss.org/)
+## Justifications
+
+ * Django
+    - There were a few reasons behind choosing Django for this project. 
+    - First and foremost Django has a robust admin interface that makes creating and managing data/users easy and simple to use
+    - Django also comes with PostgreSQL out of the box, and having a SQL database would complement our data structure very much as we have heavily relational data.
+    - 
+    - one of the downfalls about Django is that to fully take advantage of it, you need to have a pretty comprehensive knowledge of Django to make it work
+ 
+ * Reactjs
+    - We were already familiar with react, knowing it would provide us with what we needed in order to 
+      create a UX that was user friendly.
+
+ * Heroku / Netlify 
+    - This one was easy, we had used these services for back/frontend deployment before, knew they worked   and were not too tricky to use.
+
+ * Material UI
+    - This was recommended to us by our PM, it ended up being a good choice. It looks clean and is          relativly easy to use.
+
+ * Reactstrap 
+    - We chose to use this mostly for the modals, as we were already familiar with reactstrap's modals from the course.
+
+
+
+## Basic-Overview
+ #### HomePage  
+    - Greets you with a graph of your total hours by license type split up by the specific hours flown. Which hours displayed are customizable by clicking the labels at the top of the graph.
+
+ #### Flights  
+    - Where you record your flight, with various types of hours flown, which aircraft you used, and even a space for and html snippet/link to your flight plan on [Skyvector](https://www.skyvector.com)
+
+ #### Aircraft  
+    - Where you record which plane you flew on, and where you can upload a picture of it as well if you wish.
+
+ #### Instructors  
+   - Keep track of all of your instructors information as well as a picture!
+
+ #### Settings  
+   - You can change your password here.
+
+ #### Billing  
+   - Unlock the app's premium features here!
+
+
+
+## Routes
+
+ * [GET] api/flights/   -view a list of flights created by the user
+ * [GET/PUT] api/flights/(flightID)/ -view a specific flight // edit a specific flight
+ * [GET] api/aircraft/  -view list of aircraft created by the user user
+ * [GET/PUT] api/aircraft/(aircraftID)/ -view a specific aircraft // edit a specific aircraft
+ * [GET] api/instructors/ -view list of instructors created by the user
+ * [GET/PUT] api/instructor/(instructorID)/ -view a specific instructor // edit a specific instructor
+ * [GET] api/filtedflights/(aircraftID)/ -view a list of flights for a specific aircraft
+ * [POST] api/passwordchange/  -allows user to change password.
+ * [GET] api/joined/ -view flights sorted by license type 
+  
+  
+## Setting-Up
 
 ### Prerequisites
 
@@ -57,10 +134,9 @@ For this project install these dependencies by visting the links below.
 or [yarn](https://yarnpkg.com/lang/en/docs/install),
 and [pip/pipenv](https://pypi.org/project/pip/) 
 
-## Getting Started
+### Getting-Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
 
 1. For the frontend/react side of the project
    - open a terminal 
@@ -76,8 +152,10 @@ yarn start
 pipenv shell
 pipenv install
 python manage.py runserver
+python manage.py createsuperuser
 ```
 3. Further setup:
+   - After you create a super user
    - go to `http://localhost:8000/admin`
    - create a new group `default`
    - add create and delete permission for that group
@@ -90,73 +168,18 @@ python manage.py runserver
             - select lower link `Image Link with Chart Snippet`
 
 
-## Deployed on
-* Heroku for backend - https://flightloggercs10.herokuapp.com
-* Netlify for frontend - https://stoic-meitner-50ac30.netlify.com/
-
 ## Deployment
 
-Deploying on the react side is relatively easy, typing
-```
-yarn build
-```
+Deploying on the react side is relatively easy, typing `yarn build`  
 while in the frontend folder will get you started, making it easy to deploy on a site like
-[netlify](https://www.netlify.com/docs/manual-deploys/)(go here to learn more about drag and drop deployment)
+[netlify](#https://www.netlify.com/docs/manual-deploys/)
 
 It will be a bit more involved with the backend(Django). The link below will get you started.
 [heroku](https://devcenter.heroku.com/articles/git)
 
-
-## [Justifications](#just)
-
- * [Django]
-    - There were a few reasons behind choosing Django for this project. First and foremost we knew having   sql database would make using relational data much easier. The admin interface was also a factor,
-      making testing easier, along with debugging. Also being exposed to Django at the end of our course drove us to choose Django.
- 
- * [Reactjs]
-    - We were already familiar with react, knowing it would provide us with what we needed in order to 
-      create a UX that was user friendly.
-
- * [Heroku / Netlify] 
-    - This one was easy, we had used these services for back/frontend deployment before, knew they worked   and were not too tricky to use.
-
- * [Material UI]
-    - This was recommended to us by our PM, it ended up being a good choice. It looks clean and is          relativly easy to use.
-
- * [Reactstrap] 
-    - We chose to use this mostly for the modals, as we were already familiar with reactstrap's modals from the course.
-
-
-## [Basic Overview](#bo)
- * [HomePage](#home)
-    Greets you with a graph of your total hours by license type split up by the specific hours flown. Which hours displayed are customizable by clicking the labels at the top of the graph.
-
- * [Flights](#flights)
-    Where you record your flight, with various types of hours flown, which aircraft you used, and even a space for and html snippet/link to your flight plan on [Skyvector](https://www.skyvector.com)
-
- * [Aircraft](#aircraft)
-    Where you record which plane you flew on, and where you can upload a picture of it as well if you wish.
-
- * [Instructors](#instructors)
-    Keep track of all of your instructors information as well as a picture!
-
- * [Settings](#sett)
-    You can change your password here.
-
- * [Billing](#bill)
-    Unlock the app's premium features here!
-
-## [Routes](#routes)
-
- * [GET] api/flights/   -view a list of flights created by the user
- * [GET/PUT] api/flights/(flightID)/ -view a specific flight // edit a specific flight
- * [GET] api/aircraft/  -view list of aircraft created by the user user
- * [GET/PUT] api/aircraft/(aircraftID)/ -view a specific aircraft // edit a specific aircraft
- * [GET] api/instructors/ -view list of instructors created by the user
- * [GET/PUT] api/instructor/(instructorID)/ -view a specific instructor // edit a specific instructor
- * [GET] api/filtedflights/(aircraftID)/ -view a list of flights for a specific aircraft
- * [POST] api/passwordchange/  -allows user to change password.
- * [GET] api/joined/ -view flights sorted by license type 
+### Deployed on
+* Heroku for backend - https://flightloggercs10.herokuapp.com
+* Netlify for frontend - https://stoic-meitner-50ac30.netlify.com/
 
 
 ## License

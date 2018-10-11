@@ -230,11 +230,6 @@ class FlightCard extends Component {
       //   console.log('flightlicstate', this.state.license_type);
     }
 
-    if(this.state.name || this.state.total_hours === '') {
-      e.preventDefault();
-      this.setState({ inputError: 'empty field detected'})
-      return;
-    }
     axios({
       method: 'PUT',
       url: `${URL}api/flights/${this.state.id}/`,
@@ -501,30 +496,35 @@ class FlightCard extends Component {
                   name="cross_country"
                   onChange={this.handleInputChange}
                   value={this.state.cross_country}
+                  type='number'
                 />
                 <input
                   className="new-flight-pic-input"
                   name="no_instument_app"
                   onChange={this.handleInputChange}
                   value={this.state.no_instument_app}
+                  type='number'
                 />
                 <input
                   className="new-flight-pic-input"
                   name="no_ldg"
                   onChange={this.handleInputChange}
                   value={this.state.no_ldg}
+                  type='number'
                 />
                 <input
                   className="new-flight-pic-input"
                   name="day"
                   onChange={this.handleInputChange}
                   value={this.state.day}
+                  type='number'
                 />
                  <input
                   className="new-flight-pic-input"
                   name="night"
                   onChange={this.handleInputChange}
                   value={this.state.night}
+                  type='number'
                 />
               </div>
             </div>
@@ -542,30 +542,35 @@ class FlightCard extends Component {
                   name="actual_instr"
                   onChange={this.handleInputChange}
                   value={this.state.actual_instr}
+                  type='number'
                 />
                 <input
                   className="new-flight-pic-input"
                   name="sim_instr"
                   onChange={this.handleInputChange}
                   value={this.state.sim_instr}
+                  type='number'
                 />
                 <input
                   className="new-flight-pic-input"
                   name="dual_rec"
                   onChange={this.handleInputChange}
                   value={this.state.dual_rec}
+                  type='number'
                 />
                 <input
                   className="new-flight-pic-input"
                   name="pic"
                   onChange={this.handleInputChange}
                   value={this.state.pic}
+                  type='number'
                 />
                 <input
                   className="new-flight-pic-input"
                   name="total_hours"
                   onChange={this.handleInputChange}
                   value={this.state.total_hours}
+                  type='number'
                 />
               </div>
             </div>
