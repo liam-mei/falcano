@@ -20,18 +20,18 @@
 
 .CardMediaContainer {
   height: 259px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .AircraftCard .CardMedia {
   width: auto;
   height: auto;
-  margin: 0 auto;
   max-height: 259px;
   max-width: 300px;
   overflow: hidden;
   padding: 1rem;
-  /* margin-bottom: 1rem; */
-  /* border: 1px dotted blue; */
 }
 
 .AircraftCard .Content-aircraft .card-typography {
@@ -62,7 +62,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding-bottom: 0
+  padding-bottom: 0;
 }
 
 .Detailed-aircraft .modal-title .modal-header-p1 {
