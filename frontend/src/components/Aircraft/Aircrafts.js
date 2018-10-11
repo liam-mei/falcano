@@ -2,7 +2,6 @@ import axios from 'axios';
 import React, { Component } from 'react';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
-import Typography from '@material-ui/core/Typography';
 import {
   Modal,
   ModalHeader,
@@ -30,9 +29,6 @@ class Aircrafts extends Component {
     super(props);
     this.state = {
       // loading: true,
-      // token: '',
-      // name: '',
-      // content: '',
       openModal: false,
       dropdownOpen: false,
       dropdownButtonTitle: 'Airplane SEL',
@@ -156,6 +152,7 @@ class Aircrafts extends Component {
 
     //   );
     // }else
+
     return (
       <div className="Aircrafts">
         <TopHeader breadcrumb={['aircraft']} displayTotal username={this.props.username} />
