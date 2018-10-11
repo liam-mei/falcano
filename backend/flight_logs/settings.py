@@ -36,12 +36,9 @@ ALLOWED_HOSTS = config('ALLOWED_HOSTS', cast=lambda v: [
 # Application definition
 
 INSTALLED_APPS = [
-    # Stripe Payments
     'stripe_payments',
-
     'flights',
     'rest_framework',
-
     'drf_multiple_model',
 
     'corsheaders',

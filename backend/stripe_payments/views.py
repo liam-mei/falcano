@@ -1,10 +1,10 @@
-from django.views.decorators.csrf import csrf_exempt
-from django.conf import settings
-from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
+from django.views.decorators.csrf import csrf_exempt
+from django.http import HttpResponse
+from django.conf import settings
+import stripe
 import json
 
-import stripe
 
 stripe.api_key = settings.STRIPE_SECRET_KEY
 stripe.log = 'info'  # or 'debug'
@@ -22,7 +22,7 @@ try:
             description = request.POST.get('description', '')
             statement_descriptor will appear in user's credit card statement
             statement_descriptor = "Company XYX",
-            metadata={"order_id": 123456}
+
             )
             Statement descriptors are limited to 22 characters, cannot use the
             special characters <, >, ', or ", and must not consist solely of numbers.
@@ -33,7 +33,7 @@ try:
             (!!! DONT STORE ANY SENSITIVE INFORMATION - CARD DETAILS ETC as metadata or
             in the charge's description parameter)
 """
-# 3 Return response to my frontend to display a confirmation / error
+# 3 Return response to frontend to display a confirmation / error
 
 """
 - Optional: #2 can create a new model instance storing the customers_payment i.e
@@ -50,29 +50,9 @@ def checkout(request):
             currency=request.POST.get('currency', ''),
             source=request.POST.get('source', ''),
             description=request.POST.get('description', ''),
-            statement_descriptor="22 Characters max",
-            metadata={'order_id': 12345}
+            statement_descriptor="Falcano Flight Log",
+            metadata={'Labs': 7}
         )
-
-#         def checkout(request):
-#     try:
-#         subscription = stripe.Subscription.create(
-#             # amount=request.POST.get('amount', ''),
-#             # currency=request.POST.get('currency', ''),
-#             # description=request.POST.get('description', ''),
-#             # statement_descriptor="22 Characters max",
-#             # metadata={'order_id': 12345}
-#             customer='cus_DfOZc9F3hXSluK',
-#             items=[
-#                 {
-#                   "plan": "plan_DfjTFsAFNlvWqJ",
-#                 },
-#                   ],
-#             stripe_account=
-# card_1DEOTmBgQ5jgM6j7eR3mmGOY ,
-#             # source=request.POST.get('source', ''),
-#             # console.log("source: ", source)
-#         )
 
         # Only confirm an order after you have status: succeeded
         print("______STATUS_____", charge['status'])  # should be succeeded
