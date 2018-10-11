@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBar.css';
 
+const dev = process.env.REACT_APP_DEV;
 class NavBar extends Component {
   state = {};
 
   render() {
     return (
       <div className="NavBar">
+      {dev ? <div>{process.env.REACT_APP_URL}</div> : <div></div>}
         <Link className="NavBar-link" to="/home">
           <span className="Navbar-icon-large">Home</span>
           <i className="fas fa-home fa-lg Navbar-icon-small" aria-hidden="true" />

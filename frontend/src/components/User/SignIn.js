@@ -8,7 +8,7 @@ import './SignIn.css';
 import '../../utils/Images/logIn.svg';
 
 const URL = process.env.REACT_APP_URL;
-
+const dev = process.env.REACT_APP_DEV;
 class SignIn extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +67,7 @@ class SignIn extends Component {
           }
       })
       .then(response => {
-        console.log("RESPONSE FOR BILLING", response)
+        dev ? console.log("RESPONSE FOR BILLING", response) : console.log();
         if(response.data.length <= 0) {
           this.props.history.push('/home')
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import {
-  Button, Modal, ModalHeader, ModalBody, ModalFooter, Glyphicon,
+  Button, Modal, ModalBody,
 } from 'reactstrap';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -16,7 +16,7 @@ import './InstructorCard.css';
 //   : (URL = "https://flightloggercs10.herokuapp.com/api");
 
 const URL = process.env.REACT_APP_URL;
-
+const dev = process.env.REACT_APP_DEV;
 const headers = {
   Authorization: `JWT ${localStorage.getItem('token')}`,
 };
@@ -67,7 +67,7 @@ class InstructorCard extends Component {
           window.location.reload();
         })
         .catch((error) => {
-          console.log('put error', error);
+          dev ? console.log('put error', error) : console.log();
         });
     } else {
       axios({
@@ -89,12 +89,13 @@ class InstructorCard extends Component {
           window.location.reload();
         })
         .catch((error) => {
-          console.log('put error', error);
+          dev ? console.log('put error', error) : console.log();
         });
     }
   };
 
   upload = () => {
+    // eslint-disable-next-line
     window.cloudinary.openUploadWidget(
       { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
@@ -114,7 +115,8 @@ class InstructorCard extends Component {
         // this.setState({ uploadurl: imgurl });
         // console.log('===== stateurl: ', this.state.uploadurl);
       },
-    ),
+    )
+    // eslint-disable-next-line
     false;
   };
 
@@ -134,7 +136,7 @@ class InstructorCard extends Component {
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        dev ? console.log(err) : console.log();
       });
   };
 

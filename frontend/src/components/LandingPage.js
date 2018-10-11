@@ -50,11 +50,11 @@ class LandingPage extends Component {
             <h3 className="card-slogan">Time flies</h3>
             <p className="card-mission-statement">
 
-              Gone gone are the days of untracked flights. Here at
+              Gone are the days of untracked flights. Here at
               {' '}
               <span className="bold">Falcano</span>
               {' '}
-we make it easy for you to track your flights.
+              we make it easy for you to track your flights.
               Simply click and trips, instructors, hours and much more are easily managed. We've
               even made it easy for you to visually track your trips with a SkyVector map. Take us
               on your next flight and see what all the fuss is about.

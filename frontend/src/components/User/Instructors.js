@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Modal, ModalBody } from 'reactstrap';
+import { Modal, ModalBody } from 'reactstrap';
 import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import NavBar from '../NavBar';
@@ -117,6 +117,7 @@ class Instructors extends React.Component {
   };
 
   upload = () => {
+    // eslint-disable-next-line
     window.cloudinary.openUploadWidget(
       { cloud_name: 'dkzzjjjj9', upload_preset: 'ggbmyqmo', cors: 'no-cors' },
 
@@ -135,7 +136,8 @@ class Instructors extends React.Component {
         // this.setState({ uploadurl: imgurl });
         // console.log('===== stateurl: ', this.state.uploadurl);
       },
-    ),
+    )
+    // eslint-disable-next-line
     false;
   };
 

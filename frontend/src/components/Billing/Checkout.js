@@ -6,6 +6,7 @@ import './Checkout.css';
 import Auth from '../Authenication/Auth';
 import { Capitalize } from '../../utils/helper/helperFuncions'
 
+const dev = process.env.REACT_APP_DEV;
 const URL = process.env.REACT_APP_URL;
 let headers;
 
@@ -48,10 +49,10 @@ class Checkout extends React.Component {
         .createToken({ type: 'card', name: this.props.username })
         .then((result) => {
           if (result.error) {
-            console.log('THERE IS AN ERROR IN YOUR FORM', result.error);
+            dev ? console.log('THERE IS AN ERROR IN YOUR FORM', result.error) : console.log();
             return this.setState({ card_errors: result.error.message });
           }
-          console.log('Received Stripe token ---> SENDING TO SERVER: ', result.token);
+          dev ? console.log('Received Stripe token ---> SENDING TO SERVER: ', result.token) : console.log();
           const formData = new FormData();
           formData.append('description', "Best Flight Logger Ever");
           formData.append('currency', 'usd');

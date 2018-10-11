@@ -17,7 +17,6 @@ import {
   DropdownMenu,
   DropdownItem,
   Button,
-  Tooltip
 } from 'reactstrap';
 import { CardContent } from '@material-ui/core';
 
@@ -28,6 +27,7 @@ import { CardContent } from '@material-ui/core';
 //   ? (URL = 'http://127.0.0.1:8000/api/')
 //   : (URL = 'https://flightloggercs10.herokuapp.com/api/');
 
+const dev = process.env.REACT_APP_DEV;
 let URL = process.env.REACT_APP_URL;
 
 let headers;
@@ -116,7 +116,6 @@ class FlightCard extends Component {
   };
 
   handleInputChange = (e) => {
-    console.log(e.target.name, e.target.value)
     this.setState({ [e.target.name]: e.target.value });
   };
 
@@ -137,7 +136,8 @@ class FlightCard extends Component {
         });
       })
       .catch((error) => {
-        console.log('flights ac error', error);
+        // eslint-disable-next-line
+        dev ? console.log('flights ac error', error) : console.log();
       });
     this.setState({
       aircraftChoice: this.props.aircraftChoice,
@@ -202,19 +202,23 @@ class FlightCard extends Component {
       headers: headers
     })
       .then((response) => {
-        console.log(response);
+        // eslint-disable-next-line
+        dev ? console.log(response) : null;
         window.location.reload();
       })
       .catch((err) => {
-        console.log(err);
+        // eslint-disable-next-line
+        dev ? console.log(err) : null;
       });
     // this.setState({modal: !this.state.modal})
   };
 
   // ADD NEW FLIGHT
   toggleAndPost = (e) => {
-    console.log("state: +++++", this.state)
-    console.log('toggle and post====');
+    // eslint-disable-next-line
+    dev ? console.log("state: +++++", this.state) : null;
+    // eslint-disable-next-line
+    dev ? console.log('toggle and post====') : null;
     let aircraftURL = `${URL}api/aircraft/`;
     let licensetype;
     for (let i = 0; i < this.state.aircraftChoice.length; i++) {
@@ -224,7 +228,8 @@ class FlightCard extends Component {
       ) {
         aircraftURL += this.state.aircraftChoice[i].id + '/';
         licensetype = this.state.aircraftChoice[i].license_type;
-        console.log('flightlic', this.state.aircraftChoice[i].license_type);
+        // eslint-disable-next-line
+        dev ? console.log('flightlic', this.state.aircraftChoice[i].license_type) : null;
       }
       this.setState({ license_type: licensetype });
       //   console.log('flightlicstate', this.state.license_type);
@@ -257,11 +262,11 @@ class FlightCard extends Component {
       headers: headers
     })
       .then((response) => {
-        console.log('??????????', response);
+        dev ? console.log('??????????', response) : console.log();
         window.location.reload();
       })
       .catch((error) => {
-        console.log('put error', error);
+        dev ? console.log('put error', error) : console.log();
       });
     this.setState({
       openModal: !this.state.openModal
