@@ -5,14 +5,16 @@ from django.contrib.auth.password_validation import validate_password
 
 
 class UserSerializer(serializers.ModelSerializer):
-
+    '''
+    User Serializer
+    '''
     class Meta:
         model = User
         fields = ('username',)
 
 
 class UserSerializerWithToken(serializers.ModelSerializer):
-
+    
     token = serializers.SerializerMethodField()
     password = serializers.CharField(write_only=True)
 

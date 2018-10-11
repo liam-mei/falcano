@@ -19,15 +19,12 @@ from django.contrib import admin
 from rest_framework import routers, generics
 from django.urls import path, include, re_path
 from rest_framework.authtoken import views
-from flights.api import FlightsViewSet, AircraftViewSet, FilterAircraftViewSet, FilterFlightsViewSet, InstructorViewSet, BillingViewSet
-# UpdateLicenseViewSet
+from flights.api import FlightsViewSet, AircraftViewSet, InstructorViewSet, BillingViewSet
 from rest_framework_jwt.views import obtain_jwt_token, verify_jwt_token, refresh_jwt_token
 from django.conf import settings
 from django.views.static import serve
 from django.conf.urls import url
 from flights.views import Filter3ViewSet, UserList, UpdatePassword, TextAPIView
-
-
 
 # from stripe stuff
 from django.conf import settings
@@ -38,26 +35,20 @@ router.register(r'flights', FlightsViewSet)
 router.register(r'aircraft', AircraftViewSet)
 router.register(r'instructors', InstructorViewSet)
 router.register(r'billing', BillingViewSet)
-# router.register(r'filteraircraft', FilterAircraftViewSet)
-# router.register(r'filterflights', FilterFlightsViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    # re_path(r'^api-token-auth/', views.obtain_auth_token),
     path('token-auth/', obtain_jwt_token),
-    re_path(r'^api-token-verify/', verify_jwt_token),
     path('user_admin/', include('flights.urls')),
-    # url endpoint to filter data dynamically
-    url('^api/filteredflights/(?P<aircraft>.+)/$', Filter3ViewSet.as_view()),
-    url('^api/passwordchange/', UpdatePassword.as_view()),
+    re_path(r'^api-token-verify/', verify_jwt_token),
     re_path(r'^api-token-refresh/', refresh_jwt_token),
+    url('^api/passwordchange/', UpdatePassword.as_view()),
+    # endpoint for filtering flights by aircraft
+    url('^api/filteredflights/(?P<aircraft>.+)/$', Filter3ViewSet.as_view()),
+    # endpoint for Stripe Payments
     url(r'^api/', include('stripe_payments.urls')),
-    url(r'^media/(?P<path>.*)$', serve, { 'document_root': settings.MEDIA_ROOT, }),
-    # url(r'^zzz/', IndexView.as_view(), name="home_list"),
-
+    # endpoint to return all flights separated by airplane license types
     url('^api/joined/', TextAPIView.as_view())
-    # url('^api/update/', UpdateLicenseViewSet.as_view({'get': 'list'})),
 ]
-
-# urlpatterns += router.urls
+    # url(r'^media/(?P<path>.*)$', serve, { 'document_root': settings.MEDIA_ROOT, }),

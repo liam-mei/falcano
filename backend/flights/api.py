@@ -1,12 +1,11 @@
 from rest_framework import serializers, viewsets
 from .models import Flights, Aircraft, Instructor, Billing
 
-from django.db.models import Sum, Count, F
-
 
 class FlightsSerializer(serializers.HyperlinkedModelSerializer):
-    # pic_count = serializers.IntegerField()
-
+    '''
+    Serializer to Access Flights Model
+    '''
     class Meta:
         model = Flights
         fields = ('name', 'remarks', 'created_at', 'no_instument_app',
@@ -20,9 +19,26 @@ class FlightsSerializer(serializers.HyperlinkedModelSerializer):
         flight = Flights.objects.create(user=user, **validated_data)
         return flight
 
+class FlightsViewSet(viewsets.ModelViewSet):
+    '''
+    Viewset to decide what to show
+    '''
+    serializer_class = FlightsSerializer
+    queryset = Flights.objects.none()
+
+    def get_queryset(self):
+        user = self.request.user
+
+        if user.is_anonymous:
+            return Flights.objects.none()
+        else:
+            return Flights.objects.filter(user=user).order_by('-created_at')
+
 
 class InstructorSerializer(serializers.HyperlinkedModelSerializer):
-
+    '''
+    Serializer to access Instructor Model
+    '''
     class Meta:
         model = Instructor
         fields = ( 'id', 'name', 'description', 
@@ -36,6 +52,9 @@ class InstructorSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class InstructorViewSet(viewsets.ModelViewSet):
+    '''
+    Viewset for Instructor fields
+    '''
     serializer_class = InstructorSerializer
     queryset = Instructor.objects.none()
 
@@ -45,22 +64,13 @@ class InstructorViewSet(viewsets.ModelViewSet):
         if user.is_anonymous:
             return Instructor.objects.none()
         else:
-            return Instructor.objects.filter(user=user)
-
-class FlightsViewSet(viewsets.ModelViewSet):
-    serializer_class = FlightsSerializer
-    queryset = Flights.objects.none()
-
-    def get_queryset(self):
-        user = self.request.user
-
-        if user.is_anonymous:
-            return Flights.objects.none()
-        else:
-            return Flights.objects.filter(user=user).order_by('-created_at')
+            return Instructor.objects.filter(user=user).order_by('-created_at')
 
 
 class AircraftSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Serializer to access Aircraft 
+    '''
     class Meta:
         model = Aircraft
         fields = ('man_type', 'tail_number', 'license_type', 'id', 'photo')
@@ -73,6 +83,9 @@ class AircraftSerializer(serializers.HyperlinkedModelSerializer):
     
 
 class AircraftViewSet(viewsets.ModelViewSet):
+    '''
+    Viewset for Aircraft
+    '''
     serializer_class = AircraftSerializer
     queryset = Aircraft.objects.none()
     
@@ -82,9 +95,37 @@ class AircraftViewSet(viewsets.ModelViewSet):
         if user.is_anonymous:
             return Aircraft.objects.none()
         else:
-            return Aircraft.objects.filter(user=user).order_by("tail_number")
+            return Aircraft.objects.filter(user=user).order_by('-created_at')
 
 
+class BillingsSerializer(serializers.HyperlinkedModelSerializer):
+    '''
+    Serializer for Billing Model
+    '''
+    class Meta:
+        model = Billing
+        fields = ('premium',)
+
+    def create(self, validated_data):
+        user = self.context['request'].user
+        billing = Billing.objects.create(user=user, **validated_data)
+        return billing
+
+
+class BillingViewSet(viewsets.ModelViewSet):
+    '''
+    Viewset for Billing
+    '''
+    serializer_class = BillingsSerializer
+    queryset = Billing.objects.none()
+
+    def get_queryset(self):
+        user = self.request.user
+        
+        return Billing.objects.filter(user=user)
+
+
+'''
 class LicenseViewSet(viewsets.ModelViewSet):
     serializer_class = AircraftSerializer
     queryset = Aircraft.objects.none()
@@ -105,7 +146,6 @@ class FilterAircraftViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        # return Aircraft.objects.filter(license_type='sel')
 
         if user.is_anonymous:
             return Flights.objects.none()
@@ -126,25 +166,4 @@ class FilterFlightsViewSet(viewsets.ModelViewSet):
             return Flights.objects.none()
         else:
             return Flights.objects.filter(user=user, aircraft=aircraft)
-
-    
-class BillingsSerializer(serializers.HyperlinkedModelSerializer):
-
-    class Meta:
-        model = Billing
-        fields = ('premium',)
-
-    def create(self, validated_data):
-        user = self.context['request'].user
-        billing = Billing.objects.create(user=user, **validated_data)
-        return billing
-
-
-class BillingViewSet(viewsets.ModelViewSet):
-    serializer_class = BillingsSerializer
-    queryset = Billing.objects.none()
-
-    def get_queryset(self):
-        user = self.request.user
-        
-        return Billing.objects.filter(user=user)
+''' 

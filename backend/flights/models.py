@@ -1,11 +1,15 @@
 #!/usr/bin/env python
-from django.db import models
-from uuid import uuid4
 from django.contrib.auth.models import User
+from django.db import models
 from datetime import date
+from uuid import uuid4
 
 
 class Aircraft(models.Model):
+    '''
+    Aircraft Model
+    Has many-to-one relationship with User
+    '''
     SEL = 'Airplane SEL'
     SES = 'Airplane SES'
     MEL = 'Airplane MEL'
@@ -30,12 +34,12 @@ class Aircraft(models.Model):
     def __str__(self):
         return f'<{self.__class__.__name__}: {self.man_type} {self.license_type}>'
 
-# Aircraft SEL
-    # Single-engine land
-    # Single-engine sea
-    # Multi-engine land
-    # Multi-engine sea
+
 class Flights(models.Model):
+    '''
+    Flights Model
+    Has One-to-One relationship with Aircraft
+    '''
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=200)
     remarks = models.TextField(blank=True, null=True)
@@ -53,17 +57,11 @@ class Flights(models.Model):
     airports_visited = models.CharField(max_length=100, default="Airports", blank=True)
     fly_date = models.DateField(default=date.today, blank=True, null=True)
     snippet = models.TextField(blank=True, default="snippet", null=True)
-    # license_ty = models.ForeignKey(Aircraft, to_field="license_type", on_delete=models.CASCADE)
     license_type = models.CharField(max_length=40, default="Airplane SEL", null=False)
-    # man_type = models.CharField(max_length=200, default="Manufacturer")
     aircraft = models.ForeignKey(Aircraft, on_delete=models.CASCADE, default=uuid4, null=True )
     total_hours = models.FloatField(default=0.0, blank=False)
     sv_html = models.CharField(max_length=300, blank=True)
     sv_script = models.CharField(max_length=300, blank=True)
-    # pic_count = models.FloatField(default=0.0)
-    # uncomment if instructor fields end up being needed
-    # intsr_name = models.CharField(max_length=50)
-    # intsr_num = models.PositiveSmallIntegerField()
 
     class Meta:
         verbose_name_plural = "flights"
@@ -73,11 +71,19 @@ class Flights(models.Model):
 
 
 class Billing(models.Model):
+    '''
+    Billing Model
+    One-to-One relation with User
+    '''
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     premium = models.BooleanField(default=False)
 
 
 class Instructor(models.Model):
+    '''
+    Instructor Model
+    Many-to-One relation with User
+    '''
     user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
     id = models.UUIDField(primary_key=True, default=uuid4, editable=False)
     name = models.CharField(max_length=75)
@@ -87,6 +93,7 @@ class Instructor(models.Model):
     photo = models.CharField(max_length=200, blank=True)
     contact_number = models.CharField(max_length=30, blank=True)
     contact_email = models.CharField(max_length=100, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True, blank=True, null=True)
 
     def __str__(self):
         return self.name

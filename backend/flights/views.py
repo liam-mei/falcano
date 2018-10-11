@@ -1,21 +1,18 @@
-from django.shortcuts import render
-from django.http import HttpResponseRedirect
+from drf_multiple_model.views import ObjectMultipleModelAPIView
 from django.contrib.auth.models import User, Group
-from rest_framework import permissions, status
+from django.views.generic.list import ListView
+from django.db.models.signals import post_save
+from django.http import HttpResponseRedirect
+from django.dispatch import receiver
+from django.shortcuts import render
+from rest_framework import permissions, status, generics
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 from .serializers import UserSerializer, UserSerializerWithToken, ChangePasswordSerializer
 from .api import FlightsSerializer, AircraftSerializer
 from .models import Flights, Aircraft
-from rest_framework import generics
-
-
-from django.views.generic.list import ListView
-
-from drf_multiple_model.views import ObjectMultipleModelAPIView
 
 
 # Create your views here.
@@ -54,6 +51,10 @@ class UserList(APIView):
 
 # dynamically filter database off of url
 class Filter3ViewSet(generics.ListAPIView):
+    '''
+    Endpoint for filtering flights based off of Aircraft
+    '''
+
     serializer_class = FlightsSerializer
     queryset = Flights.objects.none()
     
@@ -91,37 +92,16 @@ class UpdatePassword(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-# class IndexView(ListView):
-#     context_object_name = 'home_list'    
-#     # template_name = 'contacts/index.html'
-#     queryset = Flights.objects.all()
-
-#     def get_context_data(self, **kwargs):
-#         context = super(IndexView, self).get_context_data(**kwargs)
-#         context['aircraft'] = Aircraft.objects.all()
-#         # context['venue_list'] = Venue.objects.all()
-#         # context['festival_list'] = Festival.objects.all()
-#         # And so on for more models
-#         return context
-
-
 class TextAPIView(ObjectMultipleModelAPIView):
+    """
+    Querylist endpoint to return all flights separated by their Airplane's licence types
+    """
 
-    def get_queryset(self):
-        # user = self.request.user
-        # print("USER:", self.request.user)
-        # aircraft = self.kwargs['aircraft']
-        # # model = Flights
-        # aircraft = self.kwargs['aircraft']
-        
+    def get_queryset(self):   
         return Flights.objects.none()
         
-        
     def get_querylist(self):
-
         user = self.request.user
-        # aircraft = self.kwargs['aircraft']
-
         if user.is_anonymous:
             return Flights.objects.none()
         else:
@@ -131,12 +111,6 @@ class TextAPIView(ObjectMultipleModelAPIView):
                 {'queryset': Flights.objects.filter(aircraft__license_type__contains='MEL', user=user), 'serializer_class': FlightsSerializer, 'label':'MEL'},
                 {'queryset': Flights.objects.filter(aircraft__license_type__contains='SEL', user=user), 'serializer_class': FlightsSerializer, 'label':'SEL'},
                 {'queryset': Flights.objects.filter(aircraft__license_type__contains='SES', user=user), 'serializer_class': FlightsSerializer, 'label':'SES'},
-                # {'queryset': Flights.objects.filter(user=user), 'serializer_class': FlightsSerializer,},
-
-                # {'queryset': Aircraft.objects.filter(id=aircraft), 'serializer_class': AircraftSerializer,},
             ]
 
             return querylist
-
-    # use above querylist janky js annotate into one array and send to flight cards
-
