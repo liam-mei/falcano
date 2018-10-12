@@ -62,6 +62,17 @@
   margin: 0 1rem 1rem 0;
 }
 
+.NewAircraft-content .new-aircraft-input-tn-required {
+  margin: 0 1rem 1rem 0;
+  border: 0.12rem solid red;
+}
+
+.NewAircraft-content .new-aircraft-input-mt-required {
+  /* margin: 0 1rem 1rem 0; */
+  border: 0.12rem solid red;
+}
+
+
 .Aircrafts  .NewAircraft-button {
   border-radius: 4px;
   background-color: white;

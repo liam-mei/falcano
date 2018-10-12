@@ -29,7 +29,7 @@ class AircraftCardModal extends React.Component {
       data: [],
       // files: [],
       id: '',
-      // dropdownButtonTitle: 'Airplane SEL',
+      dropdownButtonTitle: '',
       dropdownOpen: false,
       tail_number: '',
       license_type: '',
@@ -55,7 +55,9 @@ class AircraftCardModal extends React.Component {
       license_type_edit: this.props.data.license_type,
       man_type_edit: this.props.data.man_type,
       photo: this.props.data.photo,
+      dropdownButtonTitle: this.props.data.license_type
     });
+    // Filters Flights by a specific aircraft
     axios({
       method: 'GET',
       url: `${URL}api/filteredflights/${this.props.data.id}`,
@@ -69,11 +71,12 @@ class AircraftCardModal extends React.Component {
       });
   }
 
-  // toggles the modal and populates the data the specific aircraft.
+  // toggles the modal
   toggle = () => {
     this.setState({ modal: !this.state.modal });
   };
 
+  // toggles edit modal
   toggleNested = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
@@ -81,6 +84,7 @@ class AircraftCardModal extends React.Component {
     });
   };
 
+  // changes the drop down button title and popuates the state with the correct license type
   handleDropDownButton = (e) => {
     this.setState({
       dropdownButtonTitle: e.target.name,
@@ -88,17 +92,19 @@ class AircraftCardModal extends React.Component {
     });
   };
 
+  // toggles the dropdown button
   toggleDropdownButton = () => {
     this.setState({
       dropdownOpen: !this.state.dropdownOpen,
     });
   };
 
-  // Handles the change in input
+  // Handles the change in input fields
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // confirms delete
   confirmDelete = () => {
     axios({
       method: 'DELETE',
@@ -115,8 +121,10 @@ class AircraftCardModal extends React.Component {
   };
 
   // THIS WILL UPDATE THE INFORMATION OF THE AIRCRAFT VIA EDIT MODAL
+  // also handles the default photo vs uploaded photo
   toggleNestedAndPut = (e) => {
     if (this.state.uploadurl === '') {
+      // console.log("Start Axios")
       axios({
         method: 'PUT',
         url: `${URL}api/aircraft/${this.state.id}/`,
@@ -130,18 +138,14 @@ class AircraftCardModal extends React.Component {
         headers,
       })
         .then(() => {
+          // setTimeout(() =>  window.location.reload(), 150);
+          window.location.reload()
+          // this.props.history.push('/')
         })
         .catch((error) => {
           dev ? console.log('put error', error) : console.log();
         });
-      this.setState({
-        nestedModal: !this.state.nestedModal,
-        closeAll: false,
-        tail_number: this.state.tail_number_edit,
-        man_type: this.state.man_type_edit,
-        license_type: this.state.license_type,
-      });
-      window.location.reload();
+        // console.log('END axios')
     } else {
       axios({
         method: 'PUT',
@@ -157,28 +161,25 @@ class AircraftCardModal extends React.Component {
       })
         .then(() => {
           // console.log("put response", response);
+          // this.props.history.push('/')
+          // setTimeout(() =>  window.location.reload(), 150);
+          window.location.reload()
         })
         .catch((error) => {
          dev ? console.log('put error', error) : console.log();
         });
-      this.setState({
-        nestedModal: !this.state.nestedModal,
-        closeAll: false,
-        tail_number: this.state.tail_number_edit,
-        man_type: this.state.man_type_edit,
-        license_type: this.state.license_type,
-        photo: this.state.uploadurl,
-      });
-      window.location.reload();
+     
     }
   };
 
+  // toggles the delete modal
   toggleDelete = () => {
     this.setState({ deleteModal: !this.state.deleteModal });
 
     // this.setState({modal: !this.state.modal})
   };
 
+  // toggles all modals(used for closing all modals)
   toggleAll = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
@@ -186,14 +187,8 @@ class AircraftCardModal extends React.Component {
     });
   };
 
-  // // DRAG AND DROP UPLOAD HANDLER
-  // handleOnDrop = (acceptedfiles, rejectedFiles) => {
-  //   console.log(acceptedfiles);
-  //   const headers = {
-  //     Authorization: `JWT ${localStorage.getItem('token')}`,
-  //   };
-  // };
 
+  // upload function for cloudinary(has error handling for edge cases)
   upload = () => {
     // eslint-disable-next-line
     window.cloudinary.openUploadWidget(
@@ -235,6 +230,7 @@ class AircraftCardModal extends React.Component {
       no_instument_app,
       total_hours,
     ] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    // handles the totals for each aircraft
     for (let i = 0; i < this.state.data.length; i += 1) {
       pic_sum += this.state.data[i].pic;
       no_ldg += this.state.data[i].no_ldg;
@@ -270,7 +266,7 @@ class AircraftCardModal extends React.Component {
             <i
               className="fas fa-edit edit-card-button hover"
               aria-hidden="true"
-              onClick={this.toggleEditModal}
+              onClick={this.toggleAll}
             />
             <i
               className="fa fa-trash delete-button hover"
@@ -306,10 +302,11 @@ class AircraftCardModal extends React.Component {
                 className="edit-input-tn"
                 name="tail_number_edit"
                 onChange={this.handleChange}
-                placeholder={this.props.data.tail_number}
+                placeholder="Tail Number"
+                value={this.state.tail_number_edit}
               />
               <ButtonDropdown isOpen={this.state.dropdownOpen} toggle={this.toggleDropdownButton}>
-                <DropdownToggle caret>{this.state.license_type}</DropdownToggle>
+                <DropdownToggle caret>{this.state.dropdownButtonTitle}</DropdownToggle>
                 <DropdownMenu>
                   <DropdownItem name="Airplane SEL" onClick={this.handleDropDownButton}>
 
@@ -333,7 +330,7 @@ class AircraftCardModal extends React.Component {
                 className="edit-input-mt"
                 name="man_type_edit"
                 onChange={this.handleChange}
-                placeholder={this.props.data.man_type}
+                value={this.state.man_type_edit}
               />
             </ModalHeader>
             <ModalBody className="nested-modal-body">

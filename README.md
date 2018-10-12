@@ -46,6 +46,7 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
 * [JWT](https://jwt.io/) - Used to securely transfer user tokens for authorization.
 * [Axios](https://www.npmjs.com/package/axios) - Promise based HTTP client
 * [Stripe](https://stripe.com/) - Online payments company
+* [PostgreSQL](https://www.postgresql.org/) - Relational Database
 
 ### Front-End-Libraries/Frameworks
 
@@ -84,10 +85,12 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
  * Django
     - There were a few reasons behind choosing Django for this project. 
     - First and foremost Django has a robust admin interface that makes creating and managing data/users easy and simple to use
-    - Django also comes with PostgreSQL out of the box, and having a SQL database would complement our data structure very much as we have heavily relational data.
+    - Django also comes with SQL out of the box, and having a SQL database would complement our data structure as we have heavily relational data.
     - Most importantly, Django is amazing and we wanted to try out new technologies that we hadn't had much experience with before.
-    - one of the downfalls about Django is that to fully take advantage of it, you need to have a pretty comprehensive knowledge of Django to make it work
  
+* PostgreSQL
+    Because our data is heavily relational, a noSQL database such as MongoDB would not be as effective. We chose postgreSQL because it is robust and comprehensive, it is also ACID compliant.
+
  * Reactjs
     - React is a powerful library that is excellent for building single page applications.
     - React-router also allows us to give users a seamless single page experience 
@@ -100,6 +103,7 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
 
  * Reactstrap 
     - We chose to use this mostly for the modals, as we were already familiar with reactstrap's modals from the course.
+
 
 
 
@@ -126,12 +130,12 @@ Time flies, but you won't ever lose track of your hours again with Falcano.
 
 ## Routes
 
- * [GET] api/flights/   -view a list of flights created by the user
- * [GET/PUT] api/flights/(flightID)/ -view a specific flight // edit a specific flight
- * [GET] api/aircraft/  -view list of aircraft created by the user user
- * [GET/PUT] api/aircraft/(aircraftID)/ -view a specific aircraft // edit a specific aircraft
- * [GET] api/instructors/ -view list of instructors created by the user
- * [GET/PUT] api/instructor/(instructorID)/ -view a specific instructor // edit a specific instructor
+ * [GET/POST] api/flights/   -view a list of flights created by the user // create new flight
+ * [GET/PUT/DELETE] api/flights/(flightID)/ -view a specific flight // edit a specific flight // delete a flight
+ * [GET/POST] api/aircraft/  -view list of aircraft created by the user user // create new aircraft
+ * [GET/PUT/DELETE] api/aircraft/(aircraftID)/ -view a specific aircraft // edit a specific aircraft // delete an aircraft
+ * [GET/POST] api/instructors/ -view list of instructors created by the user // create a new instructor
+ * [GET/PUT/DELTE] api/instructor/(instructorID)/ -view a specific instructor // edit a specific instructor // delete an instructor
  * [GET] api/filtedflights/(aircraftID)/ -view a list of flights for a specific aircraft
  * [POST] api/passwordchange/  -allows user to change password.
  * [GET] api/joined/ -view flights sorted by license type 

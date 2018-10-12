@@ -8,6 +8,7 @@ frontend/node_modules
 # production
 /build
 # misc
+CS10-flight-log/frontend/.env
 .DS_Store
 .env
 .env.local

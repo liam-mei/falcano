@@ -17,9 +17,6 @@ import FlightCard from './FlightCard';
 import Auth from '../Authenication/Auth';
 import TopHeader from '../TopHeader';
 import NavBar from '../NavBar';
-// const dev = process.env.REACT_APP_DEV === "true" ? true : false;
-// let URL;
-// dev ? (URL = 'http://127.0.0.1:8000/api') : (URL = 'https://flightloggercs10.herokuapp.com/api');
 
 const URL = process.env.REACT_APP_URL;
 const dev = process.env.REACT_APP_DEV;
@@ -62,10 +59,7 @@ class Flights extends Component {
     };
   }
 
-  toolTipToggle = () => {
-    this.setState({ toolTipOpen: !this.state.toolTipOpen })
-  }
-
+  // toggles modal
   toggleModal = () => {
     if (this.state.aircraftChoice.length <= 0) {
       this.setState({
@@ -88,6 +82,7 @@ class Flights extends Component {
     });
   };
 
+  // splits snippet by div and script tags
   handleSnippet = (e) => {
     let html = e.target.value;
     html = html.split('200px; height: 200px;').join('100%; height: 165px;');
@@ -180,6 +175,7 @@ class Flights extends Component {
     const headers = {
       Authorization: `JWT ${localStorage.getItem('token')}`,
     };
+    // loading animation
     setTimeout(() => this.setState({ loading: false }), 1250);
     axios({
       method: 'GET',

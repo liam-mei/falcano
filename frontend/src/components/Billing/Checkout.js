@@ -112,20 +112,7 @@ class Checkout extends React.Component {
                 <span className="Subscription-text">1-Time Payment: $4.99</span>
               </label>
             </div>
-
-            <div className="radio">
-              <label className="Subscription">
-                <input
-                  type="radio"
-                  className="radio-selection form-control"
-                  value="999"
-                  checked={this.state.amount === '999'}
-                  onChange={this.handleChange}
-                />
-                <span className="Subscription-text">Support Lambda : $9.99</span>
-              </label>
-            </div>
-
+       
             <button className="form-btn">Confirm order</button>
           </form>
         </div>
