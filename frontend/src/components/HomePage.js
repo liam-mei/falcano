@@ -75,6 +75,7 @@ class HomePage extends Component {
 
         let x = 0;
         const data = this.state.flightList;
+        //takes the api/joined/ data and totals it by license type.
         for (const key in data) {
           for (let i = 0; i < data[key].length; i += 1) {
             // console.log(data[key][i].pic)

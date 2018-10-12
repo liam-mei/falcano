@@ -12,7 +12,7 @@ const Auth = Comp => class extends Component {
 
     componentDidMount() {
       const token = localStorage.getItem('token');
-
+      // verifies token is valid
       axios({
         method: 'POST',
         url: `${URL}api-token-verify/`,
@@ -27,9 +27,11 @@ const Auth = Comp => class extends Component {
         .catch((err) => {
          dev ? console.log('eeeeeeeeerrrrrrrrrrrrrorrrrrrrrrr', err) : console.log();
         });
-    }
+    
+  }
 
     render() {
+      // passes whichever component Auth is wrapped in
       return <Comp loggedIn={this.state.loggedIn} username={this.state.username} {...this.props} />;
     }
 };

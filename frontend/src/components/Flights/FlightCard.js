@@ -27,7 +27,9 @@ import { CardContent } from '@material-ui/core';
 //   ? (URL = 'http://127.0.0.1:8000/api/')
 //   : (URL = 'https://flightloggercs10.herokuapp.com/api/');
 
+// for console logs to be displayed or not
 const dev = process.env.REACT_APP_DEV;
+// for dev or deployed url
 let URL = process.env.REACT_APP_URL;
 
 let headers;
@@ -70,6 +72,9 @@ class FlightCard extends Component {
       dropdownButtonTitle: ''
     };
   }
+
+  // toggles modal and adds a random number to the html snippet and js script
+  // to make the div id unique within the pasted HTML snippet from skyvector
   modalToggle = () => {
     let randomNumber = Math.floor(Math.random() * 1000) + 10;
     let xxxsv_html2 = this.state.sv_html
@@ -88,14 +93,16 @@ class FlightCard extends Component {
     });
   };
 
+  // toggles both modals
   normalAndNestedModalToggle = () => {
     this.setState({
-      openModal: !this.state.openModal,
+      // openModal: !this.state.openModal,
       nestedModal: !this.state.nestedModal,
       closeAll: false
     });
   };
 
+  // toggles nested modal
   nestedModalToggle = () => {
     this.setState({
       nestedModal: !this.state.nestedModal,
@@ -115,6 +122,7 @@ class FlightCard extends Component {
     this.setState({ dropdownButtonTitle: e.target.name });
   };
 
+  // handles input change
   handleInputChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
@@ -166,18 +174,8 @@ class FlightCard extends Component {
     });
   }
 
-  // handleToggle = () => {
-  //   let randomNumber = Math.floor(Math.random() * 1000) + 10;
-  //   let xxxsv_html2 = this.state.sv_html.split('sv_').join('sv_' + randomNumber);
-  //   let xxxsv_script2 = this.state.sv_html.split('sv_').join('sv_' + randomNumber);
-
-  //   this.setState({
-  //     openModal: !this.state.openModal,
-  //     xxxsv_html2: xxxsv_html2,
-  //     xxxsv_script2: xxxsv_script2
-  //   });
-  // };
-
+  // splits the html snippet pasted from skyvector
+  // changes the height and width as well in order for it to fit the card
   handleSnippet = (e) => {
     let html = e.target.value;
     html = html.split('200px; height: 200px;').join('100%; height: 165px;');
@@ -189,12 +187,12 @@ class FlightCard extends Component {
     this.setState({ sv_html: sv_html, sv_script: sv_script });
   };
 
+  // toggles delete modal
   toggleDelete = () => {
     this.setState({ deleteModal: !this.state.deleteModal });
-
-    // this.setState({modal: !this.state.modal})
   };
 
+  // deletes flight
   confirmDelete = () => {
     axios({
       method: 'DELETE',
@@ -213,8 +211,8 @@ class FlightCard extends Component {
     // this.setState({modal: !this.state.modal})
   };
 
-  // ADD NEW FLIGHT
-  toggleAndPost = (e) => {
+  // Edits Flight
+  toggleAndPut = (e) => {
     // eslint-disable-next-line
     dev ? console.log("state: +++++", this.state) : null;
     // eslint-disable-next-line
@@ -310,7 +308,7 @@ class FlightCard extends Component {
               <span>{this.props.flight.total_hours}</span>
             </div>
             <div className="FlightIcons">
-              <i className="fas fa-edit flight-card-edit" onClick={this.modalToggle} />
+              <i className="fas fa-edit flight-card-edit" onClick={this.normalAndNestedModalToggle} />
               <i
                 className="fa fa-trash delete-button"
                 onClick={this.toggleDelete}
@@ -488,7 +486,7 @@ class FlightCard extends Component {
          
           <ModalFooter className="EditModalFooter">
             <div className="EditModalFooterChildren">
-              <div classname="hhh">
+              <div className="hhh">
                 <span>Cross Country :</span>
                 <span>No. Instr. App. :</span>
                 <span>No. Ldg. :</span>
@@ -581,7 +579,7 @@ class FlightCard extends Component {
             </div>
           </ModalFooter>
           <div className="flight-edit-save-container">
-                <button className="flight-edit-save-button" onClick={this.toggleAndPost}>
+                <button className="flight-edit-save-button" onClick={this.toggleAndPut}>
                   Save
                 </button>
           </div>

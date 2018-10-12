@@ -46,6 +46,7 @@ class InstructorCard extends Component {
     this.setState({ modal: !this.state.modal });
   };
 
+  // closes modal and does put request
   toggleAndPut = () => {
     if (this.state.uploadurl === '') {
       axios({
@@ -94,6 +95,7 @@ class InstructorCard extends Component {
     }
   };
 
+  // upload to cloudinary
   upload = () => {
     // eslint-disable-next-line
     window.cloudinary.openUploadWidget(
@@ -120,12 +122,14 @@ class InstructorCard extends Component {
     false;
   };
 
+  // toggles delete modal
   toggleDelete = () => {
     this.setState({ deleteModal: !this.state.deleteModal });
 
     // this.setState({modal: !this.state.modal})
   };
 
+  // deltes instructor
   confirmDelete = () => {
     axios({
       method: 'DELETE',

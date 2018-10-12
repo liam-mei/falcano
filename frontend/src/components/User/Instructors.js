@@ -39,6 +39,7 @@ class Instructors extends React.Component {
   }
 
   componentDidMount() {
+    // loading animation
     setTimeout(() => this.setState({ loading: false }), 950);
     axios({
       method: 'GET',
@@ -53,12 +54,14 @@ class Instructors extends React.Component {
       });
   }
 
+  // toggles modal
   toggle = () => {
     this.setState({
       modal: !this.state.modal,
     });
   };
 
+  // closes modal and adds new instructor
   togglePost = (e) => {
     if (this.state.name.length === 0) {
       e.preventDefault();
@@ -112,10 +115,12 @@ class Instructors extends React.Component {
     }
   };
 
+
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // cloudinary upload
   upload = () => {
     // eslint-disable-next-line
     window.cloudinary.openUploadWidget(

@@ -30,10 +30,11 @@ class Aircrafts extends Component {
       loading: true,
       openModal: false,
       dropdownOpen: false,
-      dropdownButtonTitle: 'Airplane SEL',
+      dropdownButtonTitle: 'License Type',
       tail_number_edit: '',
       man_type_edit: '',
-      license_type_edit: 'Airplane SEL',
+      requiredField: false,
+      license_type_edit: '',
       uploadurl:
         'https://res.cloudinary.com/dkzzjjjj9/image/upload/v1539107821/Default%20Images/defaultPlane.png',
       data: [
@@ -49,16 +50,17 @@ class Aircrafts extends Component {
   }
 
   componentDidMount() {
+    // loading animation
     setTimeout(() => this.setState({ loading: false }), 950);
+    // getting all aircraft
     axios({
       method: 'GET',
       url: `${URL}api/aircraft/`,
       headers,
     })
       .then((response) => {
-        const reversed_data = response.data.reverse();
         this.setState({
-          data: reversed_data,
+          data: response.data,
         });
       })
       .catch((error) => {
@@ -67,15 +69,36 @@ class Aircrafts extends Component {
       });
   }
 
+  // handles change on input fields
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
+  // toggles view modal
   toggleModal = () => {
     this.setState({ openModal: !this.state.openModal });
   };
 
-  toggleAndPost = () => {
+  // for posting new aircraft, has required fields error handling built in
+  toggleAndPost = (e) => {
+
+    if (this.state.tail_number_edit.length <= 0 ) {
+      e.preventDefault();
+      this.setState({ requiredField: true })
+      return;
+    }
+
+    if (this.state.man_type_edit.length <=0) {
+      e.preventDefault();
+      this.setState({ requiredField: true })
+      return;
+    }
+
+    if (this.state.dropdownButtonTitle === 'License Type') {
+      alert('Please Select The License Type');
+      return;
+    }
+
     this.setState({
       openModal: !this.state.openModal,
     });
@@ -99,6 +122,7 @@ class Aircrafts extends Component {
     window.location.reload();
   };
 
+  // changes the title of the dropdown button to whichever license type you chose
   handleDropDownButton = (e) => {
     this.setState({ dropdownButtonTitle: e.target.name, license_type_edit: e.target.name });
   };
@@ -187,8 +211,9 @@ class Aircrafts extends Component {
             toggle={this.toggleModal}
           >
             <ModalHeader>
+              {this.state.requiredField ? <div style={{ textAlign: 'center' }}>Please fill out the required fields</div> : <div></div>}
               <input
-                className="new-aircraft-input-tn"
+                className={this.state.requiredField ? "new-aircraft-input-tn-required" : "new-aircraft-input-tn"}
                 name="tail_number_edit"
                 onChange={this.handleChange}
                 placeholder="Tail Number"
@@ -215,7 +240,7 @@ class Aircrafts extends Component {
                 </DropdownMenu>
               </ButtonDropdown>
               <input
-                className="new-aircraft-input-mt"
+                className={this.state.requiredField ? "new-aircraft-input-mt-required" :"new-aircraft-input-mt"}
                 name="man_type_edit"
                 onChange={this.handleChange}
                 placeholder="Manufacturer Type"

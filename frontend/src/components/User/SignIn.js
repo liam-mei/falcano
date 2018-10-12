@@ -59,6 +59,7 @@ class SignIn extends Component {
           password: '',
           errorMessage: ''
         })
+        // checks if user has paid, used for premium feature gateing
         axios({
           method: "GET",
           url: `${ URL }api/billing/`,
